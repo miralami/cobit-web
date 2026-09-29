@@ -44,12 +44,14 @@ export default function Dashboard() {
           <Link to="/assessments/setup" className="btn btn--secondary">
             New Assessment
           </Link>
-          <Link to={`/assessments/workspace/${selected[0]?.id ?? 'BAI06'}`} className="btn btn--primary">
-            Continue Assessment
-            <span className="btn__arrow" aria-hidden="true">
-              →
-            </span>
-          </Link>
+          {selected.length > 0 && (
+            <Link to={`/assessments/workspace/${selected[0].id}`} className="btn btn--primary">
+              Continue Assessment
+              <span className="btn__arrow" aria-hidden="true">
+                →
+              </span>
+            </Link>
+          )}
         </div>
       </header>
 

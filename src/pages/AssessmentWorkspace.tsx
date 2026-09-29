@@ -51,10 +51,11 @@ export default function AssessmentWorkspace() {
 
   // Route params change without a remount. Reset during render, not in an effect: an effect runs
   // after commit, where a stale `index` (e.g. 4) would index past a shorter item list and crash.
+  // Only reset the index and attach state — notes and responses persist across objectives so
+  // the assessor can navigate freely without losing entered data.
   if (scopedObjectiveId !== objectiveId) {
     setScopedObjectiveId(objectiveId);
     setIndex(0);
-    setNotes(Object.fromEntries(items.map((i) => [i.id, i.notes])));
     setAttachNote(false);
   }
 

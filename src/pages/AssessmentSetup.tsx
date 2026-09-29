@@ -65,7 +65,7 @@ export default function AssessmentSetup() {
       setErrors(found);
       if (Object.keys(found).length) return;
     }
-    if (step === 2 && domains.length === 0) return;
+    // Step 2 allows proceeding with zero domains — the objective list falls back to the full catalogue.
     setStep((s) => Math.min(3, s + 1));
   };
 
@@ -351,7 +351,6 @@ export default function AssessmentSetup() {
                 type="button"
                 className="btn btn--primary"
                 onClick={next}
-                disabled={step === 2 && domains.length === 0}
               >
                 Continue
                 <span className="btn__arrow" aria-hidden="true">

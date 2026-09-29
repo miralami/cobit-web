@@ -88,6 +88,7 @@
 
 .ws__main {
   min-width: 0;
+  padding-bottom: var(--space-16);
 }
 
 /* ---------------- Criteria rail ---------------- */
@@ -366,6 +367,7 @@
 .evlist__type--documentation { color: var(--color-bai); background: color-mix(in srgb, var(--color-bai) 10%, white); }
 .evlist__type--log { color: var(--color-mea); background: color-mix(in srgb, var(--color-mea) 10%, white); }
 .evlist__type--interview { color: var(--color-dss); background: color-mix(in srgb, var(--color-dss) 10%, white); }
+.evlist__type--other { color: var(--color-text-secondary); background: var(--color-bg-tertiary); }
 
 .evlist__name {
   flex: 1;

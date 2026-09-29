@@ -30,7 +30,7 @@ export default function EvidenceFindings() {
   const workspaceObjectiveId =
     evidenceRecords
       .map((e) => assessmentItems.find((i) => i.id === e.linkedItemId)?.objectiveId)
-      .find((id) => id !== undefined) ?? assessmentItems[0].objectiveId;
+      .find((id) => id !== undefined) ?? assessmentItems[0]?.objectiveId ?? 'BAI06';
 
   return (
     <div className="page">
