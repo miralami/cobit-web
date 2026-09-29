@@ -1,0 +1,289 @@
+/* Assessment setup — 3-step wizard with a sticky scope summary */
+
+.setup__cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: var(--space-5);
+  align-items: start;
+}
+
+.setup__main {
+  min-width: 0;
+}
+
+/* ---------------- Step indicator ---------------- */
+
+.steps {
+  margin: 0 0 var(--space-6);
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}
+
+.steps__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding-top: var(--space-4);
+  border-top: 2px solid var(--color-border);
+  color: var(--color-text-tertiary);
+  transition: border-color var(--duration-base) var(--ease-out),
+    color var(--duration-base) var(--ease-out);
+}
+
+.steps__item--done {
+  border-top-color: var(--color-accent);
+}
+
+.steps__item--current {
+  border-top-color: var(--color-ink);
+  color: var(--color-ink);
+}
+
+.steps__marker {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--color-border-dark);
+  border-radius: 50%;
+  background: var(--color-bg-primary);
+  font-size: var(--font-size-xs);
+}
+
+.steps__item--done .steps__marker {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+}
+
+.steps__item--current .steps__marker {
+  border-color: var(--color-ink);
+  border-width: 2px;
+  font-weight: 600;
+}
+
+.steps__label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.3;
+}
+
+.steps__item--current .steps__label {
+  font-weight: var(--font-weight-semibold);
+}
+
+/* ---------------- Form ---------------- */
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5);
+}
+
+.form-grid__wide {
+  grid-column: 1 / -1;
+}
+
+/* ---------------- Selectable cards ---------------- */
+
+.pickgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--space-3);
+  border: 0;
+  padding: 0;
+}
+
+.pickgrid--objectives {
+  margin-top: var(--space-4);
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+.pick {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-primary);
+  cursor: pointer;
+  transition: border-color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.pick:hover {
+  border-color: var(--color-border-dark);
+  background: var(--color-bg-secondary);
+}
+
+.pick:has(input:focus-visible) {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.pick--EDM { --domain: var(--color-edm); }
+.pick--APO { --domain: var(--color-apo); }
+.pick--BAI { --domain: var(--color-bai); }
+.pick--DSS { --domain: var(--color-dss); }
+.pick--MEA { --domain: var(--color-mea); }
+
+.pick.is-checked {
+  border-color: var(--domain, var(--color-accent));
+  border-left-color: var(--domain, var(--color-accent));
+  background: var(--color-accent-light);
+  box-shadow: 0 0 0 1px var(--domain, var(--color-accent));
+}
+
+/* Tick square, top-right of every card */
+.pick__mark {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--color-border-dark);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-primary);
+  transition: background-color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
+}
+
+.pick.is-checked .pick__mark {
+  background: var(--domain, var(--color-accent));
+  border-color: var(--domain, var(--color-accent));
+}
+
+.pick.is-checked .pick__mark::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 1px;
+  width: 4px;
+  height: 8px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.pick__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding-right: var(--space-8);
+}
+
+.pick__code {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--domain, var(--color-text-primary));
+}
+
+.pick--domain .pick__code {
+  font-size: var(--font-size-base);
+}
+
+.pick__name {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.4;
+  color: var(--color-text-primary);
+  padding-right: var(--space-6);
+}
+
+.pick--domain .pick__name {
+  font-family: var(--font-display);
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.pick__desc {
+  font-size: var(--font-size-xs);
+  line-height: 1.55;
+  color: var(--color-text-tertiary);
+}
+
+.pick__count {
+  margin-top: 2px;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ---------------- Navigation ---------------- */
+
+.setup__nav {
+  margin-top: var(--space-5);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.setup__summary {
+  position: sticky;
+  top: var(--space-6);
+}
+
+.setup__summary .dl {
+  font-size: var(--font-size-xs);
+  grid-template-columns: 1fr;
+  gap: var(--space-1);
+}
+
+.setup__summary .dl dt {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+}
+
+.setup__summary .dl dd {
+  margin-bottom: var(--space-3);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  word-break: break-word;
+}
+
+/* ---------------- Responsive ---------------- */
+
+@media (max-width: 1080px) {
+  .setup__cols {
+    grid-template-columns: 1fr;
+  }
+
+  .setup__summary {
+    position: static;
+  }
+}
+
+@media (max-width: 620px) {
+  .steps {
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .setup__nav {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .setup__nav .btn {
+    width: 100%;
+  }
+}

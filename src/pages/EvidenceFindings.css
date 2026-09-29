@@ -1,0 +1,208 @@
+/* Evidence register — summary strip, wide register table, coverage audit */
+
+.evsum {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.evsum__card {
+  padding: var(--space-4) var(--space-5) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.evsum__value {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  font-family: var(--font-display);
+  font-size: var(--font-size-3xl);
+  line-height: 1.1;
+  color: var(--color-ink);
+}
+
+.evsum__value--sm {
+  font-size: var(--font-size-xl);
+}
+
+.evsum__of {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+}
+
+.evsum__meta {
+  font-size: var(--font-size-xs);
+  line-height: 1.5;
+  color: var(--color-text-tertiary);
+}
+
+/* ---------------- Register rows ---------------- */
+
+.evrow th,
+.evrow td {
+  vertical-align: top;
+}
+
+.evrow th {
+  font-weight: var(--font-weight-normal);
+}
+
+.evrow--pending {
+  background: linear-gradient(90deg, var(--color-warning-light), transparent 22%);
+}
+
+.evrow__item {
+  min-width: 250px;
+  text-align: left;
+  font-weight: var(--font-weight-normal);
+}
+
+.evrow__item-id {
+  display: inline-block;
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--color-text-tertiary);
+  padding: 2px 6px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-secondary);
+}
+
+.evrow__item-statement {
+  display: block;
+  margin-top: 6px;
+  font-size: var(--font-size-sm);
+  line-height: 1.45;
+  color: var(--color-text-primary);
+}
+
+/* The visual link back into the workspace */
+.evrow__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-accent);
+}
+
+.evrow__connector {
+  width: 18px;
+  height: 1px;
+  background: currentColor;
+  position: relative;
+  transition: width var(--duration-fast) var(--ease-out);
+}
+
+.evrow__connector::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: -2px;
+  width: 5px;
+  height: 5px;
+  border-top: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+  transform: rotate(45deg);
+}
+
+.evrow__link:hover .evrow__connector {
+  width: 26px;
+}
+
+.evrow__name {
+  display: block;
+}
+
+.evrow__id {
+  display: block;
+  margin-top: 3px;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+}
+
+.evrow__notes {
+  max-width: 30ch;
+  font-size: var(--font-size-xs);
+  line-height: 1.55;
+  color: var(--color-text-tertiary);
+}
+
+.evtype {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+  color: var(--color-text-secondary);
+  background: var(--color-bg-tertiary);
+}
+
+.evtype--policy { color: var(--color-edm); background: color-mix(in srgb, var(--color-edm) 10%, white); }
+.evtype--record { color: var(--color-apo); background: color-mix(in srgb, var(--color-apo) 10%, white); }
+.evtype--documentation { color: var(--color-bai); background: color-mix(in srgb, var(--color-bai) 10%, white); }
+.evtype--log { color: var(--color-mea); background: color-mix(in srgb, var(--color-mea) 10%, white); }
+.evtype--interview { color: var(--color-dss); background: color-mix(in srgb, var(--color-dss) 10%, white); }
+
+/* ---------------- Coverage ---------------- */
+
+.coverage {
+  margin-top: var(--space-4);
+  list-style: none;
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-warning);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.coverage__row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--color-border-light);
+  font-size: var(--font-size-sm);
+  background: var(--color-bg-primary);
+}
+
+.coverage__row:last-child {
+  border-bottom: 0;
+}
+
+.coverage__id {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  flex-shrink: 0;
+  width: 72px;
+}
+
+.coverage__statement {
+  flex: 1;
+  line-height: 1.5;
+  color: var(--color-text-primary);
+}
+
+/* ---------------- Responsive ---------------- */
+
+@media (max-width: 1100px) {
+  .evsum {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 620px) {
+  .evsum {
+    grid-template-columns: 1fr;
+  }
+
+  .coverage__row {
+    flex-wrap: wrap;
+  }
+}
