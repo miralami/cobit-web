@@ -1,5 +1,8 @@
 # Comprehensive Literature Review: COBIT 2019 Assessment with RAG for Evidence-Grounded IT Governance
 
+> **ARCHIVED — SUPERSEDED by [`../01-literature-review.md`](../01-literature-review.md).**
+> Kept for provenance only. Do not cite; cite `01-literature-review.md` instead.
+
 ## 1. Executive Summary
 
 **5–10 Most Critical Findings:**

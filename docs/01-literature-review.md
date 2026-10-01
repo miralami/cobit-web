@@ -1,4 +1,7 @@
-# Final Literature Review: COBIT 2019 Assessment with RAG for Evidence-Grounded IT Governance
+# Literature Review: COBIT 2019 Assessment with RAG for Evidence-Grounded IT Governance
+
+> **Canonical literature review.** Supersedes `archive/00-initial-literature-review.md`.
+> Next step in the chain: [`02-system-design-research.md`](02-system-design-research.md).
 
 ## 1. Executive Summary
 
