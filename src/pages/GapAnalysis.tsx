@@ -1,197 +1,196 @@
+import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { capabilityLevelLabels, currentAssessment, gapAnalysisData } from '../data/mockData';
+import { useAssessment } from '../context';
+import cobitFactors from '../data/cobitDesignFactors.json';
 import './GapAnalysis.css';
 
-const LEVELS = [0, 1, 2, 3, 4, 5];
+const capabilityLevelLabels: Record<number, string> = {
+  0: 'Incomplete',
+  1: 'Initial',
+  2: 'Managed',
+  3: 'Defined',
+  4: 'Quantitatively Managed',
+  5: 'Optimizing',
+};
 
 export default function GapAnalysis() {
-  const totalGap = gapAnalysisData.reduce((sum, row) => sum + row.gap, 0);
-  const widestGap = Math.max(...gapAnalysisData.map((row) => row.gap));
+  const { state } = useAssessment();
+  const { scopedObjectiveIds, objectiveTargets, assessments } = state;
+
+  const gapRows = useMemo(() => {
+    return scopedObjectiveIds.map((id) => {
+      const meta = cobitFactors.objectives.find((o) => o.id === id);
+      const data = assessments[id];
+      const target = objectiveTargets[id] ?? 3;
+      const current = data?.currentLevel ?? 1;
+      const gap = Math.max(0, target - current);
+      return {
+        id,
+        name: meta?.name || id,
+        domain: meta?.domain || 'EDM',
+        current,
+        target,
+        gap,
+        isAchieved: gap === 0,
+      };
+    });
+  }, [scopedObjectiveIds, objectiveTargets, assessments]);
+
+  const totalGap = gapRows.reduce((sum, r) => sum + r.gap, 0);
+  const widestGap = gapRows.length > 0 ? Math.max(...gapRows.map((r) => r.gap)) : 0;
+  const achievedCount = gapRows.filter((r) => r.isAchieved).length;
+  const avgFulfillment =
+    gapRows.length > 0
+      ? Math.round((gapRows.reduce((sum, r) => sum + (r.current / r.target), 0) / gapRows.length) * 100)
+      : 0;
 
   return (
     <div className="page">
       <header className="page-head">
         <div className="page-head__text">
           <p className="eyebrow">
-            <span className="eyebrow__num">◆</span>Gap analysis
+            <span className="eyebrow__num">◆</span>Analisis Kesenjangan Kapabilitas
           </p>
-          <h1 className="page-title">Capability gap analysis</h1>
+          <h1 className="page-title">Capability Gap Analysis</h1>
           <p className="page-lead">
-            Comparison of assessed capability against the target level for each area in scope. The
-            gap is the number of capability levels that must be closed to meet the audit plan.
+            Perbandingan objektif antara capaian kapabilitas aktual saat ini (Current Capability Level) terhadap target tingkat kapabilitas yang diharapkan organisasi (Target Level).
           </p>
         </div>
         <div className="page-head__actions">
           <Link to="/results" className="btn btn--secondary">
-            Capability results
+            ← Hasil Kapabilitas
           </Link>
           <Link to="/recommendations" className="btn btn--primary">
-            Recommendations
-            <span className="btn__arrow" aria-hidden="true">
-              →
-            </span>
+            Rekomendasi Perbaikan 3 Aspek →
           </Link>
         </div>
       </header>
 
-      {/* ---------------- Aggregate ---------------- */}
+      {/* Aggregate KPI Cards */}
       <section className="gapsum" aria-label="Gap summary">
-        <div className="card gapsum__card reveal">
-          <span className="eyebrow">Areas analysed</span>
-          <p className="gapsum__value num">{gapAnalysisData.length}</p>
+        <div className="card gapsum__card">
+          <span className="eyebrow">Objektif Dinilai</span>
+          <p className="gapsum__value num">{gapRows.length}</p>
+          <p className="gapsum__meta">{achievedCount} objektif memenuhi target</p>
         </div>
-        <div className="card gapsum__card reveal reveal-1">
-          <span className="eyebrow">Total gap</span>
-          <p className="gapsum__value num">{totalGap} levels</p>
-        </div>
-        <div className="card gapsum__card reveal reveal-2">
-          <span className="eyebrow">Widest gap</span>
-          <p className="gapsum__value num">
-            {widestGap} level{widestGap === 1 ? '' : 's'}
+        <div className="card gapsum__card">
+          <span className="eyebrow">Total Kesenjangan</span>
+          <p className="gapsum__value num" style={{ color: totalGap > 0 ? '#c5221f' : '#137333' }}>
+            {totalGap} Level
           </p>
+          <p className="gapsum__meta">Akumulasi level yang perlu ditingkatkan</p>
         </div>
-        <div className="card gapsum__card reveal reveal-3">
-          <span className="eyebrow">Target level</span>
-          <p className="gapsum__value gapsum__value--sm">
-            Level 3 · {capabilityLevelLabels[3]}
-          </p>
+        <div className="card gapsum__card">
+          <span className="eyebrow">Kesenjangan Terlebar</span>
+          <p className="gapsum__value num">{widestGap} Level</p>
+          <p className="gapsum__meta">Gap terbesar pada satu objektif</p>
+        </div>
+        <div className="card gapsum__card">
+          <span className="eyebrow">Rata-rata Pemenuhan Target</span>
+          <p className="gapsum__value num">{avgFulfillment}%</p>
+          <p className="gapsum__meta">{state.organization} · {state.period}</p>
         </div>
       </section>
 
-      {/* ---------------- Gap table ---------------- */}
-      <section className="card reveal reveal-4" aria-labelledby="gap-table-heading">
+      {/* Gap Comparison Table */}
+      <section className="card reveal" aria-labelledby="gap-table-heading">
         <div className="card__head">
           <h2 id="gap-table-heading" className="card__title">
-            Area comparison
+            Matriks Komparasi Capaian vs Target
           </h2>
-          <span className="tag mono">{currentAssessment.period}</span>
+          <span className="tag mono">{state.period}</span>
         </div>
 
         <div className="table-wrap">
           <table className="table">
-            <caption className="visually-hidden">
-              Capability gap by assessment area, showing current level, target level and the gap.
-            </caption>
             <thead>
               <tr>
-                <th scope="col">Area</th>
-                <th scope="col">Capability</th>
-                <th scope="col" className="table__num">
-                  Current
-                </th>
-                <th scope="col" className="table__num">
-                  Target
-                </th>
-                <th scope="col">Gap</th>
-                <th scope="col" className="table__num">
-                  Levels to close
-                </th>
+                <th scope="col" style={{ width: '100px' }}>Kode</th>
+                <th scope="col">Nama Objektif Tata Kelola / Manajemen</th>
+                <th scope="col" className="table__num">Current</th>
+                <th scope="col" className="table__num">Target</th>
+                <th scope="col" style={{ width: '180px' }}>Visualisasi Capaian</th>
+                <th scope="col" className="table__num">Gap</th>
+                <th scope="col" style={{ width: '130px' }}>Status</th>
+                <th scope="col" style={{ width: '100px' }}>Aksi</th>
               </tr>
             </thead>
             <tbody>
-              {gapAnalysisData.map((row) => (
-                <tr key={row.area}>
-                  <th scope="row" className="table__primary gaptable__area">
-                    {row.area}
-                  </th>
+              {gapRows.map((row) => (
+                <tr key={row.id}>
+                  <td className="table__primary mono">
+                    <strong>{row.id}</strong>
+                  </td>
                   <td>
-                    <div
-                      className="level-scale level-scale--mini"
-                      role="img"
-                      aria-label={`Current level ${row.current}, target level ${row.target}`}
-                    >
-                      {LEVELS.map((level) => {
-                        const filled = level <= row.current;
-                        const isGap = level > row.current && level <= row.target;
+                    <strong>{row.name}</strong>
+                    <div style={{ fontSize: '11px', color: 'var(--color-text-secondary)' }}>
+                      Target: {capabilityLevelLabels[row.target]}
+                    </div>
+                  </td>
+                  <td className="table__num">
+                    <span className="mono" style={{ fontSize: '16px', fontWeight: 700 }}>
+                      Level {row.current}
+                    </span>
+                  </td>
+                  <td className="table__num">
+                    <span className="mono" style={{ fontSize: '16px', fontWeight: 700, color: '#137333' }}>
+                      Level {row.target}
+                    </span>
+                  </td>
+                  <td>
+                    <div className="gap-scale-track">
+                      {[1, 2, 3, 4, 5].map((lvl) => {
+                        let fillClass = 'lvl-dot--empty';
+                        if (lvl <= row.current) {
+                          fillClass = 'lvl-dot--current';
+                        } else if (lvl <= row.target) {
+                          fillClass = 'lvl-dot--gap';
+                        }
                         return (
                           <span
-                            key={level}
-                            className={`level-cell${filled ? ' is-filled' : ''}${
-                              isGap ? ' is-gap' : ''
-                            }${level === row.target ? ' is-target' : ''}`}
+                            key={lvl}
+                            className={`lvl-dot ${fillClass}`}
+                            title={`Level ${lvl}`}
                           >
-                            <span className="level-cell__num mono">{level}</span>
+                            {lvl}
                           </span>
                         );
                       })}
                     </div>
                   </td>
-                  <td className="table__num">{row.current}</td>
-                  <td className="table__num">{row.target}</td>
-                  <td>
-                    <div className="gapbar">
-                      <div className="gapbar__track">
-                        <div
-                          className="gapbar__fill"
-                          style={{ width: `${(row.gap / widestGap) * 100}%` }}
-                        />
-                      </div>
-                      <span className="gapbar__label">
-                        {capabilityLevelLabels[row.current]} → {capabilityLevelLabels[row.target]}
-                      </span>
-                    </div>
-                  </td>
                   <td className="table__num">
                     <span
-                      className={`badge badge--${
-                        row.gap >= 3 ? 'danger' : row.gap === 2 ? 'warning' : 'neutral'
-                      }`}
+                      className="mono"
+                      style={{
+                        fontSize: '16px',
+                        fontWeight: 700,
+                        color: row.gap > 0 ? '#c5221f' : '#137333',
+                      }}
                     >
                       {row.gap}
                     </span>
+                  </td>
+                  <td>
+                    <span
+                      className={`badge ${
+                        row.isAchieved ? 'badge--success' : 'badge--warning'
+                      }`}
+                    >
+                      {row.isAchieved ? '✓ Tercapai' : `Gap ${row.gap} Level`}
+                    </span>
+                  </td>
+                  <td>
+                    <Link
+                      to={`/assessments/workspace/${row.id}`}
+                      className="btn btn--subtle btn--sm"
+                    >
+                      Asesmen →
+                    </Link>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-        </div>
-
-        <div className="card__foot gaplegend">
-          <span className="gaplegend__item">
-            <i className="scalekey__swatch scalekey__swatch--current" aria-hidden="true" />
-            Current capability
-          </span>
-          <span className="gaplegend__item">
-            <i className="scalekey__swatch scalekey__swatch--gap" aria-hidden="true" />
-            Gap to target
-          </span>
-          <span className="gaplegend__item">
-            <i className="scalekey__swatch scalekey__swatch--target" aria-hidden="true" />
-            Target level
-          </span>
-        </div>
-      </section>
-
-      {/* ---------------- Future: AI-assisted recommendations ---------------- */}
-      <section className="aibox reveal" aria-labelledby="ai-heading">
-        <div className="aibox__head">
-          <span className="aibox__badge mono">Planned</span>
-          <div>
-            <h2 id="ai-heading" className="aibox__title">
-              AI-Assisted Recommendation
-            </h2>
-            <p className="aibox__sub">
-              Future capability of the COBIT Assessment System
-            </p>
-          </div>
-        </div>
-
-        <p className="aibox__placeholder">
-          Recommendations will be generated from assessment findings and identified capability
-          gaps.
-        </p>
-
-        <ul className="aibox__points">
-          <li>Derive improvement actions from rated findings and capability gaps</li>
-          <li>Propose a target sequence ordered by gap size and objective dependency</li>
-          <li>Record the rationale, and the evidence each action is derived from</li>
-        </ul>
-
-        <div className="aibox__foot">
-          <span className="xs muted">
-            Not implemented in this prototype. See{' '}
-            <Link to="/recommendations">Recommendations</Link> for the intended scope.
-          </span>
         </div>
       </section>
     </div>

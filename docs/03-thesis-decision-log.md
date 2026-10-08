@@ -4,7 +4,7 @@
 > Builds on [`01-literature-review.md`](01-literature-review.md) → [`02-system-design-research.md`](02-system-design-research.md).
 
 **Date:** 2026-09-30  
-**Status:** Draft — menunggu persetujuan dospem
+**Status:** Draft — scope diperbarui; menunggu persetujuan dospem
 
 ---
 
@@ -26,6 +26,17 @@
 2. **Prototype sudah ada.** 8 halaman (Dashboard, AssessmentSetup, AssessmentWorkspace, CapabilityResult, GapAnalysis, EvidenceFindings, Recommendations, Landing) sudah siap pondasinya.
 3. **Menjawab masalah riil audit.** Auditor kesulitan melacak bukti pendukung untuk setiap rating F/L/P/N. Option B langsung menyelesaikan ini.
 4. **Arsitektur scalable.** Meski diimplementasi subset, sistem dirancang extensible ke semua 40 objektif.
+
+### 1.3 Batas Scope Implementasi (Keputusan Terbaru)
+
+Option B tetap menjadi fokus kontribusi: capability assessment dan evidence traceability. Design Factor DF1–DF4 masuk ke alur Assessment Setup sebagai alat penentuan prioritas objektif dan suggested target capability level.
+
+- DF1 Enterprise Strategy, DF2 Enterprise Goals, DF3 Risk Profile, dan DF4 I&T-Related Issues masuk cakupan.
+- Assessment Setup yang sudah ada menjadi titik integrasi: metadata dan pemilihan scope manual dikembangkan menjadi setup berbasis DF, dengan assessor tetap mengonfirmasi rekomendasi.
+- Capability assessment tetap menjadi fokus utama. Sistem tidak menjanjikan implementasi semua 40 objektif dan 1.202 aktivitas.
+- Jumlah objektif/aktivitas yang di-seed masih perlu diputuskan setelah inventarisasi konten COBIT yang dapat digunakan dan konfirmasi dosen.
+- Workbook PANRB dari tugas mata kuliah sebelumnya hanya referensi untuk memahami formula/struktur workbook; bukan studi kasus, benchmark resmi ISACA, atau dataset validasi.
+- DF5–DF11 berada di luar scope versi ini.
 
 ### 1.3 Kenapa Option C/D Ditolak
 
@@ -89,15 +100,15 @@ Gap Analysis Result → Susun prompt ringkas + konteks praktik COBIT
 | Mandiangan (2023) | Rancang Bangun Sistem Informasi Capability Assessment Tools COBIT 2019 | Cuma mindahin Excel ke web, rumus tidak transparan, tidak ada evidensi |
 | Anwar & Harits (2025) | Perancangan Sistem Kuisioner Penilaian Kapabilitas Framework COBIT 2019 | Salah kaprah: kuesioner persepsi, bukan penilaian berbasis bukti |
 | Noor (2021) | Implementasi Sistem Penilaian Kapabilitas Tata Kelola TI Berbasis COBIT 2021 | Cuma 1 domain (BAI), tidak ada manajemen evidensi |
-| **Penelitian ini** | **Rancang Bangun Sistem Pengukuran Capability Level COBIT 2019 Berbasis Web dengan Traceability Evidensi Audit** | **Scoring transparan + evidensi terintegrasi + agregasi penuh** |
+| **Penelitian ini** | **Rancang Bangun Sistem Pengukuran Capability Level COBIT 2019 Berbasis Web dengan Traceability Evidensi Audit** | **Setup prioritas DF1–DF4 + scoring transparan + evidensi terintegrasi pada scope terbatas** |
 
 ---
 
 ## 4. Research Questions
 
-### RQ Set (Option B)
+### RQ Set (Option B + Design Factor Setup)
 
-**RQ1:** *Bagaimana merancang dan membangun sistem pengukuran capability level COBIT 2019 berbasis web yang mengimplementasikan skala penilaian CPM (F/L/P/N) secara transparan?*
+**RQ1:** *Bagaimana merancang dan membangun sistem berbasis web yang mendukung penentuan prioritas objektif melalui Design Factor DF1–DF4 serta pengukuran capability level COBIT 2019 secara transparan?*
 
 **RQ2:** *Bagaimana mengintegrasikan manajemen evidensi agar setiap hasil capability level dapat ditelusuri ke dokumen bukti pendukungnya?*
 
@@ -119,6 +130,7 @@ Phase 1: Problem Identification
 Phase 2: Solution Design
   → Requirements derivation
   → Architecture design (React 19 + TypeScript SPA)
+  → Design Factor DF1–DF4 scoring and scope recommendation
   → Scoring methodology design (F/L/P/N + aggregation)
 
 Phase 3: Development
@@ -189,8 +201,8 @@ Aplikasi web (React 19 + TypeScript, client-side SPA) dengan modul:
 
 | # | Question | Status | Notes |
 |---|----------|--------|-------|
-| 1 | Batasan domain/objektif COBIT mana yang diimplementasi? | **Belum diputuskan** | Semua 40 objektif atau subset (2–3 domain, 8–12 objektif)? |
-| 2 | Apakah kampus wajib studi kasus instansi? | **Belum diputuskan** | Kalau wajib, tambah sub-judul *(Studi Kasus: [X])* |
+| 1 | Berapa objektif/aktivitas COBIT yang di-seed untuk implementasi dan evaluasi? | **Belum diputuskan** | Batasi subset; konfirmasi dosen dan ketersediaan konten resmi. |
+| 2 | Apakah kampus mewajibkan studi kasus instansi? | **Belum diputuskan** | PANRB bukan studi kasus penelitian saat ini. |
 | 3 | Prioritas: drafting proposal atau revisi prototype dulu? | **Belum diputuskan** | Tergantung timeline sidang |
 | 4 | LLM provider untuk fitur bonus? | **Belum diputuskan** | OpenAI / Anthropic / Gemini — pilih yang paling accessible |
 
@@ -213,6 +225,7 @@ Aplikasi web (React 19 + TypeScript, client-side SPA) dengan modul:
 Diskusi dengan user
   → Re-evaluasi: Option A terlalu dasar
   → Option B (Assessment + Evidence Management) dipilih
+  → Keputusan diperbarui: DF1–DF4 masuk Assessment Setup untuk rekomendasi scope; PANRB hanya referensi workbook
     → Alasan: gap nyata, prototype sudah ada, menjawab masalah audit riil
   → AI/RAG diposisikan sebagai fitur bonus, bukan fokus utama
     → Alasan: overload S1, domain SAGE ≠ AI, overengineering
@@ -223,11 +236,12 @@ Diskusi dengan user
   → Deskripsi thesis disiapkan untuk presentasi dospem
 
 Status saat ini
-  → Scope: Option B (final)
+  → Scope: Option B + DF1–DF4 setup (diperbarui; menunggu persetujuan dospem)
   → Judul: final
   → RQ: final
   → Metodologi: DSRM (final)
   → Deskripsi: siap presentasi
+  → DF1–DF4 masuk Assessment Setup; PANRB hanya referensi formula, bukan studi kasus/dataset
   → Menunggu: keputusan open questions + persetujuan dospem
 ```
 
@@ -248,7 +262,7 @@ Status saat ini
 | Recommendations | ✅ | Gap-based generation |
 | Landing | ✅ | Entry point |
 
-### 9.2 Yang Perlu Disempurnakan (Option B)
+### 9.2 Yang Perlu Disempurnakan (Option B + DF1–DF4)
 
 | Area | Yang Perlu Dilakukan |
 |------|---------------------|
@@ -257,6 +271,7 @@ Status saat ini
 | Evidence mapping | Relasi data evidensi ↔ rating aktivitas (traceability) |
 | Evidence validation | Status flow: pending → reviewed → attached |
 | AI bonus | Tombol "Generate AI Draft" di Recommendations (direct API call) |
+| Design Factor scope | Implementasi DF1–DF4 pada Assessment Setup; verifikasi formula dan batas cakupan sebelum coding |
 
 ---
 

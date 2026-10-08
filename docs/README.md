@@ -9,6 +9,7 @@ Single chain, no duplicates. Read top to bottom.
 | 3 | [`03-thesis-decision-log.md`](03-thesis-decision-log.md) | **Draft** | Scope decision (Option B), AI/RAG position, title, RQs, methodology, thesis description, open questions |
 | 4 | [`04-regulasi-indonesia-cobit.md`](04-regulasi-indonesia-cobit.md) | **Canonical** | Regulasi Indonesia tata kelola TI (PP 71/2019, Perpres 95/2018, Permenkominfo 16/2022, POJK, PBI), adopsi COBIT di Indonesia, studi kasus BUMN/pemerintah, paper akademik tambahan |
 | 5 | [`latar-belakang.md`](latar-belakang.md) | **Draft** | Draf Bab 1 Latar Belakang skripsi — integrates docs 01–04 |
+| 6 | [`05-product-requirements-document.md`](05-product-requirements-document.md) | **Canonical** | PRD & Grand Plan sistem web (As-Is audit, requirements matrix, DSRM roadmap) |
 | — | [`sources-notebooklm-2026-09-29/`](sources-notebooklm-2026-09-29/) | Raw sources | 32 NotebookLM source dumps feeding doc 01 |
 | — | [`archive/00-initial-literature-review.md`](archive/00-initial-literature-review.md) | Superseded | First literature review draft, kept for provenance only |
 

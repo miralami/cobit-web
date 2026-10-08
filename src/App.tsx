@@ -1,8 +1,10 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { AssessmentProvider } from './context/AssessmentContext';
 import Layout from './components/Layout';
 import Landing from './pages/Landing';
 import Dashboard from './pages/Dashboard';
+import AssessmentHistory from './pages/AssessmentHistory';
 import AssessmentSetup from './pages/AssessmentSetup';
 import AssessmentWorkspace from './pages/AssessmentWorkspace';
 import EvidenceFindings from './pages/EvidenceFindings';
@@ -24,19 +26,23 @@ function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route element={<Layout />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/assessments/setup" element={<AssessmentSetup />} />
-          <Route path="/assessments/workspace/:objectiveId" element={<AssessmentWorkspace />} />
-          <Route path="/evidence" element={<EvidenceFindings />} />
-          <Route path="/results" element={<CapabilityResult />} />
-          <Route path="/gap-analysis" element={<GapAnalysis />} />
-          <Route path="/recommendations" element={<Recommendations />} />
-        </Route>
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
+      <AssessmentProvider>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route element={<Layout />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/assessments" element={<AssessmentHistory />} />
+            <Route path="/assessments/setup" element={<AssessmentSetup />} />
+            <Route path="/assessments/workspace" element={<AssessmentWorkspace />} />
+            <Route path="/assessments/workspace/:objectiveId" element={<AssessmentWorkspace />} />
+            <Route path="/evidence" element={<EvidenceFindings />} />
+            <Route path="/results" element={<CapabilityResult />} />
+            <Route path="/gap-analysis" element={<GapAnalysis />} />
+            <Route path="/recommendations" element={<Recommendations />} />
+          </Route>
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </AssessmentProvider>
     </BrowserRouter>
   );
 }

@@ -1,0 +1,2045 @@
+{
+  "EDM03": [
+    {
+      "id": "EDM03.01-2",
+      "practiceCode": "EDM03.01",
+      "activityNumber": 1,
+      "level": 2,
+      "description": "Understand the organization and its context related to I&T risk.",
+      "response": "Yes",
+      "comment": "Telah terdapat identifikasi terhadap risiko TI utama yang dihadapi organisasi, khususnya terkait gangguan jaringan internet dan keamanan informasi. Risiko tersebut juga dipantau secara rutin melalui mekanisme monitoring yang tersedia.",
+      "evidenceIds": [
+        "EVD-001"
+      ],
+      "evidenceSnippet": "(0:25–1:07) Risiko TI yang paling sering menjadi perhatian organisasi adalah gangguan jaringan internet dan keamanan informasi. Narasumber menyampaikan bahwa \"kalau berdasarkan insiden yang sering terjadi, nomor satu itu adalah kendala jaringan internet\" dan \"yang kedua, keamanan\". Selain itu, pemantauan dilakukan secara rutin karena \"kalau pemantauan, pasti setiap hari ya. Tapi kan by system kan, kan ada IPS ya.\""
+    },
+    {
+      "id": "EDM03.02-2",
+      "practiceCode": "EDM03.01",
+      "activityNumber": 2,
+      "level": 2,
+      "description": "Determine the risk appetite of the organization, i.e., the level of I&T-related risk that the enterprise is willing to take in its pursuit\nof enterprise objectives.",
+      "response": "Yes",
+      "comment": "Telah terdapat SLA yang digunakan sebagai acuan dalam pengelolaan layanan TI. Namun, detail terkait batas toleransi risiko dan parameter SLA yang digunakan belum diperoleh dari hasil wawancara.",
+      "evidenceIds": [
+        "EVD-002"
+      ],
+      "evidenceSnippet": "(1:18–1:36) Organisasi telah memiliki batas layanan yang dijadikan acuan dalam pengelolaan risiko TI. Narasumber menjelaskan bahwa \"SLA-nya ada, tapi berapa-berapanya saya nggak tahu\"."
+    },
+    {
+      "id": "EDM03.03-2",
+      "practiceCode": "EDM03.01",
+      "activityNumber": 3,
+      "level": 2,
+      "description": "Determine risk tolerance levels against the risk appetite, i.e., temporarily acceptable deviations from the risk appetite.",
+      "response": "Partially",
+      "comment": "Telah terdapat mekanisme penentuan prioritas penanganan risiko berdasarkan kondisi operasional dan tingkat kepentingan layanan. Namun, belum ditemukan bukti adanya klasifikasi risiko formal maupun dokumentasi terkait risk tolerance level yang digunakan organisasi.",
+      "evidenceIds": [
+        "EVD-003"
+      ],
+      "evidenceSnippet": "(1:42–2:17) Prioritas penanganan risiko ditentukan berdasarkan kondisi operasional dan tingkat kepentingan layanan. Narasumber menjelaskan bahwa \"pertama pasti based on manajemen risiko lagi\" dan \"misalnya lagi pendaftaran CPNS, pas lagi dipakai gangguan berarti kan top priority itu\"."
+    },
+    {
+      "id": "EDM03.04-2",
+      "practiceCode": "EDM03.01",
+      "activityNumber": 4,
+      "level": 2,
+      "description": "Determine the extent of alignment of the I&T risk strategy to the enterprise risk strategy and ensure the risk appetite is below\nthe organization’s risk capacity",
+      "response": "Partially",
+      "comment": "Risiko TI telah dipertimbangkan dalam pembahasan risiko organisasi ketika terjadi insiden tertentu. Namun, belum ditemukan bukti bahwa evaluasi risiko TI dilakukan secara terintegrasi dan berkala sebagai bagian dari strategi manajemen risiko organisasi.",
+      "evidenceIds": [
+        "EVD-004"
+      ],
+      "evidenceSnippet": "(2:32–2:50) Risiko TI dibahas dalam konteks risiko organisasi ketika terjadi insiden tertentu. Narasumber menyampaikan bahwa pembahasan dilakukan \"pembahasan risiko dilakukan ketika insiden tersebut terjadi\". Namun belum ditemukan bukti adanya evaluasi risiko TI yang terintegrasi dan dilakukan secara rutin dalam manajemen risiko organisasi."
+    },
+    {
+      "id": "EDM03.05-3",
+      "practiceCode": "EDM03.01",
+      "activityNumber": 5,
+      "level": 3,
+      "description": "Proactively evaluate I&T risk factors in advance of pending strategic enterprise decisions and ensure that risk considerations\nare part of the strategic enterprise decision process.",
+      "response": "N.A.",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "EDM03.06-3",
+      "practiceCode": "EDM03.01",
+      "activityNumber": 6,
+      "level": 3,
+      "description": "Evaluate risk management activities to ensure alignment with the enterprise’s capacity for I&T-related loss and leadership’s\ntolerance of it.",
+      "response": "N.A.",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "EDM03.07-3",
+      "practiceCode": "EDM03.01",
+      "activityNumber": 7,
+      "level": 3,
+      "description": "Attract and maintain necessary skills and personnel for I&T Risk Management",
+      "response": "N.A.",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "EDM03.01-2",
+      "practiceCode": "EDM03.02",
+      "activityNumber": 1,
+      "level": 2,
+      "description": "Direct the translation and integration of the I&T risk strategy into risk management practices and operational activities.",
+      "response": "No",
+      "comment": "Belum ditemukan SOP atau dokumen formal yang mengatur penerapan strategi risiko TI ke dalam aktivitas operasional organisasi. Narasumber juga menyatakan belum mengetahui adanya dokumen tersebut.",
+      "evidenceIds": [
+        "EVD-005"
+      ],
+      "evidenceSnippet": "(3:25–3:33) Belum ditemukan SOP formal terkait pengelolaan risiko TI. Narasumber menyatakan bahwa \"kalau SOP saya kayaknya belum pernah lihat SOP ya\" dan \"secara dokumen kayaknya belum ada sih\"."
+    },
+    {
+      "id": "EDM03.02-2",
+      "practiceCode": "EDM03.02",
+      "activityNumber": 2,
+      "level": 2,
+      "description": "Direct the development of risk communication plans (covering all levels of the enterprise).",
+      "response": "Partially",
+      "comment": "Komunikasi terkait keamanan dan risiko TI telah dilakukan melalui sosialisasi dan pengumuman pada kondisi tertentu. Namun, belum ditemukan bukti adanya rencana komunikasi risiko yang terstruktur dan dilakukan secara konsisten pada seluruh level organisasi.",
+      "evidenceIds": [
+        "EVD-006"
+      ],
+      "evidenceSnippet": "(3:41–4:03) Informasi terkait keamanan sistem disampaikan kepada pegawai melalui sosialisasi dan pengumuman tertentu. Narasumber menjelaskan bahwa informasi keamanan \"diumumkan dalam kondisi tertentu\" dan \"sosialisasi rutin, setahun-setahun kali ya\". Namun komunikasi risiko belum dilakukan secara intensif dan terstruktur."
+    },
+    {
+      "id": "EDM03.03-2",
+      "practiceCode": "EDM03.02",
+      "activityNumber": 3,
+      "level": 2,
+      "description": "Direct implementation of the appropriate mechanisms to respond quickly to changing risk and report immediately to\nappropriate levels of management, supported by agreed principles of escalation (what to report, when, where and how).",
+      "response": "Yes",
+      "comment": "Telah terdapat mekanisme pelaporan dan eskalasi insiden melalui contact center HaloDatin serta pihak yang bertanggung jawab dalam proses penanganan insiden. Mekanisme ini mendukung respons terhadap perubahan risiko yang terjadi.",
+      "evidenceIds": [
+        "EVD-007"
+      ],
+      "evidenceSnippet": "(4:09–4:42) Organisasi telah memiliki mekanisme pelaporan dan eskalasi insiden melalui contact center. Narasumber menyatakan bahwa \"kita punya contact center sih, HaloDatin\" dan \"kalau ada insiden, ada trouble-trouble kita kontaknya ke sana\". Selain itu, telah terdapat PIC yang jelas dalam proses penanganan insiden."
+    },
+    {
+      "id": "EDM03.04-2",
+      "practiceCode": "EDM03.02",
+      "activityNumber": 4,
+      "level": 2,
+      "description": "Direct that risk, opportunities, issues and concerns may be identified and reported by anyone to the appropriate party at any\ntime. Risk should be managed in accordance with published policies and procedures and escalated to the relevant decision\nmakers.",
+      "response": "Yes",
+      "comment": "Telah tersedia sarana pelaporan gangguan atau insiden TI yang dapat digunakan oleh seluruh pegawai. Hal ini menunjukkan bahwa risiko dan permasalahan TI dapat dilaporkan kepada pihak yang berwenang untuk ditindaklanjuti.",
+      "evidenceIds": [
+        "EVD-008"
+      ],
+      "evidenceSnippet": "(4:47–4:58) Organisasi telah menyediakan mekanisme pelaporan gangguan yang dapat digunakan oleh seluruh pegawai. Narasumber menyampaikan bahwa \"udah, siapapun bisa melaporkan\"."
+    },
+    {
+      "id": "EDM03.05-3",
+      "practiceCode": "EDM03.02",
+      "activityNumber": 5,
+      "level": 3,
+      "description": "Identify key goals and metrics of the risk governance and management processes to be monitored, and approve the\napproaches, methods, techniques and processes for capturing and reporting the measurement information.",
+      "response": "N.A.",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "EDM03.01-2",
+      "practiceCode": "EDM03.03",
+      "activityNumber": 1,
+      "level": 2,
+      "description": "Verify entitlement for service requests using, where possible, a predefined process flow and standard changes.",
+      "response": "Yes",
+      "comment": "Telah terdapat mekanisme persetujuan (approval) dalam pemberian akses layanan TI. Hal ini menunjukkan bahwa permintaan layanan tidak diberikan secara langsung tanpa proses otorisasi yang sesuai.",
+      "evidenceIds": [
+        "EVD-009"
+      ],
+      "evidenceSnippet": "(5:11–5:31) Organisasi telah menerapkan mekanisme persetujuan dalam pemberian akses layanan TI. Narasumber menjelaskan bahwa \"itu pasti ada mekanisme dasarnya, bisa daftar approval\"."
+    },
+    {
+      "id": "EDM03.02-3",
+      "practiceCode": "EDM03.03",
+      "activityNumber": 2,
+      "level": 3,
+      "description": "Monitor the extent to which the risk profile is managed within the enterprise’s risk appetite and tolerance thresholds.",
+      "response": "No",
+      "comment": "Telah dilakukan pemantauan terhadap kondisi layanan dan keamanan sistem secara rutin menggunakan sistem monitoring. Namun, belum ditemukan bukti bahwa hasil pemantauan tersebut secara formal dikaitkan dengan pengukuran risk appetite maupun risk tolerance organisasi.",
+      "evidenceIds": [
+        "EVD-010"
+      ],
+      "evidenceSnippet": "(1:07–1:15) pemantauan dilakukan secara rutin karena \"kalau pemantauan, pasti setiap hari ya\" dan dilakukan menggunakan sistem monitoring, yaitu \"kan ada IPS ya\"."
+    },
+    {
+      "id": "EDM03.03-4",
+      "practiceCode": "EDM03.03",
+      "activityNumber": 3,
+      "level": 4,
+      "description": "Monitor key goals and metrics of risk governance and management processes against targets, analyze the cause of any\ndeviations, and initiate remedial actions to address the underlying causes.",
+      "response": "Partially",
+      "comment": "Organisasi telah melakukan monitoring dan tindak lanjut terhadap insiden yang terjadi. Namun, belum ditemukan bukti adanya pengukuran risiko menggunakan target atau metrik yang terdefinisi secara formal serta analisis penyimpangan yang terdokumentasi secara berkala.",
+      "evidenceIds": [
+        "EVD-011"
+      ],
+      "evidenceSnippet": "Hasil monitoring biasanya dicatat dan ditindaklanjuti apabila terdapat gangguan atau kendala pada sistem. Namun, belum terlihat adanya laporan risiko yang dibuat secara khusus dan berkala."
+    },
+    {
+      "id": "EDM03.04-4",
+      "practiceCode": "EDM03.03",
+      "activityNumber": 4,
+      "level": 4,
+      "description": "Enable key stakeholders’ review of the enterprise’s progress toward identified goals.",
+      "response": "Partially",
+      "comment": "Terdapat komunikasi kepada pimpinan ketika terjadi insiden atau permasalahan tertentu. Namun, belum ditemukan bukti adanya proses review berkala oleh stakeholder utama terhadap capaian pengelolaan risiko TI berdasarkan laporan dan indikator yang terukur.",
+      "evidenceIds": [
+        "EVD-012"
+      ],
+      "evidenceSnippet": "Apabila terdapat kejadian atau gangguan yang cukup penting, informasi tersebut biasanya disampaikan kepada pimpinan. Namun, belum ditemukan informasi mengenai pelaporan risiko TI yang dilakukan secara rutin sebagai bahan evaluasi pimpinan."
+    }
+  ],
+  "APO12": [
+    {
+      "id": "APO12.01-2",
+      "practiceCode": "APO12.01",
+      "activityNumber": 1,
+      "level": 2,
+      "description": "Establish and maintain a method for the collection, classification and analysis of I&T risk-related data.",
+      "response": "Yes",
+      "comment": "Manajemen risiko sudah berjalan secara umum dan mencakup data risiko, tetapi belum spesifik untuk risiko/data I&T. Risk register sudah tersedia sebagai bagian dari manajemen risiko.",
+      "evidenceIds": [
+        "EVD-013"
+      ],
+      "evidenceSnippet": "[01:34:04–01:34:39] Proses pengumpulan/klasifikasi/analisis data risiko ada dalam manajemen risiko umum, bukan spesifik I&T. [01:35:50–01:35:53] Risk register ada."
+    },
+    {
+      "id": "APO12.02-2",
+      "practiceCode": "APO12.01",
+      "activityNumber": 2,
+      "level": 2,
+      "description": "Record relevant and significant I&T risk-related data on the enterprise’s internal and external operating environment.",
+      "response": "Partially",
+      "comment": "Informasi risiko dari lingkungan internal/eksternal sudah dikenali secara umum, tetapi pencatatan/dokumentasi khusus belum kuat dan belum memakai metode khusus.",
+      "evidenceIds": [
+        "EVD-014"
+      ],
+      "evidenceSnippet": "[01:35:07–01:35:30] Pencatatan dan dokumentasi khusus belum ada; biasanya langsung disimpan, belum ada metode khusus."
+    },
+    {
+      "id": "APO12.03-3",
+      "practiceCode": "APO12.01",
+      "activityNumber": 3,
+      "level": 3,
+      "description": "Adopt or define a risk taxonomy for consistent definitions of risk scenarios and impact and likelihood categories.",
+      "response": "No",
+      "comment": "Belum ada taksonomi risiko khusus. PANRB memakai kategori risiko umum dan langsung melakukan asesmen penyebab serta mitigasi.",
+      "evidenceIds": [
+        "EVD-015"
+      ],
+      "evidenceSnippet": "[01:36:05–01:36:22] Tidak punya taksonomi khusus; langsung asesmen penyebab dan mitigasi. [01:36:53–01:37:26] Ada 12 kategori risiko mengacu PermenPANRB No. 5 Tahun 2020."
+    },
+    {
+      "id": "APO12.04-3",
+      "practiceCode": "APO12.01",
+      "activityNumber": 4,
+      "level": 3,
+      "description": "Record data on risk events that have caused or may cause business impacts as per the impact categories defined in the risktaxonomy. Capture relevant data from related issues, incidents, problems and investigations.",
+      "response": "Partially",
+      "comment": "Dampak/loss dan frekuensi kejadian risiko dicatat dalam manajemen risiko, tetapi belum terbukti lengkap sebagai pencatatan risk event I&T berdasarkan risk taxonomy formal.",
+      "evidenceIds": [
+        "EVD-016"
+      ],
+      "evidenceSnippet": "[01:38:26–01:38:54] Dampak kerugian didokumentasikan dan frekuensi kejadian risiko dicatat. [01:36:05–01:36:22] Tidak ada taksonomi khusus."
+    },
+    {
+      "id": "APO12.05-4",
+      "practiceCode": "APO12.01",
+      "activityNumber": 5,
+      "level": 4,
+      "description": "Survey and analyze the historical I&T risk data and loss experience from externally available data and trends, industry peersthrough industry-based event logs, databases, and industry agreements for common event disclosure.",
+      "response": "No",
+      "comment": "Belum ada bukti survei atau analisis historical I&T risk data dari sumber eksternal, industry peers, event logs, database eksternal, atau common event disclosure. Evidence yang ada hanya pembelajaran dari kejadian masa lalu internal/umum.",
+      "evidenceIds": [
+        "EVD-017"
+      ],
+      "evidenceSnippet": "[02:07:56–02:08:16] Kejadian masa lalu dianalisis dan dijadikan pembelajaran; tidak ada evidence spesifik untuk sumber historis eksternal."
+    },
+    {
+      "id": "APO12.06-4",
+      "practiceCode": "APO12.01",
+      "activityNumber": 6,
+      "level": 4,
+      "description": "For similar classes of events, organize the collected data and highlight contributing factors. Determine common contributingfactors across multiple events.",
+      "response": "Partially",
+      "comment": "Risiko dikelompokkan melalui kategori umum/area risiko dan penyebabnya dianalisis, tetapi belum terbukti ada pengolahan kelas event I&T yang formal.",
+      "evidenceIds": [
+        "EVD-018"
+      ],
+      "evidenceSnippet": "[01:37:05] Ada 12 kategori risiko. [02:06:59–02:07:36] Risiko dikategorikan berdasarkan area seperti aplikasi, infrastruktur, kepatuhan, keamanan. [01:36:15] Asesmen melihat penyebab dan mitigasi."
+    },
+    {
+      "id": "APO12.07-4",
+      "practiceCode": "APO12.01",
+      "activityNumber": 7,
+      "level": 4,
+      "description": "Determine the specific conditions that existed or were absent when risk events occurred and the way the conditions affectedevent frequency and loss magnitude.",
+      "response": "No",
+      "comment": "Belum ada bukti eksplisit analisis kondisi yang ada/tidak ada saat event terjadi. Yang terlihat baru fokus pada penyebab risiko dan perbaikan penyebab.",
+      "evidenceIds": [
+        "EVD-019"
+      ],
+      "evidenceSnippet": "[02:02:23–02:02:50] Tindak lanjut diarahkan ke penyebab, misalnya sumber bocor. [02:03:47–02:04:35] Mitigasi menekan dampak, tetapi penyebab yang harus dibereskan."
+    },
+    {
+      "id": "APO12.08-4",
+      "practiceCode": "APO12.01",
+      "activityNumber": 8,
+      "level": 4,
+      "description": "Perform periodic event and risk factor analysis to identify new or emerging risk issues and to gain an understanding of theassociated internal and external risk factors.",
+      "response": "Partially",
+      "comment": "Risiko I&T diperbarui mengikuti periode penerapan manajemen risiko, tetapi belum ada bukti analisis periodik event/faktor risiko I&T untuk menemukan risiko baru/emerging risk.",
+      "evidenceIds": [
+        "EVD-020"
+      ],
+      "evidenceSnippet": "[01:37:53–01:38:02] Risiko I&T diperbarui mengikuti periode penerapan manajemen risiko."
+    },
+    {
+      "id": "APO12.01-3",
+      "practiceCode": "APO12.02",
+      "activityNumber": 1,
+      "level": 3,
+      "description": "Define the appropriate scope of risk analysis efforts, considering all risk factors and/or the business criticality of assets.",
+      "response": "Yes",
+      "comment": "Ruang lingkup analisis risiko sudah ditentukan melalui kategori risiko umum, area dampak, dan besaran risiko. Namun pendekatannya masih dalam manajemen risiko umum, belum spesifik sebagai risk analysis I&T.",
+      "evidenceIds": [
+        "EVD-021"
+      ],
+      "evidenceSnippet": "[01:36:53–01:37:26] Ada 12 kategori risiko, mengacu PermenPANRB No. 5 Tahun 2020; terdapat kategori risiko dan dampaknya."
+    },
+    {
+      "id": "APO12.02-3",
+      "practiceCode": "APO12.02",
+      "activityNumber": 2,
+      "level": 3,
+      "description": "Build and regularly update I&T risk scenarios; I&T-related loss exposures; and scenarios regarding reputational risk, including compound scenarios of cascading and/or coincidental threat types and events. Develop expectations for specific control activities and capabilities to detect.",
+      "response": "Partially",
+      "comment": "Risiko I&T diperbarui mengikuti siklus manajemen risiko dan data dampak/frekuensi dicatat, tetapi belum terlihat sebagai pembaruan skenario risiko I&T yang formal, termasuk skenario reputasi/cascading dan control expectations.",
+      "evidenceIds": [
+        "EVD-022"
+      ],
+      "evidenceSnippet": "[01:37:53–01:38:54] Risiko I&T diperbarui sesuai periode manajemen risiko; dampak kerugian dan frekuensi kejadian risiko dicatat."
+    },
+    {
+      "id": "APO12.03-3",
+      "practiceCode": "APO12.02",
+      "activityNumber": 3,
+      "level": 3,
+      "description": "Estimate the frequency (or likelihood) and magnitude of loss or gain associated with I&T risk scenarios. Take into account allapplicable risk factors and evaluate known operational controls.",
+      "response": "Yes",
+      "comment": "Estimasi risiko memakai risk appetite berbasis dampak dan frekuensi/kemungkinan. Risiko di bawah batas tertentu dapat tidak ditindaklanjuti, sedangkan risiko tinggi diprioritaskan.",
+      "evidenceIds": [
+        "EVD-023"
+      ],
+      "evidenceSnippet": "[01:39:32–01:39:47] Ada risk appetite; contoh di bawah 10 tidak ditindaklanjuti. [02:01:36–02:02:16] Dampak 1–5 dikalikan frekuensi 1–5, maksimum 25."
+    },
+    {
+      "id": "APO12.04-3",
+      "practiceCode": "APO12.02",
+      "activityNumber": 4,
+      "level": 3,
+      "description": "Propose risk responses for risk exceeding risk appetite and tolerance levels.",
+      "response": "Yes",
+      "comment": "Respons/mitigasi tersedia untuk risiko yang melewati batas/risk appetite. Risiko tinggi, terutama di atas 20 dari maksimum 25, menjadi perhatian dan harus ditindaklanjuti/dimitigasi.",
+      "evidenceIds": [
+        "EVD-024"
+      ],
+      "evidenceSnippet": "[01:40:37–01:40:47] Risiko di atas batas ditindaklanjuti. [01:48:53–01:49:24] Risiko >20 menjadi perhatian dan harus segera ditindaklanjuti/dimitigasi."
+    },
+    {
+      "id": "APO12.05-3",
+      "practiceCode": "APO12.02",
+      "activityNumber": 5,
+      "level": 3,
+      "description": "Define knowledge sources on incidents and requests and describe how to use them.",
+      "response": "Partially",
+      "comment": "Tidak ada mekanisme knowledge source incident/request yang dijelaskan secara formal. Yang ada baru indikasi bahwa kejadian masa lalu dipakai sebagai pembelajaran.",
+      "evidenceIds": [
+        "EVD-025"
+      ],
+      "evidenceSnippet": "[02:07:56–02:08:16] Kejadian masa lalu dianalisis sebagai bahan pembelajaran."
+    },
+    {
+      "id": "APO12.06-3",
+      "practiceCode": "APO12.02",
+      "activityNumber": 6,
+      "level": 3,
+      "description": "Specify high-level requirements for projects or programs that will implement the selected risk responses. Identify requirementsand expectations for appropriate key controls for risk mitigation responses.",
+      "response": "Partially",
+      "comment": "Untuk risiko tinggi, kebutuhan respons/mitigasi diprioritaskan dan diarahkan pada penyebab risiko. Namun detail high-level control requirement masih dijelaskan secara umum, bukan sebagai dokumen/program khusus.",
+      "evidenceIds": [
+        "EVD-026"
+      ],
+      "evidenceSnippet": "[01:48:53–01:49:24] Risiko >20 harus ditindaklanjuti/dimitigasi. [02:03:47–02:04:35] Mitigasi diarahkan ke penyebab, misalnya bocor diperbaiki atau pintu ditambah gembok."
+    },
+    {
+      "id": "APO12.07-4",
+      "practiceCode": "APO12.02",
+      "activityNumber": 7,
+      "level": 4,
+      "description": "Validate the risk analysis and business impact analysis (BIA) results before using them in decision making. Confirm that theanalysis aligns with enterprise requirements and verify that estimations were properly calibrated and scrutinized for bias.",
+      "response": "No",
+      "comment": "Hasil risk analysis/BIA belum dipakai secara formal sebagai dasar pengambilan keputusan.",
+      "evidenceIds": [
+        "EVD-027"
+      ],
+      "evidenceSnippet": "[01:51:16–01:51:29] Hasil analisis risiko atau BIA tidak dipakai untuk pengambilan keputusan."
+    },
+    {
+      "id": "APO12.08-5",
+      "practiceCode": "APO12.02",
+      "activityNumber": 8,
+      "level": 5,
+      "description": "Analyze cost/benefit of potential risk response options such as avoid, reduce/mitigate, transfer/share, and accept andexploit/seize. Confirm the optimal risk response.",
+      "response": "No",
+      "comment": "Tidak ada bukti analisis cost-benefit atas opsi respons. Prioritas respons lebih memakai besaran risiko/risk appetite; untuk dampak tinggi pemerintah cenderung memilih opsi aman.",
+      "evidenceIds": [
+        "EVD-028"
+      ],
+      "evidenceSnippet": "[02:00:56–02:01:36] Penyusunan/prioritas tindak lanjut berdasarkan besaran risiko/risk appetite. [01:57:53–01:58:54] Untuk risiko tinggi biasanya mencari win-win dan cenderung cari aman."
+    },
+    {
+      "id": "APO12.01-2",
+      "practiceCode": "APO12.03",
+      "activityNumber": 1,
+      "level": 2,
+      "description": "Inventory business processes and document their dependency on I&T service management processes and IT infrastructure resources. Identify supporting personnel, applications, infrastructure, facilities, critical manual records, vendors, suppliers and outsourcers.",
+      "response": "Partially",
+      "comment": "Ketergantungan proses bisnis terhadap layanan I&T/infrastruktur/aplikasi/vendor belum seluruhnya dicatat. Narasumber menyatakan sebagian ada, tetapi ketergantungan dinilai rendah karena mayoritas dikelola mandiri.",
+      "evidenceIds": [
+        "EVD-029"
+      ],
+      "evidenceSnippet": "[01:51:51–01:52:30] Tidak semuanya dicatat; kebanyakan dikelola mandiri; sebagian tetap ada yang dicatat, tetapi ketergantungan tidak tinggi."
+    },
+    {
+      "id": "APO12.02-2",
+      "practiceCode": "APO12.03",
+      "activityNumber": 2,
+      "level": 2,
+      "description": "Determine and agree on which I&T services and IT infrastructure resources are essential to sustain the operation of businessprocesses. Analyze dependencies and identify weak links.",
+      "response": "Partially",
+      "comment": "Layanan sistem digital/TI dan infrastruktur esensial sudah disepakati melalui standar pelayanan, domain layanan arsitektur, dan SOP. Namun analisis dependency serta weak link belum dijelaskan secara lengkap.",
+      "evidenceIds": [
+        "EVD-030"
+      ],
+      "evidenceSnippet": "[01:52:40–01:53:15] Penyepakatan layanan esensial ada di standar pelayanan, domain layanan arsitektur, dan SOP. [01:51:51–01:52:30] Ketergantungan I&T/vendor tidak semuanya dicatat."
+    },
+    {
+      "id": "APO12.03-2",
+      "practiceCode": "APO12.03",
+      "activityNumber": 3,
+      "level": 2,
+      "description": "Aggregate current risk scenarios by category, business line and functional area.",
+      "response": "Partially",
+      "comment": "Risiko dikonsolidasikan per unit kerja dan bisa mencakup risiko TIK. Namun kategorisasi tidak eksplisit berdasarkan proses bisnis/area fungsional karena formulir manajemen risiko tidak memiliki kolom proses bisnis.",
+      "evidenceIds": [
+        "EVD-031"
+      ],
+      "evidenceSnippet": "[01:53:24–01:54:15] Form manajemen risiko tidak ada kolom proses bisnis; bisa dikaitkan manual. [01:54:43–01:55:16] Risiko digabungkan per unit kerja, termasuk risiko TIK."
+    },
+    {
+      "id": "APO12.04-3",
+      "practiceCode": "APO12.03",
+      "activityNumber": 4,
+      "level": 3,
+      "description": "Regularly capture all risk profile information and consolidate it into an aggregated risk profile.",
+      "response": "Partially",
+      "comment": "Profil risiko dikumpulkan per unit kerja, termasuk risiko TIK. Belum ada bukti konsolidasi menjadi aggregated risk profile I&T tingkat enterprise yang lengkap.",
+      "evidenceIds": [
+        "EVD-032"
+      ],
+      "evidenceSnippet": "[01:54:43–01:55:16] Informasi profil risiko dikonsolidasikan per unit kerja; risiko dalam unit kerja masuk ke profil risiko unit tersebut, termasuk risiko TIK."
+    },
+    {
+      "id": "APO12.05-3",
+      "practiceCode": "APO12.03",
+      "activityNumber": 5,
+      "level": 3,
+      "description": "Capture information on the status of the risk action plan for inclusion in the I&T risk profile of the enterprise.",
+      "response": "Partially",
+      "comment": "Status/tindak lanjut risiko tersedia dalam dokumen manajemen risiko dan dipantau unit kerja serta Inspektorat, tetapi belum jelas apakah status action plan tersebut masuk ke I&T risk profile enterprise secara formal.",
+      "evidenceIds": [
+        "EVD-033"
+      ],
+      "evidenceSnippet": "[01:59:21–01:59:41] Dokumen manajemen risiko memuat PIC, waktu tindak lanjut, review, dan cara penanganan. [02:00:09–02:00:26] Unit kerja dan Inspektorat memantau risiko/tindak lanjut."
+    },
+    {
+      "id": "APO12.06-4",
+      "practiceCode": "APO12.03",
+      "activityNumber": 6,
+      "level": 4,
+      "description": "Based on all risk profile data, define a set of risk indicators that allow the quick identification and monitoring of current risk and risk trends.\nrisk trends.",
+      "response": "No",
+      "comment": "Belum ada bukti risk indicator/KRI formal. Yang dijelaskan adalah skor risk appetite berbasis dampak × frekuensi sebagai dasar prioritas.",
+      "evidenceIds": [
+        "EVD-034"
+      ],
+      "evidenceSnippet": "[02:01:36–02:02:16] Risk appetite memakai tabel dampak 1–5 dan frekuensi 1–5, dikalikan hingga maksimum 25."
+    },
+    {
+      "id": "APO12.07-4",
+      "practiceCode": "APO12.03",
+      "activityNumber": 7,
+      "level": 4,
+      "description": "Capture information on I&T risk events that have materialized for inclusion in the IT risk profile of the enterprise.",
+      "response": "No",
+      "comment": "Dampak/loss dan frekuensi kejadian dicatat secara umum, tetapi belum ada bukti bahwa event I&T yang sudah terjadi dimasukkan ke profil risiko I&T secara khusus.",
+      "evidenceIds": [
+        "EVD-035"
+      ],
+      "evidenceSnippet": "[01:38:26–01:38:54] Dampak kerugian dan frekuensi kejadian risiko dicatat. [02:06:43–02:07:36] Insiden tidak dikategorikan khusus; yang dikategorikan adalah risiko."
+    },
+    {
+      "id": "APO12.01-3",
+      "practiceCode": "APO12.04",
+      "activityNumber": 1,
+      "level": 3,
+      "description": "Report the results of risk analysis to all affected stakeholders in terms and formats useful to support enterprise decisions. Whenever possible, include probabilities and ranges of loss or gain along with confidence levels, to enable management to balance risk-return.",
+      "response": "Yes",
+      "comment": "Skenario risiko, potensi kerugian, dan dampak disampaikan kepada stakeholder/pengambil keputusan dalam konteks pengambilan keputusan.",
+      "evidenceIds": [
+        "EVD-036"
+      ],
+      "evidenceSnippet": "[01:55:37–01:55:49] Stakeholder diberi tahu skenario risiko, potensi kerugian, dan dampaknya saat pengambilan keputusan."
+    },
+    {
+      "id": "APO12.02-3",
+      "practiceCode": "APO12.04",
+      "activityNumber": 2,
+      "level": 3,
+      "description": "Provide decision makers with an understanding of worst-case and most-probable scenarios, I&T-related loss exposures andsignificant reputation, legal and regulatory considerations, or any other impact category as per the risk taxonomy.",
+      "response": "Partially",
+      "comment": "Pengambil keputusan mendapat informasi dampak dan opsi penanganan risiko, tetapi belum ada bukti eksplisit bahwa skenario worst-case, most-probable, eksposur kerugian I&T, serta pertimbangan reputasi/legal/regulasi dijelaskan lengkap sesuai risk taxonomy.",
+      "evidenceIds": [
+        "EVD-037"
+      ],
+      "evidenceSnippet": "[01:57:23–01:57:35] Risiko dan opsi penanganan tercatat, tinggal keputusan yes/no pimpinan. [01:57:53–01:58:54] Risiko tinggi dipertimbangkan dan cenderung dicari opsi aman."
+    },
+    {
+      "id": "APO12.03-3",
+      "practiceCode": "APO12.04",
+      "activityNumber": 3,
+      "level": 3,
+      "description": "Report the current risk profile to all stakeholders. Include information on the effectiveness of the risk management process,control effectiveness, gaps, inconsistencies, redundancies, remediation status and their impacts on the risk profile.",
+      "response": "Partially",
+      "comment": "Risiko terkini dikomunikasikan secara terbatas kepada stakeholder yang relevan, terutama unit kerja terkait dan Inspektorat. Karena tidak dibuka ke seluruh stakeholder, aktivitas ini dinilai partially.",
+      "evidenceIds": [
+        "EVD-038"
+      ],
+      "evidenceSnippet": "[01:56:00–01:56:40] Risiko terkini tidak dilaporkan ke semua stakeholder; yang bisa melihat hanya unit kerja tersebut dan Inspektorat."
+    },
+    {
+      "id": "APO12.04-3",
+      "practiceCode": "APO12.04",
+      "activityNumber": 4,
+      "level": 3,
+      "description": "On a periodic basis, for areas with relative risk and risk capacity parity, identify I&T-related opportunities that would allow theacceptance of greater risk and enhanced growth and return.",
+      "response": "No",
+      "comment": "Peluang/keputusan berisiko tinggi dicatat dan dipertimbangkan. Namun belum ada bukti eksplisit proses periodik untuk mengidentifikasi area parity antara risk dan risk capacity.",
+      "evidenceIds": [
+        "EVD-039"
+      ],
+      "evidenceSnippet": "[01:56:55–01:57:35] Keputusan/peluang berisiko tinggi dicatat dan opsi penanganannya ada. [01:57:53–01:58:54] Dampak tinggi dipertimbangkan, biasanya dicari solusi aman."
+    },
+    {
+      "id": "APO12.05-4",
+      "practiceCode": "APO12.04",
+      "activityNumber": 5,
+      "level": 4,
+      "description": "Review the results of objective third-party assessments and internal audit and quality assurance reviews. Include them in therisk profile. Review identified gaps and I&T-related loss exposures to determine the need for additional risk analysis.",
+      "response": "N.A.",
+      "comment": "Tidak ditanyakan langsung. Ada peran Inspektorat memantau tindak lanjut risiko pada level kementerian, tetapi belum ada bukti review third-party assessment/internal audit secara khusus untuk risk profile.",
+      "evidenceIds": [
+        "EVD-040"
+      ],
+      "evidenceSnippet": "[02:00:18–02:00:26] Inspektorat memantau tindak lanjut risiko pada level kementerian."
+    },
+    {
+      "id": "APO12.01-2",
+      "practiceCode": "APO12.05",
+      "activityNumber": 1,
+      "level": 2,
+      "description": "Maintain an inventory of control activities that are in place to mitigate risk and that enable risk to be taken in line with the risk appetite and tolerance. Classify control activities and map them to specific I&T risk scenarios and aggregations of I&T risk scenarios.",
+      "response": "Yes",
+      "comment": "Inventaris aktivitas kontrol/mitigasi tersedia dalam dokumen manajemen risiko, termasuk PIC, waktu tindak lanjut, review, dan cara penanganan.",
+      "evidenceIds": [
+        "EVD-041"
+      ],
+      "evidenceSnippet": "[01:59:21–01:59:41] Siapa yang menangani, kapan ditindaklanjuti, review, dan cara penanganan ada di dokumen manajemen risiko."
+    },
+    {
+      "id": "APO12.02-3",
+      "practiceCode": "APO12.05",
+      "activityNumber": 2,
+      "level": 3,
+      "description": "Determine whether each organizational entity monitors risk and accepts accountability for operating within its individual andportfolio tolerance levels.",
+      "response": "Yes",
+      "comment": "Setiap unit kerja memantau risiko internalnya dan menerima akuntabilitas pada level unit. Inspektorat memantau tindak lanjut risiko pada level kementerian.",
+      "evidenceIds": [
+        "EVD-042"
+      ],
+      "evidenceSnippet": "[02:00:09–02:00:26] Unit kerja memantau risiko internal; Inspektorat memantau tindak lanjut risiko pada level kementerian."
+    },
+    {
+      "id": "APO12.03-3",
+      "practiceCode": "APO12.05",
+      "activityNumber": 3,
+      "level": 3,
+      "description": "Define a balanced set of project proposals designed to reduce risk and/or projects that enable strategic enterpriseopportunities, considering costs, benefits, effect on current risk profile and regulations.",
+      "response": "Partially",
+      "comment": "Prioritas usulan/tindakan pengurangan risiko ditentukan berdasarkan besaran risiko. Pertimbangan biaya-manfaat tidak dijelaskan eksplisit; narasumber mengaitkan prioritas dengan risk appetite.",
+      "evidenceIds": [
+        "EVD-043"
+      ],
+      "evidenceSnippet": "[02:00:56–02:01:30] Prioritas tindak lanjut sesuai besaran risiko. [02:01:36–02:02:16] Risk appetite memakai dampak 1–5 dan frekuensi 1–5."
+    },
+    {
+      "id": "APO12.01-3",
+      "practiceCode": "APO12.06",
+      "activityNumber": 1,
+      "level": 3,
+      "description": "Prepare, maintain and test plans that document the specific steps to take when a risk event may cause a significant operationalor development incident with serious business impact. Ensure that plans include pathways of escalation across the enterprise.",
+      "response": "Partially",
+      "comment": "Rencana respons/mitigasi dan jalur eskalasi ada, tetapi pengujian tidak dilakukan untuk semua risiko; contoh pengujian yang jelas hanya simulasi kebakaran. Eskalasi berdasarkan kapasitas/kewenangan unit, bukan otomatis karena risiko besar.",
+      "evidenceIds": [
+        "EVD-044"
+      ],
+      "evidenceSnippet": "[02:03:03–02:03:35] Tidak semua rencana respons diuji; kebakaran ada simulasi. [02:04:41–02:06:34] Eskalasi dilakukan bila unit tidak mampu/tidak berwenang, contoh ruang server bocor, vendor internet, tikus."
+    },
+    {
+      "id": "APO12.02-3",
+      "practiceCode": "APO12.06",
+      "activityNumber": 2,
+      "level": 3,
+      "description": "Apply the appropriate response plan to minimize the impact when risk incidents occur.",
+      "response": "Yes",
+      "comment": "Respons/mitigasi diterapkan saat risiko terjadi untuk menekan dampak, dengan fokus utama memperbaiki penyebab risiko.",
+      "evidenceIds": [
+        "EVD-045"
+      ],
+      "evidenceSnippet": "[02:03:47–02:04:35] Ada mitigasi risiko; penyebab yang harus dibereskan, contoh bocor diperbaiki dan kemalingan ditambah gembok."
+    },
+    {
+      "id": "APO12.03-4",
+      "practiceCode": "APO12.06",
+      "activityNumber": 3,
+      "level": 4,
+      "description": "Categorize incidents and compare I&T-related loss exposures against risk tolerance thresholds. Communicate businessimpacts to decision makers as part of reporting and update the risk profile.",
+      "response": "No",
+      "comment": "Insiden tidak dikategorikan secara khusus; kategorisasi dilakukan pada risiko berdasarkan area seperti aplikasi, infrastruktur, kepatuhan, dan keamanan. Karena itu, aktivitas kategorisasi insiden belum terpenuhi.",
+      "evidenceIds": [
+        "EVD-046"
+      ],
+      "evidenceSnippet": "[02:06:43–02:07:36] Insiden tidak ada pengategorian khusus; yang dikategorikan adalah risiko berdasarkan area seperti aplikasi, infrastruktur, kepatuhan, keamanan."
+    },
+    {
+      "id": "APO12.04-4",
+      "practiceCode": "APO12.06",
+      "activityNumber": 4,
+      "level": 4,
+      "description": "Examine past adverse events/losses and missed opportunities and determine root causes",
+      "response": "Yes",
+      "comment": "Kejadian masa lalu digunakan sebagai pembelajaran, dan root cause/kebutuhan respons tambahan dikomunikasikan untuk perbaikan proses.",
+      "evidenceIds": [
+        "EVD-047"
+      ],
+      "evidenceSnippet": "[02:07:56–02:08:16] Kejadian masa lalu dianalisis sebagai bahan pembelajaran. [02:08:22–02:08:42] Root cause, kebutuhan respons tambahan, dan perbaikan proses dikomunikasikan."
+    },
+    {
+      "id": "APO12.05-5",
+      "practiceCode": "APO12.06",
+      "activityNumber": 5,
+      "level": 5,
+      "description": "Communicate root cause, additional risk response requirements and process improvements to appropriate decision makers.Ensure that the cause, response requirements and process improvement are included in risk governance processes.",
+      "response": "Yes",
+      "comment": "Root cause, kebutuhan respons tambahan, dan perbaikan proses dikomunikasikan kepada pengambil keputusan serta masuk ke tata kelola risiko.",
+      "evidenceIds": [
+        "EVD-048"
+      ],
+      "evidenceSnippet": "[02:08:22–02:08:42] Root cause, kebutuhan respons tambahan, dan perbaikan proses dikomunikasikan kepada pengambil keputusan dan masuk ke tata kelola risiko."
+    }
+  ],
+  "DSS04": [
+    {
+      "id": "DSS04.01-3",
+      "practiceCode": "DSS04.01",
+      "activityNumber": 1,
+      "level": 3,
+      "description": "Identify internal and outsourced business processes and service activities that are critical to the enterprise operations or necessary to meet legal and/or contractual obligations.",
+      "response": "Yes",
+      "comment": "Organisasi telah menerapkan mitigation plan sebagai bagian dari manajemen risiko. Setiap risiko yang muncul telah dilengkapi dengan contingency plan yang tertuang dalam dokumen manajemen risiko.",
+      "evidenceIds": [
+        "EVD-049"
+      ],
+      "evidenceSnippet": "(01:10:45) Mitigation plan memang diterapkan dalam manajemen risiko. Ketika suatu risiko muncul, biasanya sudah terdapat contingency plan untuk menangani risiko tersebut. Hal tersebut umumnya tertuang dalam dokumen manajemen risiko"
+    },
+    {
+      "id": "DSS04.02-3",
+      "practiceCode": "DSS04.01",
+      "activityNumber": 2,
+      "level": 3,
+      "description": "Identify key stakeholders and roles and responsibilities for defining and agreeing on continuity policy and scope",
+      "response": "Yes",
+      "comment": "Terdapat tim khusus yang dibentuk untuk menangani manajemen risiko, termasuk pendefinisian peran dan tanggung jawab terkait keberlangsungan layanan.",
+      "evidenceIds": [
+        "EVD-050"
+      ],
+      "evidenceSnippet": "(01:11:20) Ada tim khusus untuk menganani manajemen risiko"
+    },
+    {
+      "id": "DSS04.03-3",
+      "practiceCode": "DSS04.01",
+      "activityNumber": 3,
+      "level": 3,
+      "description": "Define and document the agreed minimum policy objectives and scope for business resilience.",
+      "response": "Partially",
+      "comment": "Belum terdapat dokumen formal yang mendefinisikan kebijakan dan ruang lingkup ketahanan bisnis, termasuk Business Continuity Plan (BCP) yang diakui secara resmi oleh organisasi.",
+      "evidenceIds": [
+        "EVD-051"
+      ],
+      "evidenceSnippet": "(1:11:59) Tidak ada BCP"
+    },
+    {
+      "id": "DSS04.04-3",
+      "practiceCode": "DSS04.01",
+      "activityNumber": 4,
+      "level": 3,
+      "description": "Identify essential supporting business processes and related I&T services.",
+      "response": "Yes",
+      "comment": "Organisasi telah melakukan pemetaan antara layanan, aplikasi, dan proses bisnis melalui manajemen risiko dan arsitektur sistem, sehingga ketika terjadi insiden, layanan yang terdampak dapat segera diidentifikasi.",
+      "evidenceIds": [
+        "EVD-052"
+      ],
+      "evidenceSnippet": "(1:12:32) Melalui manajemen risiko dan arsitektur sistem biasanya sudah terdapat mapping antara layanan, aplikasi, dan proses bisnis. Dengan adanya mapping tersebut, ketika terjadi suatu insiden, dapat diketahui layanan atau proses bisnis mana yang terdampak dan mengalami gangguan."
+    },
+    {
+      "id": "DSS04.01-2",
+      "practiceCode": "DSS04.02",
+      "activityNumber": 1,
+      "level": 2,
+      "description": "Identify potential scenarios likely to give rise to events that could cause significant disruptive incidents",
+      "response": "Yes",
+      "comment": "Daftar potensi risiko dan insiden telah didokumentasikan berdasarkan pengalaman insiden sebelumnya dan digunakan sebagai bahan antisipasi terhadap kemungkinan insiden di masa mendatang.",
+      "evidenceIds": [
+        "EVD-053"
+      ],
+      "evidenceSnippet": "(1:13:25) Daftar potensi risiko dan insiden biasanya sudah didokumentasikan berdasarkan pengalaman insiden yang pernah terjadi sebelumnya. Risiko-risiko tersebut kemudian dilisting sebagai bahan antisipasi terhadap kemungkinan insiden yang dapat terjadi di masa mendatang."
+    },
+    {
+      "id": "DSS04.02-2",
+      "practiceCode": "DSS04.02",
+      "activityNumber": 2,
+      "level": 2,
+      "description": "Conduct a business impact analysis to evaluate the impact over time of a disruption to critical business functions and the effect that a disruption would have on them.",
+      "response": "No",
+      "comment": "Belum terdapat kajian formal mengenai dampak gangguan atau downtime layanan TI terhadap proses bisnis. Penanganan insiden saat ini dilakukan secara reaktif berdasarkan insiden yang terjadi secara langsung.",
+      "evidenceIds": [
+        "EVD-054"
+      ],
+      "evidenceSnippet": "(1:14:00) Belum terdapat kajian khusus mengenai dampak apabila layanan TI mengalami gangguan atau downtime. Penanganan yang dilakukan saat ini lebih bersifat berdasarkan insiden yang terjadi secara langsung (doing by incident)."
+    },
+    {
+      "id": "DSS04.03-2",
+      "practiceCode": "DSS04.02",
+      "activityNumber": 3,
+      "level": 2,
+      "description": "Establish the minimum time required to recover a business process and supporting I&T, based on an acceptable length of business interruption and maximum tolerable outage.",
+      "response": "Yes",
+      "comment": "Organisasi telah memiliki Service Level Agreement (SLA) sebagai acuan batas toleransi layanan ketika terjadi gangguan. Setiap layanan memiliki ketentuan SLA yang berbeda, termasuk batas toleransi downtime dan target availability.",
+      "evidenceIds": [
+        "EVD-055"
+      ],
+      "evidenceSnippet": "(1:14:36) Terdapat Service Level Agreement (SLA) sebagai acuan batas layanan ketika terjadi gangguan atau downtime. Setiap layanan memiliki ketentuan SLA yang berbeda-beda, termasuk terkait batas toleransi downtime dan target availability layanan."
+    },
+    {
+      "id": "DSS04.04-2",
+      "practiceCode": "DSS04.02",
+      "activityNumber": 4,
+      "level": 2,
+      "description": "Determine the conditions and owners of key decisions that will cause the continuity plans to be invoked",
+      "response": "Partially",
+      "comment": "Organisasi telah menetapkan tim yang bertanggung jawab atas kondisi dan keputusan kunci ketika terjadi gangguan. Setiap kendala yang muncul ditangani langsung oleh tim yang bersangkutan.",
+      "evidenceIds": [
+        "EVD-056"
+      ],
+      "evidenceSnippet": "(1:15:28) Sudah ada timnya Itu, jadi ketika itu mengalami kendala, maka tim tersebut yang bertanggung jawab untuk memperbaiki."
+    },
+    {
+      "id": "DSS04.05-3",
+      "practiceCode": "DSS04.02",
+      "activityNumber": 5,
+      "level": 3,
+      "description": "Assess the likelihood of threats that could cause loss of business continuity. Identify measures that will reduce the likelihood and impact through improved prevention and increased resilience.",
+      "response": "No",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "DSS04.06-3",
+      "practiceCode": "DSS04.02",
+      "activityNumber": 6,
+      "level": 3,
+      "description": "Analyze continuity requirements to identify possible strategic business and technical options.",
+      "response": "No",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "DSS04.07-3",
+      "practiceCode": "DSS04.02",
+      "activityNumber": 7,
+      "level": 3,
+      "description": "Identify resource requirements and costs for each strategic technical option and make strategic recommendations.",
+      "response": "No",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "DSS04.08-3",
+      "practiceCode": "DSS04.02",
+      "activityNumber": 8,
+      "level": 3,
+      "description": "Obtain executive business approval for selected strategic options.",
+      "response": "No",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "DSS04.01-2",
+      "practiceCode": "DSS04.03",
+      "activityNumber": 1,
+      "level": 2,
+      "description": "Define the incident response actions and communications to be taken in the event of disruption. Define related roles and responsibilities, including accountability for policy and implementation.",
+      "response": "Yes",
+      "comment": "Organisasi telah memiliki prosedur penanganan dan komunikasi internal ketika terjadi insiden atau gangguan, yang dilakukan melalui pengumuman, community, maupun WhatsApp agar insiden dapat segera ditindaklanjuti.",
+      "evidenceIds": [
+        "EVD-057"
+      ],
+      "evidenceSnippet": "(1:16:12) Terdapat prosedur komunikasi internal dan eksternal ketika terjadi insiden atau gangguan, biasanya dilakukan melalui pengumuman, community, maupun WhatsApp agar dapat segera ditindaklanjuti."
+    },
+    {
+      "id": "DSS04.02-2",
+      "practiceCode": "DSS04.03",
+      "activityNumber": 2,
+      "level": 2,
+      "description": "Ensure that key suppliers and outsource partners have effective continuity plans in place. Obtain audited evidence as required.",
+      "response": "Partially",
+      "comment": "Gangguan dari pihak ketiga atau vendor cukup sering terjadi dan berdampak pada layanan, terutama terkait gangguan internet dan layanan yang terhubung dengan Pusat Data Nasional.",
+      "evidenceIds": [
+        "EVD-058"
+      ],
+      "evidenceSnippet": "(1:17:20) Gangguan pada pihak ketiga atau vendor cukup sering terjadi dan berdampak pada layanan, terutama terkait gangguan internet dan layanan yang terhubung dengan Pusat Data Nasional."
+    },
+    {
+      "id": "DSS04.03-2",
+      "practiceCode": "DSS04.03",
+      "activityNumber": 3,
+      "level": 2,
+      "description": "Define the conditions and recovery procedures that would enable resumption of business processing. Include updating and reconciliation of information databases to preserve information integrity.",
+      "response": "Partially",
+      "comment": "Prosedur pemulihan layanan belum terdokumentasi secara tertulis. Pengetahuan mengenai kondisi dan langkah pemulihan masih bersifat informal dan bergantung pada pengalaman masing-masing personel dalam tim.",
+      "evidenceIds": [
+        "EVD-059"
+      ],
+      "evidenceSnippet": "(1:18:20) Prosedur pemulihan belum terdokumentasi secara tertulis dan masih bersifat pengetahuan umum di dalam tim berdasarkan pengalaman masing-masing personel."
+    },
+    {
+      "id": "DSS04.04-2",
+      "practiceCode": "DSS04.03",
+      "activityNumber": 4,
+      "level": 2,
+      "description": "Develop and maintain operational BCPs and DRPs that contain the procedures to be followed to enable continued operation of critical business processes and/or temporary processing arrangements. Include links to plans of outsourced service providers.",
+      "response": "Partially",
+      "comment": "Belum terdapat dokumen Business Continuity Plan (BCP) maupun Disaster Recovery Plan (DRP) yang operasional. Penyusunan dokumen tersebut masih terkendala anggaran karena prosesnya memerlukan keterlibatan pihak vendor.",
+      "evidenceIds": [
+        "EVD-060"
+      ],
+      "evidenceSnippet": "(1:19:20) Belum terdapat dokumen Business Continuity Plan (BCP) dan Disaster Recovery Plan (DRP). Penyusunan dokumen tersebut terkendala anggaran karena proses pembuatannya biasanya melibatkan pihak vendor."
+    },
+    {
+      "id": "DSS04.05-2",
+      "practiceCode": "DSS04.03",
+      "activityNumber": 5,
+      "level": 2,
+      "description": "Define and document the resources required to support the continuity and recovery procedures, considering people, facilities and IT infrastructure.",
+      "response": "Partially",
+      "comment": "Belum terdapat dokumentasi formal mengenai sumber daya yang dibutuhkan untuk mendukung prosedur pemulihan. Penanganan insiden dilakukan langsung oleh pegawai internal tanpa alokasi anggaran khusus.",
+      "evidenceIds": [
+        "EVD-061"
+      ],
+      "evidenceSnippet": "(1:20:00) Tidak terdapat anggaran khusus yang dialokasikan untuk proses recovery atau penanganan insiden. Ketika terjadi insiden, tindak lanjut dilakukan langsung oleh pegawai internal tanpa melibatkan vendor, sehingga umumnya tidak memerlukan anggaran tambahan."
+    },
+    {
+      "id": "DSS04.06-2",
+      "practiceCode": "DSS04.03",
+      "activityNumber": 6,
+      "level": 2,
+      "description": "Define and document the information backup requirements required to support the plans. Include plans and paper documents as well as data files. Consider the need for security and off-site storage.",
+      "response": "Yes",
+      "comment": "Organisasi telah memiliki kebijakan resmi untuk melakukan backup data, termasuk persyaratan pencadangan yang mendukung keberlangsungan layanan.",
+      "evidenceIds": [
+        "EVD-062"
+      ],
+      "evidenceSnippet": "(1:20:30) Sudah ada kebijakan resmi untuk melakukan backup data."
+    },
+    {
+      "id": "DSS04.07-2",
+      "practiceCode": "DSS04.03",
+      "activityNumber": 7,
+      "level": 2,
+      "description": "Determine required skills for individuals involved in executing the plan and procedures",
+      "response": "Yes",
+      "comment": "Terdapat tim yang secara khusus bertanggung jawab menangani insiden. Anggota tim diharapkan memiliki kompetensi yang sesuai di bidang keamanan dan pengelolaan pusat data, yang didukung dengan keikutsertaan dalam pelatihan relevan.",
+      "evidenceIds": [
+        "EVD-063"
+      ],
+      "evidenceSnippet": "(1:21:10) Terdapat tim yang secara khusus bertanggung jawab menangani insiden yang terjadi. Anggota tim tersebut diharapkan memiliki kompetensi yang sesuai, khususnya dalam bidang keamanan dan pengelolaan pusat data. Untuk mendukung kompetensi tersebut, pegawai juga mengikuti berbagai pelatihan yang relevan."
+    },
+    {
+      "id": "DSS04.08-3",
+      "practiceCode": "DSS04.03",
+      "activityNumber": 8,
+      "level": 3,
+      "description": "Distribute the plans and supporting documentation securely to appropriately authorized interested parties. Make sure the plans and documentation are accessible under all disaster scenarios.",
+      "response": "No",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "DSS04.01-2",
+      "practiceCode": "DSS04.04",
+      "activityNumber": 1,
+      "level": 2,
+      "description": "Define objectives for exercising and testing the business, technical, logistical, administrative, procedural and operational systems of the plan to verify completeness of the BCP and DRP in meeting business risk.",
+      "response": "Yes",
+      "comment": "Organisasi pernah menyusun tujuan, strategi, dan skenario yang ingin dicapai dalam pelaksanaan simulasi penanganan insiden. Skenario tersebut digunakan sebagai acuan dalam mengantisipasi berbagai kemungkinan insiden.",
+      "evidenceIds": [
+        "EVD-064"
+      ],
+      "evidenceSnippet": "(1:22:30) Organisasi pernah menyusun tujuan, strategi, dan skenario yang ingin dicapai dalam pelaksanaan simulasi atau penanganan insiden. Skenario tersebut digunakan sebagai acuan dalam mengantisipasi dan merespons berbagai kemungkinan insiden yang dapat terjadi."
+    },
+    {
+      "id": "DSS04.02-2",
+      "practiceCode": "DSS04.04",
+      "activityNumber": 2,
+      "level": 2,
+      "description": "Define and agree on stakeholder exercises that are realistic and validate continuity procedures. Include roles and responsibilities and data retention arrangements that cause minimum disruption to business processes.",
+      "response": "No",
+      "comment": "Belum pernah dilakukan latihan atau simulasi yang melibatkan berbagai unit kerja untuk memvalidasi prosedur keberlangsungan secara bersama-sama.",
+      "evidenceIds": [
+        "EVD-065"
+      ],
+      "evidenceSnippet": "(1:23:05) Tidak pernah melakukan simulasi atau latihan yang melibatkan berbagai unit kerja."
+    },
+    {
+      "id": "DSS04.03-2",
+      "practiceCode": "DSS04.04",
+      "activityNumber": 3,
+      "level": 2,
+      "description": "Assign roles and responsibilities for performing continuity plan exercises and tests",
+      "response": "Yes",
+      "comment": "Terdapat tim yang secara khusus ditugaskan dan bertanggung jawab dalam penanganan insiden, termasuk pelaksanaan latihan dan pengujian rencana keberlangsungan. Tim tersebut didukung dengan kompetensi di bidang keamanan dan pengelolaan pusat data.",
+      "evidenceIds": [
+        "EVD-063"
+      ],
+      "evidenceSnippet": "(1:21:10) Terdapat tim yang secara khusus bertanggung jawab menangani insiden yang terjadi. Anggota tim tersebut diharapkan memiliki kompetensi yang sesuai, khususnya dalam bidang keamanan dan pengelolaan pusat data. Untuk mendukung kompetensi tersebut, pegawai juga mengikuti berbagai pelatihan yang relevan."
+    },
+    {
+      "id": "DSS04.04-3",
+      "practiceCode": "DSS04.04",
+      "activityNumber": 4,
+      "level": 3,
+      "description": "Schedule exercises and test activities as defined in the continuity plans.",
+      "response": "N.A.",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "DSS04.05-4",
+      "practiceCode": "DSS04.04",
+      "activityNumber": 5,
+      "level": 4,
+      "description": "Conduct a post-exercise debriefing and analysis to consider the achievement.",
+      "response": "N.A.",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "DSS04.06-5",
+      "practiceCode": "DSS04.04",
+      "activityNumber": 6,
+      "level": 5,
+      "description": "Based on the results of the review, develop recommendations for improving the current continuity plans.",
+      "response": "N.A.",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "DSS04.01-3",
+      "practiceCode": "DSS04.05",
+      "activityNumber": 1,
+      "level": 3,
+      "description": "On a regular basis, review the continuity plans and capability against any assumptions made and current business operational and strategic objectives.",
+      "response": "Partially",
+      "comment": "Terdapat proses monitoring dan evaluasi secara informal untuk memastikan rencana tetap sesuai dengan kondisi terkini. Kegiatan ini dilakukan secara rutin melalui pertemuan berkala, diskusi, maupun komunikasi melalui WhatsApp.",
+      "evidenceIds": [
+        "EVD-066"
+      ],
+      "evidenceSnippet": "(1:24:50) Terdapat proses monitoring dan evaluasi secara informal untuk memastikan rencana tetap sesuai dengan kondisi terkini. Kegiatan tersebut dilakukan secara rutin melalui pertemuan berkala, diskusi di lingkungan kerja, maupun komunikasi melalui WhatsApp."
+    },
+    {
+      "id": "DSS04.02-3",
+      "practiceCode": "DSS04.05",
+      "activityNumber": 2,
+      "level": 3,
+      "description": "On a regular basis, review the continuity plans to consider the impact of new or major changes to enterprise organization, business processes, outsourcing arrangements, technologies, infrastructure, operating systems and application systems.",
+      "response": "Yes",
+      "comment": "Perubahan pada vendor atau pihak ketiga dipertimbangkan dampaknya terhadap rencana keberlangsungan layanan. Perubahan tersebut umumnya diatur melalui kontrak dan proses adendum setelah mempertimbangkan dampaknya terhadap kondisi internal.",
+      "evidenceIds": [
+        "EVD-067"
+      ],
+      "evidenceSnippet": "(1:25:54) Perubahan pada vendor atau pihak ketiga dapat memengaruhi rencana keberlangsungan layanan. Namun, perubahan tersebut umumnya diatur melalui kontrak dan proses adendum. Sebelum perubahan disetujui, organisasi terlebih dahulu mempertimbangkan dampaknya terhadap kebutuhan dan kondisi internal."
+    },
+    {
+      "id": "DSS04.03-3",
+      "practiceCode": "DSS04.05",
+      "activityNumber": 3,
+      "level": 3,
+      "description": "Consider whether a revised business impact assessment may be required, depending on the nature of the change.",
+      "response": "Yes",
+      "comment": "Organisasi memiliki proses untuk menilai apakah suatu perubahan memerlukan pembaruan kajian dampak bisnis sebelum perubahan tersebut disetujui dan diterapkan.",
+      "evidenceIds": [
+        "EVD-068"
+      ],
+      "evidenceSnippet": "(1:26:30) Terdapat proses untuk menilai apakah suatu perubahan memerlukan pembaruan kajian dampak bisnis."
+    },
+    {
+      "id": "DSS04.04-3",
+      "practiceCode": "DSS04.05",
+      "activityNumber": 4,
+      "level": 3,
+      "description": "Recommend changes in policy, plans, procedures, infrastructure, and roles and responsibilities. Communicate them as appropriate for management approval and processing via the IT change management process.",
+      "response": "Partially",
+      "comment": "Terdapat catatan perubahan (log) yang digunakan untuk mendokumentasikan setiap perubahan atau revisi yang dilakukan terhadap sistem maupun layanan sebagai bagian dari proses change management.",
+      "evidenceIds": [
+        "EVD-069"
+      ],
+      "evidenceSnippet": "(1:27:05) Terdapat catatan perubahan (log) yang digunakan untuk mendokumentasikan perubahan atau revisi yang dilakukan terhadap sistem maupun layanan."
+    },
+    {
+      "id": "DSS04.01-2",
+      "practiceCode": "DSS04.06",
+      "activityNumber": 1,
+      "level": 2,
+      "description": "Roll out BCP and DRP awareness and training.",
+      "response": "Partially",
+      "comment": "Pegawai telah diberikan arahan dan panduan penanganan insiden sejak awal, termasuk langkah-langkah yang harus dilakukan ketika terjadi gangguan layanan, meskipun belum dalam bentuk pelatihan BCP/DRP yang terstruktur.",
+      "evidenceIds": [
+        "EVD-070"
+      ],
+      "evidenceSnippet": "(1:27:35) Pegawai diberikan arahan dan panduan penanganan insiden, termasuk langkah-langkah yang harus dilakukan ketika terjadi gangguan layanan."
+    },
+    {
+      "id": "DSS04.02-3",
+      "practiceCode": "DSS04.06",
+      "activityNumber": 2,
+      "level": 3,
+      "description": "Define and maintain training requirements and plans for those performing continuity planning, impact assessments, risk assessments, media communication and incident response. Ensure that the training plans consider frequency of training and training delivery mechanisms.",
+      "response": "No",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "DSS04.03-3",
+      "practiceCode": "DSS04.06",
+      "activityNumber": 3,
+      "level": 3,
+      "description": "Develop competencies based on practical training, including participation in exercises and tests",
+      "response": "No",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "DSS04.04-4",
+      "practiceCode": "DSS04.06",
+      "activityNumber": 4,
+      "level": 4,
+      "description": "Based on the exercise and test results, monitor skills and competencies.",
+      "response": "No",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "DSS04.01-2",
+      "practiceCode": "DSS04.07",
+      "activityNumber": 1,
+      "level": 2,
+      "description": "Back up systems, applications, data and documentation according to a defined schedule. Consider frequency (monthly, weekly, daily, etc.), mode of backup (e.g., disk mirroring for real-time backups vs. DVD-ROM for long-term retention), type of backup (e.g., full vs. incremental), and type of media. Consider also automated online backups, data types (e.g., voice, optical), creation of logs, critical end-user computing data (e.g., spreadsheets), physical and logical location of data sources, security \nand access rights, and encryption.",
+      "response": "Partially",
+      "comment": "Backup data dilakukan secara rutin oleh organisasi. Namun, jadwal dan periode pelaksanaan backup yang lebih rinci tidak diketahui secara pasti oleh narasumber.",
+      "evidenceIds": [
+        "EVD-071"
+      ],
+      "evidenceSnippet": "(1:28:50) Backup data dilakukan secara rutin. Namun, periode atau jadwal pelaksanaan backup tidak diketahui secara pasti oleh narasumber."
+    },
+    {
+      "id": "DSS04.02-2",
+      "practiceCode": "DSS04.07",
+      "activityNumber": 2,
+      "level": 2,
+      "description": "Define requirements for on-site and off-site storage of backup data that meet the business requirements. Consider the accessibility required to back up data.",
+      "response": "Partially",
+      "comment": "Belum terdapat ketentuan atau regulasi resmi yang mengatur lokasi penyimpanan data cadangan, baik on-site maupun off-site. Penentuan lokasi backup saat ini masih didasarkan pada kesepakatan internal yang berlaku.",
+      "evidenceIds": [
+        "EVD-072"
+      ],
+      "evidenceSnippet": "(1:29:20) Belum terdapat ketentuan atau regulasi resmi yang mengatur lokasi penyimpanan data cadangan. Penentuan lokasi penyimpanan backup saat ini lebih didasarkan pada pemahaman dan praktik yang telah disepakati secara internal."
+    },
+    {
+      "id": "DSS04.03-2",
+      "practiceCode": "DSS04.07",
+      "activityNumber": 3,
+      "level": 2,
+      "description": "Periodically test and refresh archived and backup data",
+      "response": "Yes",
+      "comment": "Data cadangan yang tersimpan dilakukan pengujian secara berkala untuk memastikan bahwa data tersebut dapat digunakan kembali apabila diperlukan dalam proses pemulihan layanan.",
+      "evidenceIds": [
+        "EVD-073"
+      ],
+      "evidenceSnippet": "(1:29:52) Data cadangan yang tersimpan dilakukan pengujian untuk memastikan data dapat digunakan kembali apabila diperlukan dalam proses pemulihan."
+    },
+    {
+      "id": "DSS04.04-2",
+      "practiceCode": "DSS04.07",
+      "activityNumber": 4,
+      "level": 2,
+      "description": "Ensure that systems, applications, data and documentation maintained or processed by third parties are adequately backed up or otherwise secured. Consider requiring return of backups from third parties. Consider escrow or deposit arrangements.",
+      "response": "Yes",
+      "comment": "Data dan sistem yang dikelola oleh pihak ketiga telah memiliki prosedur pencadangan yang ditetapkan, baik oleh pihak internal maupun vendor yang terkait.",
+      "evidenceIds": [
+        "EVD-074"
+      ],
+      "evidenceSnippet": "(1:31:30) Data dan sistem yang dikelola telah memiliki prosedur pencadangan (backup) yang ditetapkan, baik oleh pihak internal maupun vendor yang terkait."
+    },
+    {
+      "id": "DSS04.01-2",
+      "practiceCode": "DSS04.08",
+      "activityNumber": 1,
+      "level": 2,
+      "description": "Assess adherence to the documented BCP and DRP.",
+      "response": "Partially",
+      "comment": "Terdapat proses evaluasi terhadap penanganan insiden dan penerapan prosedur yang telah ditetapkan, meskipun mekanisme pelaksanaannya secara spesifik tidak dapat dijelaskan secara pasti oleh narasumber.",
+      "evidenceIds": [
+        "EVD-075"
+      ],
+      "evidenceSnippet": "(1:32:10) Terdapat proses evaluasi terhadap penanganan insiden dan penerapan prosedur yang telah ditetapkan, meskipun narasumber tidak dapat menjelaskan secara pasti mekanisme pelaksanaannya."
+    },
+    {
+      "id": "DSS04.02-2",
+      "practiceCode": "DSS04.08",
+      "activityNumber": 2,
+      "level": 2,
+      "description": "Determine the effectiveness of the plans, continuity capabilities, roles and responsibilities, skills and competencies, resilience to the incident, technical infrastructure, and organizational structures and relationships.",
+      "response": "Partially",
+      "comment": "Evaluasi pasca-insiden dilakukan dengan berfokus pada identifikasi penyebab terjadinya insiden. Hasil evaluasi digunakan sebagai bahan perbaikan dan pencegahan agar kejadian serupa tidak terulang kembali.",
+      "evidenceIds": [
+        "EVD-076"
+      ],
+      "evidenceSnippet": "(1:32:47) Setelah insiden selesai ditangani, evaluasi biasanya difokuskan pada penyebab terjadinya insiden sebagai bahan perbaikan dan pencegahan agar kejadian serupa tidak terulang kembali."
+    },
+    {
+      "id": "DSS04.03-3",
+      "practiceCode": "DSS04.08",
+      "activityNumber": 3,
+      "level": 3,
+      "description": "Identify weaknesses or omissions in the plans and capabilities and make recommendations for improvement. Obtain management approval for any changes to the plans and apply via the enterprise change control process.",
+      "response": "No",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    }
+  ],
+  "DSS05": [
+    {
+      "id": "DSS05.01-2",
+      "practiceCode": "DSS05.01",
+      "activityNumber": 1,
+      "level": 2,
+      "description": "Install and activate malicious software protection tools on all processing facilities, with malicious software definition files that are updated as required (automatically or semi-automatically).",
+      "response": "Partially",
+      "comment": "Proteksi malware sudah diterapkan pada server oleh Biro Datin. Namun, penerapan pada perangkat pengguna seperti laptop belum dapat dipastikan dan masih mengandalkan Windows Defender bawaan, sehingga implementasi kontrol dinilai sebagian (partially).",
+      "evidenceIds": [
+        "EVD-077"
+      ],
+      "evidenceSnippet": "(2:48) \"Kalo di server pastinya sudah ya, Biro Datin sudah melakukan secara menyeluruh, tetapi kalau laptop saya gak yakin. Karena kalau windows biasanya sudah ada bawaan windows defender\""
+    },
+    {
+      "id": "DSS05.02-2",
+      "practiceCode": "DSS05.01",
+      "activityNumber": 2,
+      "level": 2,
+      "description": "Filter incoming traffic, such as email and downloads, to protect against unsolicited information (e.g., spyware, phishing emails).",
+      "response": "Partially",
+      "comment": "Organisasi telah menggunakan Zimbra sebagai layanan email kantor yang memiliki fitur keamanan seperti anti-spam, antivirus, dan enkripsi data. Namun, email berindikasi phishing atau spam masih sering diterima dan penanganannya masih dilakukan secara manual, sehingga kontrol filtering dinilai sebagian (partially).",
+      "evidenceIds": [
+        "EVD-078"
+      ],
+      "evidenceSnippet": "(4:40) \"Kita pake Zimbra untuk email kantornya, sejauh ini masih sering sekali masuk email yang berkonotasi negatif, tindak lanjut dilakukan manual\""
+    },
+    {
+      "id": "DSS05.03-3",
+      "practiceCode": "DSS05.01",
+      "activityNumber": 3,
+      "level": 3,
+      "description": "Communicate malicious software awareness and enforce prevention procedures and responsibilities. Conduct periodic training about malware in email and Internet usage. Train users to not open, but report, suspicious emails and to not install shared or unapproved software.",
+      "response": "N.A.",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "DSS05.04-3",
+      "practiceCode": "DSS05.01",
+      "activityNumber": 4,
+      "level": 3,
+      "description": "Distribute all protection software centrally (version and patch-level) using centralized configuration and IT change management.",
+      "response": "N.A.",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "DSS05.05-4",
+      "practiceCode": "DSS05.01",
+      "activityNumber": 5,
+      "level": 4,
+      "description": "Regularly review and evaluate information on new potential threats (e.g., reviewing vendors’ products and services security\nadvisories).",
+      "response": "N.A.",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "DSS05.01-2",
+      "practiceCode": "DSS05.02",
+      "activityNumber": 1,
+      "level": 2,
+      "description": "Allow only authorized devices to have access to corporate information and the enterprise network. Configure these devices to force password entry.",
+      "response": "Partially",
+      "comment": "Organisasi telah menerapkan pembatasan akses jaringan melalui access point khusus pegawai yang memerlukan mekanisme pendaftaran. Namun, belum ditemukan bukti bahwa perangkat yang terhubung diwajibkan menerapkan password entry atau mekanisme autentikasi perangkat secara formal.",
+      "evidenceIds": [
+        "EVD-079"
+      ],
+      "evidenceSnippet": "(6:43) \"Di kementrianPANRB AP (Access Point) nya itu ada 'bersih melayani', dan 'tamu kantor'. 'Bersih melayani' hanya digunakan oleh pegawai PANRB\"."
+    },
+    {
+      "id": "DSS05.02-2",
+      "practiceCode": "DSS05.02",
+      "activityNumber": 2,
+      "level": 2,
+      "description": "Implement network filtering mechanisms, such as firewalls and intrusion detection software. Enforce appropriate policies to control inbound and outbound traffic.",
+      "response": "Yes",
+      "comment": "Organisasi telah menerapkan mekanisme filtering jaringan berupa firewall dalam bentuk software maupun hardware, serta intrusion detection system (IDS). Implementasi tersebut digunakan untuk mendeteksi dan mengontrol lalu lintas jaringan, termasuk mendeteksi serangan yang masuk ke jaringan PANRB",
+      "evidenceIds": [
+        "EVD-080"
+      ],
+      "evidenceSnippet": "(8:00) \"Firewall dalam bentuk software maupun hardware ada. IDS ada juga dan beberapakali pernah deteksi serangan yang masuk ke jaringan PANRB\""
+    },
+    {
+      "id": "DSS05.03-2",
+      "practiceCode": "DSS05.02",
+      "activityNumber": 3,
+      "level": 2,
+      "description": "Apply approved security protocols to network connectivity.",
+      "response": "Yes",
+      "comment": "Organisasi telah menerapkan protokol keamanan jaringan seperti HTTPS dan penggunaan VPN untuk akses layanan elektronik dari luar kantor.",
+      "evidenceIds": [
+        "EVD-081"
+      ],
+      "evidenceSnippet": "(8:40) \"HTTPS Pasti, VPN itu hanya digunakan ketika mengakses layanan elektronik kantor ketika diluar kantor. Kalo dikantor tidak pake VPN.\""
+    },
+    {
+      "id": "DSS05.04-2",
+      "practiceCode": "DSS05.02",
+      "activityNumber": 4,
+      "level": 2,
+      "description": "Configure network equipment in a secure manner.",
+      "response": "Yes",
+      "comment": "Konfigurasi keamanan jaringan didukung oleh tenaga ahli keamanan di Biro Datin serta penerapan standar ISO 27001 terkait keamanan informasi. Namun, detail teknis terkait secure configuration pada perangkat jaringan belum dijelaskan secara spesifik, sehingga kontrol dinilai largely implemented.",
+      "evidenceIds": [
+        "EVD-082"
+      ],
+      "evidenceSnippet": "(9:30) \"Ada expertise dibidang keamanan di biro Datin dan sudah menerapkan ISO 27001\""
+    },
+    {
+      "id": "DSS05.05-3",
+      "practiceCode": "DSS05.02",
+      "activityNumber": 5,
+      "level": 3,
+      "description": "Encrypt information in transit according to its classification.",
+      "response": "Partially",
+      "comment": "Organisasi telah menerapkan enkripsi melalui VPN untuk akses dari luar kantor dan melakukan pengklasifikasian data berdasarkan hak akses pengguna. Namun, traffic data pada jaringan internal belum diketahui menerapkan mekanisme enkripsi secara konsisten, sehingga kontrol dinilai sebagian (partially).",
+      "evidenceIds": [
+        "EVD-083"
+      ],
+      "evidenceSnippet": "(10:20) \"Kayaknya belum deh ketika ada akses jaringan internal, tidak dilakukan enkripsi.  Kalo dari luar kantor tetap melalui VPN. Dalam konteks data, ada pengklasifikasian data, hanya orang tertentu yang bisa mengaksesnya\""
+    },
+    {
+      "id": "DSS05.06-3",
+      "practiceCode": "DSS05.02",
+      "activityNumber": 6,
+      "level": 3,
+      "description": "Based on risk assessments and business requirements, establish and maintain a policy for security of connectivity.",
+      "response": "Partially",
+      "comment": "Narasumber belum dapat menunjukkan adanya kebijakan formal terkait keamanan konektivitas berbasis risk assessment dan kebutuhan bisnis. Namun, organisasi telah menerapkan beberapa kontrol keamanan jaringan seperti VPN, firewall, dan IDS, sehingga menunjukkan bahwa pengamanan konektivitas telah diterapkan meskipun kebijakan formalnya belum teridentifikasi secara jelas.",
+      "evidenceIds": [
+        "EVD-084"
+      ],
+      "evidenceSnippet": "(11:36) \"Enggak Kayaknya\""
+    },
+    {
+      "id": "DSS05.07-3",
+      "practiceCode": "DSS05.02",
+      "activityNumber": 7,
+      "level": 3,
+      "description": "Establish trusted mechanisms to support the secure transmission and receipt of information.",
+      "response": "No",
+      "comment": "Belum terdapat mekanisme formal yang mendukung secure transmission dan verification penerimaan informasi seperti tanda tangan elektronik, sertifikat digital, atau mekanisme verifikasi lainnya. Kepercayaan terhadap informasi masih didasarkan pada identitas pengirim secara manual, sehingga kontrol dinilai belum diterapkan secara memadai.",
+      "evidenceIds": [
+        "EVD-085"
+      ],
+      "evidenceSnippet": "(11:58) \"Kayaknya gak ada deh, based on trust saja. Pastinya asal pengirimnya dari orang yang kita harapkan untuk kirimkan, pasti trust aja sih\""
+    },
+    {
+      "id": "DSS05.08-4",
+      "practiceCode": "DSS05.02",
+      "activityNumber": 8,
+      "level": 4,
+      "description": "Carry out periodic penetration testing to determine adequacy of network protection.",
+      "response": "N.A.",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "DSS05.09-4",
+      "practiceCode": "DSS05.02",
+      "activityNumber": 9,
+      "level": 4,
+      "description": "Carry out periodic testing of system security to determine adequacy of system protection.",
+      "response": "N.A.",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "DSS05.01-2",
+      "practiceCode": "DSS05.03",
+      "activityNumber": 1,
+      "level": 2,
+      "description": "Configure operating systems in a secure manner.",
+      "response": "Partially",
+      "comment": "Organisasi telah memberikan edukasi keamanan seperti anjuran mengganti password secara berkala. Namun, belum terdapat kebijakan atau standar formal terkait secure configuration pada operating system, sehingga kontrol dinilai sebagian (partially)",
+      "evidenceIds": [
+        "EVD-086"
+      ],
+      "evidenceSnippet": "(12:51) \"Secara peraturan gak ada, tetapi untuk edukasi itu ada seperti mengganti password secara berkala\""
+    },
+    {
+      "id": "DSS05.02-2",
+      "practiceCode": "DSS05.03",
+      "activityNumber": 2,
+      "level": 2,
+      "description": "Implement device lockdown mechanisms.",
+      "response": "No",
+      "comment": "Penggunaan komputer/laptop yang diberikan kepada pegawai masih dibebaskan kepada masing-masing pengguna dan belum terdapat pembatasan atau mekanisme lockdown perangkat secara khusus, sehingga kontrol dinilai belum diterapkan",
+      "evidenceIds": [
+        "EVD-087"
+      ],
+      "evidenceSnippet": "(13:31) \"Komputer/laptop yang diberikan kepada masing masing pegawai penggunaannya dibebaskan kepada pegawai tersebut\""
+    },
+    {
+      "id": "DSS05.03-2",
+      "practiceCode": "DSS05.03",
+      "activityNumber": 3,
+      "level": 2,
+      "description": "Manage remote access and control (e.g., mobile devices, teleworking).",
+      "response": "Yes",
+      "comment": "Organisasi telah menerapkan penggunaan VPN untuk mengelola dan mengamankan akses jarak jauh ke layanan internal organisasi.",
+      "evidenceIds": [
+        "EVD-088"
+      ],
+      "evidenceSnippet": "(14:15) \"Menggunakan VPN\""
+    },
+    {
+      "id": "DSS05.04-2",
+      "practiceCode": "DSS05.03",
+      "activityNumber": 4,
+      "level": 2,
+      "description": "Manage network configuration in a secure manner.",
+      "response": "No",
+      "comment": "Tidak terdapat evidence terkait hardening konfigurasi, pengelolaan default credentials, maupun review berkala terhadap konfigurasi perangkat jaringan. Kontrol dinilai belum diimplementasikan secara formal.",
+      "evidenceIds": [
+        "EVD-089"
+      ],
+      "evidenceSnippet": "(14:37) \"Tidak ada\""
+    },
+    {
+      "id": "DSS05.05-2",
+      "practiceCode": "DSS05.03",
+      "activityNumber": 5,
+      "level": 2,
+      "description": "Implement network traffic filtering on endpoint devices.",
+      "response": "No",
+      "comment": "Belum terdapat implementasi network traffic filtering secara mandiri di level endpoint. Organisasi sepenuhnya bergantung pada filtering eksternal (Komdigi) yang tidak mencakup kebutuhan filtering berbasis kebijakan keamanan informasi internal.",
+      "evidenceIds": [
+        "EVD-090"
+      ],
+      "evidenceSnippet": "(15:00) \"Kalo kayak website radikal (pornografi, judi) itu biasanya sudah otomatis ya dari komdigi, kita hanya mengandalkan itu saja\""
+    },
+    {
+      "id": "DSS05.06-2",
+      "practiceCode": "DSS05.03",
+      "activityNumber": 6,
+      "level": 2,
+      "description": "Protect system integrity.",
+      "response": "No",
+      "comment": "Perlindungan integritas sistem belum didukung mekanisme khusus dari organisasi dan masih bergantung pada masing-masing pengguna perangkat, sehingga kontrol dinilai belum diterapkan.",
+      "evidenceIds": [
+        "EVD-091"
+      ],
+      "evidenceSnippet": "(15:00) \"Gak ada mekanismenya, balik lagi ke personal atau pemilik pemegang komputer\""
+    },
+    {
+      "id": "DSS05.07-2",
+      "practiceCode": "DSS05.03",
+      "activityNumber": 7,
+      "level": 2,
+      "description": "Provide physical protection of endpoint devices.",
+      "response": "No",
+      "comment": "Tidak terdapat kebijakan formal yang mengatur perlindungan fisik endpoint. Pembawaan perangkat ke luar kantor bersifat tidak seragam dan tidak terkontrol. Tidak ditemukan evidence terkait mekanisme pengamanan fisik seperti locker room, maupun prosedur clear desk.",
+      "evidenceIds": [
+        "EVD-092"
+      ],
+      "evidenceSnippet": "(16:41) \"Kebanyakan laptop di kantor kami dibawa pulang, walaupun ada beberapa orang yang meninggalkan di kantor\""
+    },
+    {
+      "id": "DSS05.08-2",
+      "practiceCode": "DSS05.03",
+      "activityNumber": 8,
+      "level": 2,
+      "description": "Dispose of endpoint devices securely.",
+      "response": "Yes",
+      "comment": "Organisasi telah menerapkan pengelolaan endpoint device melalui prosedur barang milik negara (BMN), termasuk kewajiban migrasi data dan factory reset sebelum perangkat dipindahtangankan.",
+      "evidenceIds": [
+        "EVD-093"
+      ],
+      "evidenceSnippet": "(17:55) \"Ada pengelolaan barang milik negara, ketika ada ASN memindah tangankan barang milik negara tersebut dia harus migrasi data dan  factory reset\""
+    },
+    {
+      "id": "DSS05.09-2",
+      "practiceCode": "DSS05.03",
+      "activityNumber": 9,
+      "level": 2,
+      "description": "Manage malicious access through email and web browsers. For example, block certain websites and deactivate click-through on links for smartphones.",
+      "response": "No",
+      "comment": "Tidak terdapat prosedur formal maupun mekanisme teknis otomatis untuk mengelola ancaman melalui email dan web browser. Upaya yang ada hanya berupa edukasi informal melalui broadcast pesan singkat tanpa mekanisme terstruktur. Penanganan insiden bersifat reaktif dan hanya dilakukan apabila terdapat laporan dari pengguna, tanpa adanya kontrol preventif yang aktif.",
+      "evidenceIds": [
+        "EVD-094"
+      ],
+      "evidenceSnippet": "(18:53) \"Hanya dalam bentuk edukasi, Broadcast WA, secara prosedur itu tidak ada. Gak ada mekanisme otomatis memantau aktivitas setiap laptop ASN. Tapi ketika ada report/insiden bisa ditinjaklanjuti oleh Datin\""
+    },
+    {
+      "id": "DSS05.10-3",
+      "practiceCode": "DSS05.03",
+      "activityNumber": 10,
+      "level": 3,
+      "description": "Encrypt information in storage according to its classification.",
+      "response": "N.A.",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "DSS05.01-2",
+      "practiceCode": "DSS05.04",
+      "activityNumber": 1,
+      "level": 2,
+      "description": "Maintain user access rights in accordance with business function, process requirements and security policies. Align the management of identities and access rights to the defined roles and responsibilities, based on least-privilege, need-to-have and\nneed-to-know principles.",
+      "response": "Partially",
+      "comment": "Organisasi telah menerapkan pembatasan akses terhadap data tertentu berdasarkan kewenangan pengguna. Namun, pengelolaan hak akses belum sepenuhnya disesuaikan dengan prinsip least-privilege dan need-to-know secara formal, serta pembagian akses masih bersifat umum seperti admin dan user, sehingga kontrol dinilai sebagian (partially).",
+      "evidenceIds": [
+        "EVD-095"
+      ],
+      "evidenceSnippet": "(23:24) \"Gak ada, bebas. Pejabat maupun pegawai itu bebas. Kalo pembagian akses palingan standar seperti Super Admin, Admin, dan User\""
+    },
+    {
+      "id": "DSS05.02-3",
+      "practiceCode": "DSS05.04",
+      "activityNumber": 2,
+      "level": 3,
+      "description": "Administer all changes to access rights (creation, modifications and deletions) in a timely manner based only on approved and documented transactions authorized by designated management individuals.",
+      "response": "N.A.",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "DSS05.03-3",
+      "practiceCode": "DSS05.04",
+      "activityNumber": 3,
+      "level": 3,
+      "description": "Segregate, reduce to the minimum number necessary and actively manage privileged user accounts. Ensure monitoring on all activity on these accounts.",
+      "response": "N.A.",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "DSS05.04-3",
+      "practiceCode": "DSS05.04",
+      "activityNumber": 4,
+      "level": 3,
+      "description": "Uniquely identify all information processing activities by functional roles. Coordinate with business units to ensure that all roles are consistently defined, including roles that are defined by the business itself within business process applications.",
+      "response": "N.A.",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "DSS05.05-3",
+      "practiceCode": "DSS05.04",
+      "activityNumber": 5,
+      "level": 3,
+      "description": "Authenticate all access to information assets based on the individual’s role or business rules. Coordinate with business units that manage authentication within applications used in business processes to ensure that authentication controls have been\nproperly administered.",
+      "response": "N.A.",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "DSS05.06-3",
+      "practiceCode": "DSS05.04",
+      "activityNumber": 6,
+      "level": 3,
+      "description": "Ensure that all users (internal, external and temporary) and their activity on IT systems (business application, IT infrastructure, system operations, development and maintenance) are uniquely identifiable.",
+      "response": "N.A.",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "DSS05.07-4",
+      "practiceCode": "DSS05.04",
+      "activityNumber": 7,
+      "level": 4,
+      "description": "Maintain an audit trail of access to information depending upon its sensitivity and regulatory requirements.",
+      "response": "N.A.",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "DSS05.08-4",
+      "practiceCode": "DSS05.04",
+      "activityNumber": 8,
+      "level": 4,
+      "description": "Perform regular management review of all accounts and related privileges.",
+      "response": "N.A.",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "DSS05.01-2",
+      "practiceCode": "DSS05.05",
+      "activityNumber": 1,
+      "level": 2,
+      "description": "Log and monitor all entry points to IT sites. Register all visitors, including contractors and vendors, to the site.",
+      "response": "Yes",
+      "comment": "Organisasi telah menerapkan pencatatan pengunjung melalui logbook untuk setiap visitor yang memasuki area IT/site organisasi.",
+      "evidenceIds": [
+        "EVD-096"
+      ],
+      "evidenceSnippet": "(24:49) \"Logbook ada untuk setiap visitor\""
+    },
+    {
+      "id": "DSS05.02-2",
+      "practiceCode": "DSS05.05",
+      "activityNumber": 2,
+      "level": 2,
+      "description": "Ensure all personnel display properly approved identification at all times.",
+      "response": "No",
+      "comment": "Terdapat proses registrasi pengunjung melalui resepsionis dan logbook, namun tidak terdapat mekanisme identifikasi resmi seperti ID card atau badge yang diwajibkan ditampilkan oleh seluruh personel internal maupun tamu selama berada di area kantor.",
+      "evidenceIds": [
+        "EVD-097"
+      ],
+      "evidenceSnippet": "(25:36) \"Kita biasanya pas masuk awal kantor itu ada resepsionis, biasanya di register disitu dulu, lalu input keperluannya apa. Ada proses approve\""
+    },
+    {
+      "id": "DSS05.03-2",
+      "practiceCode": "DSS05.05",
+      "activityNumber": 3,
+      "level": 2,
+      "description": "Require visitors to be escorted at all times while on-site.",
+      "response": "Yes",
+      "comment": "Organisasi mewajibkan setiap tamu untuk didampingi oleh penanggung jawab atau karyawan internal selama berada di area organisasi.",
+      "evidenceIds": [
+        "EVD-098"
+      ],
+      "evidenceSnippet": "(26:58) \"Kalo tamu selalu dikawal oleh penanggung jawab karyawan internal\""
+    },
+    {
+      "id": "DSS05.04-2",
+      "practiceCode": "DSS05.05",
+      "activityNumber": 4,
+      "level": 2,
+      "description": "Restrict and monitor access to sensitive IT sites by establishing perimeter restrictions, such as fences, walls and security devices on interior and exterior doors.",
+      "response": "Yes",
+      "comment": "Organisasi telah menerapkan pembatasan akses terhadap area sensitif seperti ruang server melalui persyaratan surat kunjungan atau nota dinas dari Kepala Biro Datin. Selain itu, terdapat mekanisme alert ketika terjadi upaya intrusion pada area tersebut",
+      "evidenceIds": [
+        "EVD-099"
+      ],
+      "evidenceSnippet": "(28:40) \"Kalo Cuma visit biasa itu gak ada, tapi kalo masuk ke dalam ruang server itu ada minta surat kunjungan atau nota dinas dari kepala biro Datin. Kalo ada intrusion, kalo didobrak itu pasti ada alert gitu\""
+    },
+    {
+      "id": "DSS05.05-3",
+      "practiceCode": "DSS05.05",
+      "activityNumber": 5,
+      "level": 3,
+      "description": "Manage requests to allow appropriately authorized access to the computing facilities.",
+      "response": "N.A.",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "DSS05.06-3",
+      "practiceCode": "DSS05.05",
+      "activityNumber": 6,
+      "level": 3,
+      "description": "Ensure that access profiles remain current. Base access to IT sites (server rooms, buildings, areas or zones) on job function and responsibilities.",
+      "response": "N.A.",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "DSS05.07-3",
+      "practiceCode": "DSS05.05",
+      "activityNumber": 7,
+      "level": 3,
+      "description": "Conduct regular physical information security awareness training.",
+      "response": "N.A.",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "DSS05.01-2",
+      "practiceCode": "DSS05.06",
+      "activityNumber": 1,
+      "level": 2,
+      "description": "Establish procedures to govern the receipt, use, removal and disposal of sensitive documents and output devices into, within, and outside of the enterprise.",
+      "response": "Partially",
+      "comment": "Organisasi telah menerapkan pengelolaan arsip melalui jadwal retensi dokumen dan prosedur pemusnahan dokumen fisik menggunakan mesin penghancur. Namun, pengaturan terkait penerimaan, penggunaan, pemindahan, serta pengelolaan dokumen digital dan output devices belum dapat dikonfirmasi secara menyeluruh.",
+      "evidenceIds": [
+        "EVD-100"
+      ],
+      "evidenceSnippet": "(33:42) \"Dalam konteks kearsipan kita punya jadwal retensi masa periode lima tahun maka dokumen tersebut dapat dimusnahkan dan ada mesing penghancur. Kalo dalam bentuk digital kurang tahu\""
+    },
+    {
+      "id": "DSS05.02-2",
+      "practiceCode": "DSS05.06",
+      "activityNumber": 2,
+      "level": 2,
+      "description": "Ensure cryptographic controls are in place to protect sensitive electronically stored information.",
+      "response": "No",
+      "comment": "Tidak terdapat kontrol kriptografi pada dokumen yang tersimpan di endpoint, baik untuk informasi sensitif maupun non-sensitif. Pernyataan mengenai kemungkinan adanya enkripsi pada cloud storage Kemenpan bersifat spekulatif dan tidak dapat dikonfirmasi sebagai implementasi yang terverifikasi. Tidak diperoleh evidence terkait penerapan enkripsi disk, enkripsi file, maupun mekanisme kriptografi lainnya untuk melindungi informasi sensitif yang tersimpan secara elektronik.",
+      "evidenceIds": [
+        "EVD-101"
+      ],
+      "evidenceSnippet": "(34:38) \"Gak ada, semua dokumen yang ditaro di laptop ya gitu aja sensitif atau tidak sensitif. Kecuali kalo dia menyimpannya di drive cloudnya kemenpan mungkin berlaku enkripsi\""
+    },
+    {
+      "id": "DSS05.03-3",
+      "practiceCode": "DSS05.06",
+      "activityNumber": 3,
+      "level": 3,
+      "description": "Assign access privileges to sensitive documents and output devices based on the least-privilege principle, balancing risk and business requirements.",
+      "response": "N.A.",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "DSS05.04-3",
+      "practiceCode": "DSS05.06",
+      "activityNumber": 4,
+      "level": 3,
+      "description": "Establish an inventory of sensitive documents and output devices, and conduct regular reconciliations.",
+      "response": "N.A.",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "DSS05.05-3",
+      "practiceCode": "DSS05.06",
+      "activityNumber": 5,
+      "level": 3,
+      "description": "Establish appropriate physical safeguards over sensitive documents.",
+      "response": "N.A.",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "DSS05.01-2",
+      "practiceCode": "DSS05.07",
+      "activityNumber": 1,
+      "level": 2,
+      "description": "Continually use a portfolio of supported technologies, services and assets (e.g., vulnerability scanners, fuzzers and sniffers, protocol analyzers) to identify information security vulnerabilities.",
+      "response": "Partially",
+      "comment": "KemenPANRB telah melakukan penetration test sebelum aplikasi go public dan mengulangi pengujian ketika muncul serangan atau jenis serangan baru. Namun, proses ini masih bersifat reaktif dan belum mencakup pemindaian kerentanan secara proaktif dan berkelanjutan terhadap infrastruktur yang sudah berjalan.",
+      "evidenceIds": [
+        "EVD-102"
+      ],
+      "evidenceSnippet": "(38:12) \"di Datin ini sebelum aplikasi Go Public sudah melewati tahap penetration test. Cuman memang kita gak tahu nih ya tiba tiba ada celah gitu, ketika ada serangan yang muncul atau jenis serangan baru, dilakukan pengetesan kembali\""
+    },
+    {
+      "id": "DSS05.02-2",
+      "practiceCode": "DSS05.07",
+      "activityNumber": 2,
+      "level": 2,
+      "description": "Define and communicate risk scenarios, so they can be easily recognized, and the likelihood and impact understood.",
+      "response": "Yes",
+      "comment": "Berdasarkan Permen PANRB No. 31 Tahun 2022, aktivitas penyusunan, validasi, dan verifikasi risk register merupakan bagian dari tugas keamanan informasi yang diakui secara formal di lingkungan PANRB. Selain itu, hasil wawancara menunjukkan adanya penyebaran informasi ancaman dan mitigasi kepada ASN. Oleh karena itu, kontrol dinilai telah diterapkan.\n\nDokumen Pendukung:\nhttps://peraturan.bpk.go.id/Download/265479/Permen%20PANRB%20No.%2031%20Tahun%202022.pdf",
+      "evidenceIds": [
+        "EVD-103"
+      ],
+      "evidenceSnippet": "(40:00) \"Mereka punya standar pengujian kemanan dari setiap aplikasi yang dilakukan di awal ketika ada serangan yang muncul atau jenis serangan baru, dilakukan pengetesan kembali. Datin update terhadap keamanan yang lagi viral, dan menginfokan ke seluruh pegawai ASN sebagai langkah mitigasi\""
+    },
+    {
+      "id": "DSS05.03-2",
+      "practiceCode": "DSS05.07",
+      "activityNumber": 3,
+      "level": 2,
+      "description": "Regularly review the event logs for potential incidents.",
+      "response": "Partially",
+      "comment": "KemenPANRB telah memiliki sistem logging yang mencatat detail insiden seperti alamat IP penyerang, dan Datin pernah menginformasikan adanya serangan berdasarkan log tersebut. Namun, review log tampaknya baru dilakukan ketika serangan sudah terjadi dan belum terkonfirmasi dilakukan secara rutin dan proaktif untuk mendeteksi potensi insiden sejak dini.",
+      "evidenceIds": [
+        "EVD-104"
+      ],
+      "evidenceSnippet": "(42:00) \"Ketika ada serangan, terdapat log dan Datin pernah menginfokan ada serangan terhadap server dan terlihat detail IP dan sebagainya\""
+    },
+    {
+      "id": "DSS05.04-2",
+      "practiceCode": "DSS05.07",
+      "activityNumber": 4,
+      "level": 2,
+      "description": "Ensure that security--related incident tickets are created in a timely manner when monitoring identifies potential incidents.",
+      "response": "Partially",
+      "comment": "KemenPANRB telah memiliki sistem ticketing untuk pelaporan insiden yang mencakup berbagai jenis kendala, termasuk anomali yang ditemukan oleh pegawai. Namun, pembuatan tiket masih bergantung pada laporan manual dari pengguna dan belum terkonfirmasi adanya mekanisme yang secara otomatis membuat tiket berdasarkan hasil monitoring sistem.",
+      "evidenceIds": [
+        "EVD-105"
+      ],
+      "evidenceSnippet": "(43:05) \"Tiket sih ada, konteksnya jika ditemukan oleh pengguna. Misal pegawai PANRB menemukan ada anomali. Ada aplikasi menyediakan fitur ticketing ketika menemukan kendala (request incident). Bukan hanya serangan, tapi ketika ada masalah lain itu bisa dilaporkan\""
+    },
+    {
+      "id": "DSS05.05-3",
+      "practiceCode": "DSS05.07",
+      "activityNumber": 5,
+      "level": 3,
+      "description": "Log security-related events and retain records for appropriate period.",
+      "response": "N.A.",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    }
+  ],
+  "MEA03": [
+    {
+      "id": "MEA03.01-2",
+      "practiceCode": "MEA03.01",
+      "activityNumber": 1,
+      "level": 2,
+      "description": "Assign responsibility for identifying and monitoring any changes of legal, regulatory and other external contractual requirements relevant to the use of IT resources and the processing of information within the business and IT operations of the enterprise.",
+      "response": "Yes",
+      "comment": "Kementerian PANRB telah menetapkan unit yang bertanggung jawab dalam mengidentifikasi dan memonitor perubahan kebijakan terkait dengan TI di unit terkait. Hal ini menunjukkan adanya penugasan tanggung jawab yang jelas untuk memastikan bahwa perubahan regulasi dan persyaratan eksternal dapat diidentifikasi dan direspon secara tepat.",
+      "evidenceIds": [
+        "EVD-106"
+      ],
+      "evidenceSnippet": "(47:14) Sudah ada unit yang bertanggung jawab dalam mengidentifikasi dan melakukan monitoring perubahan kebijakan terkait dengan IT di unit Datin."
+    },
+    {
+      "id": "MEA03.02-2",
+      "practiceCode": "MEA03.01",
+      "activityNumber": 2,
+      "level": 2,
+      "description": "Identify and assess all potential compliance requirements and the impact on I&T activities in areas such as data flow, privacy,internal controls, financial reporting, industry-specific regulations, intellectual property, health and safety.",
+      "response": "Yes",
+      "comment": "Kementerian PANRB telah melakukan upaya identifikasi dan penyesuaian terhadap kebutuhan compliance berdasarkan hasil audit dan evaluasi SPBE.Prosesnya sudah ada, meskipun belum memiliki dokumen SOP.  Oleh karena itu, aktivitas identifikasi dan penilaian compliance dinilai terpenuhi karena konteksnya adalah prosesnya sudah ada atau belum.",
+      "evidenceIds": [
+        "EVD-107"
+      ],
+      "evidenceSnippet": "(48:07) Secara SOP tidak ada, dan \"go with the flow\" aja. Kalau ada audit yang harus memenuhi suatu kriteria maka Kementrian PANRB akan melakukan usaha untuk memenuhi kriteria tersebut. Tetapi di PANRB juga ada penilaian evaluasi SPBE, jadi dari penilaian yang dilakukan tersebut dapat diidentifikasi kurangnya di mana lalu diimplementasikan."
+    },
+    {
+      "id": "MEA03.03-2",
+      "practiceCode": "MEA03.01",
+      "activityNumber": 3,
+      "level": 2,
+      "description": "Assess the impact of I&T-related legal and regulatory requirements on third-party contracts related to IT operations, service providers and business trading partners.",
+      "response": "No",
+      "comment": "Kementerian PANRB belum memiliki mekanisme maupun proses yang digunakan untuk menilai dampak regulasi dan persyaratan hukum terkait TI terhadap kontrak pihak ketiga, penyedia layanan, maupun mitra bisnis. Hal tersebut menunjukkan bahwa aktivitas pengelolaan compliance terhadap pihak eksternal belum diterapkan.",
+      "evidenceIds": [
+        "EVD-108"
+      ],
+      "evidenceSnippet": "(49:58) \"Belum, dan tidak ada.\""
+    },
+    {
+      "id": "MEA03.04-2",
+      "practiceCode": "MEA03.01",
+      "activityNumber": 4,
+      "level": 2,
+      "description": "Define the consequences of noncompliance",
+      "response": "No",
+      "comment": "Dalam konteks SPBE, Kementerian PANRB telah memahami adanya dampak apabila instansi tidak mengikuti evaluasi, seperti tidak memperoleh nilai evaluasi yang dapat memengaruhi citra maupun kinerja instansi. Namun, konsekuensi tersebut belum didefinisikan secara formal dan tertulis dalam kebijakan atau peraturan organisasi, sehingga aktivitas ini dinilai belum memenuhi karena tidak ada dokumen tertulis.",
+      "evidenceIds": [
+        "EVD-109"
+      ],
+      "evidenceSnippet": "(49:58) Tidak ada konsekuensi tertulis secara peraturan. Hanya saja jika ada instansi yang tidak ikut evaluasi maka instansi tersebut tidak akan ada nilainya, yang berarti kinerja atau citranya jelek."
+    },
+    {
+      "id": "MEA03.05-3",
+      "practiceCode": "MEA03.01",
+      "activityNumber": 5,
+      "level": 3,
+      "description": "Obtain independent counsel, where appropriate, on changes to applicable laws, regulations and standards",
+      "response": "N.A.",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "MEA03.06-3",
+      "practiceCode": "MEA03.01",
+      "activityNumber": 6,
+      "level": 3,
+      "description": "Maintain an up-to-date log of all relevant legal, regulatory and contractual requirements; their impact and required actions",
+      "response": "N.A.",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "MEA03.07-3",
+      "practiceCode": "MEA03.01",
+      "activityNumber": 7,
+      "level": 3,
+      "description": "Maintain a harmonized and integrated overall register of external compliance requirements for the enterprise.",
+      "response": "No",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "MEA03.01-3",
+      "practiceCode": "MEA03.02",
+      "activityNumber": 1,
+      "level": 3,
+      "description": "Regularly review and adjust policies, principles, standards, procedures and methodologies for their effectiveness in ensuring necessary compliance and addressing enterprise risk. Use internal and external experts, as required.",
+      "response": "Partially",
+      "comment": "Kementerian PANRB telah melakukan penyesuaian terhadap kebijakan dan implementasi berdasarkan adanya sosialisasi atau trigger dari pihak eksternal terkait perubahan regulasi dan kebijakan pemerintah. Namun, proses review dan penyesuaian tersebut masih bersifat reaktif dan belum dilakukan melalui mekanisme yang terstruktur atau berkala secara formal. Oleh karena itu, aktivitas ini dinilai hanya terpenuhi sebagian (partially).",
+      "evidenceIds": [
+        "EVD-110"
+      ],
+      "evidenceSnippet": "(51:56) Harus ada trigger, dan tidak semua peraturan kebijakan pemerintah itu langsung tersosialisasikan.Ketika ada sosialisasi, dan PANRB ada di sana, maka PANRB pasti akan mengikuti. Tetapi kalau tidak ada sosialisasi, dan PANRB tidak tahu, maka kebijakannya tidak akan terimplementasikan kebijakannya di PANRB."
+    },
+    {
+      "id": "MEA03.02-3",
+      "practiceCode": "MEA03.02",
+      "activityNumber": 2,
+      "level": 3,
+      "description": "Communicate new and changed requirements to all relevant personnel",
+      "response": "Yes",
+      "comment": "Kementerian PANRB telah melakukan komunikasi terhadap perubahan dan kebutuhan baru melalui kegiatan sosialisasi, pengumuman pada grup WhatsApp, serta notifikasi pada aplikasi internal. Mekanisme tersebut menunjukkan adanya upaya penyampaian informasi kepada personel terkait agar perubahan kebijakan dan kebutuhan dapat diketahui serta diimplementasikan dengan baik.",
+      "evidenceIds": [
+        "EVD-111"
+      ],
+      "evidenceSnippet": "(52:51) \"Secara umum dilakukan melalui sosialisasi, kemudian pengumuman lewat WhatsApp, dan melalui Aplikasi berupa notifikasi pop-up.\""
+    },
+    {
+      "id": "MEA03.01-3",
+      "practiceCode": "MEA03.03",
+      "activityNumber": 1,
+      "level": 3,
+      "description": "Regularly evaluate organizational policies, standards, procedures and methodologies in all functions of the enterprise to ensure compliance with relevant legal and regulatory requirements in relation to the processing of information.",
+      "response": "Yes",
+      "comment": "Kementerian PANRB telah melaksanakan evaluasi terkait implementasi SPBE dan tata kelola TI untuk memastikan kepatuhan terhadap regulasi dan kebijakan yang berlaku. Evaluasi tersebut dilakukan melalui mekanisme penilaian tingkat kematangan dan monitoring implementasi pada berbagai aspek organisasi, sehingga menunjukkan adanya proses evaluasi berkala terhadap kebijakan, standar, dan prosedur organisasi.",
+      "evidenceIds": [
+        "EVD-112"
+      ],
+      "evidenceSnippet": "(53:43) Dalam konteks SPBE sudah ada evaluasi. Banyak yang sudah tingkat kematangannya 5 berarti sudah ada monev desain, dan untuk IT secara umum sudah pasti ada evaluasinya."
+    },
+    {
+      "id": "MEA03.02-3",
+      "practiceCode": "MEA03.03",
+      "activityNumber": 2,
+      "level": 3,
+      "description": "Address compliance gaps in policies, standards and procedures on a timely basis.",
+      "response": "No",
+      "comment": "Kementerian PANRB telah melakukan tindak lanjut terhadap gap compliance yang ditemukan, misalnya dengan membuat klasifikasi data ketika terdapat kebutuhan clearance tertentu. Namun, proses tindak lanjut tersebut belum memiliki prosedur tertulis dan masih dilakukan secara ad hoc sesuai kebutuhan yang muncul. Oleh karena itu, aktivitas penanganan gap compliance dinilai tidak memenuhi dikarenakan tidak ada dokumen tertulis.",
+      "evidenceIds": [
+        "EVD-113"
+      ],
+      "evidenceSnippet": "(54:34) Tidak prosedur tertulis untuk meindak lanjut gap yang ditemukan, jadi \"go with the flow\" aja. Misalnya jika ada clearance, dan membutuhkan klasifikasi data, maka tindak lanjut gapnya adalah membuat klasifikasi data."
+    },
+    {
+      "id": "MEA03.03-3",
+      "practiceCode": "MEA03.03",
+      "activityNumber": 3,
+      "level": 3,
+      "description": "Periodically evaluate business and IT processes and activities to ensure adherence to applicable legal, regulatory and contractual requirements.",
+      "response": "Yes",
+      "comment": "Kementerian PANRB telah menerapkan evaluasi dan audit keamanan SPBE secara periodik yang mencakup infrastruktur serta aplikasi pada tahun 2024. Mekanisme audit tersebut telah memiliki jadwal pelaksanaan yang terdokumentasi, baik yang dilakukan setiap satu tahun maupun dua tahun sekali oleh pihak terkait seperti BSSN dan Kemenkominfo. Dengan adanya evaluasi berkala tersebut, organisasi telah menunjukkan upaya dalam memastikan kepatuhan proses bisnis dan layanan TI terhadap regulasi, standar keamanan, dan ketentuan yang berlaku.",
+      "evidenceIds": [
+        "EVD-114"
+      ],
+      "evidenceSnippet": "(56:28) Sudah melakukan audit terkait dengan aplikasi dan infrastruktur pada tahun 2024, serta keamanan informasinya. Evidence tambahan (https://drive.google.com/file/d/1ZIe7Cf-RCd1l4ZRVIWhci_bfLVtlFENc/view?usp=sharing): Audit Keamanan SPBE terdiri atas:\n- Audit Keamanan Infrastruktur SPBE Nasional (dilaksanakan 1 kali dalam 1 tahun oleh BSSN)\n- Audit Keamanan Infrastruktur SPBE IPPD (dilaksanakan 1 kali dalam 2 tahun oleh IPPD,\nberkoordinasi dengan Kemenkominfo)\n- Audit Keamanan Aplikasi umum (dilaksanakan 1 kali dalam 1 tahun oleh BSSN)\n- Audit Keamanan Aplikasi khusus (dilaksanakan 1 kali dalam 2 tahun oleh IPPD,\nberkoordinasi dengan Kemenkominfo)"
+    },
+    {
+      "id": "MEA03.04-4",
+      "practiceCode": "MEA03.03",
+      "activityNumber": 4,
+      "level": 4,
+      "description": "Regularly review for recurring patterns of compliance failures and assess lessons learned.",
+      "response": "N.A.",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "MEA03.05-5",
+      "practiceCode": "MEA03.03",
+      "activityNumber": 5,
+      "level": 5,
+      "description": "Based on review and lessons learned, improve policies, standards, procedures, methodologies, and associated processes and activities.",
+      "response": "N.A.",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "MEA03.01-2",
+      "practiceCode": "MEA03.04",
+      "activityNumber": 1,
+      "level": 2,
+      "description": "Obtain regular confirmation of compliance with internal policies from business and IT process owners and unit heads.",
+      "response": "Yes",
+      "comment": "Kementerian PANRB telah melakukan konfirmasi kepatuhan secara rutin melalui rapat mingguan maupun bulanan yang melibatkan penanggung jawab unit dan process owner terkait kegiatan audit, evaluasi SPBE, dan aktivitas lain yang membutuhkan proses review. Mekanisme tersebut menunjukkan adanya keterlibatan unit kerja dalam memastikan kepatuhan terhadap kebijakan dan proses internal organisasi. Dalam hal ini, justifikasi dari penulis ada selama pengalaman magang di Kementerian PANRB akan selalu dibuat dokumen notulensi rapat. Oleh karena itu, dokumen tersebut menjadi dasar bahwa nilainya memenuhi.",
+      "evidenceIds": [
+        "EVD-115"
+      ],
+      "evidenceSnippet": "(1:01:45) Pasti akan rapat secara rutin baik secara mingguan maupun bulanan, terkait dengan audit atau evaluasi pemdi, dan kegiatannya lainnya yang membutuhkan review dari setiap penanggung jawab unit."
+    },
+    {
+      "id": "MEA03.02-2",
+      "practiceCode": "MEA03.04",
+      "activityNumber": 2,
+      "level": 2,
+      "description": "Perform regular (and, where appropriate, independent) internal and external reviews to assess levels of compliance.",
+      "response": "Yes",
+      "comment": "Kementerian PANRB telah melaksanakan audit dan evaluasi secara internal maupun eksternal untuk menilai tingkat kepatuhan terhadap kebijakan dan regulasi yang berlaku. Pelaksanaan audit tersebut menunjukkan adanya mekanisme review berkala dalam mendukung pengawasan dan assurance terhadap implementasi tata kelola dan layanan TI.",
+      "evidenceIds": [
+        "EVD-116"
+      ],
+      "evidenceSnippet": "(1:01:45) Sudah melakukan audit baik internal maupun external."
+    },
+    {
+      "id": "MEA03.03-2",
+      "practiceCode": "MEA03.04",
+      "activityNumber": 3,
+      "level": 2,
+      "description": "If required, obtain assertions from third-party I&T service providers on levels of their compliance with applicable laws and regulations.",
+      "response": "Yes",
+      "comment": "Kementerian PANRB telah menerapkan mekanisme pemenuhan kepatuhan bagi vendor atau penyedia layanan TI melalui proses pengadaan dengan menetapkan persyaratan tertentu, seperti kepemilikan sertifikasi standar yang relevan. Vendor diwajibkan memenuhi persyaratan tersebut sebelum kerja sama dilakukan, sehingga menunjukkan adanya upaya assurance kepatuhan pihak ketiga terhadap regulasi dan standar yang berlaku.",
+      "evidenceIds": [
+        "EVD-117"
+      ],
+      "evidenceSnippet": "(1:04:28) Paling pada saat pengadaan biasanya dari PANB akan ada kriteria yang dimintain ke vendor. Seperti halnya apakah mereka memiliki sertifikasi tertentu misalnya ISO, dan ketika itu dimintakan maka vendor wajib memenuhi."
+    },
+    {
+      "id": "MEA03.04-2",
+      "practiceCode": "MEA03.04",
+      "activityNumber": 4,
+      "level": 2,
+      "description": "If required, obtain assertions from business partners on levels of their compliance with applicable laws and regulations as they relate to intercompany electronic transactions.",
+      "response": "Yes",
+      "comment": "Kementerian PANRB telah menerapkan penggunaan dokumen Non-Disclosure Agreement (NDA) dalam proses pertukaran data dengan pihak mitra atau business partner. Penerapan NDA tersebut menjadi bentuk komitmen dan assurance dalam menjaga kepatuhan terhadap ketentuan kerahasiaan informasi serta pengelolaan transaksi elektronik antar pihak yang bekerja sama.",
+      "evidenceIds": [
+        "EVD-118"
+      ],
+      "evidenceSnippet": "(1:05:50) Iya, termasuk dengan adanya dokumen NDA yaitu Non Disclosure Agreement, pasti akan menjadi hal yang wajib terkait dengan pertukaran data."
+    },
+    {
+      "id": "MEA03.05-3",
+      "practiceCode": "MEA03.04",
+      "activityNumber": 5,
+      "level": 3,
+      "description": "Integrate reporting on legal, regulatory and contractual requirements at an enterprisewide level, involving all business units.",
+      "response": "No",
+      "comment": "Kementerian PANRB telah memiliki portal SMART yang mengintegrasikan layanan antar unit. Namun, belum terdapat mekanisme pelaporan terintegrasi terkait kepatuhan hukum, regulasi, dan kontraktual pada tingkat enterprise-wide, sehingga aktivitas ini belum terpenuhi.",
+      "evidenceIds": [
+        "EVD-119"
+      ],
+      "evidenceSnippet": "(1:06:57) Saya tidak tahu pasti. Paling portal terkait layanan SMART yang mengintegrasikan semua unit PANRB, tapi kalau untuk yang laporan kepatuhan peraturan itu belum ada."
+    },
+    {
+      "id": "MEA03.06-4",
+      "practiceCode": "MEA03.04",
+      "activityNumber": 6,
+      "level": 4,
+      "description": "Monitor and report on noncompliance issues and, where necessary, investigate the root cause.",
+      "response": "N.A.",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    },
+    {
+      "id": "MEA03.01-4",
+      "practiceCode": "MEA03.04",
+      "activityNumber": 1,
+      "level": 4,
+      "description": "",
+      "response": "N.A.",
+      "comment": "",
+      "evidenceIds": [],
+      "evidenceSnippet": ""
+    }
+  ]
+}

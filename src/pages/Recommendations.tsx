@@ -1,136 +1,419 @@
+import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { currentAssessment, gapAnalysisData } from '../data/mockData';
+import { useAssessment } from '../context';
+import type { RecommendationItem } from '../types';
+import cobitFactors from '../data/cobitDesignFactors.json';
 import './Recommendations.css';
 
-const PLANNED = [
-  {
-    num: '01',
-    title: 'Analyse assessment findings',
-    body: 'Read the recorded ratings, findings and linked evidence across all assessed items, and identify where rated practice diverges from the criteria set out in the COBIT 2019 assessment model.',
-  },
-  {
-    num: '02',
-    title: 'Identify improvement areas',
-    body: 'Cluster findings into improvement areas and weight them by capability gap, the number of affected assessment items, and the dependency between governance objectives.',
-  },
-  {
-    num: '03',
-    title: 'Generate improvement recommendations',
-    body: 'Draft a recommended action for each improvement area — expressed as a control change rather than a technology change, so that it can be assigned to a process owner.',
-  },
-  {
-    num: '04',
-    title: 'Provide rationale from evidence',
-    body: 'Cite the specific findings and evidence records behind every recommendation, so an assessor can verify the suggestion rather than accept it on trust.',
-  },
-  {
-    num: '05',
-    title: 'Organise recommended actions',
-    body: 'Group actions into a sequenced improvement plan with an owner, a target level, and an expected effect on the capability gap, ready to be exported for management review.',
-  },
-];
-
 export default function Recommendations() {
+  const { state, addRecommendation, updateRecommendation, deleteRecommendation } = useAssessment();
+  const { recommendations, scopedObjectiveIds } = state;
+
+  const [objFilter, setObjFilter] = useState<string>('All');
+  const [search, setSearch] = useState('');
+  const [editingRec, setEditingRec] = useState<RecommendationItem | null>(null);
+  const [isCreating, setIsCreating] = useState(false);
+
+  const [formData, setFormData] = useState<Omit<RecommendationItem, 'id'>>({
+    objectiveId: scopedObjectiveIds[0] || 'DSS05',
+    practiceCode: 'DSS05.01',
+    gapDescription: '',
+    peopleAspect: { type: 'Responsibility', action: '' },
+    processAspect: { type: 'Policy', action: '' },
+    technologyAspect: { type: 'Features', action: '' },
+  });
+
+  const filteredRecs = useMemo(() => {
+    return recommendations.filter((r) => {
+      const matchObj = objFilter === 'All' || r.objectiveId === objFilter;
+      const matchSearch =
+        r.practiceCode.toLowerCase().includes(search.toLowerCase()) ||
+        r.gapDescription.toLowerCase().includes(search.toLowerCase()) ||
+        r.peopleAspect.action.toLowerCase().includes(search.toLowerCase()) ||
+        r.processAspect.action.toLowerCase().includes(search.toLowerCase()) ||
+        r.technologyAspect.action.toLowerCase().includes(search.toLowerCase());
+      return matchObj && matchSearch;
+    });
+  }, [recommendations, objFilter, search]);
+
+  const handleOpenCreate = () => {
+    setFormData({
+      objectiveId: scopedObjectiveIds[0] || 'DSS05',
+      practiceCode: `${scopedObjectiveIds[0] || 'DSS05'}.01`,
+      gapDescription: '',
+      peopleAspect: { type: 'Responsibility', action: '' },
+      processAspect: { type: 'Policy', action: '' },
+      technologyAspect: { type: 'Features', action: '' },
+    });
+    setIsCreating(true);
+  };
+
+  const handleOpenEdit = (rec: RecommendationItem) => {
+    setEditingRec(rec);
+    setFormData({
+      objectiveId: rec.objectiveId,
+      practiceCode: rec.practiceCode,
+      gapDescription: rec.gapDescription,
+      peopleAspect: { ...rec.peopleAspect },
+      processAspect: { ...rec.processAspect },
+      technologyAspect: { ...rec.technologyAspect },
+    });
+  };
+
+  const handleSave = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.gapDescription.trim()) {
+      alert('Deskripsi gap wajib diisi.');
+      return;
+    }
+
+    if (editingRec) {
+      updateRecommendation({
+        ...editingRec,
+        ...formData,
+      });
+      setEditingRec(null);
+    } else {
+      addRecommendation(formData);
+      setIsCreating(false);
+    }
+  };
+
+  const handlePrint = () => {
+    window.print();
+  };
+
   return (
-    <div className="page">
-      <header className="page-head">
+    <div className="page recommendations-page">
+      <header className="page-head no-print">
         <div className="page-head__text">
           <p className="eyebrow">
-            <span className="eyebrow__num">◆</span>Recommendations
+            <span className="eyebrow__num">◆</span>Rencana Perbaikan Berkelanjutan
           </p>
-          <h1 className="page-title">Improvement recommendations</h1>
+          <h1 className="page-title">Matriks Rekomendasi Perbaikan (3 Aspek)</h1>
           <p className="page-lead">
-            The final stage of the assessment lifecycle, where findings and capability gaps are
-            converted into a sequenced set of improvement actions.
+            Rekomendasi tindakan peningkatan kapabilitas diklasifikasikan ke dalam 3 dimensi holistik COBIT 2019: <strong>People</strong> (SDM &amp; Budaya), <strong>Process</strong> (Tata Kelola &amp; SOP), dan <strong>Technology</strong> (Otomasi &amp; Infrastruktur).
           </p>
         </div>
         <div className="page-head__actions">
-          <Link to="/gap-analysis" className="btn btn--secondary">
-            ← Back to gap analysis
-          </Link>
+          <button type="button" className="btn btn--secondary" onClick={handlePrint}>
+            🖨️ Cetak / Ekspor Laporan
+          </button>
+          <button type="button" className="btn btn--primary" onClick={handleOpenCreate}>
+            + Tambah Rekomendasi
+          </button>
         </div>
       </header>
 
-      {/* ---------------- Empty state ---------------- */}
-      <section className="rec-empty" aria-labelledby="rec-empty-heading">
-        <div className="rec-empty__frame">
-          <div className="rec-empty__mark" aria-hidden="true">
-            <span className="rec-empty__num mono">00</span>
-            <span className="rec-empty__rule" />
-          </div>
+      {/* Filter Bar */}
+      <div className="rec-filter-bar no-print">
+        <input
+          type="text"
+          className="input-text rec-search"
+          placeholder="Cari kode praktik, deskripsi gap, atau tindakan..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
 
-          <p className="eyebrow">Status</p>
-          <h2 id="rec-empty-heading" className="rec-empty__title">
-            AI-assisted recommendations are not available in this prototype.
-          </h2>
-          <p className="rec-empty__body">
-            Recommendation generation depends on a documented, rule-based capability level
-            assignment across every assessed objective. That step is not implemented in this
-            prototype, so no recommendation can yet be derived from the sample data.
-          </p>
-
-          <dl className="rec-empty__facts">
-            <div>
-              <dt>Assessment</dt>
-              <dd>{currentAssessment.title}</dd>
-            </div>
-            <div>
-              <dt>Areas with an open gap</dt>
-              <dd className="mono">{gapAnalysisData.filter((g) => g.gap > 0).length}</dd>
-            </div>
-            <div>
-              <dt>Recommendations generated</dt>
-              <dd className="mono">0</dd>
-            </div>
-          </dl>
-
-          <div className="rec-empty__actions">
-            <Link to="/gap-analysis" className="btn btn--primary">
-              Review gap analysis
-            </Link>
-            <Link to="/results" className="btn btn--secondary">
-              View capability results
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ---------------- Intended scope ---------------- */}
-      <section aria-labelledby="planned-heading">
-        <div className="planned__head">
-          <div>
-            <p className="eyebrow">
-              <span className="eyebrow__num">§</span>Planned capability
-            </p>
-            <h2 id="planned-heading" className="planned__title">
-              What this page is intended to do
-            </h2>
-          </div>
-          <p className="section-note">
-            The following describes the intended behaviour of the recommendation engine. None of it
-            is implemented or simulated in the current build.
-          </p>
-        </div>
-
-        <ol className="planned__list">
-          {PLANNED.map((item) => (
-            <li key={item.num} className="planned__item">
-              <span className="planned__num mono">{item.num}</span>
-              <h3 className="planned__item-title">{item.title}</h3>
-              <p className="planned__body">{item.body}</p>
-            </li>
+        <select
+          className="select-input"
+          value={objFilter}
+          onChange={(e) => setObjFilter(e.target.value)}
+        >
+          <option value="All">Semua Objektif ({recommendations.length})</option>
+          {scopedObjectiveIds.map((id) => (
+            <option key={id} value={id}>{id}</option>
           ))}
-        </ol>
+        </select>
+      </div>
 
-        <div className="notice notice--warning planned__notice">
-          <div>
-            <span className="notice__label">Prototype limitation</span>
-            Any output shown by a future version of this page would be advisory. Recommendations
-            would remain subject to review and approval by the assessor and the process owner, and
-            would not constitute an audit opinion.
+      {/* Print Document Header */}
+      <div className="print-only print-doc-header">
+        <h2>LAPORAN REKOMENDASI PENINGKATAN KAPABILITAS TATA KELOLA TI (COBIT 2019)</h2>
+        <p><strong>Organisasi:</strong> {state.organization} | <strong>Periode:</strong> {state.period} | <strong>Assessor:</strong> {state.assessor}</p>
+        <hr />
+      </div>
+
+      {/* 3-Aspect Matrix Table */}
+      <div className="rec-table-card">
+        {filteredRecs.length === 0 ? (
+          <div className="empty-box">
+            Belum ada rekomendasi perbaikan untuk kriteria yang dipilih.
+          </div>
+        ) : (
+          <table className="rec-table">
+            <thead>
+              <tr>
+                <th style={{ width: '130px' }}>Objektif &amp; Praktik</th>
+                <th style={{ width: '240px' }}>Deskripsi Kesenjangan (Gap)</th>
+                <th style={{ width: '260px' }}>Aspek People (SDM &amp; Struktur)</th>
+                <th style={{ width: '260px' }}>Aspek Process (Kebijakan &amp; Prosedur)</th>
+                <th style={{ width: '260px' }}>Aspek Technology (Alat &amp; Otomasi)</th>
+                <th style={{ width: '80px' }} className="no-print">Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredRecs.map((rec) => {
+                const meta = cobitFactors.objectives.find((o) => o.id === rec.objectiveId);
+                return (
+                  <tr key={rec.id}>
+                    <td className="rec-code-cell">
+                      <strong>{rec.practiceCode}</strong>
+                      <span className="rec-obj-title">{meta?.name || rec.objectiveId}</span>
+                      <Link
+                        to={`/assessments/workspace/${rec.objectiveId}`}
+                        className="rec-link-workspace no-print"
+                      >
+                        Lihat Asesmen →
+                      </Link>
+                    </td>
+
+                    <td className="rec-gap-cell">
+                      <p className="rec-gap-text">{rec.gapDescription}</p>
+                    </td>
+
+                    <td className="rec-aspect-cell rec-aspect-cell--people">
+                      <div className="aspect-badge-tag">
+                        👤 {rec.peopleAspect.type}
+                      </div>
+                      <p className="aspect-action-text">{rec.peopleAspect.action}</p>
+                    </td>
+
+                    <td className="rec-aspect-cell rec-aspect-cell--process">
+                      <div className="aspect-badge-tag">
+                        📋 {rec.processAspect.type}
+                      </div>
+                      <p className="aspect-action-text">{rec.processAspect.action}</p>
+                    </td>
+
+                    <td className="rec-aspect-cell rec-aspect-cell--tech">
+                      <div className="aspect-badge-tag">
+                        💻 {rec.technologyAspect.type}
+                      </div>
+                      <p className="aspect-action-text">{rec.technologyAspect.action}</p>
+                    </td>
+
+                    <td className="no-print">
+                      <div className="rec-row-actions">
+                        <button
+                          type="button"
+                          className="btn-icon"
+                          title="Edit"
+                          onClick={() => handleOpenEdit(rec)}
+                        >
+                          ✏️
+                        </button>
+                        <button
+                          type="button"
+                          className="btn-icon text-neg"
+                          title="Hapus"
+                          onClick={() => {
+                            if (confirm('Hapus rekomendasi ini?')) deleteRecommendation(rec.id);
+                          }}
+                        >
+                          🗑️
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        )}
+      </div>
+
+      {/* Modal Dialog */}
+      {(isCreating || editingRec) && (
+        <div className="modal-backdrop" onClick={() => { setIsCreating(false); setEditingRec(null); }}>
+          <div className="modal-content modal-content--wide" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-head">
+              <h3>{editingRec ? 'Edit Rekomendasi Perbaikan' : 'Tambah Rekomendasi Perbaikan'}</h3>
+              <button
+                type="button"
+                className="modal-close-btn"
+                onClick={() => { setIsCreating(false); setEditingRec(null); }}
+              >
+                ✕
+              </button>
+            </div>
+            <form onSubmit={handleSave} className="modal-body new-evidence-form">
+              <div className="form-row-2">
+                <div className="form-group">
+                  <label className="field-label">Objektif Terkait</label>
+                  <select
+                    className="select-input"
+                    value={formData.objectiveId}
+                    onChange={(e) => {
+                      const obj = e.target.value;
+                      setFormData({
+                        ...formData,
+                        objectiveId: obj,
+                        practiceCode: `${obj}.01`,
+                      });
+                    }}
+                  >
+                    {scopedObjectiveIds.map((id) => (
+                      <option key={id} value={id}>{id}</option>
+                    ))}
+                  </select>
+                </div>
+                <div className="form-group">
+                  <label className="field-label">Kode Praktik / Butir</label>
+                  <input
+                    type="text"
+                    className="input-text"
+                    value={formData.practiceCode}
+                    onChange={(e) => setFormData({ ...formData, practiceCode: e.target.value })}
+                    placeholder="e.g. DSS05.01"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label className="field-label">Deskripsi Kesenjangan (Gap) *</label>
+                <textarea
+                  className="input-text"
+                  rows={2}
+                  value={formData.gapDescription}
+                  onChange={(e) => setFormData({ ...formData, gapDescription: e.target.value })}
+                  placeholder="Deskripsi temuan kesenjangan hasil audit..."
+                  required
+                />
+              </div>
+
+              <div className="aspect-form-box aspect-form-box--people">
+                <h4>Aspek People (SDM &amp; Budaya Organisasi)</h4>
+                <div className="form-row-2">
+                  <div className="form-group">
+                    <label className="field-label">Kategori</label>
+                    <select
+                      className="select-input"
+                      value={formData.peopleAspect.type}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          peopleAspect: { ...formData.peopleAspect, type: e.target.value },
+                        })
+                      }
+                    >
+                      <option value="Responsibility">Responsibility (Tanggung Jawab Formal)</option>
+                      <option value="Skill & awareness">Skill &amp; Awareness (Pelatihan &amp; Kompetensi)</option>
+                      <option value="Communication">Communication (Sosialisasi Kebijakan)</option>
+                    </select>
+                  </div>
+                  <div className="form-group">
+                    <label className="field-label">Tindakan Rekomendasi</label>
+                    <textarea
+                      className="input-text"
+                      rows={2}
+                      value={formData.peopleAspect.action}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          peopleAspect: { ...formData.peopleAspect, action: e.target.value },
+                        })
+                      }
+                      placeholder="e.g. Penetapan tanggung jawab formal Biro Datin dalam monitoring..."
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="aspect-form-box aspect-form-box--process">
+                <h4>Aspek Process (Tata Kelola, SOP, Dokumen)</h4>
+                <div className="form-row-2">
+                  <div className="form-group">
+                    <label className="field-label">Kategori</label>
+                    <select
+                      className="select-input"
+                      value={formData.processAspect.type}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          processAspect: { ...formData.processAspect, type: e.target.value },
+                        })
+                      }
+                    >
+                      <option value="Policy">Policy (Kebijakan Formal)</option>
+                      <option value="Procedure">Procedure (SOP / Prosedur)</option>
+                      <option value="Record">Record (Pencatatan &amp; Register)</option>
+                    </select>
+                  </div>
+                  <div className="form-group">
+                    <label className="field-label">Tindakan Rekomendasi</label>
+                    <textarea
+                      className="input-text"
+                      rows={2}
+                      value={formData.processAspect.action}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          processAspect: { ...formData.processAspect, action: e.target.value },
+                        })
+                      }
+                      placeholder="e.g. Penyusunan SOP penanganan insiden malware..."
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="aspect-form-box aspect-form-box--tech">
+                <h4>Aspek Technology (Alat, Enkripsi, Otomasi)</h4>
+                <div className="form-row-2">
+                  <div className="form-group">
+                    <label className="field-label">Kategori</label>
+                    <select
+                      className="select-input"
+                      value={formData.technologyAspect.type}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          technologyAspect: { ...formData.technologyAspect, type: e.target.value },
+                        })
+                      }
+                    >
+                      <option value="Features">Features (Konfigurasi Fitur Keamanan)</option>
+                      <option value="Infrastructure">Infrastructure (Infrastruktur Server/Jaringan)</option>
+                      <option value="Automation">Automation (Otomasi Log &amp; Monitoring)</option>
+                      <option value="Tools">Tools (Peralatan &amp; Software)</option>
+                    </select>
+                  </div>
+                  <div className="form-group">
+                    <label className="field-label">Tindakan Rekomendasi</label>
+                    <textarea
+                      className="input-text"
+                      rows={2}
+                      value={formData.technologyAspect.action}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          technologyAspect: { ...formData.technologyAspect, action: e.target.value },
+                        })
+                      }
+                      placeholder="e.g. Pemasangan EDR terpusat pada seluruh endpoint..."
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="modal-actions">
+                <button
+                  type="button"
+                  className="btn btn--subtle"
+                  onClick={() => { setIsCreating(false); setEditingRec(null); }}
+                >
+                  Batal
+                </button>
+                <button type="submit" className="btn btn--primary">
+                  Simpan Rekomendasi
+                </button>
+              </div>
+            </form>
           </div>
         </div>
-      </section>
+      )}
     </div>
   );
 }

@@ -3,7 +3,8 @@ import './Layout.css';
 
 const navItems = [
   { path: '/dashboard', label: 'Dashboard', icon: '◫' },
-  { path: '/assessments/setup', label: 'Assessments', icon: '⊕' },
+  { path: '/assessments', label: 'Riwayat Asesmen', icon: '☷' },
+  { path: '/assessments/setup', label: 'Setup & Design Factor', icon: '⊕' },
   { path: '/evidence', label: 'Evidence', icon: '◈' },
   { path: '/results', label: 'Capability Results', icon: '◉' },
   { path: '/gap-analysis', label: 'Gap Analysis', icon: '◊' },
@@ -33,8 +34,8 @@ export default function Layout() {
           ))}
         </nav>
         <div className="sidebar-footer">
-          <div className="sidebar-footer-text">Research Prototype</div>
-          <div className="sidebar-footer-version">v0.1.0</div>
+          <div className="sidebar-footer-text">COBIT 2019 DSRM Engine</div>
+          <div className="sidebar-footer-version">v2.0</div>
         </div>
       </aside>
       <main className="main-content">
