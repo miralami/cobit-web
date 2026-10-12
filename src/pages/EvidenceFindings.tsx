@@ -2,7 +2,6 @@ import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useAssessment } from '../context';
 import type { EvidenceRecord } from '../types';
-import './EvidenceFindings.css';
 
 const typeLabel: Record<EvidenceRecord['type'], string> = {
   policy: 'Policy',
@@ -178,7 +177,7 @@ export default function EvidenceFindings() {
 
         <div className="card evsum__card">
           <span className="eyebrow">Butir Belum Ada Bukti</span>
-          <p className="evsum__value num" style={{ color: unevidencedCount > 0 ? '#c5221f' : 'inherit' }}>
+          <p className="evsum__value num" style={{ color: unevidencedCount > 0 ? 'var(--color-danger)' : 'inherit' }}>
             {unevidencedCount}
           </p>
           <p className="evsum__meta">Aktivitas dinilai (Yes/Partially) tanpa bukti</p>
@@ -195,7 +194,7 @@ export default function EvidenceFindings() {
       <div className="ev-filter-bar">
         <input
           type="text"
-          className="input-text ev-search"
+          className="input ev-search"
           placeholder="Cari judul, nomor referensi, catatan bukti..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -203,7 +202,7 @@ export default function EvidenceFindings() {
 
         <div className="ev-filters-group">
           <select
-            className="select-input"
+            className="select"
             value={typeFilter}
             onChange={(e) => setTypeFilter(e.target.value)}
           >
@@ -214,7 +213,7 @@ export default function EvidenceFindings() {
           </select>
 
           <select
-            className="select-input"
+            className="select"
             value={objectiveFilter}
             onChange={(e) => setObjectiveFilter(e.target.value)}
           >
@@ -327,11 +326,11 @@ export default function EvidenceFindings() {
               </button>
             </div>
             <form onSubmit={handleSaveModal} className="modal-body new-evidence-form">
-              <div className="form-group">
-                <label className="field-label">Judul Bukti / Dokumen *</label>
+              <div className="field">
+                <label className="field__label">Judul Bukti / Dokumen *</label>
                 <input
                   type="text"
-                  className="input-text"
+                  className="input"
                   value={formData.title}
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                   placeholder="e.g. SOP Penanganan Insiden Keamanan Informasi"
@@ -340,10 +339,10 @@ export default function EvidenceFindings() {
               </div>
 
               <div className="form-row-2">
-                <div className="form-group">
-                  <label className="field-label">Tipe Dokumen</label>
+                <div className="field">
+                  <label className="field__label">Tipe Dokumen</label>
                   <select
-                    className="select-input"
+                    className="select"
                     value={formData.type}
                     onChange={(e) => setFormData({ ...formData, type: e.target.value as any })}
                   >
@@ -353,11 +352,11 @@ export default function EvidenceFindings() {
                   </select>
                 </div>
 
-                <div className="form-group">
-                  <label className="field-label">Nomor Referensi / Lokasi File</label>
+                <div className="field">
+                  <label className="field__label">Nomor Referensi / Lokasi File</label>
                   <input
                     type="text"
-                    className="input-text"
+                    className="input"
                     value={formData.referenceNumber}
                     onChange={(e) => setFormData({ ...formData, referenceNumber: e.target.value })}
                     placeholder="e.g. Ref-DSS05-L2-1 / SOP-TI-04"
@@ -366,31 +365,31 @@ export default function EvidenceFindings() {
               </div>
 
               <div className="form-row-2">
-                <div className="form-group">
-                  <label className="field-label">Assessor</label>
+                <div className="field">
+                  <label className="field__label">Assessor</label>
                   <input
                     type="text"
-                    className="input-text"
+                    className="input"
                     value={formData.assessor}
                     onChange={(e) => setFormData({ ...formData, assessor: e.target.value })}
                   />
                 </div>
 
-                <div className="form-group">
-                  <label className="field-label">Tanggal Temuan</label>
+                <div className="field">
+                  <label className="field__label">Tanggal Temuan</label>
                   <input
                     type="date"
-                    className="input-text"
+                    className="input"
                     value={formData.date}
                     onChange={(e) => setFormData({ ...formData, date: e.target.value })}
                   />
                 </div>
               </div>
 
-              <div className="form-group">
-                <label className="field-label">Catatan / Kutipan Observasi Evidensi</label>
+              <div className="field">
+                <label className="field__label">Catatan / Kutipan Observasi Evidensi</label>
                 <textarea
-                  className="input-text"
+                  className="textarea"
                   rows={3}
                   value={formData.notes}
                   onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
@@ -399,8 +398,8 @@ export default function EvidenceFindings() {
               </div>
 
               {/* Multi-select checklist for linked activities */}
-              <div className="form-group">
-                <label className="field-label">
+              <div className="field">
+                <label className="field__label">
                   Tautkan ke Butir Aktivitas Asesmen ({formData.linkedActivityIds.length} dipilih)
                 </label>
                 <div className="modal-act-checklist">

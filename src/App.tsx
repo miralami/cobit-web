@@ -13,6 +13,7 @@ import GapAnalysis from './pages/GapAnalysis';
 import Recommendations from './pages/Recommendations';
 import './styles/global.css';
 import './styles/ui.css';
+import './styles/pages.css';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -30,17 +31,18 @@ function App() {
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route element={<Layout />}>
-            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/assessments" element={<AssessmentHistory />} />
-            <Route path="/assessments/setup" element={<AssessmentSetup />} />
-            <Route path="/assessments/workspace" element={<AssessmentWorkspace />} />
-            <Route path="/assessments/workspace/:objectiveId" element={<AssessmentWorkspace />} />
-            <Route path="/evidence" element={<EvidenceFindings />} />
-            <Route path="/results" element={<CapabilityResult />} />
-            <Route path="/gap-analysis" element={<GapAnalysis />} />
-            <Route path="/recommendations" element={<Recommendations />} />
+            <Route path="/assessments/new" element={<AssessmentSetup mode="create" />} />
+            <Route path="/assessments/:id" element={<Dashboard />} />
+            <Route path="/assessments/:id/setup" element={<AssessmentSetup mode="edit" />} />
+            <Route path="/assessments/:id/workspace" element={<AssessmentWorkspace />} />
+            <Route path="/assessments/:id/workspace/:objectiveId" element={<AssessmentWorkspace />} />
+            <Route path="/assessments/:id/evidence" element={<EvidenceFindings />} />
+            <Route path="/assessments/:id/results" element={<CapabilityResult />} />
+            <Route path="/assessments/:id/gap" element={<GapAnalysis />} />
+            <Route path="/assessments/:id/recommendations" element={<Recommendations />} />
           </Route>
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<Navigate to="/assessments" replace />} />
         </Routes>
       </AssessmentProvider>
     </BrowserRouter>

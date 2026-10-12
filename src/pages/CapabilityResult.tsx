@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useAssessment } from '../context';
 import cobitFactors from '../data/cobitDesignFactors.json';
 import type { CapabilityLevel } from '../types';
-import './CapabilityResult.css';
 
 const capabilityLevelLabels: Record<CapabilityLevel, string> = {
   0: 'Incomplete — Tidak beroperasi',
@@ -96,10 +95,10 @@ export default function CapabilityResult() {
           </p>
         </div>
         <div className="page-head__actions">
-          <Link to="/gap-analysis" className="btn btn--secondary">
+          <Link to={`/assessments/${state.id}/gap`} className="btn btn--secondary">
             Analisis Kesenjangan (Gap) →
           </Link>
-          <Link to="/recommendations" className="btn btn--primary">
+          <Link to={`/assessments/${state.id}/recommendations`} className="btn btn--primary">
             Matriks Rekomendasi 3 Aspek →
           </Link>
         </div>
@@ -177,7 +176,7 @@ export default function CapabilityResult() {
           <div>
             <p className="eyebrow">
               <span className="eyebrow__num">{activeId}</span>
-              <span className="tag tag--edm">{objMeta?.domain}</span>
+              <span className={`tag tag--${objMeta?.domain || 'EDM'}`}>{objMeta?.domain}</span>
             </p>
             <h2 className="card__title levelcard__title">
               {objMeta?.name}
@@ -187,7 +186,7 @@ export default function CapabilityResult() {
             <span className={`badge ${gap > 0 ? 'badge--warning' : 'badge--success'}`}>
               {gap > 0 ? `Kesenjangan ${gap} Level` : 'Target Tercapai!'}
             </span>
-            <Link to={`/assessments/workspace/${activeId}`} className="btn btn--subtle btn--sm">
+            <Link to={`/assessments/${state.id}/workspace/${activeId}`} className="btn btn--subtle btn--sm">
               ✏️ Buka Workspace Asesmen
             </Link>
           </div>
@@ -214,7 +213,7 @@ export default function CapabilityResult() {
             <div className="levelbox levelbox--completion">
               <span className="eyebrow">Delta Kesenjangan</span>
               <p className="levelbox__value">
-                <span className="levelbox__num mono" style={{ color: gap > 0 ? '#c5221f' : '#137333' }}>
+                <span className={`levelbox__num mono ${gap > 0 ? 'text-danger' : 'text-success'}`}>
                   {gap}
                 </span>
                 <span className="levelbox__label">
@@ -227,9 +226,18 @@ export default function CapabilityResult() {
           {/* Rantai Agregasi (Aggregation Trail) */}
           <div className="aggregation-trail-section">
             <h3 className="section-subhead">Rantai Agregasi Evaluasi Berjenjang (Audit Trail)</h3>
-            <p className="text-secondary" style={{ fontSize: '13px', margin: '0 0 16px' }}>
+            <p className="text-secondary" style={{ fontSize: '13px', margin: '0 0 12px' }}>
               Rekam jejak evaluasi CPM per level yang membuktikan mengapa proses evaluasi berhenti pada level tertentu:
             </p>
+
+            <div className="trail-legend">
+              <span className="trail-legend__item trail-legend__item--pass">
+                ✓ Level terpenuhi (≥85%), evaluasi lanjut ke level berikutnya
+              </span>
+              <span className="trail-legend__item trail-legend__item--stop">
+                🛑 Stop Here — evaluasi berhenti, capability level ditetapkan di sini
+              </span>
+            </div>
 
             <div className="trail-timeline">
               {trail.map((step) => (
@@ -248,6 +256,11 @@ export default function CapabilityResult() {
                       </span>
                     </div>
                     <p className="trail-item__desc">{step.explanation}</p>
+                    {!step.isComplete && (
+                      <p className="trail-item__final">
+                        ➜ Capability level akhir objektif ini = <strong>Level {Math.max(0, step.level - 1)}</strong>
+                      </p>
+                    )}
                   </div>
                 </div>
               ))}
@@ -259,7 +272,7 @@ export default function CapabilityResult() {
             <div className="card-subcol">
               <h4>Kekuatan (Praktik Terpenuhi Penuh)</h4>
               {strengths.length === 0 ? (
-                <p className="text-muted" style={{ fontSize: '13px' }}>Belum ada aktivitas yang dinilai 'Yes'.</p>
+                <p className="text-muted" >Belum ada aktivitas yang dinilai 'Yes'.</p>
               ) : (
                 <ul className="audit-points-list">
                   {strengths.map((str, idx) => (
@@ -272,7 +285,7 @@ export default function CapabilityResult() {
             <div className="card-subcol">
               <h4>Area Kelemahan (Kesenjangan / Gap)</h4>
               {gaps.length === 0 ? (
-                <p className="text-muted" style={{ fontSize: '13px' }}>Tidak ada kesenjangan teridentifikasi.</p>
+                <p className="text-muted" >Tidak ada kesenjangan teridentifikasi.</p>
               ) : (
                 <ul className="audit-points-list audit-points-list--gaps">
                   {gaps.map((g, idx) => (

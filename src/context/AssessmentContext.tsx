@@ -1,4 +1,5 @@
 import { useEffect, useState, useMemo, useCallback } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import type {
   FullAssessmentState,
   DF1Input,
@@ -58,6 +59,9 @@ function createDefaultState(customId?: string, title?: string): FullAssessmentSt
 }
 
 export const AssessmentProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const [assessmentsList, setAssessmentsList] = useState<FullAssessmentState[]>(() => {
     try {
       const storedList = localStorage.getItem(STORAGE_KEY_LIST);
@@ -98,6 +102,17 @@ export const AssessmentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     return assessmentsList[0]?.id || 'assessment-panrb-2026';
   });
 
+  // Sync activeAssessmentId from URL
+  useEffect(() => {
+    const match = location.pathname.match(/^\/assessments\/(.+?)(?:\/|$)/);
+    if (match && match[1] !== 'new') {
+      const idFromUrl = match[1];
+      if (assessmentsList.some((a) => a.id === idFromUrl) && idFromUrl !== activeAssessmentId) {
+        setActiveAssessmentId(idFromUrl);
+      }
+    }
+  }, [location.pathname, assessmentsList, activeAssessmentId]);
+
   // Current active assessment
   const state = useMemo(() => {
     const found = assessmentsList.find((a) => a.id === activeAssessmentId);
@@ -130,11 +145,12 @@ export const AssessmentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     });
   }, [activeAssessmentId]);
 
-  const switchAssessment = useCallback((id: string) => {
+  const navigateToAssessment = useCallback((id: string) => {
     if (assessmentsList.some((a) => a.id === id)) {
       setActiveAssessmentId(id);
+      navigate(`/assessments/${id}`);
     }
-  }, [assessmentsList]);
+  }, [assessmentsList, navigate]);
 
   const createNewAssessment = useCallback(() => {
     const newAssess = createDefaultState();
@@ -561,7 +577,7 @@ export const AssessmentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       state,
       assessmentsList,
       activeAssessmentId,
-      switchAssessment,
+      navigateToAssessment,
       createNewAssessment,
       duplicateAssessment,
       deleteAssessment,
@@ -591,7 +607,7 @@ export const AssessmentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       state,
       assessmentsList,
       activeAssessmentId,
-      switchAssessment,
+      navigateToAssessment,
       createNewAssessment,
       duplicateAssessment,
       deleteAssessment,

@@ -64,13 +64,13 @@ export default function Landing() {
             </p>
 
             <div className="masthead__actions reveal reveal-3">
-              <Link to="/assessments/setup" className="btn btn--onInk btn--lg">
+              <Link to="/assessments/new" className="btn btn--onInk btn--lg">
                 Start Assessment
                 <span className="btn__arrow" aria-hidden="true">
                   →
                 </span>
               </Link>
-              <Link to="/dashboard" className="btn btn--outlineInk btn--lg">
+              <Link to="/assessments" className="btn btn--outlineInk btn--lg">
                 View Previous Assessments
               </Link>
             </div>
@@ -211,13 +211,13 @@ export default function Landing() {
             this environment.
           </p>
           <div className="landing__cta-actions">
-            <Link to="/assessments/setup" className="btn btn--onInk btn--lg">
+            <Link to="/assessments/new" className="btn btn--onInk btn--lg">
               Start Assessment
               <span className="btn__arrow" aria-hidden="true">
                 →
               </span>
             </Link>
-            <Link to="/dashboard" className="btn btn--outlineInk btn--lg">
+            <Link to="/assessments" className="btn btn--outlineInk btn--lg">
               View Previous Assessments
             </Link>
           </div>

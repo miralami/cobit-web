@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useAssessment } from '../context';
 import cobitFactors from '../data/cobitDesignFactors.json';
 import type { CapabilityLevel } from '../types';
-import './AssessmentSetup.css';
 
 const STEPS = [
   { n: 1, label: 'Inisiasi Asesmen' },
@@ -14,7 +13,11 @@ const STEPS = [
   { n: 6, label: 'Canvas & Scoping' },
 ];
 
-export default function AssessmentSetup() {
+interface AssessmentSetupProps {
+  mode?: 'create' | 'edit';
+}
+
+export default function AssessmentSetup({ mode = 'edit' }: AssessmentSetupProps) {
   const navigate = useNavigate();
   const {
     state,
@@ -31,9 +34,12 @@ export default function AssessmentSetup() {
     importStateJSON,
   } = useAssessment();
 
-  const [step, setStep] = useState(1);
+  // In edit mode with existing scope, start at Canvas (step 6)
+  const initialStep = mode === 'edit' && state.scopedObjectiveIds.length > 0 ? 6 : 1;
+  const [step, setStep] = useState(initialStep);
   const [selectedBscTab, setSelectedBscTab] = useState<string>('All');
   const [domainFilter, setDomainFilter] = useState<string>('All');
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const { df1, df2, df3, df4, dfResults, scopedObjectiveIds, objectiveTargets } = state;
 
@@ -57,7 +63,12 @@ export default function AssessmentSetup() {
       alert('Pilih minimal satu objektif COBIT untuk memulai asesmen.');
       return;
     }
-    navigate(`/assessments/workspace/${scopedObjectiveIds[0]}`);
+    setShowConfirm(true);
+  };
+
+  const confirmStart = () => {
+    setShowConfirm(false);
+    navigate(`/assessments/${state.id}/workspace/${scopedObjectiveIds[0]}`);
   };
 
   const handleImportFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -103,22 +114,16 @@ export default function AssessmentSetup() {
           <p className="eyebrow">
             <span className="eyebrow__num">◆</span>COBIT 2019 Design Factor Toolkit
           </p>
-          <h1 className="page-title">Assessment Setup & Design Factor Wizard</h1>
+          <h1 className="page-title">
+            {mode === 'create' ? 'Asesmen Baru — Setup & Design Factor' : `Edit Konfigurasi — ${state.title}`}
+          </h1>
           <p className="page-lead">
-            Konfigurasi parameter organisasi dan hitung skor prioritas objektif COBIT 2019 melalui perkalian matriks standar ISACA (DF1–DF4).
+            {mode === 'create'
+              ? 'Konfigurasi parameter organisasi dan hitung skor prioritas objektif COBIT 2019 melalui perkalian matriks standar ISACA (DF1–DF4).'
+              : 'Edit parameter organisasi dan skor prioritas objektif COBIT 2019. Perubahan akan langsung memperbarui hasil perhitungan.'}
           </p>
         </div>
         <div className="setup__header-actions">
-          <button
-            type="button"
-            className="btn btn--primary"
-            onClick={() => {
-              loadBenchmarkData();
-              alert('Dataset benchmark Kementerian PANRB berhasil dimuat!');
-            }}
-          >
-            ⚡ Load Benchmark Dataset
-          </button>
           <button
             type="button"
             className="btn btn--subtle"
@@ -167,41 +172,41 @@ export default function AssessmentSetup() {
               </p>
             </div>
             <div className="form-grid">
-              <div className="form-group form-grid__wide">
-                <label className="field-label">Nama Organisasi / Kementerian</label>
+              <div className="field form-grid__wide">
+                <label className="field__label">Nama Organisasi / Kementerian</label>
                 <input
                   type="text"
-                  className="input-text"
+                  className="input"
                   value={state.organization}
                   onChange={(e) => updateMetadata({ organization: e.target.value })}
                   placeholder="e.g. Kementerian PANRB"
                 />
               </div>
-              <div className="form-group form-grid__wide">
-                <label className="field-label">Judul Audit / Evaluasi</label>
+              <div className="field form-grid__wide">
+                <label className="field__label">Judul Audit / Evaluasi</label>
                 <input
                   type="text"
-                  className="input-text"
+                  className="input"
                   value={state.title}
                   onChange={(e) => updateMetadata({ title: e.target.value })}
                   placeholder="e.g. Evaluasi SPBE & Tata Kelola Keamanan Siber 2026"
                 />
               </div>
-              <div className="form-group">
-                <label className="field-label">Nama Assessor / Tim Audit</label>
+              <div className="field">
+                <label className="field__label">Nama Assessor / Tim Audit</label>
                 <input
                   type="text"
-                  className="input-text"
+                  className="input"
                   value={state.assessor}
                   onChange={(e) => updateMetadata({ assessor: e.target.value })}
                   placeholder="e.g. Vio Salman Kafiyan"
                 />
               </div>
-              <div className="form-group">
-                <label className="field-label">Periode Evaluasi</label>
+              <div className="field">
+                <label className="field__label">Periode Evaluasi</label>
                 <input
                   type="text"
-                  className="input-text"
+                  className="input"
                   value={state.period}
                   onChange={(e) => updateMetadata({ period: e.target.value })}
                   placeholder="e.g. Semester I - 2026"
@@ -212,7 +217,12 @@ export default function AssessmentSetup() {
             <div className="setup__benchmark-banner">
               <div className="setup__benchmark-text">
                 <strong>Ingin langsung menguji validitas matematis vs Excel ISACA?</strong>
-                <p>Klik tombol <em>Load Benchmark Dataset</em> untuk mengisi otomatis formulir DF1-4 dan respon asesmen riil (Data PANRB Sidang Skripsi).</p>
+                <p>
+                  Klik tombol <em>Muat Dataset Benchmark PANRB</em> untuk mengisi otomatis formulir DF1–4 dan respons asesmen riil.
+                </p>
+                <p className="setup__benchmark-hint">
+                  Data riil Kementerian PANRB · digunakan untuk validasi matematika vs Excel ISACA.
+                </p>
               </div>
               <button
                 type="button"
@@ -222,7 +232,7 @@ export default function AssessmentSetup() {
                   alert('Dataset benchmark Kementerian PANRB berhasil dimuat!');
                 }}
               >
-                Muat Dataset Ground Truth
+                ⚡ Muat Dataset Benchmark PANRB
               </button>
             </div>
           </div>
@@ -248,9 +258,9 @@ export default function AssessmentSetup() {
                     </div>
                     <p className="df-slider-card__desc">{cat.description}</p>
                     <div className="df-slider-container">
-                      <div className="df-slider-labels">
+                      <div className="range-slider__labels">
                         <span>1 (Rendah)</span>
-                        <span className="df-baseline-tag">Baseline: 3</span>
+                        <span className="range-slider__baseline">Baseline: 3</span>
                         <span>5 (Tinggi)</span>
                       </div>
                       <input
@@ -260,7 +270,7 @@ export default function AssessmentSetup() {
                         step="1"
                         value={currentVal}
                         onChange={(e) => updateDF1({ [cat.id]: parseInt(e.target.value, 10) })}
-                        className="df-range-slider"
+                        className="range-slider"
                       />
                     </div>
                   </div>
@@ -304,9 +314,9 @@ export default function AssessmentSetup() {
                       <span className="df-val-badge">Nilai: {val}</span>
                     </div>
                     <div className="df-slider-container">
-                      <div className="df-slider-labels">
+                      <div className="range-slider__labels">
                         <span>1 (Tidak Relevan)</span>
-                        <span className="df-baseline-tag">Baseline: 3</span>
+                        <span className="range-slider__baseline">Baseline: 3</span>
                         <span>5 (Kritis)</span>
                       </div>
                       <input
@@ -316,7 +326,7 @@ export default function AssessmentSetup() {
                         step="1"
                         value={val}
                         onChange={(e) => updateDF2Goal(goal.id, parseInt(e.target.value, 10))}
-                        className="df-range-slider"
+                        className="range-slider"
                       />
                     </div>
                   </div>
@@ -366,7 +376,7 @@ export default function AssessmentSetup() {
                         </td>
                         <td>
                           <select
-                            className="select-input"
+                            className="select"
                             value={item.impact}
                             onChange={(e) =>
                               updateDF3Risk(rsk.id, parseInt(e.target.value, 10), item.likelihood)
@@ -381,7 +391,7 @@ export default function AssessmentSetup() {
                         </td>
                         <td>
                           <select
-                            className="select-input"
+                            className="select"
                             value={item.likelihood}
                             onChange={(e) =>
                               updateDF3Risk(rsk.id, item.impact, parseInt(e.target.value, 10))
@@ -430,24 +440,24 @@ export default function AssessmentSetup() {
                       <span className="issue-code">{iss.id}</span>
                       <p className="issue-desc">{iss.description}</p>
                     </div>
-                    <div className="segmented-control">
+                    <div className="segmented">
                       <button
                         type="button"
-                        className={`seg-btn ${val === 1 ? 'seg-btn--active' : ''}`}
+                        className={`segmented__btn ${val === 1 ? 'segmented__btn--active' : ''}`}
                         onClick={() => updateDF4Issue(iss.id, 1)}
                       >
                         1 (Rendah)
                       </button>
                       <button
                         type="button"
-                        className={`seg-btn ${val === 2 ? 'seg-btn--active' : ''}`}
+                        className={`segmented__btn ${val === 2 ? 'segmented__btn--active' : ''}`}
                         onClick={() => updateDF4Issue(iss.id, 2)}
                       >
                         2 (Sedang)
                       </button>
                       <button
                         type="button"
-                        className={`seg-btn ${val === 3 ? 'seg-btn--active-danger' : ''}`}
+                        className={`segmented__btn ${val === 3 ? 'segmented__btn--danger' : ''}`}
                         onClick={() => updateDF4Issue(iss.id, 3)}
                       >
                         3 (Serius)
@@ -470,6 +480,9 @@ export default function AssessmentSetup() {
               </p>
             </div>
 
+            <div className="canvas-panels">
+            <div className="canvas-panels__main">
+
             {/* Filter Domain */}
             <div className="canvas-filter-bar">
               <span className="filter-label">Filter Domain:</span>
@@ -485,6 +498,33 @@ export default function AssessmentSetup() {
               ))}
               <div className="scoped-counter-badge">
                 Terpilih: <strong>{scopedObjectiveIds.length}</strong> Objektif
+              </div>
+            </div>
+
+            {/* Interpretation Callout */}
+            <div className="canvas-callout">
+              <div className="canvas-callout__icon" aria-hidden="true">💡</div>
+              <div className="canvas-callout__body">
+                <strong>Cara membaca grafik:</strong>
+                <p>
+                  Skor positif = objektif ini diprioritaskan berdasarkan profil strategi, tujuan bisnis, risiko,
+                  dan isu I&amp;T organisasi Anda. Skor negatif = relevansinya lebih rendah untuk konteks Anda.
+                  Pilih objektif dengan skor tertinggi agar audit tetap terfokus.
+                </p>
+                {sortedByPriority.length > 0 && (
+                  <div className="canvas-extrema">
+                    <span className="canvas-extrema__chip canvas-extrema__chip--pos">
+                      Skor Tertinggi: <strong>{sortedByPriority[0].objectiveId}</strong> ({sortedByPriority[0].normalizedScore >= 0 ? '+' : ''}
+                      {sortedByPriority[0].normalizedScore})
+                    </span>
+                    <span className="canvas-extrema__chip canvas-extrema__chip--neg">
+                      Skor Terendah: <strong>{sortedByPriority[sortedByPriority.length - 1].objectiveId}</strong> ({sortedByPriority[sortedByPriority.length - 1].normalizedScore})
+                    </span>
+                    <span className="canvas-extrema__chip canvas-extrema__chip--neutral">
+                      Total objektif: <strong>{dfResults.length}</strong>
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -510,8 +550,9 @@ export default function AssessmentSetup() {
                           onClick={(e) => e.stopPropagation()}
                         />
                         <strong>{res.objectiveId}</strong>
+                        <span className="canvas-bar-domain">{res.domain}</span>
                       </div>
-                      <div className="canvas-bar-name" title={res.name}>
+                      <div className="canvas-bar-name" title={`${res.name} — Domain ${res.domain}`}>
                         {res.name}
                       </div>
                       <div className="canvas-bar-track">
@@ -545,6 +586,9 @@ export default function AssessmentSetup() {
                 })}
               </div>
             </div>
+
+            </div>
+            <div className="canvas-panels__side">
 
             {/* Scoped Objectives & Target Adjustment Table */}
             <div className="scoping-table-section">
@@ -623,14 +667,13 @@ export default function AssessmentSetup() {
                         <span className="priority-card__score text-pos">+{rec.normalizedScore}</span>
                       </div>
                       <h4>{rec.objectiveId} — {rec.name}</h4>
-                      <p className="text-secondary" style={{ fontSize: '13px' }}>
+                      <p className="text-sm text-secondary">
                         Suggested Target: Level {rec.suggestedTargetLevel}
                       </p>
                       <button
                         type="button"
-                        className={`btn btn--sm ${isScoped ? 'btn--secondary' : 'btn--primary'}`}
+                        className={`btn btn--sm btn--block priority-card__btn ${isScoped ? 'btn--secondary' : 'btn--primary'}`}
                         onClick={() => handleToggleObjective(rec.objectiveId)}
-                        style={{ marginTop: '8px', width: '100%' }}
                       >
                         {isScoped ? '✓ Sudah Terpilih' : '+ Tambah ke Ruang Lingkup'}
                       </button>
@@ -638,6 +681,9 @@ export default function AssessmentSetup() {
                   );
                 })}
               </div>
+            </div>
+
+            </div>
             </div>
           </div>
         )}
@@ -649,7 +695,7 @@ export default function AssessmentSetup() {
               ← Kembali
             </button>
           )}
-          <div style={{ marginLeft: 'auto', display: 'flex', gap: '12px' }}>
+          <div className="setup__footer-nav">
             {step < 6 ? (
               <button type="button" className="btn btn--primary" onClick={next}>
                 Lanjut ke Langkah {step + 1} →
@@ -666,6 +712,101 @@ export default function AssessmentSetup() {
           </div>
         </div>
       </div>
+
+      {/* ---------------- Confirmation Modal ---------------- */}
+      {showConfirm && (
+        <div className="confirm-backdrop" onClick={() => setShowConfirm(false)}>
+          <div
+            className="confirm-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="confirm-title"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="confirm-modal__head">
+              <div>
+                <p className="confirm-modal__eyebrow">Ringkasan Sebelum Asesmen</p>
+                <h3 id="confirm-title">Konfigurasi Ruang Lingkup Audit</h3>
+              </div>
+              <button
+                type="button"
+                className="modal-close-btn"
+                onClick={() => setShowConfirm(false)}
+                aria-label="Tutup"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="confirm-modal__meta">
+              <div className="confirm-meta-item">
+                <span className="confirm-meta-label">Organisasi</span>
+                <strong>{state.organization || '—'}</strong>
+              </div>
+              <div className="confirm-meta-item">
+                <span className="confirm-meta-label">Judul Audit</span>
+                <strong>{state.title || '—'}</strong>
+              </div>
+              <div className="confirm-meta-item">
+                <span className="confirm-meta-label">Assessor</span>
+                <strong>{state.assessor || '—'}</strong>
+              </div>
+              <div className="confirm-meta-item">
+                <span className="confirm-meta-label">Periode</span>
+                <strong>{state.period || '—'}</strong>
+              </div>
+            </div>
+
+            <div className="confirm-modal__list">
+              <p className="confirm-modal__list-title">
+                {scopedObjectiveIds.length} objektif dipilih untuk dinilai:
+              </p>
+              <div className="confirm-table-wrap">
+                <table className="confirm-table">
+                  <thead>
+                    <tr>
+                      <th>Kode</th>
+                      <th>Nama Objektif</th>
+                      <th className="confirm-table__num">Skor</th>
+                      <th className="confirm-table__num">Target</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {scopedObjectiveIds.map((id) => {
+                      const res = dfResults.find((r) => r.objectiveId === id);
+                      const target = objectiveTargets[id] ?? res?.suggestedTargetLevel ?? 3;
+                      return (
+                        <tr key={id}>
+                          <td><strong>{id}</strong></td>
+                          <td>{res?.name}</td>
+                          <td className={`confirm-table__num ${res && res.normalizedScore >= 0 ? 'text-pos' : 'text-neg'}`}>
+                            {res ? (res.normalizedScore >= 0 ? `+${res.normalizedScore}` : res.normalizedScore) : '—'}
+                          </td>
+                          <td className="confirm-table__num">Level {target}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div className="confirm-modal__note">
+              Di langkah berikutnya Anda akan menilai tiap aktivitas COBIT per level (Yes / Partially / No / N.A.),
+              lalu sistem menghitung capability level dengan ambang batas &gt;85% dan aturan <strong>Stop Here</strong>.
+            </div>
+
+            <div className="confirm-modal__actions">
+              <button type="button" className="btn btn--subtle" onClick={() => setShowConfirm(false)}>
+                ← Kembali Edit
+              </button>
+              <button type="button" className="btn btn--primary" onClick={confirmStart}>
+                Konfirmasi &amp; Mulai Asesmen →
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

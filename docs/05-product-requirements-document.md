@@ -1,9 +1,9 @@
 # Product Requirements Document (PRD) & Master Execution Blueprint
 ## Sistem Informasi Pengukuran Capability Level COBIT 2019 Berbasis Web dengan Traceability Evidensi Audit
 
-- **Versi Dokumen:** 2.0 (Execution Ready)
+- **Versi Dokumen:** 2.1 (Requirements Refined)
 - **Tanggal:** 08 Oktober 2026
-- **Status:** Draft aligned with current decision (DF1–DF4 Setup + Option B Assessment/Evidence)
+- **Status:** Draft; arah produk dipertegas sebagai alat bantu asesmen COBIT 2019 satu entitas, berbasis bukti dan siap ditinjau/diserahkan
 - **Framework Referensi:** ISACA COBIT 2019 Framework, Design Guide, & Performance Management (CPM)
 - **Metodologi Riset:** Design Science Research Methodology (DSRM - Peffers et al., 2007)
 - **Lokasi Repositori:** `C:\Users\Sena\Documents\GitHub\cobit-web`
@@ -20,6 +20,10 @@
 7. [Arsitektur State Management & Persistence](#7-arsitektur-state-management--persistence)
 8. [Formula Verification Plan](#8-formula-verification-plan-workbook-reference)
 9. [Grand Execution Plan & File-by-File Task Matrix](#9-grand-execution-plan--file-by-file-task-matrix)
+10. [Arah Produk, Pengguna, dan Batas Sistem](#10-arah-produk-pengguna-dan-batas-sistem)
+11. [Alur Kerja Asesmen End-to-End](#11-alur-kerja-asesmen-end-to-end)
+12. [Kebutuhan Fungsional Terperinci](#12-kebutuhan-fungsional-terperinci)
+13. [Kebutuhan Nonfungsional & Kriteria Penerimaan](#13-kebutuhan-nonfungsional--kriteria-penerimaan)
 
 ---
 
@@ -31,12 +35,33 @@
 3. **Kekhawatiran Dosen Pembimbing:** Dosen menganggap memindahkan seluruh mekanisme toolkit COBIT 2019 (27 sheet Excel) ke aplikasi web akan memakan waktu terlalu lama dan berisiko gagal selesai tepat waktu.
 
 ### 1.2 Solusi Strategis (Option 1)
-Membangun aplikasi web *Single Page Application* (React 19 + TypeScript) yang:
-* **Generik & Terbuka:** Dapat digunakan oleh organisasi apa pun untuk menghitung skor prioritas dan kapabilitas.
+Membangun alat bantu asesmen COBIT 2019 berbasis web untuk satu entitas dalam satu siklus asesmen. Pengguna utama adalah assessor/peneliti yang mengelola scope, penilaian, dan bukti; PIC entitas menjadi sumber klarifikasi dan bukti. Sistem mendukung persiapan paket data agar dapat ditinjau pimpinan atau asesor eksternal, tetapi tidak mengklaim menggantikan validasi profesional. Aplikasi *Single Page Application* (React 19 + TypeScript) ini:
+* **Berorientasi satu entitas per asesmen:** Menyimpan konteks organisasi, periode, assessor, scope objektif, hasil penilaian, dan evidence dalam satu paket asesmen.
 * **Smart Design Factor Engine:** Mengimplementasikan kalkulator Design Factor Step 2 (DF1–DF4) dalam kode TypeScript teroptimasi (<150 baris) menggunakan perkalian matriks standar ISACA.
 * **Hierarki CPM Level 2–5 Otomatis:** Mengimplementasikan skala penilaian CPM (*Fully, Largely, Partially, Not Achieved*) dengan ambang batas $85\%$ dan aturan *Stop Here* yang ketat.
 * **Traceability Dua Arah:** Menghubungkan setiap butir penilaian ke dokumen bukti pendukung (*forward traceability*) dan melihat pemanfaatan setiap bukti pada butir asesmen (*backward traceability*).
 * **Formula Verification:** Memverifikasi hasil Design Factor terhadap workbook referensi dan hasil hitung independen. File PANRB dari tugas sebelumnya hanya sumber pembanding formula; bukan studi kasus atau dataset aplikasi.
+
+### 1.3 Proposisi Nilai dan Batas Klaim
+* **Nilai utama:** mengurangi bukti yang tercecer, membuat keputusan rating dapat ditelusuri ke aktivitas dan evidence, serta mempercepat peninjauan hasil.
+* **Keluaran utama:** hasil pengukuran capability, jejak perhitungan, daftar evidence terkait, gap terhadap target, dan rekomendasi tindak lanjut.
+* **Handover:** ekspor paket asesmen untuk ditinjau pihak lain adalah keluaran pendukung. Tidak ada integrasi atau pengiriman langsung ke ISACA/COBIT; COBIT adalah framework, bukan layanan tujuan pengajuan.
+* **Batas validitas:** hasil merupakan hasil asesmen berdasarkan data dan metode yang dicatat. Sistem tidak menyatakan sertifikasi, opini audit resmi, atau kepatuhan otomatis.
+
+### 1.4 Keputusan Produk yang Menjadi Dasar PRD
+1. **Lingkup:** satu organisasi/entitas dan satu assessment aktif sebagai unit kerja utama; desain multi-tenant dan pengelolaan portofolio K/L bukan sasaran MVP.
+2. **Model kerja:** assessor mengelola proses dan merekam penilaian yang diperoleh dari PIC, dokumen, wawancara, atau observasi. MVP tidak mensyaratkan akun PIC terpisah atau alur persetujuan multi-pihak.
+3. **Tahapan:** Setup & Scope → Assessment & Evidence → Review Hasil → Gap & Rekomendasi → Export/Handover.
+4. **Prinsip penilaian:** rekomendasi Design Factor membantu assessor menentukan prioritas; keputusan scope dan target tetap eksplisit dan dapat dikoreksi assessor.
+5. **Bahasa produk:** gunakan “assessment”, “assessor”, “PIC”, “evidence”, dan “hasil penilaian”; hindari klaim “sertifikasi” atau “hasil resmi” tanpa validasi pihak berwenang.
+
+### 1.5 Di Luar Lingkup MVP
+* Platform pengampu nasional, direktori banyak K/L/perusahaan, dan dashboard agregat lintas organisasi.
+* Multi-tenant, manajemen akun/permission granular, undangan pengguna, notifikasi, serta audit log tingkat enterprise.
+* Portal eksternal dengan login asesor dan workflow approve/reject yang mengunci nilai.
+* Penyimpanan atau upload file ke cloud. MVP dapat mencatat referensi/URL bukti; akses dan penyimpanan file mengikuti repositori organisasi.
+* Integrasi API ke ISACA, sistem GRC lain, atau tanda tangan/sertifikasi digital.
+* Penetapan rekomendasi otomatis sebagai keputusan final tanpa tinjauan assessor.
 
 ---
 
@@ -371,6 +396,19 @@ Pertahankan route dan halaman setup yang sudah ada; perluas wizard 3 langkah men
   * **Aspek Technology:** Penggunaan fitur teknis, otomasi kontrol, enkripsi, dashboard.
 * **Aksi Ekspor:** Tombol *"Cetak / Ekspor Laporan Rekomendasi"* (menghasilkan format cetak bersih untuk lampiran skripsi).
 
+### 6.7 Dashboard & Riwayat sebagai Beranda Kerja
+* **Dashboard:** menampilkan identitas assessment aktif, periode, status tahap, persentase aktivitas yang sudah dinilai, jumlah aktivitas tanpa evidence tertaut, jumlah evidence, dan tautan ke langkah berikutnya.
+* **Prioritas kerja:** daftar objektif dengan penilaian belum lengkap, evidence belum tertaut, atau target belum dikonfirmasi. Indikator adalah ringkasan kelengkapan, bukan skor kualitas audit.
+* **Riwayat:** menampilkan assessment tersimpan beserta organisasi, periode, status, dan waktu pembaruan; tindakan buka/duplikasi/arsip mengikuti kemampuan implementasi.
+* **Navigasi:** kelompokkan halaman menurut alur kerja (Setup & Scope, Assessment & Evidence, Results & Export). Hasil, gap, dan rekomendasi tetap dapat dibuka langsung.
+
+### 6.8 Export Audit Package
+* Sediakan ekspor JSON untuk backup/pertukaran data mesin dan tampilan cetak/unduh laporan ringkas untuk peninjauan manusia.
+* Paket minimum: metadata assessment, metode/asumsi scoring, scope dan target, rating per aktivitas, komentar, hasil agregasi per level, relasi evidence, gap, rekomendasi, serta waktu pembaruan.
+* Setiap evidence menyertakan metadata dan referensi/URL yang dicatat; file aktual tidak disalin bila hanya berada di repositori organisasi.
+* Tampilkan ringkasan batasan: data berasal dari assessment internal dan memerlukan validasi pihak yang berwenang sebelum diperlakukan sebagai hasil final.
+* Ekspor harus mempertahankan ID aktivitas/evidence dan relasi dua arah; jangan menghasilkan tautan bukti yang tidak tersimpan di data assessment.
+
 ---
 
 ## 7. Arsitektur State Management & Persistence
@@ -465,3 +503,173 @@ Implementasi dibagi menjadi 6 tahap terstruktur:
 ```
 
 Dokumen ini menjadi acuan mutlak selama proses pengembangan. Setiap baris kode yang ditulis harus tunduk pada kaidah matematis dan batasan arsitektur di atas.
+
+---
+
+## 10. Arah Produk, Pengguna, dan Batas Sistem
+
+### 10.1 Pernyataan Produk
+**Sistem informasi untuk membantu assessor mengukur capability tata kelola/manajemen TI berbasis COBIT 2019 pada satu entitas, mengelola keterlacakan rating terhadap evidence, dan menyiapkan hasil terstruktur untuk review atau handover.**
+
+Sistem saat ini lebih dekat ke *assessment toolkit* satu entitas daripada platform workflow regulator. Bentuk “alur tahapan” dipakai untuk membantu assessor mengetahui pekerjaan berikutnya; bukan berarti harus ada akun dan perpindahan tugas antaraktor dalam MVP.
+
+### 10.2 Persona dan Tanggung Jawab
+| Persona | Kebutuhan | Tanggung jawab dalam sistem | Akses MVP |
+|---|---|---|---|
+| **Assessor / Peneliti** (pengguna utama) | Mengelola scope, menilai aktivitas konsisten, menautkan bukti, menjelaskan hasil | Membuat assessment; mengisi/merekam rating; mengelola evidence; meninjau hasil; ekspor | Seluruh fungsi assessment lokal |
+| **PIC TI / Pemilik Proses** (narasumber) | Menyampaikan kondisi proses, dokumen, klarifikasi, dan konteks | Memberikan informasi melalui assessor; bukan wajib menjadi pengguna aplikasi | Tidak memerlukan akun pada MVP |
+| **Pimpinan / Reviewer Internal** | Memahami cakupan, temuan, gap, dan prioritas tindak lanjut | Meninjau ringkasan atau laporan yang diekspor; memberi masukan di luar sistem | Baca hasil ekspor; portal review bukan MVP |
+| **Asesor Eksternal** (opsional) | Menilai ulang klaim internal dengan konteks dan bukti tertata | Menggunakan paket sebagai bahan awal; mengonfirmasi independen sesuai mandat | Menerima file/laporan ekspor; bukan akun sistem pada MVP |
+
+### 10.3 Objek dan Istilah Domain
+* **Assessment:** satu siklus pengukuran untuk satu entitas, periode, assessor, metode, scope, dan kumpulan hasil.
+* **Objective:** salah satu dari 40 governance/management objectives; hanya objektif yang masuk scope dinilai.
+* **Activity:** butir penilaian dalam objective dan capability level tertentu.
+* **Rating:** jawaban/penilaian assessor beserta komentar dan status kelengkapan. Rating final tidak boleh disamakan otomatis dengan klaim narasumber.
+* **Evidence:** referensi dokumen, catatan wawancara, observasi, atau artefak lain yang mendukung satu atau lebih activity.
+* **Assessment status:** status kemajuan pekerjaan untuk membantu navigasi; tidak menyiratkan persetujuan formal atau sertifikasi.
+
+### 10.4 Model Status Assessment
+Status minimum yang direkomendasikan untuk MVP:
+| Status | Makna | Aksi/kelanjutan |
+|---|---|---|
+| `draft` | Metadata, Design Factor, atau scope masih disiapkan | Edit setup dan scope |
+| `in_progress` | Pengisian rating/evidence sedang berlangsung | Lanjutkan assessment; hasil sementara dapat dilihat |
+| `ready_for_review` | Assessor menandai input cukup untuk ditinjau; validasi kelengkapan dasar terpenuhi | Review hasil, gap, dan paket ekspor |
+| `reviewed` | Assessor telah meninjau hasil serta mencatat batasan/asumsi | Revisi bila perlu atau siapkan ekspor |
+| `archived` | Assessment ditutup untuk pekerjaan aktif | Baca/ekspor; perubahan memerlukan pembukaan kembali bila fitur tersedia |
+
+Status diperbarui oleh assessor secara eksplisit atau berdasarkan aksi yang jelas. MVP tidak mengunci rating secara permanen. “External validated” bukan status bawaan karena sistem tidak mengelola identitas/otoritas asesor eksternal.
+
+---
+
+## 11. Alur Kerja Asesmen End-to-End
+
+```text
+1. Buat assessment dan catat konteks entitas/periode
+   ↓
+2. Isi Design Factor, hitung prioritas, pilih objective dan target
+   ↓
+3. Kumpulkan informasi dari PIC/dokumen; isi rating per activity
+   ↓
+4. Catat evidence dan tautkan ke activity yang didukung
+   ↓
+5. Tinjau kelengkapan, agregasi CPM, hasil, dan asumsi
+   ↓
+6. Analisis gap dan susun/tinjau rekomendasi
+   ↓
+7. Ekspor paket untuk arsip, pimpinan, atau asesor eksternal
+```
+
+### 11.1 Tahap dan Gerbang Kelengkapan
+| Tahap | Aktor utama | Input | Keluaran | Syarat lanjut yang ditampilkan |
+|---|---|---|---|---|
+| **A. Setup & Scope** | Assessor | Metadata; DF1–DF4; daftar objective; target | Assessment dengan scope yang disetujui assessor | Metadata inti tersedia; minimal satu objective dipilih; target berada di rentang valid |
+| **B. Assessment & Evidence** | Assessor bersama PIC sebagai sumber informasi | Rating; komentar; referensi dokumen/wawancara/observasi | Rating per activity dan evidence tertaut | Item belum dijawab dan item tanpa evidence ditandai. Sistem memberi peringatan, bukan memalsukan kelengkapan |
+| **C. Review Hasil** | Assessor | Rating dan evidence yang terkumpul | Agregasi level; current capability; catatan asumsi/limitasi | Perhitungan selesai untuk data valid; item kosong dan N.A. dibedakan; aturan Stop Here terlihat |
+| **D. Gap & Tindak Lanjut** | Assessor; pimpinan sebagai pembaca | Target, current level, gap, temuan | Gap matrix dan rekomendasi yang ditinjau | Tiap rekomendasi dapat ditelusuri ke objective/gap terkait; assessor dapat mengedit atau mengabaikan saran |
+| **E. Export / Handover** | Assessor | Assessment yang telah direview | JSON dan laporan ringkas/cetak | Metadata, scope, rating, jejak agregasi, evidence reference, dan disclaimer termuat; ekspor menunjukkan tanggal dan versi data |
+
+### 11.2 Aturan Interpretasi Alur
+* “Ready for review” hanya menyatakan kesiapan untuk peninjauan, bukan seluruh bukti valid atau rating benar.
+* Sistem tidak menyimpulkan dokumen valid hanya karena evidence terhubung. Kecukupan/keabsahan dinilai manusia.
+* Wawancara dan observasi dicatat sebagai jenis/sumber evidence atau catatan, bukan modul penjadwalan/rekaman sesi.
+* Visit/on-site merupakan metode pengumpulan evidence di luar sistem; hasil atau catatannya dapat direkam assessor.
+* Asesor eksternal dapat memakai hasil ekspor sebagai bahan awal, tetapi harus melakukan validasi independen.
+
+---
+
+## 12. Kebutuhan Fungsional Terperinci
+
+Prioritas: **M** = wajib untuk MVP; **S** = penting setelah alur inti stabil; **O** = opsional/di luar MVP.
+
+### 12.1 Assessment dan Setup
+| ID | Prioritas | Kebutuhan | Kriteria penerimaan ringkas |
+|---|---|---|---|
+| FR-01 | M | Assessor dapat membuat assessment dengan nama, entitas, periode, dan assessor | Data tampil pada dashboard/riwayat dan dapat dibuka kembali |
+| FR-02 | M | Assessor dapat mengisi DF1–DF4 dengan batas nilai yang ditetapkan | Input di luar rentang ditolak/ditandai; nilai tersimpan pada assessment terkait |
+| FR-03 | M | Sistem menghitung skor dan suggested target dari input DF menggunakan formula terdokumentasi | Hasil dapat direproduksi dari input yang sama; kondisi pembagi nol ditangani |
+| FR-04 | M | Assessor dapat memilih/mengecualikan objective dan menentukan target | Scope final mencerminkan pilihan assessor; saran sistem tidak mengunci pilihan |
+| FR-05 | M | Sistem mengidentifikasi sumber dan versi data/metode yang dipakai | Metadata metode dapat dibaca pada detail/ekspor |
+| FR-06 | S | Assessor dapat menyalin konfigurasi assessment sebelumnya sebagai titik awal | Salinan tidak berbagi ID atau mengubah assessment asal |
+
+### 12.2 Penilaian Aktivitas dan CPM
+| ID | Prioritas | Kebutuhan | Kriteria penerimaan ringkas |
+|---|---|---|---|
+| FR-07 | M | Assessor melihat activity berdasarkan objective, practice, dan level | Kode, deskripsi, level, dan urutan tampil konsisten dengan katalog |
+| FR-08 | M | Assessor merekam rating, komentar, dan status jawaban tiap activity | Perubahan tampil pada ringkasan; item kosong tidak dianggap No atau N.A. |
+| FR-09 | M | Sistem menghitung agregasi tingkat level sesuai metode yang didokumentasikan | Pembilang, penyebut, persentase, predikat, dan gerbang dapat diperiksa |
+| FR-10 | M | Sistem menerapkan Stop Here sesuai aturan yang dikonfirmasi dari sumber metode | Level setelah gerbang gagal tidak ditampilkan sebagai telah dinilai/tercapai |
+| FR-11 | M | Sistem menghitung current level dan gap terhadap target dari hasil tersimpan | Perubahan rating/target memperbarui hasil secara konsisten |
+| FR-12 | M | Sistem membedakan skor sementara dari hasil yang sudah direview assessor | Status hasil terlihat di dashboard, halaman hasil, dan ekspor |
+| FR-13 | S | Assessor dapat menandai alasan pengecualian atau asumsi penilaian | Catatan melekat pada assessment/activity dan ikut diekspor |
+
+### 12.3 Evidence dan Traceability
+| ID | Prioritas | Kebutuhan | Kriteria penerimaan ringkas |
+|---|---|---|---|
+| FR-14 | M | Assessor dapat membuat, mengubah, dan menghapus metadata evidence | Validasi kolom wajib; perubahan tercermin pada register dan detail |
+| FR-15 | M | Evidence dapat ditautkan ke satu atau banyak activity | Tautan terlihat dari activity dan register; penghapusan tautan tidak menghapus evidence lain |
+| FR-16 | M | Sistem mendukung kategori policy, procedure, record, documentation, log, interview, dan other | Kategori terlihat dan dapat dipakai sebagai filter |
+| FR-17 | M | Evidence menyimpan judul, tipe, referensi/URL, tanggal, assessor, dan catatan | Data yang tersedia tampil di detail; referensi kosong ditandai |
+| FR-18 | M | Register menunjukkan activity yang didukung evidence | Pengguna dapat menelusuri evidence → activity dan activity → evidence |
+| FR-19 | M | Sistem menampilkan aktivitas belum dinilai dan aktivitas tanpa evidence tertaut | Indikator menghitung item sesuai scope dan tidak menyamakan “tanpa tautan” dengan “tidak ada bukti” |
+| FR-20 | S | Assessor dapat memberi label status review evidence seperti belum ditinjau/perlu klarifikasi/ditinjau | Status dipahami sebagai catatan assessor, bukan validasi otomatis |
+
+### 12.4 Hasil, Gap, Rekomendasi, dan Ekspor
+| ID | Prioritas | Kebutuhan | Kriteria penerimaan ringkas |
+|---|---|---|---|
+| FR-21 | M | Dashboard merangkum identitas, status, progres, dan pekerjaan yang perlu dilanjutkan | Angka konsisten dengan assessment aktif; tersedia tautan ke item terkait |
+| FR-22 | M | Halaman hasil menampilkan target, current level, CPM trail, serta dasar perhitungan | Setiap level memperlihatkan hasil dan alasan gerbang berhenti |
+| FR-23 | M | Gap analysis membandingkan target dan current level per objective | Gap tidak negatif; ringkasan sesuai data per objective |
+| FR-24 | M | Rekomendasi terhubung ke objective/gap dan dapat ditinjau/edit assessor | Tidak ada rekomendasi yang tampil seolah keputusan otomatis final |
+| FR-25 | M | Sistem mengekspor assessment sebagai JSON yang dapat diimpor kembali | Round-trip mempertahankan metadata, rating, evidence ID, relasi, scope, dan target |
+| FR-26 | M | Sistem menyediakan tampilan laporan ramah cetak/ekspor untuk reviewer | Laporan memuat identitas, scope, metode, hasil, gap, evidence index, tanggal, dan batasan |
+| FR-27 | S | Sistem dapat membandingkan dua periode assessment untuk entitas sama | Perbandingan hanya bila scope/metode kompatibel atau perbedaan ditandai jelas |
+
+### 12.5 Prioritas Eksekusi MVP
+1. **Fondasi data:** assessment metadata, scope, aktivitas, rating, evidence, dan relasi tersimpan konsisten.
+2. **Pengukuran:** Design Factor dan CPM dapat dihitung ulang serta dijelaskan; validasi input tersedia.
+3. **Keterlacakan:** rating ↔ activity ↔ evidence dapat ditelusuri dari dua arah.
+4. **Review:** ringkasan kemajuan, item yang belum lengkap, hasil, gap, asumsi, dan rekomendasi.
+5. **Handover:** ekspor JSON dan laporan cetak dengan indeks evidence serta batasan penggunaan.
+
+Fitur role multi-user, approval eksternal, upload file, dan integrasi dikerjakan hanya jika kebutuhan penelitian dan sumber daya telah disepakati.
+
+---
+
+## 13. Kebutuhan Nonfungsional & Kriteria Penerimaan
+
+### 13.1 Kebutuhan Nonfungsional
+* **Konsistensi perhitungan:** fungsi engine deterministik; perubahan input harus memperbarui seluruh hasil turunannya.
+* **Keterjelasan:** label, satuan, definisi rating, metode, penyebut, dan status kelengkapan dapat dipahami tanpa menebak.
+* **Integritas data:** operasi hapus/ubah evidence menjaga konsistensi relasi; assessment berbeda tidak berbagi state secara tidak sengaja.
+* **Portabilitas:** data lokal dapat diekspor sebagai JSON; kegagalan import memberi pesan dan tidak menimpa data secara diam-diam.
+* **Privasi:** hindari mengirim data assessment ke layanan pihak ketiga; jangan masukkan data sensitif nyata ke fixture/demo.
+* **Aksesibilitas dasar:** kontrol form memiliki label, status tidak hanya dibedakan dengan warna, navigasi keyboard memungkinkan, dan teks kontras terbaca.
+* **Kompatibilitas:** alur utama dapat digunakan pada browser desktop modern; layout tidak kehilangan fungsi pada lebar tablet.
+
+### 13.2 Kriteria Penerimaan Produk MVP
+MVP dinyatakan memenuhi kebutuhan produk jika assessor dapat:
+1. Membuat assessment satu entitas, mengisi DF1–DF4, memilih scope/target, lalu menyimpan dan membuka kembali data.
+2. Mengisi rating per activity dan memperoleh hasil CPM/current level/gap yang konsisten dengan formula serta fixture verifikasi.
+3. Menambah evidence, menautkannya ke activity, lalu menelusuri hubungan dari kedua arah.
+4. Mengenali activity yang belum dinilai, evidence yang belum ditautkan, serta status hasil sementara/review.
+5. Melihat ringkasan hasil, dasar agregasi, gap, dan rekomendasi yang terkait dengan objective.
+6. Mengekspor paket yang mempertahankan relasi data dan laporan yang cukup jelas untuk ditinjau pihak lain.
+7. Menemukan dalam laporan pernyataan bahwa keluaran adalah hasil assessment berbasis data yang dimasukkan, bukan sertifikasi atau validasi otomatis.
+
+### 13.3 Risiko dan Mitigasi
+| Risiko | Dampak | Mitigasi produk |
+|---|---|---|
+| Sumber formula/ambang CPM belum final | Hasil dapat dipersepsikan sebagai aturan resmi padahal asumsi implementasi | Catat sumber, asumsi, fixture, dan keputusan pembimbing; tampilkan metode di hasil/ekspor |
+| Aktivitas COBIT tidak lengkap atau hak penggunaan tidak jelas | Instrumen tidak representatif atau konten tidak boleh didistribusikan | Batasi subset yang disetujui; catat asal/versi katalog dan lisensi |
+| Pengguna menganggap evidence tertaut otomatis valid | Kesimpulan terlalu kuat | Pisahkan status tertaut dari status ditinjau; beri label bahwa penilaian kecukupan dilakukan manusia |
+| Aplikasi SPA/local storage dianggap sistem produksi multi-user | Ekspektasi keamanan, backup, dan kolaborasi tidak terpenuhi | Nyatakan batas MVP; sediakan ekspor backup; jangan klaim sebagai repository enterprise |
+| Scope berubah saat pengerjaan | Waktu terserap fitur multi-user/handover yang tidak dibutuhkan | Prioritaskan alur satu assessor/satu entitas; revisi scope hanya setelah keputusan riset terdokumentasi |
+
+### 13.4 Keputusan yang Masih Perlu Divalidasi
+* Unit analisis dan studi kasus final (jenis organisasi serta akses data nyata atau sintetis).
+* Sumber resmi/akademik untuk interpretasi CPM, skala aktivitas, dan aturan agregasi yang akan diklaim.
+* Objective dan activity subset yang digunakan, termasuk sumber, versi, dan hak penggunaan.
+* Format laporan utama yang diminta pembimbing/pengguna (print/PDF, Word, atau cukup JSON + tampilan cetak).
+* Apakah kebutuhan penelitian mengharuskan evaluasi usability/validitas dengan assessor ahli dan bagaimana metodenya.

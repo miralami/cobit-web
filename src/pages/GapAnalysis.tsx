@@ -2,7 +2,6 @@ import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useAssessment } from '../context';
 import cobitFactors from '../data/cobitDesignFactors.json';
-import './GapAnalysis.css';
 
 const capabilityLevelLabels: Record<number, string> = {
   0: 'Incomplete',
@@ -44,6 +43,26 @@ export default function GapAnalysis() {
       ? Math.round((gapRows.reduce((sum, r) => sum + (r.current / r.target), 0) / gapRows.length) * 100)
       : 0;
 
+  const needsWork = gapRows.filter((r) => r.gap > 0);
+  const worstRow = needsWork.length > 0 ? needsWork.reduce((a, b) => (b.gap > a.gap ? b : a)) : null;
+
+  const priorityOf = (gap: number): { label: string; cls: string } => {
+    if (gap === 0) return { label: 'Tercapai', cls: 'prio--ok' };
+    if (gap >= 3) return { label: 'Prioritas Tinggi', cls: 'prio--high' };
+    return { label: 'Perlu Perhatian', cls: 'prio--mid' };
+  };
+
+  const narrative =
+    gapRows.length === 0
+      ? 'Belum ada objektif yang masuk ruang lingkup. Pilih objektif pada halaman Setup terlebih dahulu.'
+      : needsWork.length === 0
+        ? `Seluruh ${gapRows.length} objektif yang dinilai sudah memenuhi target capability level. Tidak ada kesenjangan yang perlu ditindaklanjuti pada periode ini.`
+        : `Dari ${gapRows.length} objektif yang dinilai, ${needsWork.length} objektif memerlukan peningkatan capability level dan ${achievedCount} objektif sudah memenuhi target.` +
+          (worstRow
+            ? ` Kesenjangan terbesar terdapat pada ${worstRow.id} — ${worstRow.name} (${worstRow.gap} level), yang berarti diperlukan perbaikan substansial pada area ${worstRow.domain}.`
+            : '') +
+          ` Total akumulasi gap seluruh objektif adalah ${totalGap} level.`;
+
   return (
     <div className="page">
       <header className="page-head">
@@ -57,10 +76,10 @@ export default function GapAnalysis() {
           </p>
         </div>
         <div className="page-head__actions">
-          <Link to="/results" className="btn btn--secondary">
+          <Link to={`/assessments/${state.id}/results`} className="btn btn--secondary">
             ← Hasil Kapabilitas
           </Link>
-          <Link to="/recommendations" className="btn btn--primary">
+          <Link to={`/assessments/${state.id}/recommendations`} className="btn btn--primary">
             Rekomendasi Perbaikan 3 Aspek →
           </Link>
         </div>
@@ -75,7 +94,7 @@ export default function GapAnalysis() {
         </div>
         <div className="card gapsum__card">
           <span className="eyebrow">Total Kesenjangan</span>
-          <p className="gapsum__value num" style={{ color: totalGap > 0 ? '#c5221f' : '#137333' }}>
+          <p className="gapsum__value num" style={{ color: totalGap > 0 ? 'var(--color-danger)' : 'var(--color-success)' }}>
             {totalGap} Level
           </p>
           <p className="gapsum__meta">Akumulasi level yang perlu ditingkatkan</p>
@@ -90,6 +109,12 @@ export default function GapAnalysis() {
           <p className="gapsum__value num">{avgFulfillment}%</p>
           <p className="gapsum__meta">{state.organization} · {state.period}</p>
         </div>
+      </section>
+
+      {/* Auto-generated narrative */}
+      <section className="gap-narrative" aria-label="Interpretasi hasil">
+        <div className="gap-narrative__icon" aria-hidden="true">📊</div>
+        <p className="gap-narrative__text">{narrative}</p>
       </section>
 
       {/* Gap Comparison Table */}
@@ -111,19 +136,21 @@ export default function GapAnalysis() {
                 <th scope="col" className="table__num">Target</th>
                 <th scope="col" style={{ width: '180px' }}>Visualisasi Capaian</th>
                 <th scope="col" className="table__num">Gap</th>
-                <th scope="col" style={{ width: '130px' }}>Status</th>
-                <th scope="col" style={{ width: '100px' }}>Aksi</th>
+                <th scope="col" style={{ width: '130px' }}>Prioritas</th>
+                <th scope="col" style={{ width: '130px' }}>Aksi</th>
               </tr>
             </thead>
             <tbody>
-              {gapRows.map((row) => (
+              {gapRows.map((row) => {
+                const prio = priorityOf(row.gap);
+                return (
                 <tr key={row.id}>
                   <td className="table__primary mono">
                     <strong>{row.id}</strong>
                   </td>
                   <td>
                     <strong>{row.name}</strong>
-                    <div style={{ fontSize: '11px', color: 'var(--color-text-secondary)' }}>
+                    <div className="text-xs text-secondary">
                       Target: {capabilityLevelLabels[row.target]}
                     </div>
                   </td>
@@ -133,7 +160,7 @@ export default function GapAnalysis() {
                     </span>
                   </td>
                   <td className="table__num">
-                    <span className="mono" style={{ fontSize: '16px', fontWeight: 700, color: '#137333' }}>
+                    <span className="mono text-success" style={{ fontSize: '16px', fontWeight: 700 }}>
                       Level {row.target}
                     </span>
                   </td>
@@ -164,31 +191,26 @@ export default function GapAnalysis() {
                       style={{
                         fontSize: '16px',
                         fontWeight: 700,
-                        color: row.gap > 0 ? '#c5221f' : '#137333',
+                        color: row.gap > 0 ? 'var(--color-danger)' : 'var(--color-success)',
                       }}
                     >
                       {row.gap}
                     </span>
                   </td>
                   <td>
-                    <span
-                      className={`badge ${
-                        row.isAchieved ? 'badge--success' : 'badge--warning'
-                      }`}
-                    >
-                      {row.isAchieved ? '✓ Tercapai' : `Gap ${row.gap} Level`}
-                    </span>
+                    <span className={`prio-badge ${prio.cls}`}>{prio.label}</span>
                   </td>
                   <td>
                     <Link
-                      to={`/assessments/workspace/${row.id}`}
+                      to={`/assessments/${state.id}/workspace/${row.id}`}
                       className="btn btn--subtle btn--sm"
                     >
                       Asesmen →
                     </Link>
                   </td>
                 </tr>
-              ))}
+                );
+              })}
             </tbody>
           </table>
         </div>

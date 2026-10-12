@@ -103,7 +103,7 @@ export default function EvidenceModal({
             <div className="existing-evidence-section">
               <input
                 type="text"
-                className="input-text modal-search"
+                className="input modal-search"
                 placeholder="Cari judul, nomor referensi, atau petikan..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
@@ -150,11 +150,11 @@ export default function EvidenceModal({
             </div>
           ) : (
             <form onSubmit={handleCreateNew} className="new-evidence-form">
-              <div className="form-group">
-                <label className="field-label">Judul Dokumen / Nama Bukti *</label>
+              <div className="field">
+                <label className="field__label">Judul Dokumen / Nama Bukti *</label>
                 <input
                   type="text"
-                  className="input-text"
+                  className="input"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="e.g. SOP Penanganan Insiden Keamanan TI"
@@ -163,10 +163,10 @@ export default function EvidenceModal({
               </div>
 
               <div className="form-row-2">
-                <div className="form-group">
-                  <label className="field-label">Tipe Dokumen</label>
+                <div className="field">
+                  <label className="field__label">Tipe Dokumen</label>
                   <select
-                    className="select-input"
+                    className="select"
                     value={type}
                     onChange={(e) => setType(e.target.value as any)}
                   >
@@ -180,11 +180,11 @@ export default function EvidenceModal({
                   </select>
                 </div>
 
-                <div className="form-group">
-                  <label className="field-label">Nomor Referensi / Lokasi</label>
+                <div className="field">
+                  <label className="field__label">Nomor Referensi / Lokasi</label>
                   <input
                     type="text"
-                    className="input-text"
+                    className="input"
                     value={referenceNumber}
                     onChange={(e) => setReferenceNumber(e.target.value)}
                     placeholder="e.g. SOP-TI-04 / Record 01 (14:36)"
@@ -193,31 +193,31 @@ export default function EvidenceModal({
               </div>
 
               <div className="form-row-2">
-                <div className="form-group">
-                  <label className="field-label">Assessor</label>
+                <div className="field">
+                  <label className="field__label">Assessor</label>
                   <input
                     type="text"
-                    className="input-text"
+                    className="input"
                     value={assessor}
                     onChange={(e) => setAssessor(e.target.value)}
                   />
                 </div>
 
-                <div className="form-group">
-                  <label className="field-label">Tanggal Temuan</label>
+                <div className="field">
+                  <label className="field__label">Tanggal Temuan</label>
                   <input
                     type="date"
-                    className="input-text"
+                    className="input"
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
                   />
                 </div>
               </div>
 
-              <div className="form-group">
-                <label className="field-label">Catatan / Kutipan Evidensi</label>
+              <div className="field">
+                <label className="field__label">Catatan / Kutipan Evidensi</label>
                 <textarea
-                  className="input-text"
+                  className="textarea"
                   rows={3}
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}

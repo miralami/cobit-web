@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useAssessment } from '../context';
 import type { RecommendationItem } from '../types';
 import cobitFactors from '../data/cobitDesignFactors.json';
-import './Recommendations.css';
 
 export default function Recommendations() {
   const { state, addRecommendation, updateRecommendation, deleteRecommendation } = useAssessment();
@@ -109,14 +108,14 @@ export default function Recommendations() {
       <div className="rec-filter-bar no-print">
         <input
           type="text"
-          className="input-text rec-search"
+          className="input rec-search"
           placeholder="Cari kode praktik, deskripsi gap, atau tindakan..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
 
         <select
-          className="select-input"
+          className="select"
           value={objFilter}
           onChange={(e) => setObjFilter(e.target.value)}
         >
@@ -239,10 +238,10 @@ export default function Recommendations() {
             </div>
             <form onSubmit={handleSave} className="modal-body new-evidence-form">
               <div className="form-row-2">
-                <div className="form-group">
-                  <label className="field-label">Objektif Terkait</label>
+                <div className="field">
+                  <label className="field__label">Objektif Terkait</label>
                   <select
-                    className="select-input"
+                    className="select"
                     value={formData.objectiveId}
                     onChange={(e) => {
                       const obj = e.target.value;
@@ -258,11 +257,11 @@ export default function Recommendations() {
                     ))}
                   </select>
                 </div>
-                <div className="form-group">
-                  <label className="field-label">Kode Praktik / Butir</label>
+                <div className="field">
+                  <label className="field__label">Kode Praktik / Butir</label>
                   <input
                     type="text"
-                    className="input-text"
+                    className="input"
                     value={formData.practiceCode}
                     onChange={(e) => setFormData({ ...formData, practiceCode: e.target.value })}
                     placeholder="e.g. DSS05.01"
@@ -271,10 +270,10 @@ export default function Recommendations() {
                 </div>
               </div>
 
-              <div className="form-group">
-                <label className="field-label">Deskripsi Kesenjangan (Gap) *</label>
+              <div className="field">
+                <label className="field__label">Deskripsi Kesenjangan (Gap) *</label>
                 <textarea
-                  className="input-text"
+                  className="textarea"
                   rows={2}
                   value={formData.gapDescription}
                   onChange={(e) => setFormData({ ...formData, gapDescription: e.target.value })}
@@ -286,10 +285,10 @@ export default function Recommendations() {
               <div className="aspect-form-box aspect-form-box--people">
                 <h4>Aspek People (SDM &amp; Budaya Organisasi)</h4>
                 <div className="form-row-2">
-                  <div className="form-group">
-                    <label className="field-label">Kategori</label>
+                  <div className="field">
+                    <label className="field__label">Kategori</label>
                     <select
-                      className="select-input"
+                      className="select"
                       value={formData.peopleAspect.type}
                       onChange={(e) =>
                         setFormData({
@@ -303,10 +302,10 @@ export default function Recommendations() {
                       <option value="Communication">Communication (Sosialisasi Kebijakan)</option>
                     </select>
                   </div>
-                  <div className="form-group">
-                    <label className="field-label">Tindakan Rekomendasi</label>
+                  <div className="field">
+                    <label className="field__label">Tindakan Rekomendasi</label>
                     <textarea
-                      className="input-text"
+                      className="textarea"
                       rows={2}
                       value={formData.peopleAspect.action}
                       onChange={(e) =>
@@ -324,10 +323,10 @@ export default function Recommendations() {
               <div className="aspect-form-box aspect-form-box--process">
                 <h4>Aspek Process (Tata Kelola, SOP, Dokumen)</h4>
                 <div className="form-row-2">
-                  <div className="form-group">
-                    <label className="field-label">Kategori</label>
+                  <div className="field">
+                    <label className="field__label">Kategori</label>
                     <select
-                      className="select-input"
+                      className="select"
                       value={formData.processAspect.type}
                       onChange={(e) =>
                         setFormData({
@@ -341,10 +340,10 @@ export default function Recommendations() {
                       <option value="Record">Record (Pencatatan &amp; Register)</option>
                     </select>
                   </div>
-                  <div className="form-group">
-                    <label className="field-label">Tindakan Rekomendasi</label>
+                  <div className="field">
+                    <label className="field__label">Tindakan Rekomendasi</label>
                     <textarea
-                      className="input-text"
+                      className="textarea"
                       rows={2}
                       value={formData.processAspect.action}
                       onChange={(e) =>
@@ -362,10 +361,10 @@ export default function Recommendations() {
               <div className="aspect-form-box aspect-form-box--tech">
                 <h4>Aspek Technology (Alat, Enkripsi, Otomasi)</h4>
                 <div className="form-row-2">
-                  <div className="form-group">
-                    <label className="field-label">Kategori</label>
+                  <div className="field">
+                    <label className="field__label">Kategori</label>
                     <select
-                      className="select-input"
+                      className="select"
                       value={formData.technologyAspect.type}
                       onChange={(e) =>
                         setFormData({
@@ -380,10 +379,10 @@ export default function Recommendations() {
                       <option value="Tools">Tools (Peralatan &amp; Software)</option>
                     </select>
                   </div>
-                  <div className="form-group">
-                    <label className="field-label">Tindakan Rekomendasi</label>
+                  <div className="field">
+                    <label className="field__label">Tindakan Rekomendasi</label>
                     <textarea
-                      className="input-text"
+                      className="textarea"
                       rows={2}
                       value={formData.technologyAspect.action}
                       onChange={(e) =>

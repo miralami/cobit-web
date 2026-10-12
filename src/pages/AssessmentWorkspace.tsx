@@ -4,7 +4,6 @@ import { useAssessment } from '../context';
 import type { CapabilityLevel, ResponseRating } from '../types';
 import EvidenceModal from '../components/EvidenceModal';
 import cobitFactors from '../data/cobitDesignFactors.json';
-import './AssessmentWorkspace.css';
 
 export default function AssessmentWorkspace() {
   const { objectiveId: routeObjectiveId } = useParams<{ objectiveId?: string }>();
@@ -25,6 +24,26 @@ export default function AssessmentWorkspace() {
   }, [routeObjectiveId, scopedObjectiveIds]);
 
   const [modalActivity, setModalActivity] = useState<{ id: string; desc: string } | null>(null);
+
+  /* Accordion: one capability level open at a time. Starts at Level 2. */
+  const [openLevel, setOpenLevel] = useState<number>(2);
+
+  // Progress: how many scoped objectives have been rated
+  const activeIndex = useMemo(
+    () => Math.max(0, scopedObjectiveIds.indexOf(activeObjectiveId)),
+    [scopedObjectiveIds, activeObjectiveId]
+  );
+
+  const filledCount = useMemo(
+    () => scopedObjectiveIds.filter((id) => assessments[id]?.activities.some((a) => a.response)).length,
+    [scopedObjectiveIds, assessments]
+  );
+
+  const unansweredCount = useMemo(() => {
+    const data = assessments[activeObjectiveId];
+    if (!data) return 0;
+    return data.activities.filter((a) => !a.response).length;
+  }, [assessments, activeObjectiveId]);
 
   // Get objective metadata
   const objMeta = useMemo(() => {
@@ -61,7 +80,7 @@ export default function AssessmentWorkspace() {
           </div>
         </header>
         <div className="empty">
-          <Link to="/assessments/setup" className="btn btn--primary">
+          <Link to={`/assessments/${state.id}/setup`} className="btn btn--primary">
             Ke Halaman Setup & Scoping
           </Link>
         </div>
@@ -77,11 +96,11 @@ export default function AssessmentWorkspace() {
       <header className="workspace-header">
         <div className="workspace-header__top">
           <div className="workspace-selector-wrap">
-            <label className="field-label" style={{ margin: 0 }}>Objektif Aktif:</label>
+            <label className="field__label" style={{ margin: 0 }}>Objektif Aktif:</label>
             <select
-              className="select-input workspace-obj-select"
+              className="select workspace-obj-select"
               value={activeObjectiveId}
-              onChange={(e) => navigate(`/assessments/workspace/${e.target.value}`)}
+              onChange={(e) => navigate(`/assessments/${state.id}/workspace/${e.target.value}`)}
             >
               {scopedObjectiveIds.map((id) => {
                 const meta = cobitFactors.objectives.find((o) => o.id === id);
@@ -99,7 +118,7 @@ export default function AssessmentWorkspace() {
             <div className="badge-target">
               <span className="badge-label">Target Level:</span>
               <select
-                className="select-input target-select"
+                className="select target-select"
                 value={targetLevel}
                 onChange={(e) => setObjectiveTarget(activeObjectiveId, parseInt(e.target.value, 10) as CapabilityLevel)}
               >
@@ -125,6 +144,41 @@ export default function AssessmentWorkspace() {
         </div>
       </header>
 
+      {/* Overall progress summary */}
+      <div className="workspace-progress">
+        <div className="workspace-progress__bar">
+          <div
+            className="workspace-progress__fill"
+            style={{
+              width: `${scopedObjectiveIds.length > 0 ? (filledCount / scopedObjectiveIds.length) * 100 : 0}%`,
+            }}
+          />
+        </div>
+        <div className="workspace-progress__text">
+          Objektif <strong>{activeIndex + 1}</strong> dari <strong>{scopedObjectiveIds.length}</strong>
+          <span className="dot-sep">•</span>
+          <strong>{filledCount}</strong> sudah dinilai
+          <span className="dot-sep">•</span>
+          <strong>{scopedObjectiveIds.length - filledCount}</strong> belum selesai
+        </div>
+        {unansweredCount > 0 && (
+          <div className="workspace-progress__warning">
+            ⚠️ {unansweredCount} aktivitas pada objektif ini belum dinilai. Aktivitas kosong diperlakukan sama seperti N.A. — dikecualikan dari penyebut persentase pemenuhan, sehingga persentase bisa tampak lebih tinggi dari kenyataannya. Nilai semua aktivitas untuk hasil audit yang valid.
+          </div>
+        )}
+      </div>
+
+      {/* How-to instruction */}
+      <div className="workspace-guide">
+        <strong>Cara menilai:</strong>
+        Pilih respons untuk tiap aktivitas —
+        <span className="guide-chip guide-chip--yes">Yes</span> terpenuhi penuh (1.0),
+        <span className="guide-chip guide-chip--partially">Partially</span> sebagian (0.5),
+        <span className="guide-chip guide-chip--no">No</span> tidak ada (0.0),
+        <span className="guide-chip guide-chip--na">N.A.</span> tidak berlaku (dikecualikan dari penyebut).
+        Lampirkan bukti dokumen/wawancara untuk setiap rating agar audit dapat ditelusuri.
+      </div>
+
       {/* Level-by-Level Hierarchical Assessment Blocks */}
       <div className="workspace-levels-container">
         {levels.map((lvl) => {
@@ -146,11 +200,19 @@ export default function AssessmentWorkspace() {
               key={lvl}
               className={`level-block ${lvlResult.isComplete ? 'level-block--complete' : isStop ? 'level-block--stop' : ''}`}
             >
-              {/* Level Block Header */}
-              <div className="level-block__header">
+              {/* Level Block Header — acts as accordion toggle */}
+              <button
+                type="button"
+                className="level-block__header level-block__toggle"
+                aria-expanded={openLevel === lvl}
+                onClick={() => setOpenLevel(openLevel === lvl ? 0 : lvl)}
+              >
                 <div className="level-block__title">
                   <span className="level-num-pill">Level {lvl}</span>
                   <h3>Pencapaian Kapabilitas Level {lvl}</h3>
+                  <span className="level-threshold-tag" title="Ambang batas pemenuhan COBIT Performance Management">
+                    Ambang: &gt;85% untuk lanjut ke level berikutnya
+                  </span>
                 </div>
 
                 <div className="level-block__metrics">
@@ -169,19 +231,25 @@ export default function AssessmentWorkspace() {
                   <div className={`gate-status-banner ${lvlResult.isComplete ? 'gate-banner--complete' : 'gate-banner--stop'}`}>
                     {lvlResult.status}
                   </div>
-                </div>
-              </div>
 
-              {/* Activities Table */}
+                  <span className={`level-caret ${openLevel === lvl ? 'level-caret--open' : ''}`} aria-hidden="true">
+                    ▾
+                  </span>
+                </div>
+              </button>
+
+              {/* Activities Table (accordion body) */}
+              {openLevel === lvl && (
               <div className="level-activities-table-wrap">
-                <table className="level-activities-table">
+                <div className="table-wrap">
+                <table className="table level-activities-table">
                   <thead>
                     <tr>
                       <th style={{ width: '60px' }}>No</th>
                       <th>Butir Praktik & Aktivitas COBIT 2019</th>
-                      <th style={{ width: '260px' }}>Skala Pemenuhan</th>
-                      <th style={{ width: '220px' }}>Evidensi Terlampir</th>
-                      <th style={{ width: '280px' }}>Catatan / Komentar Assessor</th>
+                      <th style={{ width: '250px' }}>Skala Pemenuhan</th>
+                      <th style={{ width: '210px' }}>Evidensi Terlampir</th>
+                      <th style={{ width: '260px' }}>Catatan / Komentar Assessor</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -202,22 +270,23 @@ export default function AssessmentWorkspace() {
                             )}
                           </td>
                           <td className="act-response-cell">
-                            <div className="response-radios">
-                              {(['Yes', 'Partially', 'No', 'N.A.'] as ResponseRating[]).map((opt) => (
-                                <label
-                                  key={opt}
-                                  className={`radio-label ${act.response === opt ? `radio-label--${opt.toLowerCase().replace('.', '')}` : ''}`}
-                                >
-                                  <input
-                                    type="radio"
-                                    name={`resp-${act.id}`}
-                                    value={opt}
-                                    checked={act.response === opt}
-                                    onChange={() => updateActivityResponse(activeObjectiveId, act.id, opt)}
-                                  />
-                                  <span>{opt}</span>
-                                </label>
-                              ))}
+                            <div className="segmented" role="group" aria-label={`Respons aktivitas ${act.activityNumber}`}>
+                              {(['Yes', 'Partially', 'No', 'N.A.'] as ResponseRating[]).map((opt) => {
+                                const isActive = act.response === opt;
+                                const tone =
+                                  opt === 'Yes' ? 'seg-success' : opt === 'Partially' ? 'seg-warning' : opt === 'No' ? 'seg-danger' : 'seg-na';
+                                return (
+                                  <button
+                                    key={opt}
+                                    type="button"
+                                    aria-pressed={isActive}
+                                    className={`segmented__btn ${isActive ? `segmented__btn--active ${tone}` : ''}`}
+                                    onClick={() => updateActivityResponse(activeObjectiveId, act.id, opt)}
+                                  >
+                                    {opt}
+                                  </button>
+                                );
+                              })}
                             </div>
                           </td>
                           <td className="act-evidence-cell">
@@ -257,7 +326,9 @@ export default function AssessmentWorkspace() {
                     })}
                   </tbody>
                 </table>
+                </div>
               </div>
+              )}
             </div>
           );
         })}
@@ -273,10 +344,10 @@ export default function AssessmentWorkspace() {
           <span>Gap ke Target {targetLevel}: <strong>{gap} Level</strong></span>
         </div>
         <div className="footer-actions">
-          <Link to="/evidence" className="btn btn--subtle">
+          <Link to={`/assessments/${state.id}/evidence`} className="btn btn--subtle">
             Ke Register Bukti →
           </Link>
-          <Link to="/results" className="btn btn--primary">
+          <Link to={`/assessments/${state.id}/results`} className="btn btn--primary">
             Lihat Rekapitulasi Hasil Kapabilitas →
           </Link>
         </div>

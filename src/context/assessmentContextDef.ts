@@ -13,7 +13,7 @@ export interface AssessmentContextType {
   state: FullAssessmentState;
   assessmentsList: FullAssessmentState[];
   activeAssessmentId: string;
-  switchAssessment: (id: string) => void;
+  navigateToAssessment: (id: string) => void;
   createNewAssessment: () => string;
   duplicateAssessment: (id: string) => string;
   deleteAssessment: (id: string) => void;

@@ -1,14 +1,11 @@
 import { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAssessment } from '../context';
-import './AssessmentHistory.css';
 
 export default function AssessmentHistory() {
   const navigate = useNavigate();
   const {
     assessmentsList,
-    activeAssessmentId,
-    switchAssessment,
     createNewAssessment,
     duplicateAssessment,
     deleteAssessment,
@@ -30,13 +27,12 @@ export default function AssessmentHistory() {
   }, [assessmentsList, search]);
 
   const handleCreateNew = () => {
-    createNewAssessment();
-    navigate('/assessments/setup');
+    const id = createNewAssessment();
+    navigate(`/assessments/${id}/setup`);
   };
 
   const handleOpen = (id: string) => {
-    switchAssessment(id);
-    navigate('/dashboard');
+    navigate(`/assessments/${id}`);
   };
 
   const handleDuplicate = (id: string) => {
@@ -89,9 +85,9 @@ export default function AssessmentHistory() {
           <p className="eyebrow">
             <span className="eyebrow__num">◆</span>Multi-Assessment Registry
           </p>
-          <h1 className="page-title">Riwayat &amp; Daftar Asesmen</h1>
+          <h1 className="page-title">Daftar Asesmen</h1>
           <p className="page-lead">
-            Kelola seluruh rekam jejak evaluasi tata kelola TI berbasis COBIT 2019. Buka asesmen aktif, duplikat untuk periode baru, atau impor data cadangan institusi.
+            Kelola seluruh rekam jejak evaluasi tata kelola TI berbasis COBIT 2019. Buka asesmen untuk melihat dashboard, duplikat untuk periode baru, atau impor data cadangan institusi.
           </p>
         </div>
         <div className="page-head__actions">
@@ -120,16 +116,6 @@ export default function AssessmentHistory() {
         </div>
 
         <div className="card facts__card">
-          <span className="eyebrow">Asesmen Aktif Saat Ini</span>
-          <p className="facts__value facts__value--sm" style={{ fontWeight: 600 }}>
-            {assessmentsList.find((a) => a.id === activeAssessmentId)?.title || 'Tidak ada'}
-          </p>
-          <p className="facts__meta">
-            {assessmentsList.find((a) => a.id === activeAssessmentId)?.organization}
-          </p>
-        </div>
-
-        <div className="card facts__card">
           <span className="eyebrow">Akumulasi Dokumen Bukti</span>
           <p className="facts__value num">{totalEvidenceAll}</p>
           <p className="facts__meta">Tersebar di seluruh riwayat asesmen</p>
@@ -146,7 +132,7 @@ export default function AssessmentHistory() {
       <div className="history-search-bar">
         <input
           type="text"
-          className="input-text history-search-input"
+          className="input history-search-input"
           placeholder="Cari berdasarkan judul asesmen, organisasi, assessor, atau periode..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -159,7 +145,6 @@ export default function AssessmentHistory() {
       {/* ---------------- Assessments Cards / Table ---------------- */}
       <div className="history-grid">
         {filteredList.map((item) => {
-          const isActive = item.id === activeAssessmentId;
           const scopedCount = item.scopedObjectiveIds.length;
 
           // Calculate average current level
@@ -183,11 +168,10 @@ export default function AssessmentHistory() {
           return (
             <div
               key={item.id}
-              className={`history-card ${isActive ? 'history-card--active' : ''}`}
+              className={`history-card`}
             >
               <div className="history-card__top">
                 <div className="history-card__tags">
-                  {isActive && <span className="status-badge status-badge--active">Aktif Sedang Dibuka</span>}
                   <span className="domain-chip">{item.period}</span>
                 </div>
                 <span className="history-card__date">{updatedDate}</span>
@@ -237,10 +221,10 @@ export default function AssessmentHistory() {
               <div className="history-card__actions">
                 <button
                   type="button"
-                  className={`btn btn--sm ${isActive ? 'btn--secondary' : 'btn--primary'}`}
+                  className="btn btn--sm btn--primary"
                   onClick={() => handleOpen(item.id)}
                 >
-                  {isActive ? 'Buka Dashboard' : 'Pilih & Buka'}
+                  Buka Dashboard
                 </button>
                 <button
                   type="button"

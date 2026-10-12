@@ -1,0 +1,90 @@
+<!DOCTYPE html []>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="MarkdownViewer++" />
+    <title>latar-belakang.md</title>
+    <style type="text/css">
+            
+/* Avoid page breaks inside the most common attributes, especially for exports (i.e. PDF) */
+td, h1, h2, h3, h4, h5, p, ul, ol, li {
+    page-break-inside: avoid; 
+}
+body {
+        </style>
+  </head>
+  <body>
+    <h1 id="bab-i-pendahuluan">BAB I PENDAHULUAN</h1>
+    <blockquote>
+      <p>
+        <strong>Judul penelitian:</strong> Rancang Bangun Sistem Pengukuran Capability Level COBIT 2019 Berbasis Web dengan Traceability Evidensi Audit</p>
+    </blockquote>
+    <h2 id="i.1-latar-belakang">I.1 Latar Belakang</h2>
+    <p>Teknologi Informasi (TI) berperan penting dalam mendukung operasional, pencapaian tujuan bisnis, pengelolaan risiko, dan penyediaan layanan organisasi. Karena itu, penerapan TI perlu dikelola melalui tata kelola yang memastikan manfaat investasi tercapai, risiko terkendali, serta sumber daya digunakan secara bertanggung jawab (ISACA, 2019). Kompleksitas penggunaan aplikasi, data, layanan awan, dan tuntutan kepatuhan juga meningkatkan kebutuhan terhadap evaluasi tata kelola TI yang sistematis serta didukung bukti yang dapat diperiksa kembali.</p>
+    <p>Dalam konteks Indonesia, kebutuhan tersebut sejalan dengan PP Nomor 71 Tahun 2019 yang mewajibkan penyelenggara sistem elektronik menyediakan rekam jejak audit. Permenkominfo Nomor 16 Tahun 2022 juga mendefinisikan audit TIK sebagai proses sistematis untuk memperoleh dan mengevaluasi bukti secara objektif berdasarkan kriteria atau standar tertentu. Oleh sebab itu, assessment tata kelola TI tidak hanya memerlukan hasil penilaian, tetapi juga dokumentasi bukti yang jelas.</p>
+    <p>COBIT 2019 merupakan salah satu kerangka kerja untuk mengevaluasi tata kelola dan manajemen TI. Kerangka ini mencakup 40 <em>Governance and Management Objectives</em> dalam lima domain serta menyediakan <em>Design Factors</em> untuk membantu organisasi menentukan objektif yang relevan (ISACA, 2019). Pengukuran capability menggunakan <em>COBIT Performance Management</em> (CPM) melalui rating <em>Not Achieved</em> (N), <em>Partially Achieved</em> (P), <em>Largely Achieved</em> (L), dan <em>Fully Achieved</em> (F). Penilaian tersebut harus didasarkan pada pemeriksaan aktivitas dan bukti pendukung, bukan hanya persepsi responden.</p>
+    <p>Pelaksanaan assessment sering menghadapi kendala karena evidensi audit tersebar dalam dokumen kebijakan, prosedur, log, hasil wawancara, maupun tangkapan layar. Bukti tersebut dapat berada pada repositori dan format yang berbeda, sedangkan istilah organisasi belum tentu sama dengan aktivitas COBIT. Kondisi ini menyulitkan assessor ketika memetakan bukti, menetapkan rating, dan meninjau kembali dasar hasil penilaian. Tanpa keterhubungan yang jelas antara aktivitas, rating, dan bukti, hasil assessment berisiko kurang transparan dan sulit diverifikasi oleh pihak lain.</p>
+    <p>Keterlacakan bukti merupakan bagian penting dari kualitas dokumentasi audit. IIA Standard 14.6 mengharuskan dokumentasi audit memungkinkan auditor yang kompeten mengulangi pekerjaan dan memperoleh hasil yang sama (IIA, 2024). ISACA ITAF 1205 juga menekankan kecukupan dan kesesuaian bukti untuk mendukung kesimpulan audit (ISACA, 2020). Namun, alat bantu assessment COBIT 2019 yang ada umumnya berfokus pada daftar kontrol, pemetaan konten, atau kuesioner. Penelitian terdahulu juga menunjukkan ruang pengembangan pada transparansi scoring, pengelolaan evidensi, dan keterlacakan hasil penilaian (Noor, 2021; Mandiangan, 2023; Anwar dan Harits, 2025).</p>
+    <p>Berdasarkan kondisi tersebut, penelitian ini merancang sistem pengukuran <em>Capability Level</em> COBIT 2019 berbasis web dengan <em>traceability</em> evidensi audit. Sistem membantu assessor menentukan prioritas objektif melalui Design Factor DF1 sampai DF4, mencatat rating CPM, menghitung <em>Capability Level</em>, menganalisis kesenjangan terhadap target, serta menghubungkan rating dengan evidensi pendukung. Sistem berfungsi sebagai alat bantu dokumentasi dan pengambilan keputusan; penilaian akhir tetap menjadi tanggung jawab assessor.</p>
+    <p>Penelitian menggunakan <em>Design Science Research Methodology</em> (DSRM) karena menghasilkan artefak sistem informasi (Peffers et al., 2007). Sistem dievaluasi melalui pengujian fungsional <em>black-box</em>, <em>expert review</em>, dan <em>System Usability Scale</em> (SUS). Hasil penelitian diharapkan menghasilkan sistem assessment yang lebih terdokumentasi, konsisten, dan mudah ditinjau kembali.</p>
+    <h2 id="i.2-perumusan-masalah">I.2 Perumusan Masalah</h2>
+    <p>Berdasarkan latar belakang tersebut, rumusan masalah penelitian adalah sebagai berikut:</p>
+    <ol>
+      <li>Bagaimana merancang dan membangun sistem berbasis web untuk membantu penentuan prioritas objektif serta pengukuran <em>Capability Level</em> COBIT 2019 secara transparan?</li>
+      <li>Bagaimana menerapkan rating CPM N/P/L/F dan perhitungan <em>Capability Level</em> pada sistem agar hasil penilaian terdokumentasi dengan jelas?</li>
+      <li>Bagaimana mengintegrasikan evidensi audit agar setiap rating aktivitas dapat ditelusuri ke bukti pendukungnya serta sistem dapat dievaluasi secara fungsional dan usability?</li>
+    </ol>
+    <h2 id="i.3-tujuan-penelitian">I.3 Tujuan Penelitian</h2>
+    <p>Tujuan penelitian ini adalah sebagai berikut:</p>
+    <ol>
+      <li>Merancang dan membangun sistem berbasis web untuk menentukan prioritas objektif COBIT 2019 dan mengukur <em>Capability Level</em>.</li>
+      <li>Menerapkan rating CPM N/P/L/F serta perhitungan <em>Capability Level</em> secara transparan pada sistem.</li>
+      <li>Mengembangkan keterlacakan antara rating aktivitas dan evidensi audit, serta mengevaluasi fungsionalitas dan usability sistem.</li>
+    </ol>
+    <h2 id="i.4-batasan-penelitian">I.4 Batasan Penelitian</h2>
+    <p>Untuk menjaga fokus penelitian, batasan yang ditetapkan adalah sebagai berikut:</p>
+    <ol>
+      <li>Penelitian berfokus pada rancang bangun sistem assessment tata kelola dan manajemen TI berbasis COBIT 2019.</li>
+      <li>Penentuan prioritas objektif dibatasi pada Design Factor DF1 <em>Enterprise Strategy</em>, DF2 <em>Enterprise Goals</em>, DF3 <em>Risk Profile</em>, dan DF4 <em>I&amp;T-Related Issues</em>.</li>
+      <li>Objektif dan aktivitas COBIT yang diterapkan berupa subset sesuai kebutuhan penelitian dan konten yang dapat digunakan secara sah; sistem tidak mengimplementasikan seluruh 40 objektif dan 1.202 aktivitas COBIT 2019.</li>
+      <li>Evidensi berupa metadata dan dokumen yang dipetakan secara manual oleh assessor. Sistem tidak memverifikasi kebenaran bukti atau menentukan rating akhir secara otomatis.</li>
+      <li>Sistem dikembangkan sebagai aplikasi web sisi klien menggunakan React dan TypeScript; integrasi repositori eksternal, data organisasi nyata, dan penggunaan multi-tenant tidak dibahas.</li>
+      <li>Sistem bukan <em>Process Assessment Model</em> resmi ISACA. Fitur AI, bila digunakan, hanya membantu penyusunan draf rekomendasi dan tidak menentukan keputusan assessment.</li>
+    </ol>
+    <h2 id="i.5-manfaat-penelitian">I.5 Manfaat Penelitian</h2>
+    <p>Manfaat yang diharapkan dari penelitian ini adalah sebagai berikut:</p>
+    <ol>
+      <li>Bagi assessor atau auditor TI, sistem membantu pencatatan rating, pengelolaan evidensi, perhitungan <em>Capability Level</em>, dan penelusuran dasar penilaian.</li>
+      <li>Bagi organisasi, sistem menyediakan informasi capability level, kesenjangan terhadap target, dan bukti pendukung untuk perencanaan perbaikan tata kelola TI.</li>
+      <li>Bagi akademisi dan peneliti selanjutnya, penelitian ini menjadi referensi penerapan CPM COBIT 2019 berbasis web, khususnya pada transparansi scoring dan <em>traceability</em> evidensi.</li>
+    </ol>
+    <h2 id="i.6-sistematika-laporan">I.6 Sistematika Laporan</h2>
+    <p>Sistematika laporan penelitian disusun sebagai berikut:</p>
+    <ol>
+      <li>
+        <strong>BAB I PENDAHULUAN</strong> membahas latar belakang, perumusan masalah, tujuan, batasan, manfaat, dan sistematika laporan.</li>
+      <li>
+        <strong>BAB II TINJAUAN PUSTAKA</strong> membahas teori dan penelitian terdahulu terkait tata kelola TI, COBIT 2019, CPM, capability level, evidensi audit, <em>traceability</em>, DSRM, dan pengujian sistem.</li>
+      <li>
+        <strong>BAB III METODE PENYELESAIAN MASALAH</strong> menjelaskan tahapan DSRM, pengumpulan data, analisis kebutuhan, perancangan sistem, rancangan scoring dan evidensi, serta metode evaluasi.</li>
+      <li>
+        <strong>BAB IV HASIL PENELITIAN</strong> menyajikan analisis, perancangan, dan implementasi sistem.</li>
+      <li>
+        <strong>BAB V VALIDASI HASIL DAN DISKUSI</strong> membahas hasil pengujian fungsional, <em>expert review</em>, usability, dan keterbatasan sistem.</li>
+      <li>
+        <strong>BAB VI KESIMPULAN DAN SARAN</strong> menyajikan kesimpulan dan saran pengembangan.</li>
+    </ol>
+    <h2 id="daftar-referensi-sementara">Daftar Referensi Sementara</h2>
+    <ol>
+      <li>Anwar dan Harits. (2025). <em>Perancangan Sistem Kuisioner Penilaian Kapabilitas Framework COBIT 2019</em>.</li>
+      <li>IIA. (2024). <em>Global Internal Audit Standards</em>.</li>
+      <li>ISACA. (2019). <em>COBIT 2019 Framework: Introduction and Methodology</em>.</li>
+      <li>ISACA. (2020). <em>ITAF: A Professional Practices Framework for IS Audit/Assurance</em>.</li>
+      <li>Mandiangan. (2023). <em>Rancang Bangun Sistem Informasi Capability Assessment Tools COBIT 2019</em>. UPN Veteran Jakarta.</li>
+      <li>Noor. (2021). <em>Implementasi Sistem Penilaian Kapabilitas Tata Kelola TI Berbasis COBIT 2019</em>. ITTP Purwokerto.</li>
+      <li>Peffers, K., Tuunanen, T., Rothenberger, M. A., dan Chatterjee, S. (2007). “A Design Science Research Methodology for Information Systems Research.” <em>Journal of Management Information Systems</em>, 24(3), 45-77.</li>
+      <li>Peraturan Pemerintah Republik Indonesia Nomor 71 Tahun 2019 tentang Penyelenggaraan Sistem dan Transaksi Elektronik.</li>
+      <li>Peraturan Menteri Komunikasi dan Informatika Republik Indonesia Nomor 16 Tahun 2022 tentang Audit Teknologi Informasi dan Komunikasi.</li>
+    </ol>
+  </body>
+</html>
