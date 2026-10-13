@@ -468,7 +468,7 @@ Implementasi dibagi menjadi 6 tahap terstruktur:
 ├── src/data/cobitActivities.json     --> Katalog subset objektif/aktivitas yang disetujui pembimbing
 ├── src/utils/designFactorEngine.ts   --> Matrix multiplication & Canvas Step 2 calculation
 ├── src/utils/cpmEngine.ts            --> CPM scoring, threshold, & Stop Here gatekeeper
-└── src/utils/__tests__/engine.test.ts --> Script verifikasi akurasi matematis vs Excel
+└── src/utils/__tests__/engine.test.ts --> Regression test terhadap reference-calculation fixture (aturan CPM terdokumentasi; BUKAN "vs Excel" — ISACA tidak menyediakan workbook penghitung capability)
                       │
                       ▼
 [ Phase 2: State Store & Persistence Layer ]

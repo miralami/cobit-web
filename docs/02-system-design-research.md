@@ -15,7 +15,7 @@
 
 The most significant finding from this research is that **ISACA publishes no Process Assessment Model (PAM) for COBIT 2019**. This is stated explicitly by ISACA itself: "There is no PAM for COBIT 2019, but Capability Maturity Model Integration (CMMI) can be used to measure capability levels" (ISACA Journal, 2021). The consequence is profound: every commercial tool that claims "COBIT 2019 support" actually provides only **content mapping** (objectives, practices, controls as reference content), not an **assessment instrument** that implements the official Fully/Largely/Partially/Not rating scale or the 1,202-activity to 231-practice to 40-objective to 5-domain aggregation chain.
 
-This means the student's project occupies a genuinely underserved niche. The commercial market is saturated with GRC platforms that treat COBIT as one framework among dozens, but essentially empty of tools that implement the actual COBIT 2019 Performance Management (CPM) methodology. The academic literature confirms this: existing prototypes (Mandiangan 2023, Anwar and Harits 2025, Noor 2021) are isolated, undocumented in terms of scoring methodology, and none implement the full ISACA rating scale with proper aggregation.
+This means the student's project occupies a defensible **improvement** niche (not a first-of-kind): the commercial market is saturated with GRC platforms that treat COBIT as one framework among dozens, and no surveyed tool exposes a **transparently inspectable COBIT 2019 CPM aggregation with evidence traceability**. The academic literature confirms this: existing prototypes (Mandiangan 2023, Anwar and Harits 2025, Noor 2021) are isolated; their scoring is not inspectable *within* the tool (Mandiangan's Guttman + NPLF method is documented in the thesis, not in the tool), none manage repeated assessments, and none link ratings to evidence. `[VER-S]` — see §2.5 and `06-deep-research-research-gap.md` §5.4.
 
 ### 1.2 The Rebalance: From RAG-Centric to Assessment-Centric
 
@@ -68,10 +68,10 @@ The risk is **scope creep** — trying to implement all 40 objectives, all 1,202
 | Enterprise GRC | ServiceNow, RSA Archer, MetricStream, Diligent, Hyperproof, Optro | No — content mapping only |
 | ISACA's own tools | CMMI Cybermaturity Platform | No — COBIT 5, cyber-scoped |
 | Dedicated COBIT tools | ITS Governance, Complyance | Claimed but unverified scoring |
-| Academic prototypes | Mandiangan 2023, Anwar and Harits 2025, Noor 2021 | Yes but isolated, undocumented |
+| Academic prototypes | Mandiangan 2023, Anwar and Harits 2025, Noor 2021 | Yes, but isolated; scoring not inspectable within the tool |
 | Open source | ControlWeave | No — NIST/ISO assessment model |
 
-The student's system would be among the first to **transparently implement and document** the COBIT 2019 CPM methodology in a web-based tool.
+The student's system contributes an **Improvement/Exaptation** (Gregor & Hevner 2013): a web-based tool that **transparently implements and documents** the COBIT 2019 CPM scoring chain (F/L/P/N → capability levels) with evidence-to-rating traceability and multi-assessment management — features not found in the surveyed prototypes (`[VER-S]`, survey date 2026-10-13; absence in a source ≠ absence in the world).
 
 ### 1.8 Methodology Recommendation
 
@@ -136,10 +136,10 @@ The contribution is the system and its methodology, not the AI.
 
 | Study | Year | Method | COBIT Version | Capability Calc | Evidence Mgmt | Gap Analysis | Key Limitation |
 |-------|------|--------|---------------|-----------------|---------------|--------------|----------------|
-| Mandiangan (UPN Veteran Jakarta) | 2023 | Agile Scrum, web-based | 2019 | Yes (percentage-based) | No | Yes | Replaces Excel; undocumented scoring formula |
+| Mandiangan (UPN Veteran Jakarta) | 2023 | Agile Scrum, web-based | 2019 | Yes (Guttman + NPLF status; documented in thesis, not inspectable within tool) | No | Yes | Replaces Excel; scoring not inspectable in the tool; limited parameters (author-acknowledged) |
 | Anwar and Harits (Jurnal Informatika Utama) | 2025 | RAD, PHP/Java/MySQL | 2019 | Yes (capability score) | No | Not confirmed | Questionnaire system; limited documentation |
 | Noor (ITTP Purwokerto) | 2021 | Prototyping, black-box | 2019 | Yes (BAI domain) | No | Not confirmed | Single domain; no evidence management |
-| Cobvapps (UB) | — | Web app | 2019 | Yes (maturity) | No | Not confirmed | Prototype; limited documentation |
+| ~~Cobvapps (UB)~~ | — | — | — | — | — | — | **`[NF]` — not found in any primary source surveyed on 2026-10-13; likely misattributed. Removed per `06-deep-research-research-gap.md` §9.2 #13.** |
 | Pamuji et al. | 2022 | ISO/IEC 15504-2 | 2019 | Yes (audit assessment) | No | Not confirmed | Notes absence of PAM for COBIT 2019 |
 
 ### 2.6 Summary: What Exists vs. What is Missing
@@ -170,7 +170,7 @@ The contribution is the system and its methodology, not the AI.
 | CR-04 | Design Factors configuration | 11 design factors | AssessmentSetup | Medium |
 | CR-05 | Practice/activity listing per objective | 231 practices, 1,202 activities | AssessmentWorkspace | High |
 | CR-06 | Activity rating (N/P/L/F) with thresholds | CPM: less than 15 percent / 15-50 / 50-85 / above 85 | AssessmentWorkspace | High |
-| CR-07 | Capability level calculation (0-5) | CMMI-based levels | CapabilityResult | High |
+| CR-07 | Capability level calculation (0-5) | ISO/IEC 33020 ladder (0 Incomplete … 5 Innovating), COBIT 2019 I&M §4.1 | CapabilityResult | High |
 | CR-08 | Aggregation: activity-practice-objective-domain | 1,202-231-40-5 | CapabilityResult | High |
 | CR-09 | Target level setting per objective | Step 6: Reporting | GapAnalysis | High |
 | CR-10 | Gap analysis (current vs. target) | Step 6: Strengths/opportunities | GapAnalysis | High |
@@ -343,10 +343,10 @@ Phase 5: Communication
 
 | Evaluation Method | What It Measures | How to Apply | S1 Feasibility |
 |-------------------|------------------|--------------|----------------|
-| **Expert review** | Correctness of COBIT 2019 implementation | 2-3 COBIT practitioners review scoring and methodology | High |
-| **Usability testing (SUS)** | Ease of use | 5-8 assessors use system, fill SUS questionnaire | High |
+| **Expert review** | Instrument validity (scoring rules, methodology) | 2-3 COBIT practitioners validate the **instrument** (CPM rules, F/L/P/N bands, aggregation) — this validates the instrument/design, not that "the software works" | High |
+| **Usability testing (SUS)** | Ease of use | Target **N ≥ 20–30** assessors; report mean SUS with a confidence interval (small pilot samples are not publishable as evidence) | High |
 | **Black-box testing** | Functional correctness | Test all requirements (CR-01 to CR-13) | High |
-| **Comparison with manual** | Scoring accuracy | Compare system output with manual Excel assessment | Medium |
+| **Reference-calculation test** | Scoring accuracy against documented rules | Compare system output against an independently maintained **reference fixture** implementing the documented CPM rules (F/L/P/N bands → capability levels). **Not** "vs Excel": ISACA ships no assessment workbook that computes capability levels — the official Design Toolkit computes *design* priority only (`[VER-P]`, 2026-10-13) | High |
 | **Inter-rater reliability** | Consistency across assessors | Multiple assessors rate same practices, compare | Medium |
 
 ### 5.5 What Can Be Claimed as Contribution

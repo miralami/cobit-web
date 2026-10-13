@@ -97,9 +97,9 @@ Gap Analysis Result → Susun prompt ringkas + konteks praktik COBIT
 
 | Peneliti | Judul | Kelemahan |
 |----------|-------|-----------|
-| Mandiangan (2023) | Rancang Bangun Sistem Informasi Capability Assessment Tools COBIT 2019 | Cuma mindahin Excel ke web, rumus tidak transparan, tidak ada evidensi |
-| Anwar & Harits (2025) | Perancangan Sistem Kuisioner Penilaian Kapabilitas Framework COBIT 2019 | Salah kaprah: kuesioner persepsi, bukan penilaian berbasis bukti |
-| Noor (2021) | Implementasi Sistem Penilaian Kapabilitas Tata Kelola TI Berbasis COBIT 2021 | Cuma 1 domain (BAI), tidak ada manajemen evidensi |
+| Mandiangan (2023) | Rancang Bangun Sistem Informasi Capability Assessment Tools COBIT 2019 | Memindahkan proses Excel ke web; skoring (Guttman + NPLF) terdokumentasi **di tesis, bukan di dalam tool** (tidak dapat diinspeksi saat runtime); tidak ada manajemen evidensi |
+| Anwar & Harits (2025) | Perancangan Sistem Kuisioner Penilaian Kapabilitas Framework COBIT 2019 | Skoring tidak dipaparkan di abstrak (`[VER-S]`); perlu verifikasi apakah berbasis bukti riil |
+| Noor (2021) | Implementasi Sistem Penilaian Kapabilitas Tata Kelola TI Berbasis COBIT 2021 | Hanya 1 domain (BAI), tidak ada manajemen evidensi |
 | **Penelitian ini** | **Rancang Bangun Sistem Pengukuran Capability Level COBIT 2019 Berbasis Web dengan Traceability Evidensi Audit** | **Setup prioritas DF1–DF4 + scoring transparan + evidensi terintegrasi pada scope terbatas** |
 
 ---
@@ -156,7 +156,7 @@ Phase 5: Communication
 | Expert review | Correctness of COBIT 2019 implementation | High |
 | Usability (SUS) | Ease of use for assessors | High |
 | Black-box testing | Functional correctness | High |
-| Comparison with manual | Scoring accuracy vs Excel | Medium |
+| Reference-calculation test | Scoring accuracy vs documented CPM rules (bukan "vs Excel" — tidak ada workbook ISACA penghitung capability) | High |
 
 ---
 
@@ -168,9 +168,9 @@ ISACA sebagai penerbit COBIT 2019 tidak menyediakan Process Assessment Model (PA
 
 1. **Tools komersial** (ServiceNow, Diligent, Hyperproof, MetricStream) hanya menyediakan *content mapping* — daftar kontrol/objektif sebagai referensi — bukan instrumen penilaian yang menghitung capability level.
 2. **Prototipe akademik** (Mandiangan 2023, Anwar & Harits 2025, Noor 2021) memindahkan proses Excel ke web, tetapi:
-   - Rumus scoring tidak transparan/terdokumentasi.
+   - Rumus scoring tidak dapat diinspeksi **di dalam tool** (Mandiangan mendokumentasikan metode Guttman + NPLF di tesisnya, bukan di aplikasi; prototipe lain belum memaparkan skoring secara publik).
    - Tidak ada manajemen evidensi — hasil penilaian tidak bisa ditelusuri ke dokumen bukti.
-   - Sebagian menggunakan pendekatan kuesioner persepsi, padahal COBIT 2019 mensyaratkan penilaian berbasis bukti riil.
+   - Beberapa memakai kuesioner; klaim "berbasis persepsi saja" perlu diverifikasi sebelum ditulis sebagai kelemahan.
 3. **Masalah di lapangan:** Auditor memberikan rating F/L/P/N pada aktivitas COBIT, tetapi tidak ada mekanisme sistematis untuk membuktikan rating tersebut berasal dari dokumen bukti yang mana.
 
 ### 6.2 Tujuan

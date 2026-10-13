@@ -7,9 +7,9 @@
 
 **10 Most Critical Findings:**
 
-1. **Real-world problems are empirically documented** — Eulerich et al. (2023) in *Contemporary Accounting Research* (n=internal audit functions) quantifies: 45.9% cite "lack of database quality," 34.1% cite "data access issues," 46.5% cite "insufficient competence" as barriers to technology adoption. These directly map to evidence collection, management, and traceability problems. KPMG 2025 SOX Survey shows controls in scope more than doubled in 2 years, averaging 16 hours per control.
+1. **Real-world problems are empirically documented** — Eulerich et al. (2023) in *Contemporary Accounting Research* 40(2) (DOI 10.1111/1911-3846.12847) study technology-enabled audit **outcomes** in internal audit functions; the specific figures "45.9% database quality / 34.1% data access / 46.5% competence" are inherited second-hand and **`[2ND-UNV]`** — verify at the primary source before submission (do not cite as an adoption-barrier survey without verification). These map to evidence collection, management, and traceability problems. KPMG 2025 SOX Survey: in-scope **systems** grew 17 → 40 across two years `[2ND-UNV]` (the "16 hours per control" figure is dropped — not confirmed in scope).
 
-2. **COBIT 2019 assessment is evidence-intensive by design** — The official 6-step process (ISACA) requires: (1) stakeholder awareness, (2) tailored governance system design (40 G&M objectives across 5 domains), (3) process owner briefings, (4) **evidence collection using agreed methodologies with validation**, (5) process activity rating (N/P/L/F thresholds: 0-15%/>15-50%/>50-85%/>85-100%), (6) reporting strengths/opportunities. Capability levels 0-5 use CMMI labels. The Goals Cascade translates 13 Enterprise Goals → 13 Alignment Goals → 40 G&M Objectives, influenced by 11 Design Factors.
+2. **COBIT 2019 assessment is evidence-intensive by design** — The official 6-step process (ISACA) requires: (1) stakeholder awareness, (2) tailored governance system design (40 G&M objectives across 5 domains), (3) process owner briefings, (4) **evidence collection using agreed methodologies with validation**, (5) process activity rating (N/P/L/F thresholds: 0-15%/>15-50%/>50-85%/>85-100%), (6) reporting strengths/opportunities. Capability levels 0-5 use the **ISO/IEC 33020 ladder** (0 Incomplete … 5 Innovating); the "Initial … Optimizing" words are the separate *focus-area maturity* ladder. The Goals Cascade translates 13 Enterprise Goals → 13 Alignment Goals → 40 G&M Objectives, influenced by 11 Design Factors.
 
 3. **GenAI adoption in internal audit is real but uneven** — IIA NA Pulse 2025 (n=405 CAEs): **40% currently use GenAI** (up from 15% YoY); 67% plan to increase use. But fieldwork use lags significantly: only 6% use GenAI extensively in fieldwork vs 13% in planning and 11% in reporting. 59% of organizations have not adopted GenAI at all. Big 4 firms have multi-billion AI investments but GenAI in external audit remains in development due to hallucination concerns.
 
@@ -37,13 +37,13 @@
 |---------|---------------|------|------------|--------|-----------|
 | **P1: Evidence collection — data access** | 34.1% of TBAT users cite "issue with data access" as adoption barrier | 2023 | Internal audit functions (TBAT users vs non-users) | Eulerich et al., *Contemporary Accounting Research* 40(2) | Direct |
 | **P2: Evidence management — database quality** | 45.9% of TBAT users cite "lack of database quality" | 2023 | Same as above | Eulerich et al. 2023 | Direct |
-| **P3: Document review workload** | SOX controls in scope more than doubled in 2 years; 16 hrs/control average; evidence collection absorbs 50-80% of audit cycle | 2025 | ~150 SOX professionals, FY24 budget-hours N=120 | KPMG 2025 SOX Survey; Avatier 2025 | Strong |
+| **P3: Document review workload** | SOX in-scope **systems** grew 17 → 40 across 2 years (the "controls doubled / 16 hrs per control / 50-80% of audit cycle" figures are **dropped — not confirmed in scope**) `[2ND-UNV]` | 2025 | ~150 SOX professionals | KPMG 2025 SOX Survey | Strong |
 | **P4: Evidence verification** | PCAOB-identified deficiencies positively associated with future misstatements across entire client portfolio | 2025 | PCAOB inspections | Constance (2025), *CAR* | Strong |
 | **P5: Evidence→control mapping** | MITRE CRAF: only 21 of 110 NIST 800-171 controls (~19%) have automated mapping coverage; mapping is per-organization manual exercise | 2026 | MITRE CRAF Annex A | MITRE PR-26-00364-2 | Direct |
 | **P6: Audit documentation burden** | Deloitte formal SEC comment: QC 1000 "substantially increase compliance costs... without apparent corresponding benefit to audit quality" | 2025 | Big Four firm adversarial testimony | Deloitte SEC comment letter PCAOB-2025-001 | Strong |
 | **P7: Traceability** | No empirical study measuring traceability failure rates in internal/IT audit; COBIT CPM requires it while rating is subjective; NIST AU-10(3) not in baseline | — | — | Kotb et al. (2020) meta-review; COBIT 2019 CPM; NIST SP 800-53 Rev.5 | Gap |
 | **P8: Finding generation** | Eulerich et al.: +10.8% risk factors, +12.3% recommendations cited as TBAT benefits but net cost-benefit unquantifiable | 2023 | Internal audit functions | Eulerich et al. 2023 | Moderate |
-| **P9: Gap analysis** | NETBankAudit: 1,378 COBIT control evaluations across 347 engagements; distribution published (Change Mgmt 11.9%, BCP 8.1%, etc.) | 2025 | 347 engagements, ~170 financial institutions | NETBankAudit 2025 Annual IT Audit Issues | Moderate |
+| **P9: Gap analysis** | NETBankAudit: 1,378 COBIT control evaluations across 347 engagements; distribution published (Change Mgmt 11.9%, BCP 8.1%, etc.) `[2ND-UNV]` | 2025 | 347 engagements, ~170 financial institutions | NETBankAudit 2025 Annual IT Audit Issues | Moderate |
 | **P10: Recommendation generation** | Eulerich: supervisory board support gap 16.5% vs 8.8% (TBAT users vs non-users); net cost-benefit unquantifiable | 2023 | Internal audit functions | Eulerich et al. 2023 | Moderate |
 | **P11: Reporting burden** | IIA+AuditBoard 2026: 43% cite insufficient time; Vision 2035: advisory 24%→41%, assurance 76%→59% | 2025-2026 | 373 NA IA leaders; 6,506 global survey | IIA+AuditBoard 2026; Vision 2035 | Strong |
 | **P12: Data volume/complexity** | Vision 2035: 97% say technology increases data volume/complexity; 70% orgs adopted GRC software but operations gap persists | 2025 | 6,506 global survey | IIA Vision 2035; Hyperproof 2021 | Strong |
@@ -99,18 +99,20 @@ This prioritization is influenced by **11 Design Factors**, including business s
 | **5** | Perform the Process Activity Rating | **Rating scale**: Fully >85%, Largely 50-85%, Partially 15-50%, Not <15% (per practice activity); Capability levels 0-5 |
 | **6** | Report the Identified Strengths and Opportunities | Assessment report with traceability to evidence |
 
-### 3.4 Capability Levels (CMMI-based, verified from COBIT 2019 I&M)
+### 3.4 Capability Levels (named per ISO/IEC 33020:2019 §5.2; six descriptive characteristics per COBIT 2019 I&M §4.1)
 
-| Level | Name | Characteristics |
+COBIT 2019 defines **six capability characteristics** (one per level, I&M §4.1c) and inherits its level names from **ISO/IEC 33020:2019 §5.2**. The "Initial / Managed / Defined / Quantitatively Managed / Optimizing" words used in some drafts belong to COBIT's separate **focus-area maturity** ladder (I&M §6.4.3, fig. 6.3) and must **not** be used as capability names.
+
+| Level | Name (ISO/IEC 33020:2019 §5.2) | Characteristic (COBIT 2019 I&M §4.1, paraphrased) |
 |-------|------|-----------------|
-| 0 | Incomplete | Process not implemented or fails to achieve purpose |
-| 1 | Initial | Unpredictable, poorly controlled, reactive |
-| 2 | **Managed** | Planned, documented, monitored at project level, often reactive |
-| 3 | **Defined** | Proactive, organizational standard |
-| 4 | **Quantitatively Managed** | Measured and controlled |
-| 5 | **Optimizing** | Continuous improvement focus |
+| 0 | **Incomplete** | Process not implemented, or fails to achieve its purpose |
+| 1 | **Performed** | Process is implemented and achieves its purpose |
+| 2 | **Managed** | Performed process is planned, monitored and adjusted; work products established, controlled and maintained |
+| 3 | **Established** | Managed process is implemented using a defined (documented, standardised) process capable of achieving its outcomes |
+| 4 | **Predictable** | Established process operates within defined limits to achieve its outcomes (measured/quantitative) |
+| 5 | **Innovating** | Predictable process is continuously improved to support relevant organisational goals |
 
-### 3.5 Activity Rating Scale (ISO/IEC 33000-based)
+### 3.5 Activity Rating Scale (COBIT 2019 I&M §6.4.2; bands mirror ISO/IEC 33004:2015 and are identical to ISO/IEC 33020:2019 §5.3)
 
 | Rating | Threshold | Interpretation |
 |--------|-----------|----------------|
@@ -119,9 +121,9 @@ This prioritization is influenced by **11 Design Factors**, including business s
 | **L (Largely Achieved)** | >50% to 85% | Structured implementation with minor gaps |
 | **F (Fully Achieved)** | >85% to 100% | Complete, consistent, proven effective sustainably |
 
-**Critical Rule**: A process is considered to achieve a specific Capability Level (e.g., Level 2) only if **all activities at that level receive Fully Achieved (F)** and all lower levels are fully satisfied. For example, if a process achieves 73% (Largely Achieved) on Level 2, it officially **fails to achieve Level 2**.
+**Critical Rule** (published proposal — Souza Neto, Almeida & Mira da Silva 2019): A process is considered to achieve a specific Capability Level (e.g., Level 2) only if **all activities at that level are rated Largely (L) or Fully (F)** and all lower levels are also satisfied. For example, if a process achieves 73% (Largely) on a Level-2 activity, the all-L-or-F gate **fails to achieve Level 2** under that rule. Note: this gate is a **published proposal**, not an explicit ISACA formula — COBIT 2019 specifies no mandated aggregation/gate rule.
 
-### 3.6 Target-Level Cascade Algorithm (Almeida 2019)
+### 3.6 Target-Level Cascade Algorithm (Souza Neto, Almeida & Mira da Silva — ISACA Industry News, **proposal**, not an official ISACA procedure)
 
 1. Assign N/P/L/F for every Level 2 activity → if all L/F → at least Level 2
 2. For Level 2 processes, rate Level 3 activities → any N/P drops to Level 2
@@ -130,11 +132,11 @@ This prioritization is influenced by **11 Design Factors**, including business s
 
 ### 3.7 Key Constraints from Case Studies
 
-- **JKU academic paper** (MEA02/03/04 assessment): One sub-threshold process caps entire focus area maturity
-- **Capability levels 1 and 5 frequently have no defined activities** — "meaningless to formally describe" (JKU)
-- **Not cost-effective to aim for highest rating** in many cases (JKU)
-- **NETBankAudit** (2025): 1,378 COBIT evaluations across 347 engagements — real distribution of control assessments
-- **Mikroskil University case**: BAI11 domain assessment using COBIT 2019
+- **JKU academic paper** (MEA02/03/04 assessment): One sub-threshold process caps entire focus area maturity `[2ND-UNV]`
+- **Capability levels 1 and 5 frequently have no defined activities** — "meaningless to formally describe" (JKU) `[2ND-UNV]`
+- **Not cost-effective to aim for highest rating** in many cases (JKU) `[2ND-UNV]`
+- **NETBankAudit** (2025): 1,378 COBIT evaluations across 347 engagements — real distribution of control assessments `[2ND-UNV]`
+- **Mikroskil University case**: BAI11 domain assessment using COBIT 2019 `[2ND-UNV]`
 
 ---
 
@@ -231,7 +233,7 @@ This prioritization is influenced by **11 Design Factors**, including business s
 | Paper | Year | Domain | Method | Dataset | Main Result | Limitation | Relevance |
 |-------|------|--------|--------|---------|-------------|------------|-----------|
 | Eulerich et al., CAR | 2023 | Internal audit tech adoption | Survey + archival | IA functions (TBAT users/non) | 45.9% DB quality, 34.1% data access, 46.5% competence barriers | Cross-sectional | ★★★★★ |
-| NETBankAudit | 2025 | IT audit/COBIT | Case series | 347 engagements, 1,378 evals | COBIT control eval distribution published | Consulting whitepaper, client base | ★★★★☆ |
+| NETBankAudit | 2025 | IT audit/COBIT | Case series | 347 engagements, 1,378 evals `[2ND-UNV]` | COBIT control eval distribution published `[2ND-UNV]` | Consulting whitepaper, client base | ★★★★☆ |
 | IntelliAudit (Wilson et al.) | 2026 | ISO 27001 evidence eval | Multi-agent RAG | Simulated orgs, expert review | Decision-support for control sufficiency | Preprint, ISO not COBIT | ★★★★★ |
 | CTRAG (arXiv) | 2026 | Big Four control assessment | RAG + human loop | 240 controls, 45 docs (1 org) | F1 78%, recall 85%, 60% effort reduction | Single org, proprietary, no IAA | ★★★★★ |
 | Hybrid COBIT 2019-RAG (Salim et al.) | 2026 | COBIT assessment | DSR, RAGAS | 100 synthetic queries | Overall 0.8257, faithfulness 0.8502 | Q4 venue, synthetic, single-country | ★★★★☆ |
@@ -251,7 +253,7 @@ This prioritization is influenced by **11 Design Factors**, including business s
 | Vision 2035 (IIA) | 2025 | Profession future | Survey + qual | 6,506 global, 500+ qual | 97% data volume↑, 48% AI activities, advisory 24%→41% | Vision document | ★★★★☆ |
 | Kotb et al. (AAAJ) | 2020 | IA literature meta-review | SLR | 471 papers, 64 journals | "IA literature has not significantly contributed to knowledge of IAF" | Pre-GenAI | ★★★★★ |
 | CiteShade | 2026 | RAG security | Attack | Citation laundering | Wrong-answer 0.01→0.68 via trusted source | Attack paper | ★★★★☆ |
-| Karakurt et al. (Applied Sciences) | 2026 | Enterprise RAG | SLR | RAG systems review | Lab-to-market gap: 93.6% validate on isolated academic data | SLR | ★★★★☆ |
+| Karakurt et al. (Applied Sciences) | 2026 | Enterprise RAG | SLR | RAG systems review | Lab-to-market gap: 93.6% validate on isolated academic data `[2ND-UNV]` | SLR | ★★★★☆ |
 | Sarkar (Input-Regime Audit) | 2026 | RAG evaluation | Audit of RAGAS | Conflict detection | CARS ceiling effect; RAGAS hides implicit assumptions | Metric audit | ★★★★☆ |
 | Anthropic Contextual Retrieval | 2024 | RAG technique | Engineering | Contextual embeddings | Reduces retrieval failure by 67% on long documents | Blog post | ★★★★☆ |
 | Re:CAP | 2026 | Retrieval coverage | Iterative probing | Production RAG | Recovers 9-29% of gold labels BM25 misses | Preprint | ★★★★☆ |
@@ -362,7 +364,7 @@ A COBIT 2019 assessment system manages two distinct knowledge repositories:
 4. **Evaluation gap**: Faithfulness/groundedness metrics exist but **audit-specific evaluation** (sufficiency, appropriateness, professional skepticism) is absent
 5. **Framework gap**: COBIT 2019 + RAG has **one Q4 paper with synthetic data** and **zero peer-reviewed studies** with real organizational evidence
 6. **Practical gap**: Academic prototypes rarely produce **decision-support tools usable by assessors** with audit-quality documentation
-7. **Lab-to-market gap**: 93.6% of enterprise RAG research validates retrieval on isolated academic data, failing to address real-world inter-context conflicts and parametric memory issues
+7. **Lab-to-market gap**: 93.6% of enterprise RAG research validates retrieval on isolated academic data `[2ND-UNV]`, failing to address real-world inter-context conflicts and parametric memory issues
 8. **Coverage gap**: Majority of RAG industry evaluation focuses on text generation but ignores retrieval coverage — missing evidence is a critical failure mode for audit
 
 ### 8.3 Inferred Gaps (Require Validation)
@@ -468,7 +470,7 @@ A COBIT 2019 assessment system manages two distinct knowledge repositories:
 Real-World Problem
     │
     ├─→ Evidence: Eulerich et al. (2023) — 45.9% DB quality, 34.1% data access, 46.5% competence barriers
-    ├─→ Evidence: KPMG SOX 2025 — controls doubled, 16 hrs/control, 50-80% of audit cycle
+    ├─→ Evidence: KPMG SOX 2025 — in-scope systems 17 → 40 `[2ND-UNV]`
     ├─→ Evidence: Vision 2035 — 97% data volume/complexity increase
     ├─→ Evidence: NETBankAudit — 1,378 COBIT evals show real assessment volume
     ├─→ Evidence: Hyperproof 2021 — 40% compliance professionals still manual; 70% adopted GRC but operations gap persists
@@ -481,9 +483,9 @@ COBIT 2019 Assessment Process (ISACA Official)
     ├─→ Goals Cascade: 13 Enterprise Goals → 13 Alignment Goals → 40 G&M Objectives
     ├─→ 11 Design Factors influence prioritization
     ├─→ 6-step process culminating in evidence-grounded capability ratings (N/P/L/F)
-    ├─→ Capability levels 0-5 (CMMI-based)
+    ├─→ Capability levels 0-5 (ISO/IEC 33020 ladder — 0 Incomplete … 5 Innovating)
     ├─→ Traceability required between evidence and ratings (CPM)
-    └─→ Capability levels 1 & 5 often have no defined activities (JKU case study)
+    └─→ Capability levels 1 & 5 often have no defined activities (JKU case study) `[2ND-UNV]`
            │
            ▼
 Existing Approaches
@@ -493,7 +495,7 @@ Existing Approaches
     ├─→ Domain-specific: ObliQA (financial regs), IntelliAudit (ISO 27001), CTRAG (Big Four POC)
     ├─→ COBIT-specific: Hybrid COBIT-RAG (Q4, synthetic), ER2-RAG (design science only)
     ├─→ Evaluation: RAGChecker, RAGTruth, ALCE, CLERC (general/legal domains)
-    └─→ Enterprise RAG: 93.6% validate on isolated academic data (lab-to-market gap)
+    └─→ Enterprise RAG: 93.6% validate on isolated academic data (lab-to-market gap) `[2ND-UNV]`
            │
            ▼
 Limitations
@@ -546,7 +548,7 @@ Proposed Research (Option A or C)
 | Hybrid COBIT-RAG achieves 0.8257 overall | **Weak** | Q4 venue (ASSET), 100 synthetic queries, single country |
 | Traceability failure rates unmeasured in IA | **Strong** | Confirmed by Kotb et al. (2020) meta-review + systematic search |
 | NIST AU-10(3) not in baseline | **Strong** | Verified from NIST CSF tools reference |
-| Lab-to-market gap (93.6% academic data) | **Moderate** | SLR by Karakurt et al. 2026, needs journal publication |
+| Lab-to-market gap (93.6% academic data) `[2ND-UNV]` | **Moderate** | SLR by Karakurt et al. 2026, needs journal publication |
 | Contextual Retrieval reduces failure 67% | **Weak** | Anthropic engineering blog, not peer-reviewed |
 | CARS ceiling effect | **Moderate** | Sarkar 2026 input-regime audit, needs peer review |
 | Compliance automation saves 80% time | **Weak** | Avatier vendor marketing, no methodology disclosed |
@@ -570,9 +572,9 @@ Proposed Research (Option A or C)
 | 11 | **ALCE (EMNLP 2023)** | Peer-reviewed | Citation quality evaluation; 50% incomplete citations in best systems |
 | 12 | **KDAF "Auditable by Construction" (arXiv 2026)** | Preprint | Negative result: auditability ≠ accuracy; structured retrieval for traceability |
 | 13 | **CiteShade (arXiv 2026)** | Preprint | Citation laundering attack — threat model for audit RAG |
-| 14 | **NETBankAudit 2025 Annual IT Audit Issues** | Industry whitepaper | Real COBIT control evaluation distribution (1,378 evals) |
+| 14 | **NETBankAudit 2025 Annual IT Audit Issues** | Industry whitepaper | Real COBIT control evaluation distribution (1,378 evals) `[2ND-UNV]` |
 | 15 | **Kotb, Elbardan & Halabi (2020), *Accounting, Auditing & Accountability Journal*** | Peer-reviewed SLR | "IA literature has not significantly contributed to knowledge of IAF" — justifies gap |
-| 16 | **Karakurt et al. (2026), *Applied Sciences*** | SLR | Lab-to-market gap in enterprise RAG; 93.6% academic data validation |
+| 16 | **Karakurt et al. (2026), *Applied Sciences*** | SLR | Lab-to-market gap in enterprise RAG; 93.6% academic data validation `[2ND-UNV]` |
 | 17 | **Sarkar (2026), Input-Regime Audit** | Metric audit | CARS ceiling effect; RAGAS weakness with contradictory documents |
 | 18 | **Anthropic Contextual Retrieval (2024)** | Engineering blog | 67% retrieval failure reduction; contextual embeddings technique |
 | 19 | **Re:CAP (arXiv 2026)** | Preprint | Iterative probing for missing evidence detection in production RAG |

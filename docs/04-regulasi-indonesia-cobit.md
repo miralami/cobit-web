@@ -3,6 +3,14 @@
 > **Sumber:** Hasil riset librarian 2026-10-01. Dokumen konteks untuk mendukung Bab 1 Latar Belakang.
 > **Chain:** Feeds into [`latar-belakang.md`](latar-belakang.md).
 
+> ⚠️ **KOREKSI 2026-10-13 — lihat `06-deep-research-research-gap.md` §9.2 (baris 19–24) dan §9.5:**
+> 1. Klaim *"tidak ada regulasi yang menyebut COBIT"* **SALAH secara harfiah** — yang benar: **tidak ada regulasi yang MEWAJIBKAN COBIT**; COBIT disebut sebagai praktik terbaik opsional di POJK 38/2016, SEOJK 21/2017, PermenPANRB 5/2018, dan PermenPANRB 59/2020 (Lampiran).
+> 2. **PermenPANRB 59/2020 DICABUT** oleh **PermenPANRB 8/2026** (Evaluasi Kinerja Pemerintah Digital, ±20 indikator). Untuk hukum yang berlaku, kutip 8/2026 — bukan 59/2020.
+> 3. **Perpres 132/2022 bukan perubahan atas Perpres 95/2018** — ia Perpres terpisah tentang *Arsitektur SPBE Nasional*.
+> 4. Kutipan definisi *Audit TIK* di §1.3: frasa "standar dan praktik-praktik terbaik" berasal dari **Lampiran (definisi "kriteria")**, bukan Pasal 1 angka 2.
+> 5. Referensi Sebatik: terbit **2023** (Akbar & Saputra), bukan 2025 — DOI 10.46984/sebatik.v27i2.2336.
+> 6. Klaim *"SEOJK 21/2017 menyebut ISO & SNI dan **tidak** menyebut COBIT"* **SALAH di tingkat dokumen** — hanya §1.7(b) yang berbicara ISO/SNI; **§5.2 dan §7.6.1 justru menamai COBIT/ITIL/IEC** sebagai rujukan opsional.
+
 ---
 
 ## Catatan Metodologis Penting

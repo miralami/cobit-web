@@ -4,7 +4,8 @@ import { BENCHMARK_ASSESSMENT_STATE } from '../../data/benchmarkData';
 import type { AssessmentActivity } from '../../types/index';
 
 console.log('=============================================');
-console.log('🧪 RUNNING GROUND TRUTH BENCHMARK TEST SUITE');
+console.log('🧪 REFERENCE-CALCULATION REGRESSION SUITE');
+console.log('    (self-consistency vs documented DF/CPM rules — NOT an external benchmark)');
 console.log('=============================================');
 
 // ----------------------------------------------------
@@ -118,5 +119,5 @@ assertEq('DSS05 Target Level', dss05Assessment.targetLevel, 4);
 assertEq('DSS05 Gap', dss05Assessment.gap, 3);
 
 console.log('\n=============================================');
-console.log('🎉 ALL BENCHMARK ENGINE TESTS PASSED PERFECTLY!');
+console.log('🎉 ALL REFERENCE-CALCULATION TESTS PASSED');
 console.log('=============================================\n');

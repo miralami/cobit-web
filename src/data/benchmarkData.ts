@@ -1,3 +1,16 @@
+/**
+ * DEMO / INTERVIEW-DERIVED DATASET — NOT A VALIDATED BENCHMARK.
+ *
+ * The records below are transcribed from an earlier PANRB-linked assessment
+ * exercise and are used here purely to demonstrate and regression-test the
+ * app's Design-Factor and CPM engines. They are NOT:
+ *   - an official ISACA/PANRB dataset or scoring reference;
+ *   - a validated external benchmark;
+ *   - representative of any population.
+ * Any reported "match" or result computed from this file is a self-consistency
+ * check against the app's own documented rules, nothing more.
+ * See docs/06-deep-research-research-gap.md §9.2 (rows 5, 9, 25).
+ */
 import type { FullAssessmentState, EvidenceRecord, RecommendationItem, ObjectiveAssessmentData } from '../types';
 import cobitActivitiesData from './cobitActivities.json';
 import { calculateDesignFactors } from '../utils/designFactorEngine';
