@@ -13,8 +13,20 @@ const typeLabel: Record<EvidenceRecord['type'], string> = {
   other: 'Other',
 };
 
+const evidenceStatusLabel: Record<string, string> = {
+  pending: 'Pending',
+  reviewed: 'Reviewed',
+  attached: 'Attached',
+};
+
+const evidenceStatusNextLabel: Record<string, string> = {
+  pending: 'Review →',
+  reviewed: 'Attach →',
+  attached: 'Selesai',
+};
+
 export default function EvidenceFindings() {
-  const { state, addEvidence, updateEvidence, deleteEvidence } = useAssessment();
+  const { state, addEvidence, updateEvidence, deleteEvidence, advanceEvidenceStatus } = useAssessment();
   const { evidenceList, assessments, scopedObjectiveIds } = state;
 
   const [search, setSearch] = useState('');
@@ -241,6 +253,7 @@ export default function EvidenceFindings() {
                 <th style={{ width: '160px' }}>Nomor Referensi</th>
                 <th style={{ width: '130px' }}>Tanggal</th>
                 <th style={{ width: '220px' }}>Backward Traceability (Linked Activities)</th>
+                <th style={{ width: '150px' }}>Status Verifikasi</th>
                 <th style={{ width: '110px' }}>Aksi</th>
               </tr>
             </thead>
@@ -279,6 +292,23 @@ export default function EvidenceFindings() {
                             </Link>
                           );
                         })
+                      )}
+                    </div>
+                  </td>
+                  <td>
+                    <div className="ev-status-cell">
+                      <span className={`ev-status ev-status--${ev.status ?? 'pending'}`}>
+                        {evidenceStatusLabel[ev.status ?? 'pending']}
+                      </span>
+                      {(ev.status ?? 'pending') !== 'attached' && (
+                        <button
+                          type="button"
+                          className="btn btn--subtle btn--sm"
+                          title="Majukan status verifikasi"
+                          onClick={() => advanceEvidenceStatus(ev.id)}
+                        >
+                          {evidenceStatusNextLabel[ev.status ?? 'pending']}
+                        </button>
                       )}
                     </div>
                   </td>

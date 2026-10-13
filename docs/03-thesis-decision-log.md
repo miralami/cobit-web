@@ -141,8 +141,9 @@ Phase 3: Development
 
 Phase 4: Evaluation
   → Expert review (2–3 COBIT practitioners)
-  → Usability testing (SUS questionnaire, 5–8 assessors)
+  → Usability testing (SUS questionnaire, N ≥ 20–30 respondents; report a confidence interval)
   → Black-box testing (functional requirements)
+  → Reference-calculation test (independent oracle vs documented CPM rules)
 
 Phase 5: Communication
   → Thesis write-up
@@ -157,6 +158,28 @@ Phase 5: Communication
 | Usability (SUS) | Ease of use for assessors | High |
 | Black-box testing | Functional correctness | High |
 | Reference-calculation test | Scoring accuracy vs documented CPM rules (bukan "vs Excel" — tidak ada workbook ISACA penghitung capability) | High |
+
+### 5.3 Keputusan Aturan Gate Agregasi CPM (Final)
+
+ISACA tidak menetapkan formula agregasi wajib untuk CPM COBIT 2019, sehingga penelitian ini harus memilih satu aturan dan menyatakannya secara eksplisit. Sistem mengimplementasikan **tiga** aturan yang dapat dipilih, tetapi hanya **satu** yang dipertahankan sebagai acuan utama:
+
+| Aturan (`gate`) | Definisi | Sumber | Posisi |
+|-----------------|----------|--------|--------|
+| **`aggregate-85`** | Level tercapai bila persentase pemenuhan agregat level **> 85%** (ambang *Fully*) | Konsisten dengan band *Fully* ISACA; rata-rata sederhana diizinkan sebagai proposal (Gorgona, 2021) | **Acuan utama (default)** |
+| `all-l-or-f` | Level tercapai bila **seluruh** aktivitasnya bernilai *Largely* atau *Fully* | Souza Neto, Almeida & Mira da Silva (2019), ISACA Industry News | Uji ketahanan (robustness) |
+| `iso-staged` | Level yang diklaim cukup *Largely* (>50%); level di bawahnya harus *Fully* (>85%) | ISO/IEC 33020:2019 (via model bertahap) | Uji ketahanan (robustness) |
+
+**Alasan pemilihan `aggregate-85` sebagai acuan utama:**
+1. Konsisten dengan makna ambang **Fully (>85%)** yang diterbitkan ISACA — level dinyatakan tercapai tepat ketika pencapaian agregatnya melewati band *Fully*.
+2. Menggunakan **rata-rata sederhana**, yang secara eksplisit diizinkan ISACA Journal (Gorgona, 2021) sebagai proposal untuk organisasi pada tahap kematangan awal.
+3. Mempertahankan **konsistensi hasil** dengan dataset demo dan perilaku aplikasi yang sudah ada (backward compatible).
+4. Memiliki preseden lokal sebagai koreborasi praktik (Marcela & Fianty, 2023; Simatupang & Fianty, 2023).
+
+**Pernyataan untuk naskah skripsi (siap pakai):**
+
+> Aturan agregasi CPM yang digunakan sebagai acuan utama adalah penetapan sebuah level sebagai tercapai apabila persentase pemenuhan agregat level tersebut melewati ambang *Fully* (>85%) pada skala N/P/L/F ISO/IEC 33020:2019 §5.3. Pilihan ini diambil karena (i) konsisten dengan makna ambang *Fully* yang diterbitkan ISACA, yaitu level dinyatakan tercapai ketika pencapaiannya melewati 85%; (ii) menggunakan rata-rata sederhana yang diizinkan secara eksplisit oleh ISACA Journal (Gorgona, 2021) sebagai proposal untuk organisasi pada tahap kematangan awal; dan (iii) menjaga konsistensi hasil dengan praktik yang telah digunakan pada penelitian terdahulu. Karena ISACA tidak menetapkan formula agregasi wajib untuk COBIT 2019, aturan ini dinyatakan secara eksplisit sebagai **adaptasi operasional**, bukan standar ISACA. Untuk menilai ketahanan (*robustness*) hasil terhadap pilihan aturan, sistem juga mengimplementasikan dua aturan alternatif — seluruh aktivitas bernilai *Largely* atau *Fully* (*all-l-or-f*; Souza Neto et al., 2019) dan model bertahap ISO/IEC 33020 (*iso-staged*) — dan menampilkan *capability level* yang dihasilkan setiap aturan pada data yang sama. Divergensi antar-aturan, bila muncul, dilaporkan sebagai temuan sensitivitas, bukan sebagai galat sistem.
+
+> Catatan: meskipun `aggregate-85` menjadi acuan utama, halaman hasil tetap menampilkan ambang ISO/IEC 33020:2019 §5.3 dan aturan aktif, sehingga pilihan aturan dapat diaudit dan direplikasi.
 
 ---
 
@@ -256,22 +279,24 @@ Status saat ini
 | Dashboard | ✅ | Progress visualization |
 | AssessmentSetup | ✅ | Project config, domain selection |
 | AssessmentWorkspace | ✅ | Activity rating N/P/L/F |
-| CapabilityResult | ✅ | CL 0–5 calculation |
+| CapabilityResult | ✅ | CL 0–5 calculation + **metode transparan & gate dapat dikonfigurasi** (sensitivitas aturan, rantai agregasi) |
 | GapAnalysis | ✅ | Current vs. target |
-| EvidenceFindings | ✅ | Evidence management (mock) |
+| EvidenceFindings | ✅ | Evidence management + **workflow status** (pending → reviewed → attached) |
+| CompareAssessments | ✅ | **Snapshot & perbandingan** baseline→candidate antar-periode/unit |
 | Recommendations | ✅ | Gap-based generation |
 | Landing | ✅ | Entry point |
 
 ### 9.2 Yang Perlu Disempurnakan (Option B + DF1–DF4)
 
-| Area | Yang Perlu Dilakukan |
-|------|---------------------|
-| Scoring engine | Pastikan threshold F/L/P/N sesuai CPM (<15% / 15–50% / 50–85% / >85%) |
-| Agregasi | Rantai penuh: Aktivitas → Praktik → Objektif → Domain |
-| Evidence mapping | Relasi data evidensi ↔ rating aktivitas (traceability) |
-| Evidence validation | Status flow: pending → reviewed → attached |
-| AI bonus | Tombol "Generate AI Draft" di Recommendations (direct API call) |
-| Design Factor scope | Implementasi DF1–DF4 pada Assessment Setup; verifikasi formula dan batas cakupan sebelum coding |
+| Area | Yang Perlu Dilakukan | Status |
+|------|---------------------|--------|
+| Scoring engine | Threshold F/L/P/N — **selesai**: ambang ISO/IEC 33020:2019 §5.3 (≤15% / ≤50% / ≤85% / >85%), gate dapat dikonfigurasi | ✅ |
+| Agregasi | Rantai: Aktivitas → level → Objektif; trail *Stop Here*; level N.A.-only → *Insufficient Evidence* | ✅ |
+| Evidence mapping | Relasi data evidensi ↔ rating aktivitas (traceability) | ✅ (linkage belum di-hard-enforce) |
+| Evidence validation | Status flow: pending → reviewed → attached | ✅ |
+| Multi-assessment | Riwayat asesmen + snapshot + perbandingan baseline→candidate | ✅ |
+| AI bonus | Tombol "Generate AI Draft" di Recommendations (direct API call) | ⏳ |
+| Design Factor scope | Implementasi DF1–DF4 pada Assessment Setup; verifikasi formula dan batas cakupan sebelum coding | ✅ |
 
 ---
 

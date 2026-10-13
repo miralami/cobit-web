@@ -7,6 +7,7 @@ import {
   FileSearch,
   BarChart3,
   GitMerge,
+  TrendingUp,
   Lightbulb,
   History,
   ArrowLeft,
@@ -43,6 +44,7 @@ const WORKFLOW_NAV: NavGroup[] = [
       { path: 'evidence', label: 'Evidence Register', icon: FileSearch },
       { path: 'results', label: 'Capability Results', icon: BarChart3 },
       { path: 'gap', label: 'Gap Analysis', icon: GitMerge },
+      { path: 'compare', label: 'Perbandingan', icon: TrendingUp },
       { path: 'recommendations', label: 'Recommendations', icon: Lightbulb },
     ],
   },
@@ -76,6 +78,7 @@ function Breadcrumb() {
           evidence: 'Evidence Register',
           results: 'Capability Results',
           gap: 'Gap Analysis',
+          compare: 'Perbandingan',
           recommendations: 'Recommendations',
         };
         crumbs.push({ label: sectionLabels[section] || section, path: '' });

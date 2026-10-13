@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useAssessment } from '../context';
 import cobitFactors from '../data/cobitDesignFactors.json';
-import type { CapabilityLevel } from '../types';
+import type { CapabilityLevel, CpmGateRule } from '../types';
 
 const capabilityLevelLabels: Record<CapabilityLevel, string> = {
   0: 'Incomplete — Tidak beroperasi',
@@ -13,9 +13,16 @@ const capabilityLevelLabels: Record<CapabilityLevel, string> = {
   5: 'Optimizing — Perbaikan berkelanjutan otomatis',
 };
 
+const gateLabels: Record<CpmGateRule, string> = {
+  'aggregate-85': 'Agregat > 85% (adaptasi operasional)',
+  'all-l-or-f': 'Semua aktivitas L atau F (proposal ISACA 2019)',
+  'iso-staged': 'ISO/IEC 33020 staged (bawah Fully, klaim Largely)',
+};
+
 export default function CapabilityResult() {
-  const { state } = useAssessment();
+  const { state, setMethodConfig } = useAssessment();
   const { scopedObjectiveIds, objectiveTargets, assessments } = state;
+  const activeGate: CpmGateRule = state.methodConfig?.gate ?? 'aggregate-85';
 
   const [selectedId, setSelectedId] = useState<string>(
     scopedObjectiveIds[0] || 'EDM03'
@@ -41,6 +48,8 @@ export default function CapabilityResult() {
       isComplete: boolean;
       status: string;
       validCount: number;
+      insufficient: boolean;
+      gateSummary: string;
       explanation: string;
     }[] = [];
 
@@ -48,11 +57,18 @@ export default function CapabilityResult() {
       const res = assessmentData.levelResults[lvl];
       if (!res) continue;
       const pct = Math.round(res.fulfillmentPercentage * 100);
+      const g = res.gateResults;
+      const gateSummary = g
+        ? `Agregat ${g.aggregate85 ? '✓' : '✗'} · All-L/F ${g.allLOrF ? '✓' : '✗'} · ISO-staged ${g.isoStagedClaimed ? '✓' : '✗'}`
+        : '—';
+
       let explanation = '';
-      if (res.isComplete) {
-        explanation = `Level ${lvl} terpenuhi ${pct}% (>85%, rating ${res.cpmRating}). Memenuhi kriteria, evaluasi berlanjut ke level berikutnya.`;
+      if (res.insufficientEvidence) {
+        explanation = `Level ${lvl} tidak dapat dinilai: seluruh aktivitas ditandai N.A. Bukti tidak mencukupi, sehingga level ini tidak boleh dianggap "N" (tidak tercapai).`;
+      } else if (res.isComplete) {
+        explanation = `Level ${lvl} terpenuhi ${pct}% (rating ${res.cpmRating}). Kriteria gate "${gateLabels[activeGate]}" terpenuhi; evaluasi berlanjut ke level berikutnya.`;
       } else {
-        explanation = `Level ${lvl} hanya terpenuhi ${pct}% (≤85%, rating ${res.cpmRating}). Aturan Stop Here aktif! Capaian terhenti pada level sebelumnya.`;
+        explanation = `Level ${lvl} hanya terpenuhi ${pct}% (rating ${res.cpmRating}). Gate "${gateLabels[activeGate]}" belum terpenuhi; evaluasi berhenti (Stop Here).`;
       }
       steps.push({
         level: lvl,
@@ -61,11 +77,13 @@ export default function CapabilityResult() {
         isComplete: res.isComplete,
         status: res.status,
         validCount: res.validCount,
+        insufficient: !!res.insufficientEvidence,
+        gateSummary,
         explanation,
       });
     }
     return steps;
-  }, [assessmentData]);
+  }, [assessmentData, activeGate]);
 
   // Strengths and Gaps
   const strengths = useMemo(() => {
@@ -91,7 +109,7 @@ export default function CapabilityResult() {
           </p>
           <h1 className="page-title">Hasil Pengukuran Capability Level</h1>
           <p className="page-lead">
-            Level kapabilitas dihitung secara berjenjang dari skala respon aktivitas Level 2–5 menggunakan ambang batas pemenuhan &gt;85% dan aturan Stop Here yang ketat.
+            Level kapabilitas dihitung secara berjenjang dari skala respon aktivitas Level 2–5 menggunakan ambang N/P/L/F ISO/IEC 33020:2019 dan gate yang dapat dipilih (default: agregat &gt;85%), serta aturan Stop Here berjenjang.
           </p>
         </div>
         <div className="page-head__actions">
@@ -103,6 +121,51 @@ export default function CapabilityResult() {
           </Link>
         </div>
       </header>
+
+      {/* Method disclosure — the inspectable scoring rule */}
+      <section className="card method-card" aria-labelledby="method-heading">
+        <div className="card__head">
+          <h2 id="method-heading" className="card__title">Metode Perhitungan (Transparan &amp; Dapat Diubah)</h2>
+          <span className="tag mono">{gateLabels[activeGate]}</span>
+        </div>
+        <div className="card__body">
+          <p className="text-secondary" style={{ fontSize: '13px', margin: '0 0 12px' }}>
+            COBIT 2019 tidak menetapkan formula agregasi resmi (ISACA Journal 2021 Vol. 6), sehingga aturan di bawah
+            ini adalah <strong>adaptasi operasional yang dinyatakan eksplisit</strong> — bukan standar ISACA. Ubah gate
+            untuk melihat sensitivitas hasil terhadap pilihan aturan (temuan penelitian).
+          </p>
+          <div className="gate-switch">
+            {(Object.keys(gateLabels) as CpmGateRule[]).map((gate) => (
+              <button
+                key={gate}
+                type="button"
+                className={`gate-option ${activeGate === gate ? 'gate-option--active' : ''}`}
+                onClick={() => setMethodConfig({ gate })}
+              >
+                <strong>{gateLabels[gate]}</strong>
+                <span className="gate-option__code mono">{gate}</span>
+              </button>
+            ))}
+          </div>
+          <div className="method-meta">
+            <span>Ambang N/P/L/F (ISO/IEC 33020:2019 §5.3): ≤15% · ≤50% · ≤85% · &gt;85%</span>
+            <span>Kebijakan N.A.: dikecualikan dari penyebut; level tanpa bukti ditandai <em>Insufficient Evidence</em>.</span>
+          </div>
+          {assessmentData?.currentLevelByGate && (
+            <div className="rule-sensitivity">
+              <span className="eyebrow">Sensitivitas Aturan — {activeId}</span>
+              <div className="rule-sensitivity__grid">
+                {(Object.keys(gateLabels) as CpmGateRule[]).map((gate) => (
+                  <div key={gate} className={`rule-sens-box ${activeGate === gate ? 'rule-sens-box--active' : ''}`}>
+                    <span className="rule-sens-box__label">{gate}</span>
+                    <strong className="rule-sens-box__val mono">L{assessmentData.currentLevelByGate![gate]}</strong>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
 
       {/* Comparative Grouped Bar Overview */}
       <section className="cap-overview-section">
@@ -232,10 +295,13 @@ export default function CapabilityResult() {
 
             <div className="trail-legend">
               <span className="trail-legend__item trail-legend__item--pass">
-                ✓ Level terpenuhi (≥85%), evaluasi lanjut ke level berikutnya
+                ✓ Level terpenuhi menurut gate aktif, evaluasi lanjut ke level berikutnya
               </span>
               <span className="trail-legend__item trail-legend__item--stop">
                 🛑 Stop Here — evaluasi berhenti, capability level ditetapkan di sini
+              </span>
+              <span className="trail-legend__item">
+                ⚠ Insufficient Evidence — semua aktivitas N.A., level tidak dapat dinilai
               </span>
             </div>
 
@@ -243,10 +309,10 @@ export default function CapabilityResult() {
               {trail.map((step) => (
                 <div
                   key={step.level}
-                  className={`trail-item ${step.isComplete ? 'trail-item--pass' : 'trail-item--stop'}`}
+                  className={`trail-item ${step.insufficient ? 'trail-item--insufficient' : step.isComplete ? 'trail-item--pass' : 'trail-item--stop'}`}
                 >
                   <div className="trail-item__marker">
-                    {step.isComplete ? '✓' : '🛑'}
+                    {step.insufficient ? '⚠' : step.isComplete ? '✓' : '🛑'}
                   </div>
                   <div className="trail-item__content">
                     <div className="trail-item__top">
@@ -256,7 +322,8 @@ export default function CapabilityResult() {
                       </span>
                     </div>
                     <p className="trail-item__desc">{step.explanation}</p>
-                    {!step.isComplete && (
+                    <p className="trail-item__gates mono">Gate — {step.gateSummary}</p>
+                    {!step.isComplete && !step.insufficient && (
                       <p className="trail-item__final">
                         ➜ Capability level akhir objektif ini = <strong>Level {Math.max(0, step.level - 1)}</strong>
                       </p>

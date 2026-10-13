@@ -207,16 +207,18 @@ gap  : max(0, target − currentLevel)
 | B2 | Boundary partition | ✅ **The engine's partition (≤15→N, >15–≤50→P, >50–≤85→L, >85→F) matches ISO/IEC 33020:2019 §5.3 exactly.** COBIT's own prose is loose at 15/50/85 (e.g. "between 50 and 85"); adopting the ISO boundaries is the correct disambiguation — cite ISO for the boundaries, not COBIT. | — |
 | B3 | Activities → percentage → band | ⚠️ **Category shift.** ISACA assigns F/L/P/N **per activity** (judgment of how far the capability level is achieved). The engine derives a **percentage of activity-answers** and applies the band to *that*. Defensible as an operationalisation, but it is **not** ISACA's mechanism. | **High (must be disclosed)** |
 | B4 | Simple mean | ✅ Permitted for early maturity by Gorgona 2021 — *as a proposal*. Not officially mandated. | Medium (disclose) |
-| B5 | Gate ">85% aggregate = pass" | ⚠️ **Diverges from all three official/published readings** (§4.1g): stricter than the ISO staged rule (the level claimed needs only *Largely* there), and a percentage substitution for COBIT's literal "*all activities*" sentence. It can pass a level while **one activity is rated N (0.0)** (e.g. 9×F + 1×N = 0.90). Must be labelled an **adaptation**, cited to the published "cannot continue below 85%" precedents (Marcela & Fianty 2023; Simatupang & Fianty 2023), and made configurable. | **High (design decision)** |
+| B5 | Gate ">85% aggregate = pass" | ✅ **Addressed (2026-10-13).** The gate is now **configurable and user-visible**: `aggregate-85` (default, preserves legacy behaviour; cite the published "cannot continue below 85%" precedents — Marcela & Fianty 2023; Simatupang & Fianty 2023), `all-l-or-f` (§4.1g published proposal), and `iso-staged` (§4.1g ISO staged model). The results page exposes a rule-sensitivity panel showing the level produced by each gate for the same data, and the method card states the rule is an *operational adaptation*, not an ISACA standard. | Closed (was High) |
 | B6 | 3-point response scale (Yes/Partially/No) | ⚠️ Drops ISACA's **L (Largely)** at the activity level; recovers it only after aggregation. Acceptable simplification, must be stated. | Medium |
-| B7 | `N.A.` excluded from denominator | ⚠️ If **all** activities at a level are `N.A.`, `P_L = 0 → N → gate closes`. "Not assessed" is silently treated as "not achieved." Violates the audit principle of not equating absence of evidence with evidence of absence. | **High (validity)** |
+| B7 | `N.A.` excluded from denominator | ✅ **Addressed (2026-10-13).** `N.A.` is still excluded from the denominator, but a level whose activities are **all** `N.A.` is now flagged **Insufficient Evidence** (not N, and it halts the climb without asserting a rating). The status is surfaced in the aggregation trail. | Closed (was High) |
 | B8 | Level 1 assumed achieved | ✅ Reasonable for target-based assessment of selected objectives; but level 0 (process absent) cannot be produced. State the assumption. | Low–Medium |
 | B9 | Level with **no defined activities** | ⚠️ `validCount = 0 → 0 → fail`, which *happens* to yield the intended "cap at level 4" outcome for level-5-less processes — but only **accidentally**; it is fragile and undocumented. | Medium |
-| B10 | No persistence / single assessment | ⚠️ No history, comparison, or traceable assessment lifecycle across time (`05-PRD` line 78: "Belum ada persistensi lintas halaman"). Bound to Focus D. | **High (for the promised contribution)** |
-| B11 | "100% match vs Excel" claim | ❌ **Not supported.** `engine.test.ts` asserts against hard-coded literals and the **interview-derived demo** `BENCHMARK_ASSESSMENT_STATE`; there is no ISACA assessment workbook in the repo to match. | **High (claim integrity)** |
+| B10 | No persistence / single assessment | ✅ **Addressed (2026-10-13).** Multi-assessment history + compact snapshots (`cobit_assessment_snapshots_v1`) + a baseline→candidate comparison page are now implemented (`AssessmentContext`, `CompareAssessments.tsx`). | Closed |
+| B11 | "100% match vs Excel" claim | ✅ **Addressed (2026-10-13).** The claim is removed from `README.md`, `05-PRD`, and the test banner, and a genuine **independent reference-calculation oracle** (`referenceCalculation.test.ts`) now derives expected results by hand from the documented rules and asserts equality. The DF "match" is retained only as a labelled *comparison-workbook* check (not an ISACA benchmark). | Closed (was High) |
 | B12 | Design-factor formula | ⚠️ `DF1–DF4` weighted sum + normalisation + target mapping (25/50/75) matches the *Design Guide* example logic (`[VER-P]` Souza Neto et al. quote of *Design Guide* §7.2.4.1), but the prototype's matrix constants and `BENCHMARK_ASSESSMENT_STATE` are **demo/interview-derived** (`src/data/benchmarkData.ts`), not ISACA data. | Medium |
 
 ### 4.3 Recommended fix (cheap, high value)
+>
+> **Status 2026-10-13: this recommendation has been implemented.** The gate is configurable (`aggregate-85` / `all-l-or-f` / `iso-staged`) and displayed in the UI, all-N.A. levels are marked *Insufficient Evidence*, and the test banner is relabelled with a separate independent reference-calculation oracle added. The remaining action is the thesis write-up (name the construction honestly and pick the gate to defend).
 
 Make the aggregation rule **configurable and visible**, and state it in the thesis as an explicit design decision:
 
@@ -378,9 +380,9 @@ ISACA itself names the missing layer: the 2021 Journal article says the maturity
 
 ### 6.3 Prototype honesty check
 
-- Current state: **client-side SPA, no persistence** — `05-PRD` line 78.
-- Benchmark dataset: **synthetic** — `src/data/benchmarkData.ts`.
-- Therefore "multi-assessment / history / comparison" is currently a **design goal**, not an implemented capability. The thesis must either implement a minimal persistence + version/snapshot mechanism, **or** scope it as a design principle and evaluate it conceptually. Do not claim more than is built.
+- **Updated 2026-10-13:** the client-side SPA now has **minimal localStorage persistence** (assessment registry + compact snapshots) and a **baseline→candidate comparison page**. So "multi-assessment / history / comparison" is now an **implemented capability**, not only a design goal.
+- Benchmark dataset: **synthetic / interview-derived** — `src/data/benchmarkData.ts`, and the UI now labels it *"Data Demo"* rather than "Benchmark PANRB".
+- Still to do: (a) finalise the seeded COBIT subset and its licensing note (Appendix B #6); (b) in the thesis, scope the persistence as *single-browser, client-side* (no server, no multi-tenant) and evaluate it as such. Do not claim more than is built.
 
 ### 6.4 Focus-D gap table
 
@@ -391,7 +393,7 @@ ISACA itself names the missing layer: the 2021 Journal article says the maturity
 | D3 | Audit documentation must be reproducible | IIA 2024 (principle); exact number `[NF]` | `[VER-P]`/`[NF]` |
 | D4 | Tool should produce management-language reporting | ISACA Journal 2021 | `[VER-P]` |
 | D5 | Existing tools lack the management layer | Draft matrix | `[2ND-UNV]` |
-| D6 | Prototype implements multi-assessment/history | Repo | `[VER-P]` (repo) | **Not yet** |
+| D6 | Prototype implements multi-assessment/history | Repo | `[VER-P]` (repo) | ✅ **Yes (2026-10-13)** — registry, snapshots, and comparison page implemented |
 
 ---
 
@@ -690,9 +692,9 @@ Dimensions: formative/summative × artificial/naturalistic. Strategies: Quick&Si
 | Rating granularity | F/L/P/N **per activity per level**, judgment + evidence | Yes/Partial/No per activity → % → F/L/P/N | Simplified; disclose |
 | Thresholds | >85 / 50–85 / 15–50 / <15 | ≤15 / ≤50 / ≤85 / >85 | Match modulo boundaries |
 | Aggregation | **Not mandated**; simple avg proposed for early maturity | Simple mean | Permitted-as-proposal; disclose |
-| Gate | Published proposal: all activities L or F | mean > 0.85 | **Different**; make configurable |
-| N.A. | Judgment ("judgment call") | excluded; all-N.A. → fail | **Risk**; mark insufficient evidence |
-| Evidence | Traceability required | evidenceIds field (not enforced) | Gap to close |
+| Gate | Published proposal: all activities L or F | selectable: `aggregate-85` (default) / `all-l-or-f` / `iso-staged` | ✅ Configurable (2026-10-13) |
+| N.A. | Judgment ("judgment call") | excluded; all-N.A. → **Insufficient Evidence** | ✅ Handled (2026-10-13) |
+| Evidence | Traceability required | evidenceIds field + **status workflow** (pending→reviewed→attached) | Partial — status flow added; linkage not hard-enforced |
 | Cases (121) count | 1,202 activities / 231 practices / 40 objectives / 5 domains | subset | Scope-limited |
 
 ## Appendix B — Open items (status as of 2026-10-13)
@@ -702,10 +704,10 @@ Dimensions: formative/summative × artificial/naturalistic. Strategies: Quick&Si
 | 1 | Re-verify every `[2ND-UNV]` tool/prototype row from the primary paper/vendor page | ✅ **Mostly done** — academic prototypes re-verified at DOI/repository level (§5.4, §10.7). ⏳ **Still open:** commercial GRC rows (§5.2) — Vanta/AuditBoard/TeamMate pages were blocked; re-verify before the thesis lists them |
 | 2 | Verify IIA 14.6 and ITAF 1205 exact numbering/title | ✅ **Done** (2026-10-13): IIA 14.6 = *Engagement Documentation*; ITAF 4th ed. 1205 = *Evidence* (§6.1, §10.3) |
 | 3 | Verify Indonesian regulation status | ✅ **Done** (§9.5, §10.9): no mandate for COBIT; PermenPANRB 8/2026 revoked 59/2020; Perpres 132/2022 is not an amendment |
-| 4 | Decide + document the **gate rule** (all-L-or-F vs aggregate >85% vs ISO staged) | ⏳ **Open** — §4.3 recommends offering two gates; thesis must pick and label the choice as an *adaptation* |
-| 5 | Replace the "vs Excel" framing with a reference-calculation fixture | 🟡 **Partly done (2026-10-13)** — the "vs Excel" framing is replaced in `02` §5.4, `05` line 471, `03` §5, and the test banner is relabelled; the **independent reference fixture itself** still has to be built (`06` §8.3) |
+| 4 | Decide + document the **gate rule** (all-L-or-F vs aggregate >85% vs ISO staged) | ✅ **Implemented + decided (2026-10-13)** — all three rules selectable; **defended primary = `aggregate-85`**, with `all-l-or-f` and `iso-staged` reported as robustness checks. Rationale + thesis-ready paragraph in `03-decision-log.md` §5.3. Label it an *adaptation* in the write-up |
+| 5 | Replace the "vs Excel" framing with a reference-calculation fixture | ✅ **Done (2026-10-13)** — "vs Excel" removed from `02` §5.4, `05`, `03`, `README`, test banner, and UI labels; independent reference fixture `src/utils/__tests__/referenceCalculation.test.ts` built and green |
 | 6 | Decide the seeded COBIT subset (objectives/activities) and its licensing | ⏳ **Open** — ISACA content is copyrighted; a small seeded subset + attribute must be decided and documented |
-| 7 | Decide whether minimal persistence + history/comparison is **built** or **design-only** | ⏳ **Open** — the promised assessment-management contribution (Focus D) needs either an implemented snapshot/persistence layer or an explicit design-only scope |
+| 7 | Decide whether minimal persistence + history/comparison is **built** or **design-only** | ✅ **Built (2026-10-13)** — localStorage registry + compact snapshots (`cobit_assessment_snapshots_v1`) + `CompareAssessments.tsx` baseline→candidate comparison. Scope it in the thesis as single-browser/client-side |
 | 8 | Verify ITAF edition and IIA edition to cite | ✅ **Done** — cite ITAF 4th ed. (2020; a 5th ed. exists in 2026), IIA 2024 Standards |
 | 9 | Reconcile `04-regulasi-indonesia-cobit.md` against §9.2 rows 19–24 | ✅ **Done (2026-10-13)** — a 6-item correction banner at the top of `04` now covers rows 19–24 (incl. §9.2 #23, SEOJK 21/2017 §5.2/§7.6.1 naming COBIT) |
 | 10 | Apply the §9.2 register rows 1–8, 13, 18 to `01`/`02`/`03`/`05` | ✅ **Done (2026-10-13)** — capability names, all-L-or-F gate, attribution, Almeida→Souza Neto, Eulerich/KPMG, Mandiangan, Cobvapps removal, `[2ND-UNV]` flags all applied |

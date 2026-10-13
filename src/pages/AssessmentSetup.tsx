@@ -216,12 +216,14 @@ export default function AssessmentSetup({ mode = 'edit' }: AssessmentSetupProps)
 
             <div className="setup__benchmark-banner">
               <div className="setup__benchmark-text">
-                <strong>Ingin langsung menguji validitas matematis vs Excel ISACA?</strong>
+                <strong>Ingin mencoba sistem dengan contoh data?</strong>
                 <p>
-                  Klik tombol <em>Muat Dataset Benchmark PANRB</em> untuk mengisi otomatis formulir DF1–4 dan respons asesmen riil.
+                  Klik tombol <em>Muat Data Demo</em> untuk mengisi otomatis formulir DF1–4 dan respons asesmen. Data ini
+                  bersifat <strong>sintetis/demo</strong> (diturunkan dari latihan asesmen sebelumnya), bukan dataset resmi
+                  PANRB maupun benchmark ISACA.
                 </p>
                 <p className="setup__benchmark-hint">
-                  Data riil Kementerian PANRB · digunakan untuk validasi matematika vs Excel ISACA.
+                  Data demo sintetis · hasil hanya cek konsistensi internal terhadap aturan CPM yang didokumentasikan aplikasi.
                 </p>
               </div>
               <button
@@ -229,10 +231,10 @@ export default function AssessmentSetup({ mode = 'edit' }: AssessmentSetupProps)
                 className="btn btn--primary"
                 onClick={() => {
                   loadBenchmarkData();
-                  alert('Dataset benchmark Kementerian PANRB berhasil dimuat!');
+                  alert('Data demo berhasil dimuat!');
                 }}
               >
-                ⚡ Muat Dataset Benchmark PANRB
+                ⚡ Muat Data Demo
               </button>
             </div>
           </div>

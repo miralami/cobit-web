@@ -4,6 +4,9 @@ import type {
   DF1Input,
   DesignFactorWeights,
   CapabilityLevel,
+  CpmMethodConfig,
+  EvidenceStatus,
+  AssessmentSnapshot,
   ResponseRating,
   EvidenceRecord,
   RecommendationItem,
@@ -13,10 +16,14 @@ export interface AssessmentContextType {
   state: FullAssessmentState;
   assessmentsList: FullAssessmentState[];
   activeAssessmentId: string;
+  snapshots: AssessmentSnapshot[];
   navigateToAssessment: (id: string) => void;
   createNewAssessment: () => string;
   duplicateAssessment: (id: string) => string;
   deleteAssessment: (id: string) => void;
+  createSnapshot: (label: string) => string;
+  deleteSnapshot: (id: string) => void;
+  setMethodConfig: (config: Partial<CpmMethodConfig>) => void;
   updateMetadata: (meta: { title?: string; organization?: string; assessor?: string; period?: string }) => void;
   updateWeights: (weights: Partial<DesignFactorWeights>) => void;
   updateDF1: (df1: Partial<DF1Input>) => void;
@@ -33,6 +40,8 @@ export interface AssessmentContextType {
   ) => void;
   addEvidence: (evidence: Omit<EvidenceRecord, 'id'>) => string;
   updateEvidence: (evidence: EvidenceRecord) => void;
+  advanceEvidenceStatus: (evidenceId: string) => void;
+  setEvidenceStatus: (evidenceId: string, status: EvidenceStatus) => void;
   deleteEvidence: (evidenceId: string) => void;
   linkEvidenceToActivity: (evidenceId: string, activityId: string, objectiveId?: string) => void;
   unlinkEvidenceFromActivity: (evidenceId: string, activityId: string, objectiveId?: string) => void;

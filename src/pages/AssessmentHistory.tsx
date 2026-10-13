@@ -93,9 +93,9 @@ export default function AssessmentHistory() {
         <div className="page-head__actions">
           <button type="button" className="btn btn--secondary" onClick={() => {
             loadBenchmarkData();
-            alert('Benchmark dataset PANRB ditambahkan ke riwayat!');
+            alert('Data demo sintetis ditambahkan ke riwayat!');
           }}>
-            ⚡ Muat Benchmark PANRB
+            ⚡ Muat Data Demo
           </button>
           <label className="btn btn--subtle file-upload-btn">
             📥 Impor JSON

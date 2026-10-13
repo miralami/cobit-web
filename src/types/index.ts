@@ -16,6 +16,39 @@ export type CPMRating = 'N' | 'P' | 'L' | 'F';
 
 export type AssessmentStatus = 'not-started' | 'in-progress' | 'completed' | 'archived';
 
+/**
+ * Gate rule that decides when a capability level is considered achieved.
+ *
+ * - `aggregate-85`  : mean fulfilment of a level > 85% (operational adaptation,
+ *                     preceded by Marcela & Fianty 2023 / Simatupang & Fianty 2023)
+ * - `all-l-or-f`    : every activity of the level is rated Largely or Fully
+ *                     (Souza Neto, Almeida & Mira da Silva 2019, ISACA proposal)
+ * - `iso-staged`    : lower levels need Fully, the claimed level needs Largely
+ *                     (ISO/IEC 33020:2019 staged model)
+ */
+export type CpmGateRule = 'aggregate-85' | 'all-l-or-f' | 'iso-staged';
+
+/** N/P/L/F percentage bands. F is implied by `> lMax`. */
+export interface CpmThresholds {
+  nMax: number; // <= nMax  => N
+  pMax: number; // <= pMax  => P
+  lMax: number; // <= lMax  => L, otherwise F
+}
+
+/**
+ * The explicit, inspectable operational rule set applied by the engine.
+ * COBIT 2019 mandates no aggregation formula (ISACA Journal 2021 Vol 6), so
+ * this configuration *is* a documented design decision, not an ISACA standard.
+ */
+export interface CpmMethodConfig {
+  gate: CpmGateRule;
+  thresholds: CpmThresholds;
+  /** How "not applicable" responses are treated. Kept explicit for auditability. */
+  naPolicy: 'exclude-from-denominator';
+}
+
+export type EvidenceStatus = 'pending' | 'reviewed' | 'attached';
+
 export interface DesignFactorWeights {
   df1: number; // default: 2
   df2: number; // default: 1
@@ -75,9 +108,19 @@ export interface LevelAssessmentResult {
   validCount: number;
   totalScore: number;
   fulfillmentPercentage: number; // 0.0 - 1.0
-  cpmRating: CPMRating;          // N, P, L, F
-  isComplete: boolean;           // true if > 0.85
-  status: 'Complete!' | 'Stop Here!';
+  cpmRating: CPMRating;          // N, P, L, F (per-level band, judgment proxy)
+  isComplete: boolean;           // true if the configured gate is passed
+  status: 'Complete!' | 'Stop Here!' | 'Insufficient Evidence';
+  naCount?: number;              // activities marked N.A. at this level
+  totalActivities?: number;      // activities defined at this level
+  insufficientEvidence?: boolean; // all defined activities are N.A. => cannot judge
+  /** Outcome of every supported gate, so the thesis can report rule sensitivity. */
+  gateResults?: {
+    aggregate85: boolean;
+    allLOrF: boolean;
+    isoStagedLower: boolean;   // passes as a *lower* level (needs F)
+    isoStagedClaimed: boolean; // passes as the *claimed* level (needs L or F)
+  };
 }
 
 export interface ObjectiveAssessmentData {
@@ -87,6 +130,10 @@ export interface ObjectiveAssessmentData {
   activities: AssessmentActivity[];
   levelResults: Record<number, LevelAssessmentResult>;
   gap: number;
+  /** Method rule set used to compute this objective's result. */
+  methodConfig?: CpmMethodConfig;
+  /** Current level under each gate rule, for transparent rule comparison. */
+  currentLevelByGate?: Record<CpmGateRule, CapabilityLevel>;
 }
 
 export interface EvidenceRecord {
@@ -98,7 +145,7 @@ export interface EvidenceRecord {
   date: string;
   notes: string;
   linkedActivityIds: string[]; // IDs of activities this evidence supports
-  status?: 'attached' | 'pending' | 'reviewed';
+  status?: EvidenceStatus;
 }
 
 export interface RecommendationItem {
@@ -138,6 +185,34 @@ export interface FullAssessmentState {
   evidenceList: EvidenceRecord[];
   recommendations: RecommendationItem[];
   updatedAt: string;
+  /** Explicit scoring rule set for this assessment (auditable method disclosure). */
+  methodConfig?: CpmMethodConfig;
+}
+
+/** Compact, frozen metrics of an assessment at a point in time. */
+export interface SnapshotSummary {
+  totalObjectives: number;
+  avgCurrentLevel: number;
+  totalGap: number;
+  achievedCount: number;
+  evidenceCount: number;
+  recommendationCount: number;
+  rows: Array<{
+    objectiveId: string;
+    currentLevel: CapabilityLevel;
+    targetLevel: CapabilityLevel;
+    gap: number;
+  }>;
+}
+
+/** Immutable snapshot used for period-over-period / unit comparison. */
+export interface AssessmentSnapshot {
+  id: string;
+  assessmentId: string;
+  label: string;
+  createdAt: string;
+  methodConfig: CpmMethodConfig;
+  summary: SnapshotSummary;
 }
 
 // Legacy / Helper interfaces for compatibility with existing UI components

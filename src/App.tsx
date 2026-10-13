@@ -10,6 +10,7 @@ import AssessmentWorkspace from './pages/AssessmentWorkspace';
 import EvidenceFindings from './pages/EvidenceFindings';
 import CapabilityResult from './pages/CapabilityResult';
 import GapAnalysis from './pages/GapAnalysis';
+import CompareAssessments from './pages/CompareAssessments';
 import Recommendations from './pages/Recommendations';
 import './styles/global.css';
 import './styles/ui.css';
@@ -40,6 +41,7 @@ function App() {
             <Route path="/assessments/:id/evidence" element={<EvidenceFindings />} />
             <Route path="/assessments/:id/results" element={<CapabilityResult />} />
             <Route path="/assessments/:id/gap" element={<GapAnalysis />} />
+            <Route path="/assessments/:id/compare" element={<CompareAssessments />} />
             <Route path="/assessments/:id/recommendations" element={<Recommendations />} />
           </Route>
           <Route path="*" element={<Navigate to="/assessments" replace />} />

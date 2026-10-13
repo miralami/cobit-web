@@ -5,19 +5,77 @@ import type {
   DF1Input,
   DesignFactorWeights,
   CapabilityLevel,
+  CpmMethodConfig,
+  EvidenceStatus,
+  AssessmentSnapshot,
+  SnapshotSummary,
   ResponseRating,
   EvidenceRecord,
   RecommendationItem,
 } from '../types';
 import { calculateDesignFactors } from '../utils/designFactorEngine';
-import { calculateObjectiveAssessment } from '../utils/cpmEngine';
+import { calculateObjectiveAssessment, DEFAULT_CPM_CONFIG } from '../utils/cpmEngine';
 import { createBenchmarkState } from '../data/benchmarkData';
 import cobitActivitiesData from '../data/cobitActivities.json';
 import { AssessmentContext } from './assessmentContextDef';
 
 const STORAGE_KEY_LIST = 'cobit_assessments_history_v2';
 const STORAGE_KEY_ACTIVE = 'cobit_active_assessment_id_v2';
+const STORAGE_KEY_SNAPSHOTS = 'cobit_assessment_snapshots_v1';
 const LEGACY_STORAGE_KEY = 'cobit_assessment_store_v2';
+
+function resolveConfig(state: Pick<FullAssessmentState, 'methodConfig'>): CpmMethodConfig {
+  return state.methodConfig ?? DEFAULT_CPM_CONFIG;
+}
+
+/**
+ * Recompute every scoped objective's result under the given method config.
+ * Used on load and whenever the assessor switches the gate rule.
+ */
+function recomputeAssessments(
+  state: FullAssessmentState,
+  config: CpmMethodConfig
+): FullAssessmentState['assessments'] {
+  const recomputed: FullAssessmentState['assessments'] = {};
+  for (const [objId, objData] of Object.entries(state.assessments)) {
+    recomputed[objId] = calculateObjectiveAssessment(
+      objId,
+      state.objectiveTargets[objId] ?? objData.targetLevel ?? 3,
+      objData.activities,
+      config
+    );
+  }
+  return recomputed;
+}
+
+function buildSnapshotSummary(state: FullAssessmentState): SnapshotSummary {
+  const rows = state.scopedObjectiveIds.map((id) => {
+    const data = state.assessments[id];
+    const target = state.objectiveTargets[id] ?? 3;
+    const current = data?.currentLevel ?? 1;
+    return {
+      objectiveId: id,
+      currentLevel: current,
+      targetLevel: target,
+      gap: Math.max(0, target - current),
+    };
+  });
+  const totalObjectives = rows.length;
+  const avgCurrentLevel =
+    totalObjectives > 0
+      ? Math.round((rows.reduce((sum, r) => sum + r.currentLevel, 0) / totalObjectives) * 100) / 100
+      : 0;
+  const totalGap = rows.reduce((sum, r) => sum + r.gap, 0);
+  return {
+    totalObjectives,
+    avgCurrentLevel,
+    totalGap,
+    achievedCount: rows.filter((r) => r.gap === 0).length,
+    evidenceCount: state.evidenceList.length,
+    recommendationCount: state.recommendations.length,
+    rows,
+  };
+}
 
 function createDefaultState(customId?: string, title?: string): FullAssessmentState {
   const id = customId || 'assessment-' + Date.now();
@@ -55,8 +113,15 @@ function createDefaultState(customId?: string, title?: string): FullAssessmentSt
     evidenceList: [],
     recommendations: [],
     updatedAt: new Date().toISOString(),
+    methodConfig: { ...DEFAULT_CPM_CONFIG },
   };
 }
+
+export const EVIDENCE_STATUS_FLOW: Record<EvidenceStatus, EvidenceStatus | null> = {
+  pending: 'reviewed',
+  reviewed: 'attached',
+  attached: null,
+};
 
 export const AssessmentProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const location = useLocation();
@@ -68,10 +133,17 @@ export const AssessmentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       if (storedList) {
         const parsed = JSON.parse(storedList) as FullAssessmentState[];
         if (Array.isArray(parsed) && parsed.length > 0) {
-          return parsed.map((item) => ({
-            ...item,
-            dfResults: calculateDesignFactors(item.df1, item.df2, item.df3, item.df4, item.weights || { df1: 2, df2: 1, df3: 3, df4: 4 }),
-          }));
+          return parsed.map((item) => {
+            const withMethod: FullAssessmentState = {
+              ...item,
+              methodConfig: resolveConfig(item),
+            };
+            return {
+              ...withMethod,
+              dfResults: calculateDesignFactors(withMethod.df1, withMethod.df2, withMethod.df3, withMethod.df4, withMethod.weights || { df1: 2, df2: 1, df3: 3, df4: 4 }),
+              assessments: recomputeAssessments(withMethod, withMethod.methodConfig as CpmMethodConfig),
+            };
+          });
         }
       }
       // Check legacy single-assessment storage
@@ -79,7 +151,9 @@ export const AssessmentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       if (storedSingle) {
         const single = JSON.parse(storedSingle) as FullAssessmentState;
         if (single && single.id) {
+          single.methodConfig = resolveConfig(single);
           single.dfResults = calculateDesignFactors(single.df1, single.df2, single.df3, single.df4, single.weights || { df1: 2, df2: 1, df3: 3, df4: 4 });
+          single.assessments = recomputeAssessments(single, single.methodConfig);
           return [single];
         }
       }
@@ -87,7 +161,10 @@ export const AssessmentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       console.warn('Failed to load assessment history:', e);
     }
     // Default initial assessment history: benchmark data
-    return [createBenchmarkState()];
+    const benchmark = createBenchmarkState();
+    benchmark.methodConfig = resolveConfig(benchmark);
+    benchmark.assessments = recomputeAssessments(benchmark, benchmark.methodConfig);
+    return [benchmark];
   });
 
   const [activeAssessmentId, setActiveAssessmentId] = useState<string>(() => {
@@ -133,6 +210,28 @@ export const AssessmentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     }
   }, [assessmentsList, activeAssessmentId, state]);
 
+  // Immutable snapshots (kept in a separate store so FullAssessmentState stays acyclic)
+  const [snapshots, setSnapshots] = useState<AssessmentSnapshot[]>(() => {
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY_SNAPSHOTS);
+      if (stored) {
+        const parsed = JSON.parse(stored) as AssessmentSnapshot[];
+        if (Array.isArray(parsed)) return parsed;
+      }
+    } catch (e) {
+      console.warn('Failed to load snapshots:', e);
+    }
+    return [];
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY_SNAPSHOTS, JSON.stringify(snapshots));
+    } catch (e) {
+      console.error('Failed to sync snapshots to localStorage:', e);
+    }
+  }, [snapshots]);
+
   // Helper to mutate active assessment
   const updateCurrent = useCallback((updater: (current: FullAssessmentState) => FullAssessmentState) => {
     setAssessmentsList((prevList) => {
@@ -176,6 +275,8 @@ export const AssessmentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       const remaining = prev.filter((a) => a.id !== id);
       if (remaining.length === 0) {
         const fresh = createBenchmarkState();
+        fresh.methodConfig = resolveConfig(fresh);
+        fresh.assessments = recomputeAssessments(fresh, fresh.methodConfig);
         setActiveAssessmentId(fresh.id);
         return [fresh];
       }
@@ -185,6 +286,47 @@ export const AssessmentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       return remaining;
     });
   }, [activeAssessmentId]);
+
+  /**
+   * Switch the transient/documentation gate rule and recompute all results.
+   * This is the "inspectable scoring method" contribution: the rule is data,
+   * not a hard-coded constant.
+   */
+  const setMethodConfig = useCallback((partial: Partial<CpmMethodConfig>) => {
+    updateCurrent((prev) => {
+      const baseConfig = resolveConfig(prev);
+      const nextConfig: CpmMethodConfig = {
+        ...baseConfig,
+        ...partial,
+        thresholds: { ...baseConfig.thresholds, ...(partial.thresholds ?? {}) },
+      };
+      return {
+        ...prev,
+        methodConfig: nextConfig,
+        assessments: recomputeAssessments(prev, nextConfig),
+        updatedAt: new Date().toISOString(),
+      };
+    });
+  }, [updateCurrent]);
+
+  const createSnapshot = useCallback((label: string): string => {
+    const target = assessmentsList.find((a) => a.id === activeAssessmentId);
+    if (!target) return '';
+    const newSnapshot: AssessmentSnapshot = {
+      id: `SNAP-${Date.now()}`,
+      assessmentId: target.id,
+      label: label.trim() || `Snapshot ${new Date().toLocaleString('id-ID')}`,
+      createdAt: new Date().toISOString(),
+      methodConfig: resolveConfig(target),
+      summary: buildSnapshotSummary(target),
+    };
+    setSnapshots((prev) => [newSnapshot, ...prev]);
+    return newSnapshot.id;
+  }, [assessmentsList, activeAssessmentId]);
+
+  const deleteSnapshot = useCallback((id: string) => {
+    setSnapshots((prev) => prev.filter((s) => s.id !== id));
+  }, []);
 
   const updateMetadata = useCallback((meta: { title?: string; organization?: string; assessor?: string; period?: string }) => {
     updateCurrent((prev) => ({
@@ -274,7 +416,7 @@ export const AssessmentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
         }
         if (!newAssessments[objId]) {
           const preSeeded = (cobitActivitiesData as Record<string, any>)[objId] || [];
-          newAssessments[objId] = calculateObjectiveAssessment(objId, newTargets[objId], preSeeded);
+          newAssessments[objId] = calculateObjectiveAssessment(objId, newTargets[objId], preSeeded, resolveConfig(prev));
         }
       }
 
@@ -297,7 +439,8 @@ export const AssessmentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
         newAssessments[objectiveId] = calculateObjectiveAssessment(
           objectiveId,
           target,
-          existing.activities
+          existing.activities,
+          resolveConfig(prev)
         );
       }
       return {
@@ -327,7 +470,7 @@ export const AssessmentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
         });
 
         const target = prev.objectiveTargets[objectiveId] ?? assessment.targetLevel;
-        const updatedAssessment = calculateObjectiveAssessment(objectiveId, target, updatedActivities);
+        const updatedAssessment = calculateObjectiveAssessment(objectiveId, target, updatedActivities, resolveConfig(prev));
 
         return {
           ...prev,
@@ -347,6 +490,7 @@ export const AssessmentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     const newRecord: EvidenceRecord = {
       ...evidenceData,
       id: newId,
+      status: evidenceData.status ?? 'pending',
     };
 
     updateCurrent((prev) => {
@@ -366,7 +510,8 @@ export const AssessmentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
               updatedAssessments[objId] = calculateObjectiveAssessment(
                 objId,
                 objData.targetLevel,
-                newActivities
+                newActivities,
+                resolveConfig(prev)
               );
             }
           }
@@ -392,6 +537,27 @@ export const AssessmentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     }));
   }, [updateCurrent]);
 
+  /** Explicit, one-step-at-a-time verification workflow for audit evidence. */
+  const advanceEvidenceStatus = useCallback((evidenceId: string) => {
+    updateCurrent((prev) => ({
+      ...prev,
+      evidenceList: prev.evidenceList.map((e) => {
+        if (e.id !== evidenceId) return e;
+        const current = e.status ?? 'pending';
+        return { ...e, status: EVIDENCE_STATUS_FLOW[current] ?? current };
+      }),
+      updatedAt: new Date().toISOString(),
+    }));
+  }, [updateCurrent]);
+
+  const setEvidenceStatus = useCallback((evidenceId: string, status: EvidenceStatus) => {
+    updateCurrent((prev) => ({
+      ...prev,
+      evidenceList: prev.evidenceList.map((e) => (e.id === evidenceId ? { ...e, status } : e)),
+      updatedAt: new Date().toISOString(),
+    }));
+  }, [updateCurrent]);
+
   const deleteEvidence = useCallback((evidenceId: string) => {
     updateCurrent((prev) => {
       const updatedList = prev.evidenceList.filter((e) => e.id !== evidenceId);
@@ -412,7 +578,8 @@ export const AssessmentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
           updatedAssessments[objId] = calculateObjectiveAssessment(
             objId,
             objData.targetLevel,
-            newActivities
+            newActivities,
+            resolveConfig(prev)
           );
         }
       }
@@ -447,7 +614,7 @@ export const AssessmentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
           if (!act.evidenceIds.includes(evidenceId)) {
             const newActivities = [...objData.activities];
             newActivities[actIndex] = { ...act, evidenceIds: [...act.evidenceIds, evidenceId] };
-            updatedAssessments[objId] = calculateObjectiveAssessment(objId, objData.targetLevel, newActivities);
+            updatedAssessments[objId] = calculateObjectiveAssessment(objId, objData.targetLevel, newActivities, resolveConfig(prev));
           }
         }
       }
@@ -482,7 +649,7 @@ export const AssessmentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
           if (act.evidenceIds.includes(evidenceId)) {
             const newActivities = [...objData.activities];
             newActivities[actIndex] = { ...act, evidenceIds: act.evidenceIds.filter((id) => id !== evidenceId) };
-            updatedAssessments[objId] = calculateObjectiveAssessment(objId, objData.targetLevel, newActivities);
+            updatedAssessments[objId] = calculateObjectiveAssessment(objId, objData.targetLevel, newActivities, resolveConfig(prev));
           }
         }
       }
@@ -528,6 +695,8 @@ export const AssessmentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
 
   const loadBenchmarkData = useCallback(() => {
     const benchmark = createBenchmarkState();
+    benchmark.methodConfig = resolveConfig(benchmark);
+    benchmark.assessments = recomputeAssessments(benchmark, benchmark.methodConfig);
     // Add to history if not existing or replace benchmark instance
     setAssessmentsList((prev) => {
       const existsIndex = prev.findIndex((a) => a.id === benchmark.id);
@@ -560,7 +729,9 @@ export const AssessmentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     try {
       const parsed = JSON.parse(jsonStr) as FullAssessmentState;
       if (parsed && parsed.df1 && parsed.df2 && parsed.df3 && parsed.df4) {
+        parsed.methodConfig = resolveConfig(parsed);
         parsed.dfResults = calculateDesignFactors(parsed.df1, parsed.df2, parsed.df3, parsed.df4, parsed.weights || { df1: 2, df2: 1, df3: 3, df4: 4 });
+        parsed.assessments = recomputeAssessments(parsed, parsed.methodConfig);
         if (!parsed.id) parsed.id = 'assessment-' + Date.now();
         setAssessmentsList((prev) => [parsed, ...prev.filter((a) => a.id !== parsed.id)]);
         setActiveAssessmentId(parsed.id);
@@ -577,10 +748,14 @@ export const AssessmentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       state,
       assessmentsList,
       activeAssessmentId,
+      snapshots,
       navigateToAssessment,
       createNewAssessment,
       duplicateAssessment,
       deleteAssessment,
+      createSnapshot,
+      deleteSnapshot,
+      setMethodConfig,
       updateMetadata,
       updateWeights,
       updateDF1,
@@ -592,6 +767,8 @@ export const AssessmentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       updateActivityResponse,
       addEvidence,
       updateEvidence,
+      advanceEvidenceStatus,
+      setEvidenceStatus,
       deleteEvidence,
       linkEvidenceToActivity,
       unlinkEvidenceFromActivity,
@@ -607,10 +784,14 @@ export const AssessmentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       state,
       assessmentsList,
       activeAssessmentId,
+      snapshots,
       navigateToAssessment,
       createNewAssessment,
       duplicateAssessment,
       deleteAssessment,
+      createSnapshot,
+      deleteSnapshot,
+      setMethodConfig,
       updateMetadata,
       updateWeights,
       updateDF1,
@@ -622,6 +803,8 @@ export const AssessmentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       updateActivityResponse,
       addEvidence,
       updateEvidence,
+      advanceEvidenceStatus,
+      setEvidenceStatus,
       deleteEvidence,
       linkEvidenceToActivity,
       unlinkEvidenceFromActivity,

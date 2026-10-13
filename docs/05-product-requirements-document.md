@@ -75,7 +75,9 @@ Membangun alat bantu asesmen COBIT 2019 berbasis web untuk satu entitas dalam sa
 | **`CapabilityResult.tsx`** | Menampilkan kartu hasil kapabilitas hardcoded dari `mockData.ts`. | **Kalkulasi tidak reaktif.** Level saat ini tidak dihitung otomatis dari respon pada workspace asesmen. |
 | **`GapAnalysis.tsx`** | Tabel gap statis dari `mockData.ts`. | **Nilai delta statis.** Tidak menghitung selisih Target vs Current secara dinamis dari hasil asesmen aktif. |
 | **`Recommendations.tsx`** | Placeholder yang menjelaskan rekomendasi belum tersedia. | **Belum ada tabel rekomendasi.** Belum ada rekomendasi rule-based per gap, termasuk klasifikasi *People, Process, Technology*. |
-| **Data Layer (`mockData.ts`)** | Array statis dan sample values; sebagian input workspace hanya di React state. | **Belum ada persistensi lintas halaman.** Belum ada katalog aktivitas COBIT lengkap atau `localStorage`. Data PANRB bukan dataset benchmark default. |
+| **Data Layer (`mockData.ts`)** | ~~Array statis dan sample values~~ **[Diperbarui]** State terpusat di `AssessmentContext` + sinkronisasi `localStorage` (`cobit_assessment_store_v2`), riwayat multi-assessment, snapshot ringkas (`cobit_assessment_snapshots_v1`), ekspor/impor JSON. Katalog aktivitas dari `src/data/cobitActivities.json`. | **Sudah ada persistensi lintas halaman.** Sisa: finalisasi subset objektif/aktivitas yang di-seed dan labelisasi data sebagai sintetis/demo. |
+
+> **Catatan status (2026-10-13):** tabel as-is di atas mendokumentasikan kondisi *pra-implementasi*. Beberapa gap (persistensi, kalkulasi reaktif, CRUD bukti, rekomendasi rule-based, mesin CPM) kini sudah ditutup pada kode; lihat `06-deep-research-research-gap.md` Appendix B untuk status terbuka.
 
 ---
 
