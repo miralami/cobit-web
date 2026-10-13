@@ -2,6 +2,11 @@
 
 # Laporan Penelitian: Evaluasi Empiris Assessment Tata Kelola TI Berbasis COBIT 2019 dan Contextual Retrieval-Augmented Generation (RAG) dalam Auditing
 
+> **Catatan koreksi (2026-10-13).** Dokumen ini adalah keluaran NotebookLM (bahan mentah), bukan naskah skripsi. Beberapa klaim teknis di dalamnya telah dikoreksi agar selaras dengan `06-deep-research-research-gap.md` §9.2:
+> 1. **Skala N/P/L/F** — bukan "ISO/IEC 33000". COBIT 2019 menganut skema berbasis **CMMI** dan **tidak menerbitkan PAM** (ISACA Journal, 2021; ISACA, 2018). Ambang persentase N/P/L/F diambil dari **COBIT 2019 I&M §6.4.2** dan identik dengan **ISO/IEC 33020:2019 §5.3**.
+> 2. **Gerbang ketercapaian level** — bukan "seluruh aktivitas harus **Fully (F)**". Teks COBIT 2019 hanya menyatakan level tercapai bila "all activities of that level are performed successfully" (§3.4, G&M), dan sebuah **proposal** ISACA (Souza Neto, Almeida & Mira da Silva, 2019) membaca ini sebagai **seluruh aktivitas bernilai Largely atau Fully (L/F)**. COBIT 2019 **tidak menetapkan formula agregasi wajib**.
+> 3. **Angka 93,6% (Karakurt 2026)** dan klaim RAG lain di dokumen ini berstatus **`[2ND-UNV]`** (belum terverifikasi) — lihat `06` §7.2.
+
 ## Ringkasan Eksekutif
 
 Proses assessment tata kelola Teknologi Informasi (TI) menggunakan kerangka kerja COBIT 2019 secara historis didominasi oleh peninjauan bukti digital (*evidence collection and review*) yang manual, memakan waktu, dan rentan terhadap subjektivitas penilai (*assessor*) [cite: 1, 2, 3]. Laporan penelitian ini menyajikan analisis objektif dan berbasis bukti (*evidence-based*) mengenai hambatan operasional dalam audit TI, mekanisme penilaian COBIT 2019, lanskap adopsi *Artificial Intelligence* (AI) dan *Generative AI* (GenAI), serta batas-batas kemampuan *Retrieval-Augmented Generation* (RAG) dalam konteks *decision-support system* [cite: 4, 5, 6, 7].
@@ -10,7 +15,7 @@ Proses assessment tata kelola Teknologi Informasi (TI) menggunakan kerangka kerj
 
 **Gap Operasional dalam Tata Kelola TI**: Meskipun 70% organisasi telah mengadopsi perangkat lunak GRC (*Governance, Risk, and Compliance*) [cite: 1], mayoritas entitas mengalami ketidaksesuaian operasional (*operations gap*) antara pemetaan kontrol teoritis dan eksekusi bukti riil akibat tingginya volume data tidak terstruktur [cite: 1, 2].
 
-**Kompleksitas COBIT 2019**: Kerangka kerja COBIT 2019 membutuhkan penelusuran *goals cascade* yang ketat (13 *Enterprise Goals* ke 13 *Alignment Goals* hingga 40 *Governance/Management Objectives*) [cite: 7, 9], serta pemetaan bukti multi-level untuk mengukur tingkat kapabilitas (*Capability Level* 0–5) dengan skala pemenuhan ISO/IEC 33000 (N, P, L, F) [cite: 7, 9, 10].
+**Kompleksitas COBIT 2019**: Kerangka kerja COBIT 2019 membutuhkan penelusuran *goals cascade* yang ketat (13 *Enterprise Goals* ke 13 *Alignment Goals* hingga 40 *Governance/Management Objectives*) [cite: 7, 9], serta pemetaan bukti multi-level untuk mengukur tingkat kapabilitas (*Capability Level* 0–5) dengan skala pemenuhan *Not/Partially/Largely/Fully* (N/P/L/F) yang ambang persentasenya identik dengan ISO/IEC 33020:2019 §5.3 dan bersumber dari COBIT 2019 I&M §6.4.2 [cite: 7, 9, 10].
 
 **Tingkat Adopsi GenAI yang Asimetris**: Berdasarkan data *Institute of Internal Auditors* (IIA) tahun 2025, meskipun 41% tim audit internal mengindikasikan adopsi atau rencana penggunaan GenAI [cite: 5, 11], hanya 6% yang menggunakannya secara ekstensif pada tahap pekerjaan lapangan (*fieldwork*) dan 60% belum melangkah sama sekali [cite: 5].
 
@@ -78,7 +83,7 @@ Kedua, pada tahap *Evidence Collection and Inventorying*, assessor mengumpulkan 
 
 Ketiga, pada tahap *Evidence Mapping to COBIT Practices*, assessor memetakan setiap bukti dokumen ke *Management Practices* dan *Activities* spesifik di dalam domain COBIT yang dipilih [cite: 2, 7]. Assessor harus memverifikasi kecukupan (*sufficiency*) dan kesesuaian (*appropriateness*) bukti tersebut [cite: 2].
 
-Keempat, pada tahap *Capability Level Rating*, assessor menguji ketercapaian kriteria pada skala *COBIT Performance Management* (CPM) yang mengadopsi standar ISO/IEC 33000 [cite: 7, 9, 10]. Penilaian ketercapaian kriteria aktivitas (*Activity Rating Scale*) menggunakan ambang batas matematis sebagai berikut [cite: 7, 9, 10]:
+Keempat, pada tahap *Capability Level Rating*, assessor menguji ketercapaian kriteria pada skala *COBIT Performance Management* (CPM) yang menggunakan skala N/P/L/F. Ambang persentase N/P/L/F bersumber dari COBIT 2019 I&M §6.4.2 dan identik dengan ISO/IEC 33020:2019 §5.3; COBIT 2019 menganut skema berbasis CMMI dan **tidak menerbitkan PAM tersendiri** [cite: 7, 9, 10]. Penilaian ketercapaian kriteria aktivitas (*Activity Rating Scale*) menggunakan ambang batas matematis sebagai berikut [cite: 7, 9, 10]:
 
 **N (Not Achieved)**: 0% hingga 15% pemenuhan. Bukti sangat minim atau tidak ada pencapaian [cite: 7, 9, 10].
 
@@ -88,7 +93,7 @@ Keempat, pada tahap *Capability Level Rating*, assessor menguji ketercapaian kri
 
 **F (Fully Achieved)**: >85% hingga 100% pemenuhan. Bukti lengkap, konsisten, dan terbukti berjalan efektif secara berkelanjutan [cite: 7, 9, 10].
 
-Prinsip utama CPM menetapkan bahwa suatu domain proses hanya dianggap mencapai *Capability Level* tertentu (misalnya Level 2) jika seluruh aktivitas pada tingkat tersebut mendapatkan predikat **Fully Achieved (F)** dan tingkat di bawahnya telah terpenuhi penuh [cite: 9, 25]. Sebagai contoh, jika sebuah proses mencapai rerata 73% (Largely Achieved) pada Level 2, secara resmi proses tersebut dinilai **gagal mencapai Level 2** [cite: 25].
+Karena ISACA menetapkan **tidak ada formula agregasi wajib** untuk COBIT 2019, aturan penentuan ketercapaian sebuah level perlu dinyatakan secara eksplisit. Teks COBIT 2019 menyatakan bahwa sebuah proses mencapai suatu capability level "as soon as all activities of that level are performed successfully" (*COBIT 2019 Framework: Governance and Management Objectives*, §3.4) [cite: 9]. Sebuah **proposal** yang diterbitkan ISACA menafsirkan aturan ini sebagai: suatu level dianggap tercapai hanya jika **seluruh aktivitas pada level tersebut diberi predikat Largely atau Fully (L/F)** dan seluruh level di bawahnya telah terpenuhi (Souza Neto, Almeida & Mira da Silva, 2019) [cite: 25]. Dengan aturan *all-L-or-F* ini, satu aktivitas saja yang bernilai N atau P menggugurkan pencapaian level tersebut. Perlu ditegaskan bahwa ini adalah *proposal operasional*, bukan standar resmi ISACA; alternatif lain — misalnya model bertahap ISO/IEC 33020 (level yang diklaim cukup *Largely*, level di bawahnya harus *Fully*) — dapat memberikan hasil yang berbeda pada data yang sama.
 
 Kelima, pada tahap *Gap Analysis and Findings Synthesis*, assessor membandingkan *Target Capability Level* yang diinginkan organisasi dengan *Current Capability Level* hasil pengujian [cite: 7, 9]. Ketidaksesuaian antara kriteria COBIT dan bukti nyata didokumentasikan sebagai temuan audit (*findings*) [cite: 7].
 
@@ -332,7 +337,7 @@ Memilih Scope D membawa risiko kegagalan proyek yang tinggi karena alokasi waktu
 
 Landasan teoretis dan metodologis dari laporan penelitian ini dibangun di atas 10 sumber ilmiah dan organisasi profesional bereputasi tinggi:
 
-Landasan utama penilaian tata kelola berasal dari terbitan resmi ISACA mengenai kerangka kerja COBIT 2019 [cite: 7, 9, 10]. Publikasi ini memberikan kontribusi teoretis mutlak mengenai struktur 40 *Governance and Management Objectives*, mekanisme *Goals Cascade*, serta aturan penilaian kapabilitas berbasis *COBIT Performance Management* (CPM) yang mengadopsi ISO/IEC 33000 [cite: 7, 9, 10].
+Landasan utama penilaian tata kelola berasal dari terbitan resmi ISACA mengenai kerangka kerja COBIT 2019 [cite: 7, 9, 10]. Publikasi ini memberikan kontribusi teoretis mutlak mengenai struktur 40 *Governance and Management Objectives*, mekanisme *Goals Cascade*, serta aturan penilaian kapabilitas berbasis *COBIT Performance Management* (CPM) dengan skala N/P/L/F (ambang persentase identik dengan ISO/IEC 33020:2019 §5.3) [cite: 7, 9, 10].
 
 Laporan *North American Pulse of Internal Audit* (2025) yang diterbitkan oleh IIA Foundation memberikan kontribusi statistik empiris mengenai tingkat adopsi nyata Generative AI di lapangan audit internal, membuktikan bahwa adopsi teknis pada *fieldwork* baru mencapai 6% [cite: 5]. Hal ini didukung oleh temuan *IT Risk Management and Compliance Benchmark Report* (2021) dari Hyperproof yang mengonfirmasi eksistensi *operations gap* dan fakta bahwa 40% profesional kepatuhan masih mengandalkan proses manual [cite: 1, 8].
 

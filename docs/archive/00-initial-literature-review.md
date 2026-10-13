@@ -74,7 +74,7 @@
 - Level 4: **Quantitatively Managed** (Measured and controlled)
 - Level 5: **Optimizing** (Continuous improvement focus)
 
-### Target-Level Cascade Algorithm (Almeida 2019)
+### Target-Level Cascade Algorithm (Souza Neto, Almeida & Mira da Silva, 2019) — *arsip; lihat koreksi 06 §9.2 #4*
 1. Assign N/P/L/F for every Level 2 activity → if all L/F → at least Level 2
 2. For Level 2 processes, rate Level 3 activities → any N/P drops to Level 2
 3. For Level 3, rate Level 4 → any N/P drops to Level 3

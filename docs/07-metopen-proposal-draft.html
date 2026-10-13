@@ -1,0 +1,566 @@
+<!DOCTYPE html []>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="MarkdownViewer++" />
+    <title>07-metopen-proposal-draft.md</title>
+    <style type="text/css">
+            
+/* Avoid page breaks inside the most common attributes, especially for exports (i.e. PDF) */
+td, h1, h2, h3, h4, h5, p, ul, ol, li {
+    page-break-inside: avoid; 
+}
+
+        </style>
+  </head>
+  <body>
+    <h1 id="proposal-tugas-akhir-metopen-draf-isi">Proposal Tugas Akhir (Metopen) — Draf Isi</h1>
+    <blockquote>
+      <p>
+        <strong>Judul (ID):</strong> Rancang Bangun Sistem Pengukuran <em>Capability Level</em> COBIT 2019 Berbasis Web dengan <em>Traceability</em> Evidensi Audit
+<strong>Judul (EN):</strong><em>Design and Development of a Web-Based COBIT 2019 Capability Level Assessment System with Audit Evidence Traceability</em></p>
+      <p>
+        <strong>Catatan:</strong> Ini adalah <strong>draf isi dalam format Markdown</strong>, bukan berkas <code>.docx</code>. Ditujukan untuk disalin ke <code>Template Metopen Draft.docx</code>. Seluruh pernyataan teknis konsisten dengan <code>06-deep-research-research-gap.md</code> (Theory/fakta terverifikasi 2026-10-13). Sitasi dalam teks memakai gaya <strong>Harvard</strong> (mengikuti Bab 1 draf yang sudah ada); <strong>Daftar Pustaka</strong> disajikan bergaya <strong>IEEE</strong> sesuai ketentuan template — lihat catatan di akhir.</p>
+      <p>
+        <strong>Status label</strong> (<code>06</code> §2.2): <code>[VER-P]</code> terverifikasi primer · <code>[VER-S]</code> sekunder · <code>[2ND-UNV]</code> belum terverifikasi · <code>[NF]</code> tidak ditemukan (bukan berarti tidak ada).</p>
+    </blockquote>
+    <hr />
+    <h2 id="bab-1-pendahuluan">BAB 1 PENDAHULUAN</h2>
+    <h3 id="latar-belakang">1.1 Latar Belakang</h3>
+    <p>Teknologi Informasi (TI) kini menjadi tulang punggung operasional, layanan, dan pengambilan keputusan organisasi. Karena itu, pemanfaatan TI perlu dikelola melalui tata kelola yang memastikan manfaat investasi tercapai, risiko terkendali, dan sumber daya digunakan secara bertanggung jawab (ISACA, 2019). Meningkatnya penggunaan aplikasi, data, layanan awan, dan tuntutan kepatuhan membuat evaluasi tata kelola TI yang sistematis serta didukung bukti yang dapat diperiksa kembali menjadi semakin penting.</p>
+    <p>COBIT 2019 adalah salah satu kerangka kerja yang digunakan untuk mengevaluasi tata kelola dan manajemen TI. Kerangka ini mencakup 40 <em>Governance and Management Objectives</em> dalam lima domain dan menyediakan <em>Design Factors</em> untuk membantu organisasi menentukan objektif yang relevan (ISACA, 2019). Pengukuran tingkat pencapaian menggunakan <em>COBIT Performance Management</em> (CPM) pada skala <em>capability</em> 0–5, dengan predikat <em>Not Achieved</em> (N), <em>Partially Achieved</em> (P), <em>Largely Achieved</em> (L), dan <em>Fully Achieved</em> (F) berdasarkan persentase pencapaian aktivitas (ISACA, 2019). Penilaian ini seharusnya bersandar pada pemeriksaan aktivitas dan bukti pendukung, bukan semata persepsi responden.</p>
+    <p>Namun, COBIT 2019 memiliki keterbatasan instrumen yang mendasar. ISACA tidak menerbitkan <em>Process Assessment Model</em> (PAM) resmi untuk COBIT 2019, berbeda dengan COBIT 5 yang berbasis ISO/IEC 33000 (ISACA, 2018; ISACA Journal, 2021). Skema CPM pada COBIT 2019 berbasis CMMI dan tidak menyediakan model penilaian proses tersendiri. Artefak digital resmi yang tersedia, seperti <em>Design Guide Tool Kit</em>, berfokus pada prioritisasi desain objektif dan tidak menghitung <em>capability level</em>. Yang lebih penting, ISACA <strong>tidak menetapkan formula agregasi wajib</strong> untuk menggulung nilai aktivitas menjadi <em>capability level</em> sebuah objektif; artikel ISACA Journal sekadar <em>mengusulkan</em> rata-rata sederhana atau rata-rata berbobot sebagai praktik yang dapat dipilih organisasi (Gorgona, 2021). Akibatnya, organisasi dan peneliti harus menetapkan sendiri aturan agregasi tersebut, dan aturan itu perlu dinyatakan secara eksplisit agar hasilnya transparan dan dapat dipertanggungjawabkan.</p>
+    <p>Keterbatasan berikutnya menyangkut evidensi. CPM mensyaratkan <em>traceability</em> antara bukti objektif yang dikumpulkan dan rating aktivitas yang diberikan (ISACA, 2019). Di lapangan, bukti audit tersebar dalam dokumen kebijakan, prosedur, log, notulen wawancara, maupun tangkapan layar, dengan repositori dan format yang berbeda serta istilah organisasi yang belum tentu sama dengan aktivitas COBIT. Kondisi ini menyulitkan assessor ketika memetakan bukti, menetapkan rating, dan meninjau ulang dasar penilaian. Padahal, standar audit menuntut dokumentasi yang memungkinkan auditor kompeten mengulangi pekerjaan dan memperoleh kesimpulan serupa (IIA, 2024), serta bukti yang cukup dan sesuai untuk mendukung kesimpulan (ISACA, 2020). Tanpa keterhubungan yang jelas antara aktivitas, rating, dan bukti, hasil assessment berisiko kurang transparan dan sulit diverifikasi pihak lain.</p>
+    <p>Persoalan berikutnya adalah bahwa assessment bukan kalkulasi sekali jalan, melainkan sebuah artefak informasi yang memiliki siklus hidup. Organisasi umumnya menilai ulang tata kelola TI pada periode berikutnya atau pada unit yang berbeda, sehingga pertanyaan yang muncul adalah bagaimana membandingkan capaian antar-periode atau antar-unit, apa yang dinilai sebelumnya dan atas dasar bukti apa, serta bagaimana hasilnya dilaporkan kepada manajemen dalam bahasa yang mudah dipahami. ISACA Journal menegaskan bahwa model kematangan seharusnya bermuara pada alat yang mampu menghasilkan pelaporan yang dapat dipahami manajemen puncak (Gorgona, 2021). Fungsi manajemen assessment ini belum menjadi perhatian utama pada alat bantu yang ada.</p>
+    <p>Alat bantu yang tersedia saat ini belum sepenuhnya menjawab kebutuhan tersebut. Perangkat GRC komersial umumnya menyediakan pemetaan konten kontrol dan objektif, bukan instrumen penilaian yang menghitung <em>capability level</em> secara berjenjang. Prototipe akademik yang ada telah memindahkan sebagian proses berbasis lembar kerja ke web, namun beberapa di antaranya belum memaparkan aturan <em>scoring</em> secara dapat diinspeksi di dalam aplikasi, belum menyediakan manajemen evidensi yang menghubungkan rating dengan dokumen bukti, dan belum mendukung pengelolaan assessment lintas waktu (Noor, 2021; Mandiangan, 2023; Anwar dan Harits, 2025). Karena itu, masih terbuka ruang untuk sebuah sistem yang membuat perhitungan CPM <strong>eksplisit dan dapat diperiksa</strong>, menghubungkan setiap rating ke evidensi audit, dan mengelola assessment sebagai artefak yang dapat dibandingkan antar-periode.</p>
+    <p>Penelitian ini merespons keterbatasan tersebut dengan merancang dan membangun sistem pengukuran <em>Capability Level</em> COBIT 2019 berbasis web. Sistem membantu assessor menentukan prioritas objektif melalui <em>Design Factor</em> DF1 sampai DF4, mencatat rating CPM, menghitung <em>capability level</em> melalui aturan agregasi yang dinyatakan terbuka dan dapat dikonfigurasi, menganalisis kesenjangan terhadap target, menghubungkan rating dengan evidensi pendukung, serta membandingkan hasil antar-periode melalui <em>snapshot</em>. Sistem berfungsi sebagai alat bantu dokumentasi dan pengambilan keputusan; penilaian akhir tetap menjadi tanggung jawab assessor, dan aturan agregasi yang dipakai merupakan <strong>adaptasi operasional yang dinyatakan eksplisit</strong>, bukan standar resmi ISACA. Penelitian menggunakan <em>Design Science Research Methodology</em> (DSRM) karena menghasilkan artefak sistem informasi (Peffers et al., 2007), dan dievaluasi melalui pengujian fungsional <em>black-box</em>, validasi terhadap perhitungan referensi independen, <em>expert review</em> sebagai pengujian validitas instrumen, serta <em>System Usability Scale</em> (SUS) dalam kerangka FEDS (Hevner et al., 2004; Venable et al., 2016).</p>
+    <p>Sebagai konteks, bukan justifikasi, kebutuhan tersebut bersinggungan dengan kewajiban regulasi di Indonesia. Pasal 22 ayat (1) PP Nomor 71 Tahun 2019 mewajibkan penyelenggara sistem elektronik menyediakan rekam jejak audit, sedangkan Permenkominfo Nomor 16 Tahun 2022 mendefinisikan Audit TIK sebagai proses sistematis untuk memperoleh dan mengevaluasi bukti secara objektif terhadap kriteria dan/atau standar yang telah ditetapkan. Kedua ketentuan ini menegaskan pentingnya rekam jejak dan bukti, tetapi <strong>tidak menyediakan instrumen pengukurannya</strong> dan <strong>tidak mewajibkan COBIT</strong>. Evaluasi kinerja pemerintahan digital saat ini menggunakan instrumen PermenPANRB dengan indikator dan skala kematangannya sendiri (PermenPANRB Nomor 8 Tahun 2026, yang menggantikan PermenPANRB Nomor 59 Tahun 2020), sehingga COBIT 2019 diposisikan sebagai pelengkap <em>self-assessment</em> yang bersifat sukarela dan lebih mendalam, bukan sebagai kewajiban regulasi.</p>
+    <h3 id="rumusan-masalah">1.2 Rumusan Masalah</h3>
+    <p>Berdasarkan latar belakang tersebut, rumusan masalah penelitian adalah sebagai berikut:</p>
+    <ol>
+      <li>Bagaimana merancang dan membangun sistem berbasis web untuk membantu penentuan prioritas objektif serta pengukuran <em>Capability Level</em> COBIT 2019 secara transparan?</li>
+      <li>Bagaimana menerapkan rating CPM N/P/L/F dan aturan agregasi <em>capability level</em> yang eksplisit dan dapat diperiksa pada sistem agar hasil penilaian terdokumentasi dengan jelas?</li>
+      <li>Bagaimana mengintegrasikan evidensi audit agar setiap rating aktivitas dapat ditelusuri ke bukti pendukungnya, serta bagaimana validitas perhitungan CPM, keterlacakan, dan <em>usability</em> sistem dinilai melalui pengujian <em>black-box</em>, validasi terhadap perhitungan referensi independen, <em>expert review</em>, dan SUS?</li>
+    </ol>
+    <h3 id="tujuan-penelitian">1.3 Tujuan Penelitian</h3>
+    <p>Tujuan penelitian ini adalah sebagai berikut:</p>
+    <ol>
+      <li>Merancang dan membangun sistem berbasis web untuk menentukan prioritas objektif COBIT 2019 dan mengukur <em>Capability Level</em>.</li>
+      <li>Menerapkan rating CPM N/P/L/F serta aturan agregasi <em>capability level</em> yang eksplisit dan dapat diubah pada sistem.</li>
+      <li>Mengembangkan keterlacakan antara rating aktivitas dan evidensi audit, serta mengevaluasi validitas perhitungan, fungsionalitas, keterlacakan, dan <em>usability</em> sistem.</li>
+    </ol>
+    <h3 id="batasan-masalah">1.4 Batasan Masalah</h3>
+    <p>Untuk menjaga fokus penelitian, batasan yang ditetapkan adalah sebagai berikut:</p>
+    <ol>
+      <li>Penelitian berfokus pada rancang bangun sistem assessment tata kelola dan manajemen TI berbasis COBIT 2019.</li>
+      <li>Penentuan prioritas objektif dibatasi pada <em>Design Factor</em> DF1 <em>Enterprise Strategy</em>, DF2 <em>Enterprise Goals</em>, DF3 <em>Risk Profile</em>, dan DF4 <em>I&amp;T-Related Issues</em>; DF5–DF11 berada di luar cakupan.</li>
+      <li>Objektif dan aktivitas COBIT yang diterapkan berupa subset sesuai kebutuhan penelitian dan konten yang dapat digunakan secara sah; sistem tidak mengimplementasikan seluruh 40 objektif dan 1.202 aktivitas COBIT 2019.</li>
+      <li>Aturan agregasi CPM yang digunakan adalah <strong>adaptasi operasional</strong> dari skala <em>capability</em> COBIT 2019 dengan ambang N/P/L/F ISO/IEC 33020:2019 §5.3. Karena ISACA tidak menetapkan formula agregasi resmi, sistem menyediakan beberapa aturan <em>gate</em> yang dapat dipilih dan menampilkan aturan yang sedang aktif; sistem tidak diklaim sebagai standar resmi ISACA atau PAM resmi.</li>
+      <li>Evidensi berupa metadata dan dokumen yang dipetakan secara manual oleh assessor. Sistem tidak memverifikasi kebenaran bukti atau menentukan rating akhir secara otomatis.</li>
+      <li>Sistem dikembangkan sebagai aplikasi web sisi klien (React dan TypeScript) dengan persistensi <em>localStorage</em> pada satu peramban; integrasi repositori eksternal, data organisasi nyata, dan arsitektur multi-tenant tidak dibahas.</li>
+      <li>Fitur AI, bila digunakan, hanya membantu penyusunan draf rekomendasi dan tidak menentukan keputusan assessment.</li>
+    </ol>
+    <h3 id="manfaat-penelitian">1.5 Manfaat Penelitian</h3>
+    <p>Manfaat yang diharapkan dari penelitian ini adalah sebagai berikut:</p>
+    <ol>
+      <li>Bagi assessor atau auditor TI, sistem membantu pencatatan rating, pengelolaan evidensi, perhitungan <em>Capability Level</em> yang transparan, dan penelusuran dasar penilaian.</li>
+      <li>Bagi organisasi, sistem menyediakan informasi <em>capability level</em>, kesenjangan terhadap target, dan bukti pendukung untuk perencanaan perbaikan tata kelola TI, serta riwayat capaian antar-periode.</li>
+      <li>Bagi akademisi dan peneliti selanjutnya, penelitian ini menjadi referensi penerapan CPM COBIT 2019 berbasis web, khususnya pada transparansi aturan <em>scoring</em>, <em>traceability</em> evidensi, dan pengelolaan assessment lintas waktu.</li>
+    </ol>
+    <h3 id="sistematika-laporan">1.6 Sistematika Laporan</h3>
+    <p>Sistematika laporan penelitian disusun sebagai berikut:</p>
+    <ol>
+      <li>
+        <strong>BAB I PENDAHULUAN</strong> membahas latar belakang, rumusan masalah, tujuan, batasan, manfaat, dan sistematika laporan.</li>
+      <li>
+        <strong>BAB II KAJIAN PUSTAKA</strong> membahas teori dan penelitian terdahulu terkait tata kelola TI, COBIT 2019, CPM, <em>capability level</em>, evidensi audit, <em>traceability</em>, DSRM, dan pengujian sistem.</li>
+      <li>
+        <strong>BAB III METODOLOGI PENELITIAN</strong> menjelaskan tahapan DSRM, pengumpulan data, analisis kebutuhan, perancangan sistem, rancangan <em>scoring</em> dan evidensi, serta metode evaluasi.</li>
+      <li>
+        <strong>BAB IV SIMPULAN</strong> menyajikan simpulan singkat atas perancangan dan rencana penelitian.</li>
+    </ol>
+    <hr />
+    <h2 id="bab-2-kajian-pustaka">BAB 2 KAJIAN PUSTAKA</h2>
+    <h3 id="kajian-penelitian-terkait">2.1 Kajian Penelitian Terkait</h3>
+    <p>Penelitian terkait dapat dikelompokkan menjadi tiga: (i) artefak resmi ISACA, (ii) perkakas GRC/komersial, dan (iii) prototipe akademik. Tabel berikut merangkum posisi masing-masing terhadap kebutuhan penelitian.</p>
+    <p>
+      <strong>Tabel 2.1</strong> Penelitian dan artefak terkait serta posisinya.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Sumber</th>
+          <th>Tahun</th>
+          <th>COBIT</th>
+          <th>Metode / <em>scoring</em></th>
+          <th>Evidensi</th>
+          <th>Pengelolaan assessment</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <em>Design Guide Tool Kit</em> (ISACA)</td>
+          <td>2019/2020</td>
+          <td>2019</td>
+          <td>Prioritisasi desain DF1–DF10; tanpa perhitungan 0–5; <em>single-assessment</em></td>
+          <td>—</td>
+          <td>—</td>
+          <td>
+            <code>[VER-P]</code>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <em>COBIT 2019 Tool Kit</em> (ISACA, gratis)</td>
+          <td>2019</td>
+          <td>2019</td>
+          <td>Materi referensi; bukan kalkulator</td>
+          <td>—</td>
+          <td>—</td>
+          <td>
+            <code>[VER-P]</code>
+          </td>
+        </tr>
+        <tr>
+          <td>Mandiangan</td>
+          <td>2023</td>
+          <td>2019</td>
+          <td>Skala Guttman + NPLF (dokumentasi di naskah, tidak tampak di alat)</td>
+          <td>Tidak ada</td>
+          <td>Tidak ada</td>
+          <td>
+            <code>[VER-S]</code> — prior art terdekat</td>
+        </tr>
+        <tr>
+          <td>Abdullah, Putra &amp; Kartika</td>
+          <td>2023</td>
+          <td>2019</td>
+          <td>SCRUM, Laravel; <em>scoring</em> tidak dijelaskan dalam abstrak</td>
+          <td>Tidak ada</td>
+          <td>Tidak ada</td>
+          <td>
+            <code>[VER-S]</code>
+          </td>
+        </tr>
+        <tr>
+          <td>Anwar &amp; Harits</td>
+          <td>2025</td>
+          <td>2019</td>
+          <td>RAD; skor <em>capability</em> + grafik</td>
+          <td>Tidak ada</td>
+          <td>Tidak ada</td>
+          <td>
+            <code>[VER-S]</code>
+          </td>
+        </tr>
+        <tr>
+          <td>Noor</td>
+          <td>2021</td>
+          <td>2019 (hanya BAI)</td>
+          <td>Prototyping; <em>capability assessment</em></td>
+          <td>Tidak ada</td>
+          <td>Tidak ada</td>
+          <td>
+            <code>[VER-S]</code>
+          </td>
+        </tr>
+        <tr>
+          <td>Pamuji, Putra &amp; Wahdiniwaty</td>
+          <td>2022</td>
+          <td>2019 + ISO/IEC 15504-2</td>
+          <td>Model assessment; <em>capability level</em></td>
+          <td>Tidak ada</td>
+          <td>Tidak ada</td>
+          <td>
+            <code>[VER-S]</code>
+          </td>
+        </tr>
+        <tr>
+          <td>Kurniawan et al.</td>
+          <td>2025</td>
+          <td>
+            <strong>COBIT 5</strong>
+          </td>
+          <td>Sistem audit terintegrasi; <strong>masih manual</strong></td>
+          <td>Tidak ada</td>
+          <td>Tidak ada</td>
+          <td>
+            <code>[VER-S]</code>
+          </td>
+        </tr>
+        <tr>
+          <td>Indrawati, Rozas &amp; Wahyudi</td>
+          <td>2023</td>
+          <td>2019</td>
+          <td>R&amp;D instrumen kematangan</td>
+          <td>Tidak ada</td>
+          <td>Tidak ada</td>
+          <td>
+            <code>[VER-S]</code>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Beberapa temuan penting:</p>
+    <ol>
+      <li>
+        <strong>Instrumen resmi tidak ada.</strong> ISACA tidak menyediakan PAM untuk COBIT 2019 dan artefak digital resminya (Design Guide Tool Kit) hanya untuk perancangan/prioritisasi, bukan pengukuran <em>capability</em><code>[VER-P]</code>.</li>
+      <li>
+        <strong>Alat assessment berbasis web sudah ada.</strong> Mandiangan (2023), Abdullah dkk. (2023), Anwar &amp; Harits (2025), dan Noor (2021) telah membangun alat assessment COBIT 2019 berbasis web. Karena itu, penelitian ini <strong>tidak</strong> mengklaim "pertama"; kebaruan diletakkan pada fitur spesifik (lihat §2.3).</li>
+      <li>
+        <strong>Tidak ditemukan prototipe yang menghubungkan <em>scoring</em> dengan evidensi dan mengelola assessment lintas waktu</strong> pada sumber yang disurvei pada 2026-10-13 <code>[VER-S]</code>. (Catatan: "tidak ditemukan" ≠ "tidak ada".)</li>
+      <li>
+        <strong>Cobvapps (UB)</strong> tidak dapat diverifikasi pada sumber primer dan <strong>dikeluarkan</strong> dari pembahasan kebaruan <code>[NF]</code>.</li>
+    </ol>
+    <h3 id="teori-dasar">2.2 Teori Dasar</h3>
+    <h4 id="tata-kelola-dan-manajemen-ti-serta-cobit-2019">2.2.1 Tata Kelola dan Manajemen TI serta COBIT 2019</h4>
+    <p>Tata kelola TI mengarahkan dan mengendalikan pemanfaatan TI agar sejalan dengan tujuan organisasi. COBIT 2019 menyediakan kerangka tata kelola dan manajemen TI dengan 40 <em>Governance and Management Objectives</em> dalam lima domain: <em>Evaluate, Direct and Monitor</em> (EDM), <em>Align, Plan and Organize</em> (APO), <em>Build, Acquire and Implement</em> (BAI), <em>Deliver, Service and Support</em> (DSS), dan <em>Monitor, Evaluate and Assess</em> (MEA). Kerangka ini memakai 11 <em>Design Factors</em> dan <em>Goals Cascade</em> untuk memilih objektif yang relevan bagi organisasi (ISACA, 2019).</p>
+    <h4 id="capability-level-cobit-performance-management-dan-skala-nplf">2.2.2 <em>Capability Level</em>, <em>COBIT Performance Management</em>, dan Skala N/P/L/F</h4>
+    <p>COBIT 2019 memisahkan dua konstruk yang berbeda (ISACA, 2020):</p>
+    <ul>
+      <li>
+        <em>
+          <strong>Capability level</strong>
+        </em> — per <strong>proses/objektif</strong>; seberapa baik sebuah proses diterapkan dan berjalan.</li>
+      <li>
+        <em>
+          <strong>Maturity level</strong>
+        </em> — per <em><strong>focus area</strong></em>; dicapai bila seluruh <em>capability level</em> yang disyaratkan terpenuhi pada proses-proses dalam area tersebut.</li>
+    </ul>
+    <p>Skala memiliki rentang 0–5. ISACA menyediakan enam karakteristik deskriptif level (figur 6.2 pada <em>Introduction and Methodology</em>). Predikat pencapaian memakai skala N/P/L/F dengan ambang persentase berikut, yang identik dengan ISO/IEC 33020:2019 §5.3:</p>
+    <ul>
+      <li>
+        <strong>Fully (F)</strong> — pencapaian <strong>&gt; 85%</strong>;</li>
+      <li>
+        <strong>Largely (L)</strong> — <strong>&gt; 50% s.d. ≤ 85%</strong>;</li>
+      <li>
+        <strong>Partially (P)</strong> — <strong>&gt; 15% s.d. ≤ 50%</strong>;</li>
+      <li>
+        <strong>Not (N)</strong> — <strong>0% s.d. ≤ 15%</strong>.</li>
+    </ul>
+    <p>ISACA menegaskan bahwa penentuan predikat bersifat <em>judgment</em> yang harus disubstansiasi oleh pemeriksaan komponen enabler (aktivitas, tujuan proses, struktur organisasi), dan bahwa <strong>traceability harus dijaga</strong> antara bukti objektif yang dikumpulkan dengan rating aktivitas yang diberikan (Dhulipalla, 2019; ISACA, 2019).</p>
+    <h4 id="ketiadaan-pam-dan-formula-agregasi-resmi">2.2.3 Ketiadaan PAM dan Formula Agregasi Resmi</h4>
+    <p>COBIT 2019 tidak menerbitkan PAM dan tidak menetapkan formula agregasi wajib (ISACA, 2018; Gorgona, 2021). Terdapat tiga tafsir gerbang ketercapaian level yang saling bersaing:</p>
+    <ol>
+      <li>
+        <strong>Teks literal COBIT 2019</strong> — sebuah proses mencapai suatu capability level "as soon as all activities of that level are performed successfully" (<em>COBIT 2019 Framework: Governance and Management Objectives</em>, §3.4);</li>
+      <li>
+        <strong>Proposal yang diterbitkan ISACA</strong> — sebuah level tercapai bila <strong>seluruh aktivitas pada level tersebut bernilai L atau F</strong> dan seluruh level di bawahnya terpenuhi (Souza Neto, Almeida &amp; Mira da Silva, 2019);</li>
+      <li>
+        <strong>Model bertahap ISO/IEC 33020</strong> — level yang <em>diklaim</em> cukup <strong>Largely (&gt;50%)</strong>, sedangkan seluruh level di bawahnya harus <strong>Fully (&gt;85%)</strong>.</li>
+    </ol>
+    <p>Karena tidak ada satu aturan resmi yang mengikat, <strong>aturan agregasi harus dinyatakan sebagai keputusan desain yang eksplisit</strong> dan hasilnya harus dapat ditelusuri. Inilah salah satu inti kontribusi penelitian ini.</p>
+    <h4 id="keterlacakan-evidensi-audit">2.2.4 Keterlacakan Evidensi Audit</h4>
+    <p>Standar audit menuntut dokumentasi yang dapat direproduksi dan bukti yang cukup serta sesuai. IIA <em>Global Internal Audit Standards</em> (2024), khususnya <em>Standard 14.6 "Engagement Documentation"</em>, mengharuskan dokumentasi memungkinkan auditor kompeten mengulangi pekerjaan dan memperoleh kesimpulan serupa. ISACA <em>ITAF</em> edisi ke-4 (2020), <em>Standard 1205 "Evidence"</em>, mengharuskan praktisi memperoleh bukti yang cukup dan sesuai untuk menarik kesimpulan yang wajar. Konsekuensinya, sistem assessment perlu mengaitkan setiap rating dengan bukti pendukung dan menyimpan jejaknya secara dapat diperiksa.</p>
+    <h4 id="design-science-research-dan-evaluasi-artefak">2.2.5 <em>Design Science Research</em> dan Evaluasi Artefak</h4>
+    <p>Penelitian ini menggunakan DSRM (Peffers et al., 2007) dengan enam aktivitas: identifikasi masalah dan motivasi, definisi tujuan solusi, perancangan dan pengembangan, demonstrasi, evaluasi, dan komunikasi. Pedoman perancangan mengacu pada Hevner et al. (2004) (tujuh pedoman; hlm. 75–105) dan pandangan siklus (<em>three-cycle view</em>) dari Hevner (2007). Kerangka kontribusi pengetahuan mengikuti Gregor &amp; Hevner (2013); karena alat assessment berbasis web sudah ada, kontribusi diframing sebagai <em><strong>Improvement</strong></em> (artefak yang lebih baik untuk masalah yang diketahui) atau <em><strong>Exaptation</strong></em> (metode yang dikenal diterapkan pada konteks baru), <strong>bukan</strong><em>Invention</em>. Strategi evaluasi mengikuti FEDS (Venable, Pries-Heje &amp; Baskerville, 2016), dengan kombinasi <em>Technical Risk &amp; Efficacy</em> (artifisial) dan <em>Human Risk &amp; Effectiveness</em> (naturalistik). Metode evaluasi yang akan dipakai: pengujian fungsional <em>black-box</em> (Hevner et al., 2004; ISO/IEC/IEEE 29119-4), validasi perhitungan referensi (Barr et al., 2015), <em>expert review</em> untuk validitas <strong>instrumen</strong> (Lynn, 1986; Polit &amp; Beck, 2006), dan SUS untuk <em>usability</em> (Brooke, 1996; Bangor et al., 2008; Lewis, 2018).</p>
+    <h3 id="posisi-dan-kebaruan-penelitian">2.3 Posisi dan Kebaruan Penelitian</h3>
+    <p>Tabel berikut membandingkan kapabilitas yang ada dengan yang ditawarkan penelitian ini.</p>
+    <p>
+      <strong>Tabel 2.2</strong> Perbandingan kapabilitas.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Kapabilitas</th>
+          <th style="text-align: center;">GRC komersial</th>
+          <th style="text-align: center;">Resmi ISACA</th>
+          <th style="text-align: center;">Prototipe akademik</th>
+          <th style="text-align: center;">
+            <strong>Penelitian ini</strong>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Konten COBIT 2019</td>
+          <td style="text-align: center;">✔</td>
+          <td style="text-align: center;">✔ (desain)</td>
+          <td style="text-align: center;">✔</td>
+          <td style="text-align: center;">✔ (subset)</td>
+        </tr>
+        <tr>
+          <td>Instrumen <em>capability</em> resmi</td>
+          <td style="text-align: center;">✘</td>
+          <td style="text-align: center;">✘</td>
+          <td style="text-align: center;">✘</td>
+          <td style="text-align: center;">✘ (bukan resmi — dinyatakan)</td>
+        </tr>
+        <tr>
+          <td>Perhitungan CPM otomatis</td>
+          <td style="text-align: center;">✘</td>
+          <td style="text-align: center;">✘</td>
+          <td style="text-align: center;">sebagian</td>
+          <td style="text-align: center;">✔</td>
+        </tr>
+        <tr>
+          <td>
+            <em>Scoring</em> transparan/<em>inspectable</em></td>
+          <td style="text-align: center;">✘</td>
+          <td style="text-align: center;">n/a</td>
+          <td style="text-align: center;">✘</td>
+          <td style="text-align: center;">✔</td>
+        </tr>
+        <tr>
+          <td>
+            <em>Traceability</em> rating ↔ evidensi</td>
+          <td style="text-align: center;">sebagian</td>
+          <td style="text-align: center;">✘</td>
+          <td style="text-align: center;">✘</td>
+          <td style="text-align: center;">✔</td>
+        </tr>
+        <tr>
+          <td>Pengelolaan assessment (riwayat/perbandingan/laporan)</td>
+          <td style="text-align: center;">sebagian</td>
+          <td style="text-align: center;">✘</td>
+          <td style="text-align: center;">✘</td>
+          <td style="text-align: center;">✔ (tujuan desain)</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      <strong>Pernyataan kebaruan:</strong> penelitian ini tidak mengklaim "sistem COBIT 2019 berbasis web pertama". Kebaruan diletakkan pada <strong>kombinasi</strong> (i) aturan agregasi CPM yang transparan dan dapat dikonfigurasi, (ii) keterlacakan rating ke evidensi audit, (iii) pengelolaan assessment lintas periode, dan (iv) evaluasi yang lebih ketat (perhitungan referensi + <em>expert review</em> + SUS).</p>
+    <hr />
+    <h2 id="bab-3-metodologi-penelitian">BAB 3 METODOLOGI PENELITIAN</h2>
+    <h3 id="sistematika-penelitian">3.1 Sistematika Penelitian</h3>
+    <p>Penelitian mengikuti enam aktivitas DSRM (Peffers et al., 2007) yang dipetakan pada tahapan berikut:</p>
+    <pre>
+      <code>(1) Identifikasi Masalah &amp; Motivasi  → literatur + regulasi konteks
+(2) Definisi Tujuan Solusi           → kebutuhan fungsional &amp; nonfungsional
+(3) Perancangan &amp; Pengembangan       → arsitektur, engine CPM, evidensi
+(4) Demonstrasi                      → aplikasi web berjalan pada data kasus
+(5) Evaluasi                         → black-box, perhitungan referensi, expert review, SUS
+(6) Komunikasi                       → laporan tugas akhir
+</code>
+    </pre>
+    <p>
+      <em>Titik masuk:</em>
+      <strong>problem-centred</strong> (berangkat dari keterbatasan instrumen dan praktik assessment).</p>
+    <h3 id="tahap-1-identifikasi-masalah-dan-motivasi">3.2 Tahap 1 — Identifikasi Masalah dan Motivasi</h3>
+    <p>Studi literatur atas kerangka COBIT 2019, mekanisme CPM, standar audit/keterlacakan, penelitian terkait, serta regulasi Indonesia (sebagai konteks) dilakukan untuk merumuskan masalah: tidak adanya instrumen <em>capability</em> resmi, ketiadaan formula agregasi wajib, dan lemahnya keterlacakan evidensi pada alat yang ada.</p>
+    <h3 id="tahap-2-definisi-tujuan-solusi">3.3 Tahap 2 — Definisi Tujuan Solusi</h3>
+    <p>Tujuan solusi diturunkan dari rumusan masalah dan kebutuhan pengguna (§1.2, §1.3), mencakup: penentuan prioritas objektif (DF1–DF4), pencatatan rating CPM, perhitungan <em>capability level</em> yang transparan, analisis kesenjangan, keterlacakan evidensi, dan pengelolaan assessment lintas periode.</p>
+    <h3 id="tahap-3-perancangan-dan-pengembangan">3.4 Tahap 3 — Perancangan dan Pengembangan</h3>
+    <p>
+      <strong>a. Arsitektur.</strong> Aplikasi web sisi klien (React + TypeScript) dengan <em>state store</em> terpusat; persistensi <em>localStorage</em>; ekspor/impor JSON.</p>
+    <p>
+      <strong>b. Prioritisasi objektif.</strong> Mesin <em>Design Factor</em> menghitung skor DF1–DF4 dan menurunkan target <em>capability level</em> per objektif.</p>
+    <p>
+      <strong>c. Mesin CPM (<em>explicit &amp; configurable</em>).</strong> Setiap aktivitas diberi respons (Yes / Partially / No / N.A.); N.A. dikeluarkan dari penyebut, dan level yang seluruh aktivitasnya N.A. ditandai <strong>Insufficient Evidence</strong>. Persentase pemenuhan per level memetakan ke predikat N/P/L/F memakai ambang ISO/IEC 33020:2019 §5.3. Aturan gerbang dapat dipilih: <code>aggregate-85</code> (default), <code>all-l-or-f</code> (proposal Souza Neto dkk., 2019), dan <code>iso-staged</code> (ISO/IEC 33020); sistem menampilkan level hasil setiap aturan pada data yang sama sebagai analisis sensitivitas.</p>
+    <p>
+      <strong>d. Keterlacakan evidensi.</strong> Setiap aktivitas menyimpan <code>evidenceIds</code>; setiap evidence menyimpan metadata (jenis, referensi, penilai, tanggal, catatan) dan <code>linkedActivityIds</code>, dengan alur status <code>pending → reviewed → attached</code> dan penelusuran dua arah.</p>
+    <p>
+      <strong>e. Pengelolaan assessment.</strong> Registri assessment, <em>snapshot</em> metrik ringkas, dan halaman perbandingan <em>baseline → kandidat</em>.</p>
+    <h3 id="tahap-4-demonstrasi">3.5 Tahap 4 — Demonstrasi</h3>
+    <p>Sistem dijalankan pada <em>dataset</em> kasus yang <strong>dinyatakan sintetis/berasal dari wawancara</strong> (bukan <em>benchmark</em> resmi). Demonstrasi menunjukkan alur end-to-end dari setup DF, pengisian rating, penautan evidensi, hingga hasil, gap, dan rekomendasi.</p>
+    <h3 id="tahap-5-evaluasi">3.6 Tahap 5 — Evaluasi</h3>
+    <p>
+      <strong>Tabel 3.1</strong> Rencana evaluasi dan apa yang dibuktikan/tidak dibuktikan.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Metode</th>
+          <th>Membuktikan</th>
+          <th>Tidak membuktikan</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Pengujian fungsional <em>black-box</em></td>
+          <td>Keluaran sistem sesuai keluaran yang diharapkan untuk masukan terpilih</td>
+          <td>Bebas cacat; kebenaran jalur yang tidak diuji</td>
+        </tr>
+        <tr>
+          <td>Validasi perhitungan referensi (<em>test oracle</em>)</td>
+          <td>Engine mereproduksi hasil yang diturunkan independen dari aturan terdokumentasi</td>
+          <td>Bahwa metode itu sendiri "benar" secara bisnis</td>
+        </tr>
+        <tr>
+          <td>
+            <em>Expert review</em> (validitas instrumen)</td>
+          <td>Pakar menilai pemetaan COBIT dan model <em>scoring</em> sudah sesuai</td>
+          <td>Akurasi statistik; validitas perangkat lunak</td>
+        </tr>
+        <tr>
+          <td>SUS</td>
+          <td>
+            <em>Usability</em> yang dipersepsikan</td>
+          <td>Kebenaran fungsional</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      <strong>Catatan penting.</strong> (i) Validasi perhitungan referensi membuktikan <strong>ekuivalensi implementasi (verifikasi)</strong>, bukan kebenaran hasil COBIT. (ii) <em>Expert review</em> memvalidasi <strong>instrumen/kuesioner</strong>, bukan perangkat lunak; jangan menulis "sistem memiliki indeks validitas konten". (iii) SUS tidak memiliki jumlah minimum universal, tetapi presisi rata-rata buruk pada N kecil; disarankan <strong>N ≥ 20–30</strong> responden dan pelaporan <strong>interval kepercayaan</strong>. (iv) Bila dua assessor menilai kasus yang sama, gunakan <strong>Cohen's κ</strong> (bobot bila ordinal) atau <strong>Fleiss' κ</strong> untuk lebih dari dua penilai.</p>
+    <h3 id="tahap-6-komunikasi">3.7 Tahap 6 — Komunikasi</h3>
+    <p>Hasil penelitian dilaporkan dalam bentuk laporan tugas akhir, mencakup analisis, perancangan, implementasi, dan hasil evaluasi.</p>
+    <h3 id="alat-dan-bahan-penelitian">3.8 Alat dan Bahan Penelitian</h3>
+    <ul>
+      <li>
+        <strong>Alat:</strong> React + TypeScript, Vite, <em>library</em> pengujian unit; React Context untuk <em>state</em>; <code>localStorage</code> untuk persistensi; browser desktop modern.</li>
+      <li>
+        <strong>Bahan:</strong> subset objektif/aktivitas COBIT 2019 (sesuai lisensi), katalog <em>Design Factor</em> DF1–DF4, dan <em>dataset</em> kasus sintetis/wawancara.</li>
+    </ul>
+    <hr />
+    <h2 id="bab-4-simpulan">BAB 4 SIMPULAN</h2>
+    <p>Penelitian ini merancang dan membangun sistem pengukuran <em>Capability Level</em> COBIT 2019 berbasis web yang membuat perhitungan CPM eksplisit dan dapat diperiksa, menghubungkan setiap rating aktivitas dengan evidensi audit, dan mengelola assessment lintas periode. Sistem diposisikan secara jujur sebagai <strong>adaptasi operasional</strong> — bukan PAM atau standar resmi ISACA — dengan aturan agregasi yang dinyatakan terbuka dan dapat dikonfigurasi. Evaluasi direncanakan melalui pengujian <em>black-box</em>, validasi perhitungan referensi independen, <em>expert review</em> untuk validitas instrumen, serta SUS dengan pelaporan interval kepercayaan. Diharapkan hasil penelitian ini memberikan kontribusi berupa artefak sistem informasi dan prinsip desain yang dapat direplikasi untuk transparansi <em>scoring</em> dan keterlacakan evidensi pada assessment tata kelola TI.</p>
+    <hr />
+    <h2 id="daftar-pustaka-sementara">DAFTAR PUSTAKA (sementara)</h2>
+    <blockquote>
+      <p>
+        <strong>Catatan format.</strong> Template meminta Daftar Pustaka bergaya <strong>IEEE</strong>. Senarai di bawah disusun bergaya IEEE (bernomor). Sitasi dalam teks draf ini masih bergaya <strong>Harvard</strong> (mengikuti Bab 1 yang sudah ada). Jika pembimbing meminta konsistensi penuh, ubah sitasi dalam teks menjadi <code>[n]</code> sesuai nomor di bawah, atau ubah senarai ini ke gaya Harvard (alfabetis).</p>
+    </blockquote>
+    <ol>
+      <li>ISACA, <em>COBIT 2019 Framework: Introduction and Methodology</em>. Rolling Meadows, IL, USA: ISACA, 2019.</li>
+      <li>ISACA, <em>COBIT 2019 Framework: Governance and Management Objectives</em>. Rolling Meadows, IL, USA: ISACA, 2019.</li>
+      <li>ISACA, <em>Introducing COBIT 2019: Major Differences with COBIT 5</em>. Rolling Meadows, IL, USA: ISACA, 2018.</li>
+      <li>ISACA, <em>ITAF: A Professional Practices Framework for IT Audit</em>, 4th ed. Rolling Meadows, IL, USA: ISACA, 2020.</li>
+      <li>
+        <ol type="A" start="12">
+          <li>
+            <ol type="A" start="18">
+              <li>
+                <ol type="A" start="19">
+                  <li>Dhulipalla, "Using COBIT 2019 Performance Management Model to Assess Governance and Management Objectives," <em>ISACA COBIT Focus</em>, Sep. 2019.</li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+        </ol>
+      </li>
+      <li>
+        <ol type="A" start="12">
+          <li>Gorgona, "Building a Maturity Model for COBIT 2019 Based on CMMI," <em>ISACA Journal</em>, vol. 6, 2021.</li>
+        </ol>
+      </li>
+      <li>
+        <ol type="A" start="5">
+          <li>Elue, "Effective Capability and Maturity Assessment Using COBIT 2019," <em>ISACA Industry News</em>, 2020.</li>
+        </ol>
+      </li>
+      <li>
+        <ol type="A" start="10">
+          <li>Souza Neto, R. Almeida, and M. Mira da Silva, "Defining Target Capability Levels in COBIT 2019: A Proposal for Refinement," <em>ISACA Industry News</em>, Mar. 2019.</li>
+        </ol>
+      </li>
+      <li>ISO/IEC, <em>ISO/IEC 33020:2019 — Information technology — Process assessment — Process measurement framework for assessment of process capability</em>. Geneva, Switzerland: ISO, 2019.</li>
+      <li>IIA, <em>Global Internal Audit Standards</em>. Lake Mary, FL, USA: The Institute of Internal Auditors, 2024.</li>
+      <li>
+        <ol type="A" start="11">
+          <li>Peffers, T. Tuunanen, M. A. Rothenberger, and S. Chatterjee, "A Design Science Research Methodology for Information Systems Research," <em>J. Manage. Inf. Syst.</em>, vol. 24, no. 3, pp. 45–77, 2007, doi: 10.2753/MIS0742-1222240302.</li>
+        </ol>
+      </li>
+      <li>
+        <ol type="A">
+          <li>
+            <ol type="A" start="18">
+              <li>Hevner, S. T. March, J. Park, and S. Ram, "Design Science in Information Systems Research," <em>MIS Quart.</em>, vol. 28, no. 1, pp. 75–105, 2004, doi: 10.2307/25148625.</li>
+            </ol>
+          </li>
+        </ol>
+      </li>
+      <li>
+        <ol type="A">
+          <li>
+            <ol type="A" start="18">
+              <li>Hevner, "A Three Cycle View of Design Science Research," <em>Scand. J. Inf. Syst.</em>, vol. 19, no. 2, art. 4, 2007.</li>
+            </ol>
+          </li>
+        </ol>
+      </li>
+      <li>
+        <ol type="A" start="19">
+          <li>Gregor and A. R. Hevner, "Positioning and Presenting Design Science Research for Maximum Impact," <em>MIS Quart.</em>, vol. 37, no. 2, pp. 337–355, 2013, doi: 10.25300/MISQ/2013/37.2.01.</li>
+        </ol>
+      </li>
+      <li>
+        <ol type="A" start="10">
+          <li>Venable, J. Pries-Heje, and R. Baskerville, "FEDS: A Framework for Evaluation in Design Science Research," <em>Eur. J. Inf. Syst.</em>, vol. 25, no. 1, pp. 77–89, 2016, doi: 10.1057/ejis.2014.36.</li>
+        </ol>
+      </li>
+      <li>
+        <ol type="A" start="5">
+          <li>
+            <ol type="A" start="20">
+              <li>Barr, M. Harman, P. McMinn, M. Shahbaz, and S. Yoo, "The Oracle Problem in Software Testing: A Survey," <em>IEEE Trans. Softw. Eng.</em>, vol. 41, no. 5, pp. 507–525, 2015, doi: 10.1109/TSE.2014.2372785.</li>
+            </ol>
+          </li>
+        </ol>
+      </li>
+      <li>
+        <ol type="A" start="10">
+          <li>Brooke, "SUS: A 'Quick and Dirty' Usability Scale," in <em>Usability Evaluation in Industry</em>, 1996, doi: 10.1201/9781498710411-35.</li>
+        </ol>
+      </li>
+      <li>
+        <ol type="A">
+          <li>Bangor, P. T. Kortum, and J. T. Miller, "An Empirical Evaluation of the System Usability Scale," <em>Int. J. Human–Comput. Interact.</em>, vol. 24, no. 6, pp. 574–594, 2008, doi: 10.1080/10447310802205776.</li>
+        </ol>
+      </li>
+      <li>
+        <ol type="A" start="10">
+          <li>
+            <ol type="A" start="18">
+              <li>Lewis, "The System Usability Scale: Past, Present, and Future," <em>Int. J. Human–Comput. Interact.</em>, vol. 34, no. 7, pp. 577–590, 2018, doi: 10.1080/10447318.2018.1455307.</li>
+            </ol>
+          </li>
+        </ol>
+      </li>
+      <li>
+        <ol type="A" start="13">
+          <li>
+            <ol type="A" start="18">
+              <li>Lynn, "Determination and Quantification of Content Validity," <em>Nurs. Res.</em>, vol. 35, no. 6, pp. 382–385, 1986, doi: 10.1097/00006199-198611000-00017.</li>
+            </ol>
+          </li>
+        </ol>
+      </li>
+      <li>
+        <ol type="A" start="10">
+          <li>Cohen, "A Coefficient of Agreement for Nominal Scales," <em>Educ. Psychol. Meas.</em>, vol. 20, no. 1, pp. 37–46, 1960, doi: 10.1177/001316446002000104.</li>
+        </ol>
+      </li>
+      <li>
+        <ol type="A" start="10">
+          <li>
+            <ol type="A" start="18">
+              <li>Landis and G. G. Koch, "The Measurement of Observer Agreement for Categorical Data," <em>Biometrics</em>, vol. 33, no. 1, pp. 159–174, 1977, doi: 10.2307/2529310.</li>
+            </ol>
+          </li>
+        </ol>
+      </li>
+      <li>
+        <ol type="A" start="19">
+          <li>Mandiangan, "Rancang Bangun Sistem Informasi Capability Assessment Tools COBIT 2019," Skripsi, UPN Veteran Jakarta, 2023.</li>
+        </ol>
+      </li>
+      <li>
+        <ol type="A" start="13">
+          <li>
+            <ol type="A" start="19">
+              <li>Noor, "Implementasi Sistem Penilaian Kapabilitas Tata Kelola TI Berbasis COBIT 2019," Skripsi, ITTP Purwokerto, 2021.</li>
+            </ol>
+          </li>
+        </ol>
+      </li>
+      <li>Anwar and Harits, "Perancangan Sistem Kuisioner Penilaian Kapabilitas Framework COBIT 2019," <em>J. Informatika Utama</em>, vol. 3, no. 1, 2025, doi: 10.55903/jitu.v3i1.271.</li>
+      <li>Peraturan Pemerintah Republik Indonesia Nomor 71 Tahun 2019 tentang Penyelenggaraan Sistem dan Transaksi Elektronik.</li>
+      <li>Peraturan Menteri Komunikasi dan Informatika Republik Indonesia Nomor 16 Tahun 2022 tentang Audit Teknologi Informasi dan Komunikasi.</li>
+      <li>Peraturan Menteri Pendayagunaan Aparatur Negara dan Reformasi Birokrasi Republik Indonesia Nomor 8 Tahun 2026 tentang Evaluasi Kinerja Pemerintah Digital.</li>
+    </ol>
+    <hr />
+    <blockquote>
+      <p>
+        <strong>Butir terbuka yang harus diselesaikan sebelum submission</strong> (dari <code>06</code> Appendix B):</p>
+      <ol>
+        <li>
+          <strong>Lisensi konten COBIT</strong> — tetapkan subset objektif/aktivitas final + pernyataan hak cipta ISACA.</li>
+        <li>
+          <strong>Re-verifikasi baris perkakas GRC komersial</strong> (masih <code>[2ND-UNV]</code>) sebelum dicantumkan.</li>
+        <li>
+          <strong>Instrumen evaluasi</strong> — siapkan kuesioner <em>expert review</em> dan instrumen SUS; tetapkan jumlah responden (N ≥ 20–30).</li>
+        <li>
+          <strong>Fixture perhitungan referensi</strong> — sudah dibangun (<code>src/utils/__tests__/referenceCalculation.test.ts</code>); pastikan didokumentasikan sebagai <em>verifikasi</em>, bukan validasi kebenaran hasil.</li>
+      </ol>
+    </blockquote>
+  </body>
+</html>

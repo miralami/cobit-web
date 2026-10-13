@@ -75,7 +75,7 @@ Membangun alat bantu asesmen COBIT 2019 berbasis web untuk satu entitas dalam sa
 | **`CapabilityResult.tsx`** | Menampilkan kartu hasil kapabilitas hardcoded dari `mockData.ts`. | **Kalkulasi tidak reaktif.** Level saat ini tidak dihitung otomatis dari respon pada workspace asesmen. |
 | **`GapAnalysis.tsx`** | Tabel gap statis dari `mockData.ts`. | **Nilai delta statis.** Tidak menghitung selisih Target vs Current secara dinamis dari hasil asesmen aktif. |
 | **`Recommendations.tsx`** | Placeholder yang menjelaskan rekomendasi belum tersedia. | **Belum ada tabel rekomendasi.** Belum ada rekomendasi rule-based per gap, termasuk klasifikasi *People, Process, Technology*. |
-| **Data Layer (`mockData.ts`)** | ~~Array statis dan sample values~~ **[Diperbarui]** State terpusat di `AssessmentContext` + sinkronisasi `localStorage` (`cobit_assessment_store_v2`), riwayat multi-assessment, snapshot ringkas (`cobit_assessment_snapshots_v1`), ekspor/impor JSON. Katalog aktivitas dari `src/data/cobitActivities.json`. | **Sudah ada persistensi lintas halaman.** Sisa: finalisasi subset objektif/aktivitas yang di-seed dan labelisasi data sebagai sintetis/demo. |
+| **Data Layer (`mockData.ts`)** | ~~Array statis dan sample values~~ **[Diperbarui]** State terpusat di `AssessmentContext` + sinkronisasi `localStorage` (`cobit_assessments_history_v2`), riwayat multi-assessment, snapshot ringkas (`cobit_assessment_snapshots_v1`), ekspor/impor JSON. Katalog aktivitas dari `src/data/cobitActivities.json`. | **Sudah ada persistensi lintas halaman.** Sisa: finalisasi subset objektif/aktivitas yang di-seed dan labelisasi data sebagai sintetis/demo. |
 
 > **Catatan status (2026-10-13):** tabel as-is di atas mendokumentasikan kondisi *pra-implementasi*. Beberapa gap (persistensi, kalkulasi reaktif, CRUD bukti, rekomendasi rule-based, mesin CPM) kini sudah ditutup pada kode; lihat `06-deep-research-research-gap.md` Appendix B untuk status terbuka.
 
@@ -417,9 +417,9 @@ Pertahankan route dan halaman setup yang sudah ada; perluas wizard 3 langkah men
 
 1. **State Store (`src/context/AssessmentContext.tsx`):**
    * Menggunakan React Context + `useReducer` / clean custom hooks.
-   * State tersinkronisasi otomatis ke `window.localStorage` dengan key `cobit_assessment_store_v2`.
+   * State tersinkronisasi otomatis ke `window.localStorage` dengan key `cobit_assessments_history_v2` (daftar assessment), `cobit_active_assessment_id_v2` (id aktif), dan `cobit_assessment_snapshots_v1` (snapshot ringkas). Key lama `cobit_assessment_store_v2` hanya dibaca sebagai migrasi legacy.
 2. **Fitur Pengendali State:**
-   * `loadSampleAssessment()`: Memuat data sintetis untuk demo. Data PANRB tidak menjadi dataset aplikasi.
+   * `loadBenchmarkData()` (memanggil `createBenchmarkState()` dari `src/data/benchmarkData.ts`): Memuat data demo/sintetis. Data PANRB tidak menjadi dataset aplikasi.
    * `resetToDefault()`: Mengembalikan aplikasi ke kondisi awal bersih.
    * `exportStateJSON()`: Mengunduh file backup konfigurasi assessment.
    * `importStateJSON(file)`: Memulihkan konfigurasi assessment dari file JSON.
@@ -439,16 +439,17 @@ Untuk memenuhi kaidah **DSRM**, verifikasi formula memakai input dan expected ou
   * EDM02 Relative Score = `30`
   * EDM03 Relative Score = `25`
   * APO02 Relative Score = `-20`
-  * DSS05 Relative Score = `30`
+  * DSS05 Relative Score = `35`
 
 ### Test Case 2: Canvas Step 2 Normalisasi
 * **Input:** Catat input/output workbook sebagai fixture beserta sumber dan asumsi formula; jangan menyebut fixture PANRB dataset resmi.
-* **Ekspektasi Skor Normalisasi:**
-  * EDM03 = `+20` (Suggested Target = 2)
-  * DSS04 = `+75` (Suggested Target = 4)
-  * DSS05 = `+80` (Suggested Target = 4)
-  * APO12 = `+75` (Suggested Target = 4)
-  * MEA03 = `+75` (Suggested Target = 4)
+* **Ekspektasi Skor Normalisasi (keluaran engine, rekonsiliasi 2026-10-13):**
+  * EDM03 = `+20` (Suggested Target = 1)
+  * DSS04 = `+65` (Suggested Target = 3)
+  * DSS05 = `+50` (Suggested Target = 3)
+  * APO12 = `+15` (Suggested Target = 1)
+  * MEA03 = `+15` (Suggested Target = 1)
+* **Catatan rekonsiliasi.** Nilai di atas menyelaraskan PRD dengan keluaran aktual engine DF dan konsisten dengan `npm test` (`engine.test.ts`, Test 2) serta `README.md`. Test 2 mengasorsi `EDM03 = 20` / target `1` dan target `DSS04` & `DSS05` ≥ `3`; nilai lain adalah keluaran engine (belum seluruhnya diasersi). Nilai sebelumnya (DSS04/DSS05/APO12/MEA03 = 75/80/75/75, target 4) adalah estimasi pra-implementasi dan tidak lagi dipakai.
 
 ### Test Case 3: CPM Fulfillment & Stop Here Rule (DSS05)
 * **Aktivitas Level 2:** Fixture sintetis untuk menguji rumus (dua butir bernilai Partially [0.5]).
@@ -475,7 +476,7 @@ Implementasi dibagi menjadi 6 tahap terstruktur:
                       ▼
 [ Phase 2: State Store & Persistence Layer ]
 ├── src/types/index.ts                --> Pembaruan interface sesuai PRD
-├── src/data/sampleAssessment.ts      --> Data sintetis untuk demo; bukan PANRB
+├── src/data/benchmarkData.ts          --> Data demo/sintetis untuk demo; bukan PANRB
 └── src/context/AssessmentContext.tsx --> Central state store + localStorage sync
                       │
                       ▼
@@ -675,3 +676,36 @@ MVP dinyatakan memenuhi kebutuhan produk jika assessor dapat:
 * Objective dan activity subset yang digunakan, termasuk sumber, versi, dan hak penggunaan.
 * Format laporan utama yang diminta pembimbing/pengguna (print/PDF, Word, atau cukup JSON + tampilan cetak).
 * Apakah kebutuhan penelitian mengharuskan evaluasi usability/validitas dengan assessor ahli dan bagaimana metodenya.
+
+---
+
+## 14. Disclosure Metodologis Perhitungan CPM (Batasan yang Harus Dinyatakan)
+
+> Ditambahkan 2026-10-13 dari `06-deep-research-research-gap.md` §4.2 (item B3, B6, B8, B9) dan §6.3. Tujuan: mencegah sistem atau naskah menyiratkan bahwa perhitungan CPM merupakan mekanisme resmi ISACA. Semua butir di bawah **wajib dinyatakan** di Bab Metodologi dan pada kartu metode di UI/ekspor.
+
+### 14.1 Pergeseran kategori (B3)
+ISACA menetapkan predikat **F/L/P/N per aktivitas**, sebagai *judgment* atas seberapa jauh capability level tercapai. Sistem menerapkan operasionalisasi yang berbeda: jawaban per aktivitas (Yes/Partially/No) diubah menjadi **persentase pemenuhan**, lalu **ambang N/P/L/F diterapkan pada persentase tersebut**. Ini adalah **operasionalisasi yang disahkan secara eksplisit**, bukan mekanisme ISACA. Harus dilabeli demikian di UI dan naskah.
+
+### 14.2 Skala respons 3 titik menghilangkan predikat *L* pada tingkat aktivitas (B6)
+Form hanya menyediakan `Yes`, `Partially`, `No`, dan `N.A.`; predikat **Largely (L)** tidak tersedia pada tingkat aktivitas dan baru muncul setelah agregasi. Ini penyederhanaan yang dapat diterima, tetapi **harus dinyatakan** karena berbeda dari skala empat-nilai ISACA.
+
+### 14.3 Level 1 diasumsikan tercapai; Level 0 tidak dapat dihasilkan (B8)
+Engine mengevaluasi level 2–5 dengan asumsi **Level 1 sebagai basis** yang telah dicapai. Karena itu sistem **tidak dapat menghasilkan Level 0** (proses tidak ada). Asumsi ini harus dinyatakan dan dibatasi pada konteks assessment berbasis target atas objektif terpilih.
+
+### 14.4 Level tanpa aktivitas terdefinisi (B9)
+Apabila suatu level tidak memiliki aktivitas terdefinisi pada katalog, perhitungan akan menghasilkan nilai 0 dan level dianggap gagal; pada katalog saat ini hal ini kebetulan menghasilkan perilaku yang diinginkan (proses tanpa level 5 berhenti di level 4). Perilaku ini **fragile dan tidak boleh diandalkan secara implisit**; statusnya harus ditandai dan diuji sebagai kasus khusus, bukan dibiarkan sebagai efek samping.
+
+### 14.5 Status `N.A.` (B7 — ditutup)
+Aktivitas berstatus `N.A.` tidak dihitung dalam penyebut; sebuah level yang **seluruh** aktivitasnya `N.A.` ditandai **Insufficient Evidence** (bukan N) dan tidak memutuskan rating. Perilaku ini sudah diimplementasikan dan tetap harus disebutkan sebagai kebijakan eksplisit.
+
+### 14.6 Keterhubungan rating ↔ evidence belum dipaksakan (hard-enforced)
+Data menyimpan `evidenceIds` pada aktivitas dan `linkedActivityIds` pada evidence, dan tersedia alur status `pending → reviewed → attached`. Namun sistem **tidak memaksa** bahwa setiap rating memiliki minimal satu evidence, dan **tidak memverifikasi** kecukupan/kesesuaian bukti. Penilaian akhir tetap pada assessor. Klaim keterlacakan harus dirumuskan sebagai "menyediakan mekanisme penautan dan penelusuran dua arah", bukan "menjamin setiap rating berbukti".
+
+### 14.7 Cakupan pelaporan (reporting) saat ini
+Pelaporan yang tersedia terbatas pada **ekspor JSON** (backup/pertukaran mesin) dan **tampilan cetak** (`window.print()`) pada halaman rekomendasi. Ekspor laporan naratif lengkap (mis. PDF terformat) **belum** diimplementasikan dan tidak boleh diklaim ada.
+
+### 14.8 Verifikasi ≠ validasi kebenaran hasil
+Pengujian perhitungan referensi (`referenceCalculation.test.ts`) membuktikan **ekuivalensi implementasi** (verifikasi), bukan bahwa hasil COBIT "benar" secara bisnis (validasi). Ini adalah pembeda antara evaluasi S1 yang dapat dipertahankan dan klaim berlebih.
+
+### 14.9 Lisensi dan atribusi konten COBIT (butir terbuka)
+Konten COBIT 2019 (objektif/aktivitas/praktik) dilindungi hak cipta ISACA. Subset yang di-seed harus dibatasi, sumber serta versinya dicatat, dan atribusi hak cipta ISACA ditampilkan. Keputusan subset final dan pernyataan lisensi masih **terbuka** (lihat `06` Appendix B #6) dan harus diselesaikan sebelum distribusi.
