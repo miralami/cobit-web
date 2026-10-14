@@ -300,5 +300,17 @@ Status saat ini
 
 ---
 
+## 10. External Change Watch — COBIT 7 (ditambahkan 2026-10-14)
+
+ISACA mengumumkan **COBIT 7**, yang dipublikasikan **Oktober 2026**, dengan *"the new digital presentation of the framework, the robust assessment tools, and supporting guidance"* (ISACA Store, *"A First Look at COBIT 7"*, webinar 03 Nov 2026; diakses 2026-10-14).
+
+Implikasi untuk skripsi:
+
+1. Premis celah penelitian — *"ISACA tidak menyediakan instrumen penilaian capability resmi"* — **dibatasi pada COBIT 2019** dan harus dinyatakan demikian secara eksplisit.
+2. Sebelum finalisasi/sidang, **periksa apakah COBIT 7 benar-benar membawa *capability-assessment tool*.** Bila ya, posisikan kontribusi sebagai (a) artefak COBIT 2019 / pra-COBIT-7, atau (b) bandingkan secara eksplisit.
+3. Tambahkan butir *limitations / future work*: migrasi ke COBIT 7 dan dampaknya terhadap aturan agregasi serta traceability evidensi.
+
+---
+
 *Document generated: 2026-09-30*  
 *Based on: 01-literature-review.md + 02-system-design-research.md + diskusi scope & judul*

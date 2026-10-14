@@ -82,7 +82,8 @@ Sistematika laporan penelitian disusun sebagai berikut:
 9. Mandiangan. (2023). *Rancang Bangun Sistem Informasi Capability Assessment Tools COBIT 2019*. UPN Veteran Jakarta.
 10. Noor. (2021). *Implementasi Sistem Penilaian Kapabilitas Tata Kelola TI Berbasis COBIT 2019*. ITTP Purwokerto.
 11. Peffers, K., Tuunanen, T., Rothenberger, M. A., dan Chatterjee, S. (2007). “A Design Science Research Methodology for Information Systems Research.” *Journal of Management Information Systems*, 24(3), 45–77.
-12. Souza Neto, J., Almeida, R., dan Mira da Silva, M. (2019). “Effective Capability and Maturity Assessment Using COBIT 2019.” ISACA Industry News.
+12. Souza Neto, J., Almeida, R., dan Mira da Silva, M. (2019). “Defining Target Capability Levels in COBIT 2019: A Proposal for Refinement.” ISACA Industry News, 18 Maret 2019.
+12b. Elue, E. (2020). “Effective Capability and Maturity Assessment Using COBIT 2019.” ISACA Industry News.
 13. Venable, J., Pries-Heje, J., dan Baskerville, R. (2016). “FEDS: a Framework for Evaluation in Design Science Research.” *European Journal of Information Systems*, 25(1), 77–89.
 14. Peraturan Pemerintah Republik Indonesia Nomor 71 Tahun 2019 tentang Penyelenggaraan Sistem dan Transaksi Elektronik.
 15. Peraturan Menteri Komunikasi dan Informatika Republik Indonesia Nomor 16 Tahun 2022 tentang Audit Teknologi Informasi dan Komunikasi.
